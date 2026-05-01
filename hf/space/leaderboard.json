@@ -1,0 +1,44 @@
+{
+  "generated_at": "2026-05-01T22:17:06+00:00",
+  "main": [
+    {
+      "model_id": "smoke-public",
+      "model_type": "mock",
+      "backend": "mock",
+      "revision": null,
+      "overall_score": 0.35,
+      "timestamp": "2026-05-01T22:16:42+00:00",
+      "artifact": "results/smoke_public.json",
+      "culture_score": 1.0,
+      "culture_n": 4,
+      "instruction_score": 0.0,
+      "instruction_n": 4,
+      "knowledge_score": 0.75,
+      "knowledge_n": 4,
+      "reading_score": 0.0,
+      "reading_n": 4,
+      "short_qa_score": 0.0,
+      "short_qa_n": 4
+    },
+    {
+      "model_id": "smoke",
+      "model_type": "mock",
+      "backend": "mock",
+      "revision": null,
+      "overall_score": 0.2,
+      "timestamp": "2026-05-01T22:16:42+00:00",
+      "artifact": "results/smoke.json",
+      "culture_score": 0.5,
+      "culture_n": 2,
+      "instruction_score": 0.0,
+      "instruction_n": 2,
+      "knowledge_score": 0.5,
+      "knowledge_n": 2,
+      "reading_score": 0.0,
+      "reading_n": 2,
+      "short_qa_score": 0.0,
+      "short_qa_n": 2
+    }
+  ],
+  "reference": []
+}

@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "persian-llm-eval"
+version = "0.1.0"
+description = "A practical benchmark runner and leaderboard scaffold for Iranian Persian LLM evaluation."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+  {name = "Persian LLM Eval contributors"}
+]
+keywords = ["persian", "farsi", "llm", "benchmark", "evaluation"]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+hf = ["torch>=2", "transformers>=4.40"]
+space = ["gradio>=4", "pandas>=2"]
+
+[project.scripts]
+persian-eval = "persian_eval.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["persian_eval*"]

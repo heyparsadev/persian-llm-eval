@@ -1,0 +1,27 @@
+# Suggested baseline matrix for the first public leaderboard batch.
+# These are examples, not pinned official results.
+open_weight:
+  persian_specialized:
+    - model_id: PartAI/Dorna2-Llama3.1-8B-Instruct
+      backend: hf
+      model_type: open-weight
+    - model_id: PartAI/Dorna-Llama3-8B-Instruct
+      backend: hf
+      model_type: open-weight
+    - model_id: universitytehran/PersianMind-v1.0
+      backend: hf
+      model_type: open-weight
+  multilingual:
+    - model_id: meta-llama/Llama-3.1-8B-Instruct
+      backend: hf
+      model_type: open-weight
+    - model_id: Qwen/Qwen2.5-7B-Instruct
+      backend: hf
+      model_type: open-weight
+    - model_id: mistralai/Mistral-7B-Instruct-v0.3
+      backend: hf
+      model_type: open-weight
+api_reference:
+  - model_id: gpt-4.1-mini
+    backend: openai-compatible
+    model_type: api

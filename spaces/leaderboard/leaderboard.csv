@@ -1,0 +1,3 @@
+artifact,backend,culture_n,culture_score,instruction_n,instruction_score,knowledge_n,knowledge_score,model_id,model_type,overall_score,reading_n,reading_score,revision,short_qa_n,short_qa_score,table,timestamp
+results/smoke_public.json,mock,4,1.0,4,0.0,4,0.75,smoke-public,mock,0.35,4,0.0,,4,0.0,main,2026-05-01T22:16:42+00:00
+results/smoke.json,mock,2,0.5,2,0.0,2,0.5,smoke,mock,0.2,2,0.0,,2,0.0,main,2026-05-01T22:16:42+00:00
