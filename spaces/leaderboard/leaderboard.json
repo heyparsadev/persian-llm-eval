@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-05T16:44:50+00:00",
+  "generated_at": "2026-05-05T20:57:19+00:00",
   "main": [
     {
       "model_id": "Qwen/Qwen3-8B",
@@ -13,6 +13,25 @@
       "culture_n": 4,
       "knowledge_score": 0.75,
       "knowledge_n": 4
+    },
+    {
+      "model_id": "Qwen/Qwen3-14B",
+      "model_type": "open-weight",
+      "backend": "hf",
+      "revision": null,
+      "overall_score": 0.629266,
+      "timestamp": "2026-05-05T20:57:18+00:00",
+      "artifact": "results/qwen3_14b_4bit_hard.json",
+      "hard_culture_score": 1.0,
+      "hard_culture_n": 4,
+      "hard_instruction_score": 0.25,
+      "hard_instruction_n": 4,
+      "hard_math_score": 0.25,
+      "hard_math_n": 4,
+      "hard_reading_score": 0.646329,
+      "hard_reading_n": 4,
+      "hard_reasoning_score": 1.0,
+      "hard_reasoning_n": 4
     },
     {
       "model_id": "Qwen/Qwen2.5-0.5B-Instruct",

@@ -1,0 +1,273 @@
+{
+  "model_id": "Qwen/Qwen3-14B",
+  "model_type": "open-weight",
+  "revision": null,
+  "backend": "hf",
+  "task_scores": {
+    "hard_culture": {
+      "score": 1.0,
+      "n": 4
+    },
+    "hard_instruction": {
+      "score": 0.25,
+      "n": 4
+    },
+    "hard_math": {
+      "score": 0.25,
+      "n": 4
+    },
+    "hard_reading": {
+      "score": 0.6463293650793651,
+      "n": 4
+    },
+    "hard_reasoning": {
+      "score": 1.0,
+      "n": 4
+    }
+  },
+  "overall_score": 0.629265873015873,
+  "run_config": {
+    "data": [
+      "data/persian_eval_v1.hard.jsonl"
+    ],
+    "tasks": "all",
+    "split": null,
+    "max_new_tokens": 32,
+    "temperature": 0.0,
+    "dtype": "bfloat16",
+    "quantization": "4bit"
+  },
+  "timestamp": "2026-05-05T20:57:18+00:00",
+  "samples": [
+    {
+      "id": "peval-hard-reasoning-001",
+      "track": "hard_reasoning",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-002",
+      "track": "hard_reasoning",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-003",
+      "track": "hard_reasoning",
+      "prediction": "الف) مریم به داده خام دسترسی ندارد",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-004",
+      "track": "hard_reasoning",
+      "prediction": "الف)",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0
+      }
+    },
+    {
+      "id": "peval-hard-math-001",
+      "track": "hard_math",
+      "prediction": "2.4 درصد کاهش",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۴ درصد کاهش",
+          "4 درصد کاهش",
+          "کاهش ۴ درصد",
+          "کاهش 4 درصد"
+        ],
+        "normalized_prediction": "24 درصد کاهش"
+      }
+    },
+    {
+      "id": "peval-hard-math-002",
+      "track": "hard_math",
+      "prediction": "۲۰",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "۲۰",
+          "20"
+        ],
+        "normalized_prediction": "20"
+      }
+    },
+    {
+      "id": "peval-hard-math-003",
+      "track": "hard_math",
+      "prediction": "50.4",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۵۰",
+          "50"
+        ],
+        "normalized_prediction": "504"
+      }
+    },
+    {
+      "id": "peval-hard-math-004",
+      "track": "hard_math",
+      "prediction": "پ",
+      "score": 0.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 0
+      }
+    },
+    {
+      "id": "peval-hard-reading-001",
+      "track": "hard_reading",
+      "prediction": "اتوبوس رزرو نشده بود.",
+      "score": 1.0,
+      "details": {
+        "best_answer": "اتوبوس رزرو نشده بود"
+      }
+    },
+    {
+      "id": "peval-hard-reading-002",
+      "track": "hard_reading",
+      "prediction": "پروژه ب ریسک کمتری داشت و زیرساخت بلندمدت می‌ساخت.",
+      "score": 0.888888888888889,
+      "details": {
+        "best_answer": "ریسک کمتری داشت و زیرساخت بلندمدت می ساخت"
+      }
+    },
+    {
+      "id": "peval-hard-reading-003",
+      "track": "hard_reading",
+      "prediction": "مشکل اصلی طراحی افزایش زمان انجام کار و ایجاد تاخیر بین صفحات",
+      "score": 0.125,
+      "details": {
+        "best_answer": "بارگذاری بین دو صفحه"
+      }
+    },
+    {
+      "id": "peval-hard-reading-004",
+      "track": "hard_reading",
+      "prediction": "عواملی مانند درآمد و سطح تحصیلات می‌توانند رابطه اولیه",
+      "score": 0.5714285714285715,
+      "details": {
+        "best_answer": "درآمد و سطح تحصیلات"
+      }
+    },
+    {
+      "id": "peval-hard-instruction-001",
+      "track": "hard_instruction",
+      "prediction": "نتیجه: مطالعه گروهی باعث افزایش بازخورد و بهبود تمرکز",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": false,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 0.8
+      }
+    },
+    {
+      "id": "peval-hard-instruction-002",
+      "track": "hard_instruction",
+      "prediction": "درک می‌کنم که این مساله برای شما حساس است، پیگیری می‌ک",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      }
+    },
+    {
+      "id": "peval-hard-instruction-003",
+      "track": "hard_instruction",
+      "prediction": "رمز عبور یکی از مهم‌ترین عوامل امنیتی در حفاظت از اطلاع",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "required_keywords": false,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true
+        },
+        "constraint_score": 0.75
+      }
+    },
+    {
+      "id": "peval-hard-instruction-004",
+      "track": "hard_instruction",
+      "prediction": "اگر برنامه ریزی روزانه با اولویت‌های مهم شروع شود، به بهتر",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true,
+          "required_suffix": false
+        },
+        "constraint_score": 0.8
+      }
+    },
+    {
+      "id": "peval-hard-culture-001",
+      "track": "hard_culture",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0
+      }
+    },
+    {
+      "id": "peval-hard-culture-002",
+      "track": "hard_culture",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0
+      }
+    },
+    {
+      "id": "peval-hard-culture-003",
+      "track": "hard_culture",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0
+      }
+    },
+    {
+      "id": "peval-hard-culture-004",
+      "track": "hard_culture",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0
+      }
+    }
+  ]
+}
