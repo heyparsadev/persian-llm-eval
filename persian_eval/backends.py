@@ -76,21 +76,26 @@ class HFBackend(BaseBackend):
     def generate(self, record: DatasetRecord) -> str:
         prompt = format_prompt(record)
         if getattr(self.tokenizer, "chat_template", None):
-            input_ids = self.tokenizer.apply_chat_template(
+            encoded = self.tokenizer.apply_chat_template(
                 [{"role": "system", "content": SYSTEM_PROMPT}, {"role": "user", "content": prompt}],
                 add_generation_prompt=True,
                 return_tensors="pt",
-            ).to(self.model.device)
+                return_dict=True,
+            )
         else:
             encoded = self.tokenizer(f"{SYSTEM_PROMPT}\n\n{prompt}", return_tensors="pt")
-            input_ids = encoded["input_ids"].to(self.model.device)
+
+        encoded = encoded.to(self.model.device)
+        input_ids = encoded["input_ids"]
 
         do_sample = self.config.temperature > 0
         generate_kwargs = {
             "max_new_tokens": self.config.max_new_tokens,
             "do_sample": do_sample,
             "pad_token_id": self.tokenizer.eos_token_id,
+            "attention_mask": encoded.get("attention_mask"),
         }
+        generate_kwargs = {key: value for key, value in generate_kwargs.items() if value is not None}
         if do_sample:
             generate_kwargs["temperature"] = self.config.temperature
         with self.torch.no_grad():
