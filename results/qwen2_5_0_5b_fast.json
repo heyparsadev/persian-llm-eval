@@ -1,0 +1,112 @@
+{
+  "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+  "model_type": "open-weight",
+  "revision": null,
+  "backend": "hf",
+  "task_scores": {
+    "culture": {
+      "score": 0.0,
+      "n": 4
+    },
+    "knowledge": {
+      "score": 0.25,
+      "n": 4
+    }
+  },
+  "overall_score": 0.125,
+  "run_config": {
+    "data": [
+      "data/persian_eval_v1.public_eval.jsonl"
+    ],
+    "tasks": [
+      "culture",
+      "knowledge"
+    ],
+    "split": null,
+    "max_new_tokens": 8,
+    "temperature": 0.0
+  },
+  "timestamp": "2026-05-05T16:38:51+00:00",
+  "samples": [
+    {
+      "id": "peval-public-knowledge-001",
+      "track": "knowledge",
+      "prediction": "ب",
+      "score": 0.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 0
+      }
+    },
+    {
+      "id": "peval-public-knowledge-002",
+      "track": "knowledge",
+      "prediction": "برچسب گزینه",
+      "score": 0.0,
+      "details": {
+        "predicted_index": null,
+        "answer_index": 0
+      }
+    },
+    {
+      "id": "peval-public-knowledge-003",
+      "track": "knowledge",
+      "prediction": "ب",
+      "score": 0.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 0
+      }
+    },
+    {
+      "id": "peval-public-knowledge-004",
+      "track": "knowledge",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1
+      }
+    },
+    {
+      "id": "peval-public-culture-001",
+      "track": "culture",
+      "prediction": "ب",
+      "score": 0.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 0
+      }
+    },
+    {
+      "id": "peval-public-culture-002",
+      "track": "culture",
+      "prediction": "ب",
+      "score": 0.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 0
+      }
+    },
+    {
+      "id": "peval-public-culture-003",
+      "track": "culture",
+      "prediction": "ب",
+      "score": 0.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 0
+      }
+    },
+    {
+      "id": "peval-public-culture-004",
+      "track": "culture",
+      "prediction": "ب",
+      "score": 0.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 0
+      }
+    }
+  ]
+}
