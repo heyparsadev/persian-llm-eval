@@ -76,12 +76,19 @@ class HFBackend(BaseBackend):
     def generate(self, record: DatasetRecord) -> str:
         prompt = format_prompt(record)
         if getattr(self.tokenizer, "chat_template", None):
-            encoded = self.tokenizer.apply_chat_template(
-                [{"role": "system", "content": SYSTEM_PROMPT}, {"role": "user", "content": prompt}],
-                add_generation_prompt=True,
-                return_tensors="pt",
-                return_dict=True,
-            )
+            messages = [{"role": "system", "content": SYSTEM_PROMPT}, {"role": "user", "content": prompt}]
+            template_kwargs = {
+                "add_generation_prompt": True,
+                "return_tensors": "pt",
+                "return_dict": True,
+            }
+            if "qwen3" in self.model_id.lower():
+                template_kwargs["enable_thinking"] = False
+            try:
+                encoded = self.tokenizer.apply_chat_template(messages, **template_kwargs)
+            except TypeError:
+                template_kwargs.pop("enable_thinking", None)
+                encoded = self.tokenizer.apply_chat_template(messages, **template_kwargs)
         else:
             encoded = self.tokenizer(f"{SYSTEM_PROMPT}\n\n{prompt}", return_tensors="pt")
 
