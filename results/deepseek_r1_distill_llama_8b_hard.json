@@ -1,0 +1,273 @@
+{
+  "model_id": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+  "model_type": "open-weight",
+  "revision": null,
+  "backend": "hf",
+  "task_scores": {
+    "hard_culture": {
+      "score": 0.0,
+      "n": 4
+    },
+    "hard_instruction": {
+      "score": 0.25,
+      "n": 4
+    },
+    "hard_math": {
+      "score": 0.0,
+      "n": 4
+    },
+    "hard_reading": {
+      "score": 0.12680598555211559,
+      "n": 4
+    },
+    "hard_reasoning": {
+      "score": 0.0,
+      "n": 4
+    }
+  },
+  "overall_score": 0.07536119711042312,
+  "run_config": {
+    "data": [
+      "data/persian_eval_v1.hard.jsonl"
+    ],
+    "tasks": "all",
+    "split": null,
+    "max_new_tokens": 48,
+    "temperature": 0.0,
+    "dtype": "bfloat16",
+    "quantization": null
+  },
+  "timestamp": "2026-05-05T20:59:33+00:00",
+  "samples": [
+    {
+      "id": "peval-hard-reasoning-001",
+      "track": "hard_reasoning",
+      "prediction": "خب، من باید این سوال را حل کنم. سوال درباره سه نفر است: نازنین، بهرام و کاوه. آنها به طور مرتبی وارد اتاق میشوند. نکات مهمی هستند:\n\n1. ناز",
+      "score": 0.0,
+      "details": {
+        "predicted_index": null,
+        "answer_index": 0
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-002",
+      "track": "hard_reasoning",
+      "prediction": "خب، من باید این سوال را حل کنم. سوال درباره منطق و گزارههاست. اول باید به درستی理解 سوال کنم.\n\n题目 این است: اگر هر گزارش تاییدشده قابل انتشار باشد، و هیچ",
+      "score": 0.0,
+      "details": {
+        "predicted_index": null,
+        "answer_index": 0
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-003",
+      "track": "hard_reasoning",
+      "prediction": "خب، من باید این سوال را حل کنم. سوال درباره امنیت دادهها در شرکت است. اول باید به متن سوال توجه کنم.\n\nاول، شرکت规定 کرده است که هرکسی که به داده خام دسترسی دارد باید آموزش امنیت ب",
+      "score": 0.0,
+      "details": {
+        "predicted_index": null,
+        "answer_index": 0
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-004",
+      "track": "hard_reasoning",
+      "prediction": "خب، من باید این سوال را حل کنم. علی و سارا در مورد گزارش و جلسه صحبت میکنند. علی می گوید اگر گزارش امروز کامل شود، فردا جلسه داریم. سارا则 می گوید اگر جلسه داشته",
+      "score": 0.0,
+      "details": {
+        "predicted_index": null,
+        "answer_index": 0
+      }
+    },
+    {
+      "id": "peval-hard-math-001",
+      "track": "hard_math",
+      "prediction": "خب، من باید این را بررسی کنم که قیمت نهایی نسبت به قیمت اولیه به چه درصد تغییر کرده است. اولی، قیمت اولیه را فرض میکنم و آن را به P نامگذاری میکنم. بعد از آن، فروش",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۴ درصد کاهش",
+          "4 درصد کاهش",
+          "کاهش ۴ درصد",
+          "کاهش 4 درصد"
+        ],
+        "normalized_prediction": "خب من باید این را بررسی کنم که قیمت نهایی نسبت به قیمت اولیه به چه درصد تغییر کرده است اولی قیمت اولیه را فرض میکنم و آن را به p نامگذاری میکنم بعد از آن فروش"
+      }
+    },
+    {
+      "id": "peval-hard-math-002",
+      "track": "hard_math",
+      "prediction": "برای حل این مسئله، باید از دادههای موجود استفاده کنم. میانگین پنج عدد برابر با ۱۸ است، بنابراین مجموع این پنج عدد برابر با ۹۰ است (بنا براین ۱۸ × ۵ = ۹",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۲۰",
+          "20"
+        ],
+        "normalized_prediction": "برای حل این مسئله باید از دادههای موجود استفاده کنم میانگین پنج عدد برابر با 18 است بنابراین مجموع این پنج عدد برابر با 90 است بنا براین 18 × 5 9"
+      }
+    },
+    {
+      "id": "peval-hard-math-003",
+      "track": "hard_math",
+      "prediction": "برای محاسبه میانگین سرعت کل سفر، باید از راهی مناسب استفاده کنم. یکی از راهکارهای مناسب برای این محاسبه، استفاده از قانون همافزایی ( یا قانون آریستوتل ) است که به",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۵۰",
+          "50"
+        ],
+        "normalized_prediction": "برای محاسبه میانگین سرعت کل سفر باید از راهی مناسب استفاده کنم یکی از راهکارهای مناسب برای این محاسبه استفاده از قانون همافزایی یا قانون آریستوتل است که به"
+      }
+    },
+    {
+      "id": "peval-hard-math-004",
+      "track": "hard_math",
+      "prediction": "خب، من باید این سوال را حل کنم. در یک جعبه، تعداد مهرهها به این شرح است: ۳ قرمز، ۲ آبی و ۱ سبز. حالا، اگر بدون جایگذاری دو مهره",
+      "score": 0.0,
+      "details": {
+        "predicted_index": null,
+        "answer_index": 0
+      }
+    },
+    {
+      "id": "peval-hard-reading-001",
+      "track": "hard_reading",
+      "prediction": "خب، من باید این متن را بخونم و به سوال اصلی پاسخ بدم. متن دربارهی اردو مدرسه است که به خاطر باران و اتوبوس رزرو نشده، برگزار نشد. مدیر مدرسه گفت اگر",
+      "score": 0.16666666666666666,
+      "details": {
+        "best_answer": "اتوبوس رزرو نشده بود"
+      }
+    },
+    {
+      "id": "peval-hard-reading-002",
+      "track": "hard_reading",
+      "prediction": "خب، من باید متن رو بخونم و به سوالش پاسخ بدم. متن رو اینجام: کمیته ابتدا پیشنهاد کرد بودجه به پروژه الف برسد، چون بازدهی کوتاهمدت داشت. بعد معلوم شد",
+      "score": 0.10526315789473685,
+      "details": {
+        "best_answer": "ریسک کمتری داشت و زیرساخت بلندمدت می ساخت"
+      }
+    },
+    {
+      "id": "peval-hard-reading-003",
+      "track": "hard_reading",
+      "prediction": "خب، من این متن رو باید بخونم و به زبان فارسی پاسخ بدم. متن درباره یک اپلیکیشنی است که تعداد کلیکها رو کم کرده، اما زمان انجام کار رو افزایش داد. دلیل این موضوع هم",
+      "score": 0.0,
+      "details": {
+        "best_answer": ""
+      }
+    },
+    {
+      "id": "peval-hard-reading-004",
+      "track": "hard_reading",
+      "prediction": "خب، من این متن رو بخونم. پژوهشگران发现 که شهرهایی که کتابخانه بیشتری دارند، میانگین مطالعه بالاتری دارند. اما وقتی درآمد و سطح تحصیلات رو کنترل کردند، اثر تعداد کتابخانهها خیلی",
+      "score": 0.23529411764705882,
+      "details": {
+        "best_answer": "درآمد و سطح تحصیلات"
+      }
+    },
+    {
+      "id": "peval-hard-instruction-001",
+      "track": "hard_instruction",
+      "prediction": "خب، من باید یک پاسخ فارسی درباره مزیت مطالعه گروهی بنویسم. اول باید بفهمم چی مزیتهای این نوع مطالعه وجود داره. احتمالاً تمرکز و بازخورد از مزایای",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": false
+        },
+        "constraint_score": 0.8
+      }
+    },
+    {
+      "id": "peval-hard-instruction-002",
+      "track": "hard_instruction",
+      "prediction": "درک می‌کنم که شما به دنبال یک پاسخ دقیق و کوتاه هستید. لطفاً مشخص کنید که چه کاری میخواهید انجام شود تا بتوانم به شما کمک کنم.\n</think>\n\nدرک می‌کنم که",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "required_keywords": false,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 0.8
+      }
+    },
+    {
+      "id": "peval-hard-instruction-003",
+      "track": "hard_instruction",
+      "prediction": "خب، من باید یک توضیح فارسی درباره امنیت رمز عبور بنویسم که شامل «رمز عبور» و «احراز هویت» باشد و از استفاده از اعداد خودداری کنم. اول باید بفهم",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true
+        },
+        "constraint_score": 1.0
+      }
+    },
+    {
+      "id": "peval-hard-instruction-004",
+      "track": "hard_instruction",
+      "prediction": "خب، من باید یک جمله فارسی درباره برنامه ریزی روزانه بنویس که با \"اگر\" شروع شود و شامل \"اولویت\" باشد و با \"می‌شود.\" تمام شود. اولویتها معمولاً مهم هستند،",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": false,
+          "required_suffix": false
+        },
+        "constraint_score": 0.6
+      }
+    },
+    {
+      "id": "peval-hard-culture-001",
+      "track": "hard_culture",
+      "prediction": "خب، من این سوال رو باید به فارسی بفهمم. سوال اینه که کیه که می گوید \"فلانی دستش نمک ندارد\" و منظورش قضاوت درباره مزه غذا نیست. نزدیکترین معنی",
+      "score": 0.0,
+      "details": {
+        "predicted_index": null,
+        "answer_index": 0
+      }
+    },
+    {
+      "id": "peval-hard-culture-002",
+      "track": "hard_culture",
+      "prediction": "خب، این سوال درباره یک مهمانی ایرانی و تعارف مهمان به پیشنهادها است. اول باید بفهمم که تعارف در مهمانیهای ایرانی چطور رفتار میشود. تعارف در فارسی به معنی پیشنهاد یا دعوت",
+      "score": 0.0,
+      "details": {
+        "predicted_index": null,
+        "answer_index": 0
+      }
+    },
+    {
+      "id": "peval-hard-culture-003",
+      "track": "hard_culture",
+      "prediction": "خب، من این جمله رو باید به فارسی بفهمم. جمله هست \"فلانی چراغ خاموش کارش را جلو برد\". اول باید بفهمم چراغ خاموش چیه معنی داره. چ",
+      "score": 0.0,
+      "details": {
+        "predicted_index": null,
+        "answer_index": 0
+      }
+    },
+    {
+      "id": "peval-hard-culture-004",
+      "track": "hard_culture",
+      "prediction": "خب، من باید به این سوال پاسخ بدم. سوال درباره رد مودبانه دعوت کاری در زبان فارسی است. گزینهها الف، ب، پ، ت هستند.\n\nاول، باید هر یک گزینه را بررسی کنم",
+      "score": 0.0,
+      "details": {
+        "predicted_index": null,
+        "answer_index": 0
+      }
+    }
+  ]
+}

@@ -2,3 +2,4 @@ artifact,backend,culture_n,culture_score,hard_culture_n,hard_culture_score,hard_
 results/qwen3_8b_fast.json,hf,4,0.75,,,,,,,,,,,4,0.75,Qwen/Qwen3-8B,open-weight,0.75,,main,2026-05-05T16:44:48+00:00
 results/qwen3_14b_4bit_hard.json,hf,,,4,1.0,4,0.25,4,0.25,4,0.646329,4,1.0,,,Qwen/Qwen3-14B,open-weight,0.629266,,main,2026-05-05T20:57:18+00:00
 results/qwen2_5_0_5b_fast.json,hf,4,0.0,,,,,,,,,,,4,0.25,Qwen/Qwen2.5-0.5B-Instruct,open-weight,0.125,,main,2026-05-05T16:38:51+00:00
+results/deepseek_r1_distill_llama_8b_hard.json,hf,,,4,0.0,4,0.25,4,0.0,4,0.126806,4,0.0,,,deepseek-ai/DeepSeek-R1-Distill-Llama-8B,open-weight,0.075361,,main,2026-05-05T20:59:33+00:00

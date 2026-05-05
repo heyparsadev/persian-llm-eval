@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-05T20:57:19+00:00",
+  "generated_at": "2026-05-05T20:59:34+00:00",
   "main": [
     {
       "model_id": "Qwen/Qwen3-8B",
@@ -45,6 +45,25 @@
       "culture_n": 4,
       "knowledge_score": 0.25,
       "knowledge_n": 4
+    },
+    {
+      "model_id": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+      "model_type": "open-weight",
+      "backend": "hf",
+      "revision": null,
+      "overall_score": 0.075361,
+      "timestamp": "2026-05-05T20:59:33+00:00",
+      "artifact": "results/deepseek_r1_distill_llama_8b_hard.json",
+      "hard_culture_score": 0.0,
+      "hard_culture_n": 4,
+      "hard_instruction_score": 0.25,
+      "hard_instruction_n": 4,
+      "hard_math_score": 0.0,
+      "hard_math_n": 4,
+      "hard_reading_score": 0.126806,
+      "hard_reading_n": 4,
+      "hard_reasoning_score": 0.0,
+      "hard_reasoning_n": 4
     }
   ],
   "reference": []
