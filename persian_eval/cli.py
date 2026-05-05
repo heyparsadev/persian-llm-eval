@@ -47,6 +47,8 @@ def build_parser() -> argparse.ArgumentParser:
     run_parser.add_argument("--max-new-tokens", type=int, default=96)
     run_parser.add_argument("--temperature", type=float, default=0.0)
     run_parser.add_argument("--base-url", default=None, help="OpenAI-compatible base URL")
+    run_parser.add_argument("--dtype", default="bfloat16", choices=["auto", "bfloat16", "float16", "float32"])
+    run_parser.add_argument("--quantization", default=None, choices=["4bit", "8bit"], help="Optional HF bitsandbytes quantization")
     run_parser.add_argument("--no-samples", action="store_true", help="Do not include sample-level predictions")
 
     validate_parser = subparsers.add_parser("validate", help="Validate result JSON or dataset JSONL")
@@ -73,7 +75,13 @@ def run_command(args: argparse.Namespace) -> int:
         raise DatasetError("no records matched the requested split/tasks")
 
     model_type = args.model_type or infer_model_type(args.backend)
-    config = GenerationConfig(max_new_tokens=args.max_new_tokens, temperature=args.temperature, base_url=args.base_url)
+    config = GenerationConfig(
+        max_new_tokens=args.max_new_tokens,
+        temperature=args.temperature,
+        base_url=args.base_url,
+        dtype=args.dtype,
+        quantization=args.quantization,
+    )
     backend = create_backend(args.backend, args.model, revision=args.revision, config=config)
     run_config = {
         "data": [str(Path(path)) for path in args.data],
@@ -81,6 +89,8 @@ def run_command(args: argparse.Namespace) -> int:
         "split": args.split,
         "max_new_tokens": args.max_new_tokens,
         "temperature": args.temperature,
+        "dtype": args.dtype,
+        "quantization": args.quantization,
     }
     result = run_records(
         records,

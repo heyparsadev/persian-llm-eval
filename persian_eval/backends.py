@@ -29,6 +29,8 @@ class GenerationConfig:
     max_new_tokens: int = 96
     temperature: float = 0.0
     base_url: str | None = None
+    dtype: str = "bfloat16"
+    quantization: str | None = None
 
 
 class BaseBackend:
@@ -57,7 +59,7 @@ class HFBackend(BaseBackend):
     def __init__(self, model_id: str, *, revision: str | None, config: GenerationConfig):
         try:
             import torch
-            from transformers import AutoModelForCausalLM, AutoTokenizer
+            from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
         except ImportError as exc:
             raise RuntimeError("Install the Hugging Face backend with: pip install -e '.[hf]'") from exc
 
@@ -65,13 +67,35 @@ class HFBackend(BaseBackend):
         self.model_id = model_id
         self.config = config
         self.tokenizer = AutoTokenizer.from_pretrained(model_id, revision=revision, trust_remote_code=True)
-        self.model = AutoModelForCausalLM.from_pretrained(
-            model_id,
-            revision=revision,
-            torch_dtype=getattr(torch, "bfloat16", None),
-            device_map="auto",
-            trust_remote_code=True,
-        )
+        load_kwargs: dict[str, Any] = {
+            "revision": revision,
+            "device_map": "auto",
+            "trust_remote_code": True,
+        }
+        dtype = self._resolve_dtype(config.dtype)
+        if dtype is not None:
+            load_kwargs["torch_dtype"] = dtype
+        if config.quantization == "4bit":
+            load_kwargs["quantization_config"] = BitsAndBytesConfig(
+                load_in_4bit=True,
+                bnb_4bit_compute_dtype=dtype or torch.float16,
+                bnb_4bit_quant_type="nf4",
+                bnb_4bit_use_double_quant=True,
+            )
+        elif config.quantization == "8bit":
+            load_kwargs["quantization_config"] = BitsAndBytesConfig(load_in_8bit=True)
+        self.model = AutoModelForCausalLM.from_pretrained(model_id, **load_kwargs)
+
+    def _resolve_dtype(self, dtype_name: str) -> Any:
+        if dtype_name == "auto":
+            return None
+        if dtype_name == "float16":
+            return self.torch.float16
+        if dtype_name == "bfloat16":
+            return self.torch.bfloat16
+        if dtype_name == "float32":
+            return self.torch.float32
+        raise ValueError(f"Unsupported dtype: {dtype_name}")
 
     def generate(self, record: DatasetRecord) -> str:
         prompt = format_prompt(record)

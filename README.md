@@ -96,6 +96,16 @@ Harder curated examples are available in:
 persian-eval run --model smoke --backend mock --data data/persian_eval_v1.hard.jsonl --output results/smoke_hard.json
 ```
 
+Advanced open-weight examples for a 24GB GPU:
+
+```bash
+scripts/run_qwen3_8b_hard.sh
+scripts/run_qwen3_14b_4bit_hard.sh
+scripts/run_deepseek_r1_distill_8b_hard.sh
+```
+
+`Qwen3-14B` uses `--quantization 4bit` so it can fit on a single RTX 4090-class GPU.
+
 ## Dataset Schema
 
 Each JSONL row uses this shape:

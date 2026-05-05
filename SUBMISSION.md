@@ -29,3 +29,16 @@ persian-eval validate results/org__model-name.json
 ```
 
 API baselines are accepted only as reference rows and should not be mixed into the main open-weight ranking.
+
+For large models on 24GB GPUs, use explicit quantization metadata in the command and result:
+
+```bash
+persian-eval run \
+  --model org/model-14b \
+  --backend hf \
+  --model-type open-weight \
+  --quantization 4bit \
+  --dtype bfloat16 \
+  --data data/persian_eval_v1.hard.jsonl \
+  --output results/org__model-14b_4bit_hard.json
+```
