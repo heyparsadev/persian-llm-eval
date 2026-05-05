@@ -1,2 +1,3 @@
 artifact,backend,culture_n,culture_score,knowledge_n,knowledge_score,model_id,model_type,overall_score,revision,table,timestamp
+results/qwen3_8b_fast.json,hf,4,0.75,4,0.75,Qwen/Qwen3-8B,open-weight,0.75,,main,2026-05-05T16:44:48+00:00
 results/qwen2_5_0_5b_fast.json,hf,4,0.0,4,0.25,Qwen/Qwen2.5-0.5B-Instruct,open-weight,0.125,,main,2026-05-05T16:38:51+00:00

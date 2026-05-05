@@ -1,6 +1,19 @@
 {
-  "generated_at": "2026-05-05T16:38:53+00:00",
+  "generated_at": "2026-05-05T16:44:50+00:00",
   "main": [
+    {
+      "model_id": "Qwen/Qwen3-8B",
+      "model_type": "open-weight",
+      "backend": "hf",
+      "revision": null,
+      "overall_score": 0.75,
+      "timestamp": "2026-05-05T16:44:48+00:00",
+      "artifact": "results/qwen3_8b_fast.json",
+      "culture_score": 0.75,
+      "culture_n": 4,
+      "knowledge_score": 0.75,
+      "knowledge_n": 4
+    },
     {
       "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
       "model_type": "open-weight",
