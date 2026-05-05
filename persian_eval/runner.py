@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import sys
 from collections import defaultdict
 from pathlib import Path
 from typing import Any
@@ -26,7 +27,9 @@ def run_records(
     counts: dict[str, int] = defaultdict(int)
     samples: list[dict[str, Any]] = []
 
-    for record in records:
+    total_records = len(records)
+    for index, record in enumerate(records, start=1):
+        print(f"[{index}/{total_records}] {record.id} ({record.track})", file=sys.stderr, flush=True)
         prediction = backend.generate(record)
         score, details = score_record(record, prediction)
         totals[record.track] += score
