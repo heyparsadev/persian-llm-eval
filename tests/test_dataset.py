@@ -13,9 +13,10 @@ class DatasetTests(unittest.TestCase):
             [
                 ROOT / "data" / "persian_eval_v1.dev.jsonl",
                 ROOT / "data" / "persian_eval_v1.public_eval.jsonl",
+                ROOT / "data" / "persian_eval_v1.hard.jsonl",
             ]
         )
-        self.assertEqual(len(records), 30)
+        self.assertEqual(len(records), 50)
         self.assertEqual(duplicate_prompts(records), [])
 
     def test_task_filter(self):

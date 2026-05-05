@@ -90,6 +90,12 @@ Task selection accepts `all` or a comma-separated list of tracks:
 persian-eval run --model smoke --backend mock --tasks knowledge,reading --output results/smoke_subset.json
 ```
 
+Harder curated examples are available in:
+
+```bash
+persian-eval run --model smoke --backend mock --data data/persian_eval_v1.hard.jsonl --output results/smoke_hard.json
+```
+
 ## Dataset Schema
 
 Each JSONL row uses this shape:
