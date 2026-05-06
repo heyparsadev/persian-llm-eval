@@ -102,6 +102,7 @@ Advanced open-weight examples for a 24GB GPU:
 scripts/run_qwen3_8b_hard.sh
 scripts/run_qwen3_14b_4bit_hard.sh
 scripts/run_deepseek_r1_distill_8b_hard.sh
+scripts/run_deepseek_r1_distill_qwen_14b_4bit_hard.sh
 ```
 
 `Qwen3-14B` uses `--quantization 4bit` so it can fit on a single RTX 4090-class GPU.

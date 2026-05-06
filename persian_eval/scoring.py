@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from typing import Any
 
 from .dataset import DatasetRecord
@@ -28,34 +29,47 @@ def score_mcq(record: DatasetRecord, prediction: str) -> tuple[float, dict[str, 
     answer_index = record.metadata.get("answer_index")
     if answer_index is None:
         answer_index = _find_answer_index(record)
-    predicted_index = extract_choice_index(prediction, record.choices or [], labels)
+    predicted_index = None
+    scored_candidate = ""
+    for candidate in prediction_candidates(prediction):
+        predicted_index = extract_choice_index(candidate, record.choices or [], labels)
+        if predicted_index is not None:
+            scored_candidate = candidate
+            break
     score = 1.0 if predicted_index == answer_index else 0.0
-    return score, {"predicted_index": predicted_index, "answer_index": answer_index}
+    return score, {"predicted_index": predicted_index, "answer_index": answer_index, "scored_candidate": scored_candidate}
 
 
 def score_exact(record: DatasetRecord, prediction: str) -> tuple[float, dict[str, Any]]:
     accepted = _accepted_answers(record.answer)
-    normalized_prediction = strip_punctuation(prediction)
     normalized_accepted = [strip_punctuation(item) for item in accepted]
-    score = 1.0 if normalized_prediction in normalized_accepted else 0.0
-    return score, {"accepted": accepted, "normalized_prediction": normalized_prediction}
+    for candidate in prediction_candidates(prediction):
+        normalized_prediction = strip_punctuation(candidate)
+        if normalized_prediction in normalized_accepted:
+            return 1.0, {"accepted": accepted, "normalized_prediction": normalized_prediction, "scored_candidate": candidate}
+    normalized_prediction = strip_punctuation(strip_reasoning(prediction))
+    return 0.0, {"accepted": accepted, "normalized_prediction": normalized_prediction, "scored_candidate": strip_reasoning(prediction)}
 
 
 def score_f1(record: DatasetRecord, prediction: str) -> tuple[float, dict[str, Any]]:
     accepted = _accepted_answers(record.answer)
-    prediction_tokens = tokenize(prediction)
     best = 0.0
     best_answer = ""
-    for answer in accepted:
-        current = token_f1(prediction_tokens, tokenize(answer))
-        if current > best:
-            best = current
-            best_answer = answer
-    return best, {"best_answer": best_answer}
+    best_candidate = ""
+    for candidate in prediction_candidates(prediction):
+        prediction_tokens = tokenize(candidate)
+        for answer in accepted:
+            current = token_f1(prediction_tokens, tokenize(answer))
+            if current > best:
+                best = current
+                best_answer = answer
+                best_candidate = candidate
+    return best, {"best_answer": best_answer, "scored_candidate": best_candidate}
 
 
 def score_instruction(record: DatasetRecord, prediction: str) -> tuple[float, dict[str, Any]]:
     constraints = dict(record.answer)
+    prediction = strip_reasoning(prediction)
     normalized_prediction = normalize_persian(prediction)
     checks: dict[str, bool] = {}
 
@@ -123,6 +137,48 @@ def extract_choice_index(prediction: str, choices: list[str], labels: list[str])
     if len(matched) == 1:
         return matched[0]
     return None
+
+
+def strip_reasoning(prediction: str) -> str:
+    """Remove common hidden/visible reasoning wrappers before deterministic scoring."""
+
+    value = str(prediction or "").strip()
+    if "</think>" in value:
+        value = value.split("</think>")[-1].strip()
+    value = re.sub(r"<think>.*?</think>", "", value, flags=re.DOTALL | re.IGNORECASE).strip()
+    return value
+
+
+def prediction_candidates(prediction: str) -> list[str]:
+    """Return likely final-answer snippets, ordered from most to least specific."""
+
+    stripped = strip_reasoning(prediction)
+    candidates: list[str] = []
+    marker_patterns = [
+        r"(?:پاسخ\s*نهایی|جواب\s*نهایی|نتیجه\s*نهایی|پاسخ|جواب|نتیجه)\s*[:：]\s*(.+)",
+        r"(?:final\s*answer|answer|therefore)\s*[:：]\s*(.+)",
+    ]
+    for pattern in marker_patterns:
+        for match in re.finditer(pattern, stripped, flags=re.IGNORECASE | re.DOTALL):
+            candidates.append(match.group(1).strip())
+    for match in re.finditer(r"\\boxed\{([^{}]+)\}", stripped):
+        candidates.append(match.group(1).strip())
+    for line in reversed([item.strip() for item in stripped.splitlines() if item.strip()]):
+        candidates.append(line)
+    candidates.append(stripped)
+    candidates.append(str(prediction or "").strip())
+
+    deduped: list[str] = []
+    seen: set[str] = set()
+    for candidate in candidates:
+        cleaned = candidate.strip()
+        if not cleaned:
+            continue
+        key = normalize_persian(cleaned)
+        if key and key not in seen:
+            seen.add(key)
+            deduped.append(cleaned)
+    return deduped
 
 
 def _find_answer_index(record: DatasetRecord) -> int:
