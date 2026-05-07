@@ -16,7 +16,13 @@ keywords = ["persian", "farsi", "llm", "benchmark", "evaluation"]
 dependencies = []
 
 [project.optional-dependencies]
-dev = ["pytest>=8"]
+dev = [
+  "pytest>=8",
+  "pytest-cov>=5",
+  "ruff>=0.6",
+  "mypy>=1.10",
+  "pre-commit>=3.7",
+]
 hf = ["torch>=2", "transformers>=4.51,<5", "accelerate>=0.26", "bitsandbytes>=0.43,<0.49"]
 space = ["gradio>=4", "pandas>=2"]
 
@@ -25,3 +31,47 @@ persian-eval = "persian_eval.cli:main"
 
 [tool.setuptools.packages.find]
 include = ["persian_eval*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+extend-exclude = ["data", "results", "leaderboard", "spaces", "hf"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "RUF", "SIM", "PL"]
+ignore = [
+  "PLR0913",  # too-many-arguments: common in CLI and runner signatures.
+  "PLR2004",  # magic-value: frequent in scoring thresholds and tests.
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["PLR2004", "S101"]
+"scripts/*" = ["E402", "T201"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.mypy]
+python_version = "3.10"
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_unused_configs = true
+no_implicit_optional = true
+check_untyped_defs = true
+ignore_missing_imports = true
+exclude = [
+  "scripts/",
+  "spaces/",
+  "hf/",
+  "tests/",
+]
+
+[[tool.mypy.overrides]]
+module = ["torch.*", "transformers.*", "accelerate.*", "bitsandbytes.*", "gradio.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-ra"
