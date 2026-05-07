@@ -3,9 +3,10 @@
 from __future__ import annotations
 
 import json
+from collections.abc import Iterable
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any
 
 from .normalize import strip_punctuation
 
@@ -26,7 +27,7 @@ class DatasetRecord:
     split: str
 
     @classmethod
-    def from_dict(cls, row: dict[str, Any], *, row_number: int | None = None) -> "DatasetRecord":
+    def from_dict(cls, row: dict[str, Any], *, row_number: int | None = None) -> DatasetRecord:
         prefix = f"row {row_number}: " if row_number is not None else ""
         required = ["id", "track", "prompt", "answer", "metadata", "source", "split"]
         missing = [key for key in required if key not in row]
@@ -34,9 +35,10 @@ class DatasetRecord:
             raise DatasetError(f"{prefix}missing required field(s): {', '.join(missing)}")
 
         choices = row.get("choices")
-        if choices is not None:
-            if not isinstance(choices, list) or not all(isinstance(item, str) for item in choices):
-                raise DatasetError(f"{prefix}choices must be null or a list of strings")
+        if choices is not None and (
+            not isinstance(choices, list) or not all(isinstance(item, str) for item in choices)
+        ):
+            raise DatasetError(f"{prefix}choices must be null or a list of strings")
 
         metadata = row["metadata"]
         if not isinstance(metadata, dict):
@@ -89,8 +91,8 @@ def _require_str(row: dict[str, Any], key: str, prefix: str) -> str:
 def read_jsonl(path: str | Path) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     with Path(path).open("r", encoding="utf-8") as handle:
-        for row_number, line in enumerate(handle, start=1):
-            line = line.strip()
+        for row_number, raw_line in enumerate(handle, start=1):
+            line = raw_line.strip()
             if not line:
                 continue
             try:

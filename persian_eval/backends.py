@@ -21,7 +21,7 @@ def format_prompt(record: DatasetRecord) -> str:
             or ["الف", "ب", "پ", "ت", "ث", "ج", "چ", "ح"][: len(record.choices)]
         )
         rendered_choices = "\n".join(
-            f"{label}) {choice}" for label, choice in zip(labels, record.choices)
+            f"{label}) {choice}" for label, choice in zip(labels, record.choices, strict=False)
         )
         return f"{record.prompt}\n\nگزینه ها:\n{rendered_choices}\n\nفقط برچسب گزینه درست را بنویس."
     if scoring in {"exact", "f1"}:
@@ -63,8 +63,12 @@ class HFBackend(BaseBackend):
 
     def __init__(self, model_id: str, *, revision: str | None, config: GenerationConfig):
         try:
-            import torch
-            from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
+            import torch  # noqa: PLC0415 - optional backend dependency
+            from transformers import (  # noqa: PLC0415 - optional backend dependency
+                AutoModelForCausalLM,
+                AutoTokenizer,
+                BitsAndBytesConfig,
+            )
         except ImportError as exc:
             raise RuntimeError(
                 "Install the Hugging Face backend with: pip install -e '.[hf]'"

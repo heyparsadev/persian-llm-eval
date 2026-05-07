@@ -3,7 +3,6 @@ from pathlib import Path
 
 from persian_eval.dataset import duplicate_prompts, load_records
 
-
 ROOT = Path(__file__).resolve().parents[1]
 
 

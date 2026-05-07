@@ -35,11 +35,12 @@ include = ["persian_eval*"]
 [tool.ruff]
 line-length = 100
 target-version = "py310"
-extend-exclude = ["data", "results", "leaderboard", "spaces", "hf"]
+extend-exclude = ["data", "results", "leaderboard", "spaces", "hf", "scripts"]
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "B", "UP", "RUF", "SIM", "PL"]
 ignore = [
+  "RUF001",   # ambiguous unicode is expected in Persian prompts, labels, and normalizers.
   "PLR0913",  # too-many-arguments: common in CLI and runner signatures.
   "PLR2004",  # magic-value: frequent in scoring thresholds and tests.
 ]

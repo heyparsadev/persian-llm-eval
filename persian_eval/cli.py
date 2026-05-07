@@ -147,7 +147,8 @@ def leaderboard_command(args: argparse.Namespace) -> int:
     if args.csv:
         write_csv(args.csv, leaderboard)
     print(
-        f"wrote {args.output} | main={len(leaderboard['main'])} | reference={len(leaderboard['reference'])}"
+        f"wrote {args.output} | main={len(leaderboard['main'])} | "
+        f"reference={len(leaderboard['reference'])}"
     )
     return 0
 
