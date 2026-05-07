@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pytest:*)",
+      "Bash(ruff check:*)",
+      "Bash(ruff format:*)",
+      "Bash(mypy:*)",
+      "Bash(pip install -e .*)",
+      "Bash(persian-eval validate:*)",
+      "Bash(persian-eval leakage:*)",
+      "Bash(persian-eval run:*)",
+      "Bash(persian-eval leaderboard:*)",
+      "Bash(pre-commit run:*)",
+      "Bash(git status)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git branch:*)"
+    ]
+  }
+}
