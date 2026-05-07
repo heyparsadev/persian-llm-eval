@@ -2,6 +2,12 @@
 .pytest_cache/
 .ruff_cache/
 .mypy_cache/
+.coverage
+htmlcov/
+coverage.xml
+.python-version
+.idea/
+.vscode/
 __pycache__/
 *.py[cod]
 .venv/
