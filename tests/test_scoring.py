@@ -15,7 +15,9 @@ class ScoringTests(unittest.TestCase):
         self.assertEqual(index, 1)
 
     def test_choice_text_is_not_confused_with_label(self):
-        index = extract_choice_index("پایتون", ["پایتون", "البرز", "نوروز", "سه تار"], ["الف", "ب", "پ", "ت"])
+        index = extract_choice_index(
+            "پایتون", ["پایتون", "البرز", "نوروز", "سه تار"], ["الف", "ب", "پ", "ت"]
+        )
         self.assertEqual(index, 0)
 
     def test_prediction_candidates_extract_final_answer(self):

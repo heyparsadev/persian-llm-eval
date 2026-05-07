@@ -29,7 +29,9 @@ def run_records(
 
     total_records = len(records)
     for index, record in enumerate(records, start=1):
-        print(f"[{index}/{total_records}] {record.id} ({record.track})", file=sys.stderr, flush=True)
+        print(
+            f"[{index}/{total_records}] {record.id} ({record.track})", file=sys.stderr, flush=True
+        )
         prediction = backend.generate(record)
         score, details = score_record(record, prediction)
         totals[record.track] += score
@@ -50,7 +52,11 @@ def run_records(
         for track in sorted(counts)
         if counts[track] > 0
     }
-    overall_score = sum(item["score"] for item in task_scores.values()) / len(task_scores) if task_scores else 0.0
+    overall_score = (
+        sum(item["score"] for item in task_scores.values()) / len(task_scores)
+        if task_scores
+        else 0.0
+    )
 
     result: dict[str, Any] = {
         "model_id": model_id,

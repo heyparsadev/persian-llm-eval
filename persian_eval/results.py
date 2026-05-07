@@ -17,7 +17,16 @@ def utc_now() -> str:
 
 
 def validate_result(data: dict[str, Any]) -> None:
-    required = ["model_id", "model_type", "revision", "backend", "task_scores", "overall_score", "run_config", "timestamp"]
+    required = [
+        "model_id",
+        "model_type",
+        "revision",
+        "backend",
+        "task_scores",
+        "overall_score",
+        "run_config",
+        "timestamp",
+    ]
     missing = [key for key in required if key not in data]
     if missing:
         raise ResultError(f"missing required field(s): {', '.join(missing)}")

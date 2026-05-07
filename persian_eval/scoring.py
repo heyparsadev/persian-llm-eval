@@ -37,7 +37,11 @@ def score_mcq(record: DatasetRecord, prediction: str) -> tuple[float, dict[str, 
             scored_candidate = candidate
             break
     score = 1.0 if predicted_index == answer_index else 0.0
-    return score, {"predicted_index": predicted_index, "answer_index": answer_index, "scored_candidate": scored_candidate}
+    return score, {
+        "predicted_index": predicted_index,
+        "answer_index": answer_index,
+        "scored_candidate": scored_candidate,
+    }
 
 
 def score_exact(record: DatasetRecord, prediction: str) -> tuple[float, dict[str, Any]]:
@@ -46,9 +50,17 @@ def score_exact(record: DatasetRecord, prediction: str) -> tuple[float, dict[str
     for candidate in prediction_candidates(prediction):
         normalized_prediction = strip_punctuation(candidate)
         if normalized_prediction in normalized_accepted:
-            return 1.0, {"accepted": accepted, "normalized_prediction": normalized_prediction, "scored_candidate": candidate}
+            return 1.0, {
+                "accepted": accepted,
+                "normalized_prediction": normalized_prediction,
+                "scored_candidate": candidate,
+            }
     normalized_prediction = strip_punctuation(strip_reasoning(prediction))
-    return 0.0, {"accepted": accepted, "normalized_prediction": normalized_prediction, "scored_candidate": strip_reasoning(prediction)}
+    return 0.0, {
+        "accepted": accepted,
+        "normalized_prediction": normalized_prediction,
+        "scored_candidate": strip_reasoning(prediction),
+    }
 
 
 def score_f1(record: DatasetRecord, prediction: str) -> tuple[float, dict[str, Any]]:
@@ -75,11 +87,15 @@ def score_instruction(record: DatasetRecord, prediction: str) -> tuple[float, di
 
     required_keywords = constraints.get("required_keywords", [])
     if required_keywords:
-        checks["required_keywords"] = all(normalize_persian(keyword) in normalized_prediction for keyword in required_keywords)
+        checks["required_keywords"] = all(
+            normalize_persian(keyword) in normalized_prediction for keyword in required_keywords
+        )
 
     forbidden = constraints.get("forbidden", [])
     if forbidden:
-        checks["forbidden"] = all(normalize_persian(item) not in normalized_prediction for item in forbidden)
+        checks["forbidden"] = all(
+            normalize_persian(item) not in normalized_prediction for item in forbidden
+        )
 
     words = tokenize(prediction)
     if "min_words" in constraints:
@@ -87,9 +103,13 @@ def score_instruction(record: DatasetRecord, prediction: str) -> tuple[float, di
     if "max_words" in constraints:
         checks["max_words"] = len(words) <= int(constraints["max_words"])
     if "required_prefix" in constraints:
-        checks["required_prefix"] = normalized_prediction.startswith(normalize_persian(constraints["required_prefix"]))
+        checks["required_prefix"] = normalized_prediction.startswith(
+            normalize_persian(constraints["required_prefix"])
+        )
     if "required_suffix" in constraints:
-        checks["required_suffix"] = normalized_prediction.endswith(normalize_persian(constraints["required_suffix"]))
+        checks["required_suffix"] = normalized_prediction.endswith(
+            normalize_persian(constraints["required_suffix"])
+        )
 
     if not checks:
         return 0.0, {"checks": checks, "constraint_score": 0.0}

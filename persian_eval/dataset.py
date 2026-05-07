@@ -64,12 +64,16 @@ class DatasetRecord:
             raise DatasetError(f"{self.id}: prompt cannot be empty")
         scoring = self.metadata.get("scoring")
         if scoring not in {"mcq", "exact", "f1", "instruction"}:
-            raise DatasetError(f"{self.id}: metadata.scoring must be mcq, exact, f1, or instruction")
+            raise DatasetError(
+                f"{self.id}: metadata.scoring must be mcq, exact, f1, or instruction"
+            )
         if scoring == "mcq":
             if not self.choices:
                 raise DatasetError(f"{self.id}: mcq rows require choices")
             answer_index = self.metadata.get("answer_index")
-            if answer_index is not None and not (isinstance(answer_index, int) and 0 <= answer_index < len(self.choices)):
+            if answer_index is not None and not (
+                isinstance(answer_index, int) and 0 <= answer_index < len(self.choices)
+            ):
                 raise DatasetError(f"{self.id}: metadata.answer_index is out of range")
         if scoring == "instruction" and not isinstance(self.answer, dict):
             raise DatasetError(f"{self.id}: instruction rows require an object answer")

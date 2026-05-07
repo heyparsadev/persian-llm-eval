@@ -16,8 +16,13 @@ SYSTEM_PROMPT = "شما یک دستیار دقیق فارسی هستید. پاس
 def format_prompt(record: DatasetRecord) -> str:
     scoring = record.metadata.get("scoring")
     if scoring == "mcq" and record.choices:
-        labels = record.metadata.get("choice_labels") or ["الف", "ب", "پ", "ت", "ث", "ج", "چ", "ح"][: len(record.choices)]
-        rendered_choices = "\n".join(f"{label}) {choice}" for label, choice in zip(labels, record.choices))
+        labels = (
+            record.metadata.get("choice_labels")
+            or ["الف", "ب", "پ", "ت", "ث", "ج", "چ", "ح"][: len(record.choices)]
+        )
+        rendered_choices = "\n".join(
+            f"{label}) {choice}" for label, choice in zip(labels, record.choices)
+        )
         return f"{record.prompt}\n\nگزینه ها:\n{rendered_choices}\n\nفقط برچسب گزینه درست را بنویس."
     if scoring in {"exact", "f1"}:
         return f"{record.prompt}\n\nپاسخ کوتاه:"
@@ -61,12 +66,16 @@ class HFBackend(BaseBackend):
             import torch
             from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
         except ImportError as exc:
-            raise RuntimeError("Install the Hugging Face backend with: pip install -e '.[hf]'") from exc
+            raise RuntimeError(
+                "Install the Hugging Face backend with: pip install -e '.[hf]'"
+            ) from exc
 
         self.torch = torch
         self.model_id = model_id
         self.config = config
-        self.tokenizer = AutoTokenizer.from_pretrained(model_id, revision=revision, trust_remote_code=True)
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            model_id, revision=revision, trust_remote_code=True
+        )
         load_kwargs: dict[str, Any] = {
             "revision": revision,
             "device_map": "auto",
@@ -100,7 +109,10 @@ class HFBackend(BaseBackend):
     def generate(self, record: DatasetRecord) -> str:
         prompt = format_prompt(record)
         if getattr(self.tokenizer, "chat_template", None):
-            messages = [{"role": "system", "content": SYSTEM_PROMPT}, {"role": "user", "content": prompt}]
+            messages = [
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": prompt},
+            ]
             template_kwargs = {
                 "add_generation_prompt": True,
                 "return_tensors": "pt",
@@ -126,7 +138,9 @@ class HFBackend(BaseBackend):
             "pad_token_id": self.tokenizer.eos_token_id,
             "attention_mask": encoded.get("attention_mask"),
         }
-        generate_kwargs = {key: value for key, value in generate_kwargs.items() if value is not None}
+        generate_kwargs = {
+            key: value for key, value in generate_kwargs.items() if value is not None
+        }
         if do_sample:
             generate_kwargs["temperature"] = self.config.temperature
         with self.torch.no_grad():
@@ -141,7 +155,9 @@ class OpenAICompatibleBackend(BaseBackend):
     def __init__(self, model_id: str, *, config: GenerationConfig):
         self.model_id = model_id
         self.config = config
-        self.base_url = (config.base_url or os.getenv("OPENAI_BASE_URL") or "https://api.openai.com/v1").rstrip("/")
+        self.base_url = (
+            config.base_url or os.getenv("OPENAI_BASE_URL") or "https://api.openai.com/v1"
+        ).rstrip("/")
         self.api_key = os.getenv("OPENAI_API_KEY")
         if not self.api_key:
             raise RuntimeError("OPENAI_API_KEY is required for the openai-compatible backend")

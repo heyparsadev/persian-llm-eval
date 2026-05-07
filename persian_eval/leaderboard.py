@@ -29,8 +29,12 @@ def build_leaderboard(result_paths: list[str | Path]) -> dict[str, Any]:
         rows.append(row)
 
     rows.sort(key=lambda item: item["overall_score"], reverse=True)
-    main = [row for row in rows if row["model_type"] != "api" and row["backend"] != "openai-compatible"]
-    reference = [row for row in rows if row["model_type"] == "api" or row["backend"] == "openai-compatible"]
+    main = [
+        row for row in rows if row["model_type"] != "api" and row["backend"] != "openai-compatible"
+    ]
+    reference = [
+        row for row in rows if row["model_type"] == "api" or row["backend"] == "openai-compatible"
+    ]
     return {"generated_at": utc_now(), "main": main, "reference": reference}
 
 
@@ -50,7 +54,11 @@ def write_csv(path: str | Path, leaderboard: dict[str, Any]) -> None:
 
     output_path = Path(path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    fieldnames = sorted({key for row in rows for key in row}) if rows else ["table", "model_id", "overall_score"]
+    fieldnames = (
+        sorted({key for row in rows for key in row})
+        if rows
+        else ["table", "model_id", "overall_score"]
+    )
     with output_path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=fieldnames)
         writer.writeheader()

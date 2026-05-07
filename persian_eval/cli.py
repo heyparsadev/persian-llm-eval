@@ -37,8 +37,12 @@ def build_parser() -> argparse.ArgumentParser:
 
     run_parser = subparsers.add_parser("run", help="Run a model on a Persian Eval JSONL dataset")
     run_parser.add_argument("--model", required=True, help="Model ID or API model name")
-    run_parser.add_argument("--backend", default="mock", choices=["mock", "hf", "openai-compatible"])
-    run_parser.add_argument("--model-type", default=None, choices=["open-weight", "open-source", "api", "mock", "other"])
+    run_parser.add_argument(
+        "--backend", default="mock", choices=["mock", "hf", "openai-compatible"]
+    )
+    run_parser.add_argument(
+        "--model-type", default=None, choices=["open-weight", "open-source", "api", "mock", "other"]
+    )
     run_parser.add_argument("--revision", default=None)
     run_parser.add_argument("--tasks", default="all", help="all or comma-separated track names")
     run_parser.add_argument("--split", default=None)
@@ -47,20 +51,37 @@ def build_parser() -> argparse.ArgumentParser:
     run_parser.add_argument("--max-new-tokens", type=int, default=96)
     run_parser.add_argument("--temperature", type=float, default=0.0)
     run_parser.add_argument("--base-url", default=None, help="OpenAI-compatible base URL")
-    run_parser.add_argument("--dtype", default="bfloat16", choices=["auto", "bfloat16", "float16", "float32"])
-    run_parser.add_argument("--quantization", default=None, choices=["4bit", "8bit"], help="Optional HF bitsandbytes quantization")
-    run_parser.add_argument("--no-samples", action="store_true", help="Do not include sample-level predictions")
+    run_parser.add_argument(
+        "--dtype", default="bfloat16", choices=["auto", "bfloat16", "float16", "float32"]
+    )
+    run_parser.add_argument(
+        "--quantization",
+        default=None,
+        choices=["4bit", "8bit"],
+        help="Optional HF bitsandbytes quantization",
+    )
+    run_parser.add_argument(
+        "--no-samples", action="store_true", help="Do not include sample-level predictions"
+    )
 
-    validate_parser = subparsers.add_parser("validate", help="Validate result JSON or dataset JSONL")
+    validate_parser = subparsers.add_parser(
+        "validate", help="Validate result JSON or dataset JSONL"
+    )
     validate_parser.add_argument("paths", nargs="+")
     validate_parser.add_argument("--dataset", action="store_true")
 
-    leakage_parser = subparsers.add_parser("leakage", help="Check duplicate prompts across JSONL datasets")
+    leakage_parser = subparsers.add_parser(
+        "leakage", help="Check duplicate prompts across JSONL datasets"
+    )
     leakage_parser.add_argument("paths", nargs="+")
 
     leaderboard_parser = subparsers.add_parser("leaderboard", help="Leaderboard operations")
-    leaderboard_subparsers = leaderboard_parser.add_subparsers(dest="leaderboard_command", required=True)
-    build = leaderboard_subparsers.add_parser("build", help="Build leaderboard artifacts from result JSON files")
+    leaderboard_subparsers = leaderboard_parser.add_subparsers(
+        dest="leaderboard_command", required=True
+    )
+    build = leaderboard_subparsers.add_parser(
+        "build", help="Build leaderboard artifacts from result JSON files"
+    )
     build.add_argument("results", nargs="+")
     build.add_argument("--output", default="leaderboard/leaderboard.json")
     build.add_argument("--csv", default=None)

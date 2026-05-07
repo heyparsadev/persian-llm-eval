@@ -20,7 +20,9 @@ class DatasetTests(unittest.TestCase):
         self.assertEqual(duplicate_prompts(records), [])
 
     def test_task_filter(self):
-        records = load_records([ROOT / "data" / "persian_eval_v1.public_eval.jsonl"], tasks={"culture"})
+        records = load_records(
+            [ROOT / "data" / "persian_eval_v1.public_eval.jsonl"], tasks={"culture"}
+        )
         self.assertEqual(len(records), 4)
         self.assertTrue(all(record.track == "culture" for record in records))
 
