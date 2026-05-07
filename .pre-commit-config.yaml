@@ -1,3 +1,4 @@
+exclude: ^(results/\.gitkeep|leaderboard/\.gitkeep|leaderboard/leaderboard\.csv|spaces/leaderboard/leaderboard\.csv|hf/space/leaderboard\.csv)$
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.15.12
