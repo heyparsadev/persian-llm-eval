@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-09T07:39:37+00:00",
+  "generated_at": "2026-05-09T07:59:09+00:00",
   "main": [
     {
       "model_id": "Qwen/Qwen3-8B",
@@ -13,6 +13,25 @@
       "culture_n": 4,
       "knowledge_score": 0.75,
       "knowledge_n": 4
+    },
+    {
+      "model_id": "unsloth/Mistral-Small-24B-Instruct-2501-unsloth-bnb-4bit",
+      "model_type": "open-weight",
+      "backend": "hf",
+      "revision": null,
+      "overall_score": 0.732628,
+      "timestamp": "2026-05-09T07:58:35+00:00",
+      "artifact": "results/mistral_small_24b_2501_bnb_4bit_hard.json",
+      "hard_culture_score": 1.0,
+      "hard_culture_n": 4,
+      "hard_instruction_score": 1.0,
+      "hard_instruction_n": 4,
+      "hard_math_score": 0.25,
+      "hard_math_n": 4,
+      "hard_reading_score": 0.663141,
+      "hard_reading_n": 4,
+      "hard_reasoning_score": 0.75,
+      "hard_reasoning_n": 4
     },
     {
       "model_id": "Qwen/Qwen3-14B",
