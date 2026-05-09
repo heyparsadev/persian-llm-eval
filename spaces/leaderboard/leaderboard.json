@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-06T05:40:11+00:00",
+  "generated_at": "2026-05-09T07:39:37+00:00",
   "main": [
     {
       "model_id": "Qwen/Qwen3-8B",
@@ -31,6 +31,25 @@
       "hard_reading_score": 0.646329,
       "hard_reading_n": 4,
       "hard_reasoning_score": 1.0,
+      "hard_reasoning_n": 4
+    },
+    {
+      "model_id": "Qwen/Qwen3-8B",
+      "model_type": "open-weight",
+      "backend": "hf",
+      "revision": null,
+      "overall_score": 0.609295,
+      "timestamp": "2026-05-09T07:38:02+00:00",
+      "artifact": "results/qwen3_8b_hard.json",
+      "hard_culture_score": 1.0,
+      "hard_culture_n": 4,
+      "hard_instruction_score": 0.25,
+      "hard_instruction_n": 4,
+      "hard_math_score": 0.5,
+      "hard_math_n": 4,
+      "hard_reading_score": 0.546474,
+      "hard_reading_n": 4,
+      "hard_reasoning_score": 0.75,
       "hard_reasoning_n": 4
     },
     {
