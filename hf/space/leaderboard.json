@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-09T12:42:55+00:00",
+  "generated_at": "2026-05-09T18:17:10+00:00",
   "main": [
     {
       "model_id": "Qwen/Qwen3-8B",
@@ -180,5 +180,63 @@
       "hard_reasoning_n": 4
     }
   ],
-  "reference": []
+  "reference": [
+    {
+      "model_id": "gpt-5.5",
+      "model_type": "api",
+      "backend": "openai-responses",
+      "revision": null,
+      "overall_score": 0.859893,
+      "timestamp": "2026-05-09T18:16:30+00:00",
+      "artifact": "results/gpt_5_5_high_hard.json",
+      "hard_culture_score": 1.0,
+      "hard_culture_n": 4,
+      "hard_instruction_score": 1.0,
+      "hard_instruction_n": 4,
+      "hard_math_score": 0.75,
+      "hard_math_n": 4,
+      "hard_reading_score": 0.549465,
+      "hard_reading_n": 4,
+      "hard_reasoning_score": 1.0,
+      "hard_reasoning_n": 4
+    },
+    {
+      "model_id": "gpt-5.4",
+      "model_type": "api",
+      "backend": "openai-responses",
+      "revision": null,
+      "overall_score": 0.798315,
+      "timestamp": "2026-05-09T18:14:21+00:00",
+      "artifact": "results/gpt_5_4_high_hard.json",
+      "hard_culture_score": 1.0,
+      "hard_culture_n": 4,
+      "hard_instruction_score": 0.75,
+      "hard_instruction_n": 4,
+      "hard_math_score": 0.75,
+      "hard_math_n": 4,
+      "hard_reading_score": 0.491575,
+      "hard_reading_n": 4,
+      "hard_reasoning_score": 1.0,
+      "hard_reasoning_n": 4
+    },
+    {
+      "model_id": "gpt-5.4-mini",
+      "model_type": "api",
+      "backend": "openai-responses",
+      "revision": null,
+      "overall_score": 0.784457,
+      "timestamp": "2026-05-09T18:08:40+00:00",
+      "artifact": "results/gpt_5_4_mini_high_hard.json",
+      "hard_culture_score": 1.0,
+      "hard_culture_n": 4,
+      "hard_instruction_score": 0.75,
+      "hard_instruction_n": 4,
+      "hard_math_score": 0.75,
+      "hard_math_n": 4,
+      "hard_reading_score": 0.422287,
+      "hard_reading_n": 4,
+      "hard_reasoning_score": 1.0,
+      "hard_reasoning_n": 4
+    }
+  ]
 }

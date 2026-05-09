@@ -1,0 +1,290 @@
+{
+  "model_id": "gpt-5.4-mini",
+  "model_type": "api",
+  "revision": null,
+  "backend": "openai-responses",
+  "task_scores": {
+    "hard_culture": {
+      "score": 1.0,
+      "n": 4
+    },
+    "hard_instruction": {
+      "score": 0.75,
+      "n": 4
+    },
+    "hard_math": {
+      "score": 0.75,
+      "n": 4
+    },
+    "hard_reading": {
+      "score": 0.422286863463334,
+      "n": 4
+    },
+    "hard_reasoning": {
+      "score": 1.0,
+      "n": 4
+    }
+  },
+  "overall_score": 0.7844573726926668,
+  "run_config": {
+    "data": [
+      "data/persian_eval_v1.hard.jsonl"
+    ],
+    "tasks": "all",
+    "split": null,
+    "max_new_tokens": 1024,
+    "temperature": 0.0,
+    "dtype": "bfloat16",
+    "quantization": null,
+    "reasoning_effort": "high"
+  },
+  "timestamp": "2026-05-09T18:08:40+00:00",
+  "samples": [
+    {
+      "id": "peval-hard-reasoning-001",
+      "track": "hard_reasoning",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-002",
+      "track": "hard_reasoning",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-003",
+      "track": "hard_reasoning",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-004",
+      "track": "hard_reasoning",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      }
+    },
+    {
+      "id": "peval-hard-math-001",
+      "track": "hard_math",
+      "prediction": "۴٪ کاهش",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۴ درصد کاهش",
+          "4 درصد کاهش",
+          "کاهش ۴ درصد",
+          "کاهش 4 درصد"
+        ],
+        "normalized_prediction": "4 کاهش",
+        "scored_candidate": "۴٪ کاهش"
+      }
+    },
+    {
+      "id": "peval-hard-math-002",
+      "track": "hard_math",
+      "prediction": "۲۰",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "۲۰",
+          "20"
+        ],
+        "normalized_prediction": "20",
+        "scored_candidate": "۲۰"
+      }
+    },
+    {
+      "id": "peval-hard-math-003",
+      "track": "hard_math",
+      "prediction": "50",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "۵۰",
+          "50"
+        ],
+        "normalized_prediction": "50",
+        "scored_candidate": "50"
+      }
+    },
+    {
+      "id": "peval-hard-math-004",
+      "track": "hard_math",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      }
+    },
+    {
+      "id": "peval-hard-reading-001",
+      "track": "hard_reading",
+      "prediction": "علت نهایی این بود که **اتوبوس رزرو نشده بود**.",
+      "score": 0.6153846153846153,
+      "details": {
+        "best_answer": "اتوبوس رزرو نشده بود",
+        "scored_candidate": "علت نهایی این بود که **اتوبوس رزرو نشده بود**."
+      }
+    },
+    {
+      "id": "peval-hard-reading-002",
+      "track": "hard_reading",
+      "prediction": "چون مشخص شد پروژه ب با همان هزینه، ریسک کمتر و فایده بلندمدت بیشتری دارد.",
+      "score": 0.3809523809523809,
+      "details": {
+        "best_answer": "ریسک کمتر و ساخت زیرساخت بلندمدت",
+        "scored_candidate": "چون مشخص شد پروژه ب با همان هزینه، ریسک کمتر و فایده بلندمدت بیشتری دارد."
+      }
+    },
+    {
+      "id": "peval-hard-reading-003",
+      "track": "hard_reading",
+      "prediction": "مشکل اصلی، **طراحی نامناسب جریان کار و وابستگی زیاد به بارگذاری بین صفحات** بود.",
+      "score": 0.22222222222222224,
+      "details": {
+        "best_answer": "بارگذاری بین دو صفحه",
+        "scored_candidate": "مشکل اصلی، **طراحی نامناسب جریان کار و وابستگی زیاد به بارگذاری بین صفحات** بود."
+      }
+    },
+    {
+      "id": "peval-hard-reading-004",
+      "track": "hard_reading",
+      "prediction": "احتمالاً **سطح درآمد و تحصیلات مردم** عامل اصلی بوده، نه تعداد کتابخانه‌ها.",
+      "score": 0.47058823529411764,
+      "details": {
+        "best_answer": "درآمد و سطح تحصیلات",
+        "scored_candidate": "احتمالاً **سطح درآمد و تحصیلات مردم** عامل اصلی بوده، نه تعداد کتابخانه‌ها."
+      }
+    },
+    {
+      "id": "peval-hard-instruction-001",
+      "track": "hard_instruction",
+      "prediction": "نتیجه: مطالعه گروهی با ایجاد بازخورد فوری، به درک بهتر مطالب کمک می‌کند و با افزایش تمرکز، یادگیری را مؤثرتر می‌سازد.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      }
+    },
+    {
+      "id": "peval-hard-instruction-002",
+      "track": "hard_instruction",
+      "prediction": "درک می‌کنم که این مشکل چقدر آزاردهنده است و همین حالا پیگیری آن را شروع می‌کنم تا سریع‌تر برطرف شود.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      }
+    },
+    {
+      "id": "peval-hard-instruction-003",
+      "track": "hard_instruction",
+      "prediction": "امنیت **رمز عبور** یعنی انتخاب یک رمز عبور پیچیده، یکتا و غیرقابل حدس، و نگهداری امن آن. بهتر است رمز عبور را با دیگران به اشتراک نگذارید، آن را در جاهای ناامن ذخیره نکنید و برای دسترسی‌های مهم از روش‌های تکمیلی **احراز هویت** استفاده کنید. این کار خطر سرقت حساب را کمتر می‌کند.",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": false
+        },
+        "constraint_score": 0.75
+      }
+    },
+    {
+      "id": "peval-hard-instruction-004",
+      "track": "hard_instruction",
+      "prediction": "اگر هر روز برای کارهایت اولویت تعیین کنی، مدیریت زمانت بهتر می‌شود.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true,
+          "required_suffix": true
+        },
+        "constraint_score": 1.0
+      }
+    },
+    {
+      "id": "peval-hard-culture-001",
+      "track": "hard_culture",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      }
+    },
+    {
+      "id": "peval-hard-culture-002",
+      "track": "hard_culture",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      }
+    },
+    {
+      "id": "peval-hard-culture-003",
+      "track": "hard_culture",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      }
+    },
+    {
+      "id": "peval-hard-culture-004",
+      "track": "hard_culture",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      }
+    }
+  ]
+}
