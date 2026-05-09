@@ -2,8 +2,11 @@
 
 from __future__ import annotations
 
+import http.client
 import json
 import os
+import time
+import urllib.error
 import urllib.request
 from dataclasses import dataclass
 from typing import Any
@@ -36,6 +39,7 @@ class GenerationConfig:
     base_url: str | None = None
     dtype: str = "bfloat16"
     quantization: str | None = None
+    reasoning_effort: str | None = None
 
 
 class BaseBackend:
@@ -185,9 +189,85 @@ class OpenAICompatibleBackend(BaseBackend):
             },
             method="POST",
         )
-        with urllib.request.urlopen(request, timeout=120) as response:
-            data = json.loads(response.read().decode("utf-8"))
+        data = post_json(request, timeout=120)
         return data["choices"][0]["message"]["content"].strip()
+
+
+class OpenAIResponsesBackend(BaseBackend):
+    name = "openai-responses"
+
+    def __init__(self, model_id: str, *, config: GenerationConfig):
+        self.model_id = model_id
+        self.config = config
+        self.base_url = (
+            config.base_url or os.getenv("OPENAI_BASE_URL") or "https://api.openai.com/v1"
+        ).rstrip("/")
+        self.api_key = os.getenv("OPENAI_API_KEY")
+        if not self.api_key:
+            raise RuntimeError("OPENAI_API_KEY is required for the openai-responses backend")
+
+    def generate(self, record: DatasetRecord) -> str:
+        payload: dict[str, Any] = {
+            "model": self.model_id,
+            "input": [
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": format_prompt(record)},
+            ],
+            "max_output_tokens": self.config.max_new_tokens,
+        }
+        if self.config.reasoning_effort:
+            payload["reasoning"] = {"effort": self.config.reasoning_effort}
+        request = urllib.request.Request(
+            f"{self.base_url}/responses",
+            data=json.dumps(payload).encode("utf-8"),
+            headers={
+                "Authorization": f"Bearer {self.api_key}",
+                "Content-Type": "application/json",
+            },
+            method="POST",
+        )
+        data = post_json(request, timeout=300)
+        return extract_response_text(data)
+
+
+def post_json(request: urllib.request.Request, *, timeout: int) -> dict[str, Any]:
+    retry_statuses = {408, 409, 429, 500, 502, 503, 504}
+    last_error: Exception | None = None
+    for attempt in range(4):
+        try:
+            with urllib.request.urlopen(request, timeout=timeout) as response:
+                return json.loads(response.read().decode("utf-8"))
+        except urllib.error.HTTPError as exc:
+            last_error = exc
+            if exc.code not in retry_statuses or attempt == 3:
+                detail = exc.read().decode("utf-8", errors="replace")
+                raise RuntimeError(f"OpenAI API error {exc.code}: {detail}") from exc
+        except (urllib.error.URLError, http.client.RemoteDisconnected, TimeoutError) as exc:
+            last_error = exc
+            if attempt == 3:
+                raise RuntimeError(f"OpenAI API request failed: {exc}") from exc
+        time.sleep(2**attempt)
+    raise RuntimeError(f"OpenAI API request failed: {last_error}")
+
+
+def extract_response_text(data: dict[str, Any]) -> str:
+    output_text = data.get("output_text")
+    if isinstance(output_text, str) and output_text.strip():
+        return output_text.strip()
+
+    chunks: list[str] = []
+    for item in data.get("output", []):
+        if not isinstance(item, dict):
+            continue
+        for content in item.get("content", []):
+            if not isinstance(content, dict):
+                continue
+            text = content.get("text")
+            if isinstance(text, str):
+                chunks.append(text)
+    if chunks:
+        return "\n".join(chunks).strip()
+    raise RuntimeError("Responses API response did not include output text")
 
 
 def create_backend(
@@ -203,4 +283,6 @@ def create_backend(
         return HFBackend(model_id, revision=revision, config=config)
     if backend_name == "openai-compatible":
         return OpenAICompatibleBackend(model_id, config=config)
+    if backend_name == "openai-responses":
+        return OpenAIResponsesBackend(model_id, config=config)
     raise ValueError(f"Unsupported backend: {backend_name}")

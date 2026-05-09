@@ -38,7 +38,7 @@ def build_parser() -> argparse.ArgumentParser:
     run_parser = subparsers.add_parser("run", help="Run a model on a Persian Eval JSONL dataset")
     run_parser.add_argument("--model", required=True, help="Model ID or API model name")
     run_parser.add_argument(
-        "--backend", default="mock", choices=["mock", "hf", "openai-compatible"]
+        "--backend", default="mock", choices=["mock", "hf", "openai-compatible", "openai-responses"]
     )
     run_parser.add_argument(
         "--model-type", default=None, choices=["open-weight", "open-source", "api", "mock", "other"]
@@ -51,6 +51,12 @@ def build_parser() -> argparse.ArgumentParser:
     run_parser.add_argument("--max-new-tokens", type=int, default=96)
     run_parser.add_argument("--temperature", type=float, default=0.0)
     run_parser.add_argument("--base-url", default=None, help="OpenAI-compatible base URL")
+    run_parser.add_argument(
+        "--reasoning-effort",
+        default=None,
+        choices=["none", "minimal", "low", "medium", "high", "xhigh"],
+        help="Optional Responses API reasoning effort for reasoning models",
+    )
     run_parser.add_argument(
         "--dtype", default="bfloat16", choices=["auto", "bfloat16", "float16", "float32"]
     )
@@ -102,6 +108,7 @@ def run_command(args: argparse.Namespace) -> int:
         base_url=args.base_url,
         dtype=args.dtype,
         quantization=args.quantization,
+        reasoning_effort=args.reasoning_effort,
     )
     backend = create_backend(args.backend, args.model, revision=args.revision, config=config)
     run_config = {
@@ -112,6 +119,7 @@ def run_command(args: argparse.Namespace) -> int:
         "temperature": args.temperature,
         "dtype": args.dtype,
         "quantization": args.quantization,
+        "reasoning_effort": args.reasoning_effort,
     }
     result = run_records(
         records,
@@ -171,7 +179,7 @@ def parse_tasks(value: str) -> set[str] | None:
 
 
 def infer_model_type(backend: str) -> str:
-    if backend == "openai-compatible":
+    if backend in {"openai-compatible", "openai-responses"}:
         return "api"
     if backend == "mock":
         return "mock"
