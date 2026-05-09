@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-09T12:39:37+00:00",
+  "generated_at": "2026-05-09T12:42:55+00:00",
   "main": [
     {
       "model_id": "Qwen/Qwen3-8B",
@@ -50,6 +50,25 @@
       "hard_reading_score": 0.53125,
       "hard_reading_n": 4,
       "hard_reasoning_score": 1.0,
+      "hard_reasoning_n": 4
+    },
+    {
+      "model_id": "unsloth/Llama-3.3-70B-Instruct-bnb-4bit",
+      "model_type": "open-weight",
+      "backend": "hf",
+      "revision": null,
+      "overall_score": 0.652137,
+      "timestamp": "2026-05-09T12:42:07+00:00",
+      "artifact": "results/llama3_3_70b_instruct_bnb_4bit_hard.json",
+      "hard_culture_score": 1.0,
+      "hard_culture_n": 4,
+      "hard_instruction_score": 0.75,
+      "hard_instruction_n": 4,
+      "hard_math_score": 0.0,
+      "hard_math_n": 4,
+      "hard_reading_score": 0.760684,
+      "hard_reading_n": 4,
+      "hard_reasoning_score": 0.75,
       "hard_reasoning_n": 4
     },
     {
