@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-09T07:59:09+00:00",
+  "generated_at": "2026-05-09T12:36:30+00:00",
   "main": [
     {
       "model_id": "Qwen/Qwen3-8B",
@@ -31,6 +31,25 @@
       "hard_reading_score": 0.663141,
       "hard_reading_n": 4,
       "hard_reasoning_score": 0.75,
+      "hard_reasoning_n": 4
+    },
+    {
+      "model_id": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+      "model_type": "open-weight",
+      "backend": "hf",
+      "revision": null,
+      "overall_score": 0.65625,
+      "timestamp": "2026-05-09T12:35:27+00:00",
+      "artifact": "results/qwen3_30b_a3b_instruct_2507_hard.json",
+      "hard_culture_score": 1.0,
+      "hard_culture_n": 4,
+      "hard_instruction_score": 0.25,
+      "hard_instruction_n": 4,
+      "hard_math_score": 0.5,
+      "hard_math_n": 4,
+      "hard_reading_score": 0.53125,
+      "hard_reading_n": 4,
+      "hard_reasoning_score": 1.0,
       "hard_reasoning_n": 4
     },
     {

@@ -1,6 +1,7 @@
 artifact,backend,culture_n,culture_score,hard_culture_n,hard_culture_score,hard_instruction_n,hard_instruction_score,hard_math_n,hard_math_score,hard_reading_n,hard_reading_score,hard_reasoning_n,hard_reasoning_score,knowledge_n,knowledge_score,model_id,model_type,overall_score,revision,table,timestamp
 results/qwen3_8b_fast.json,hf,4,0.75,,,,,,,,,,,4,0.75,Qwen/Qwen3-8B,open-weight,0.75,,main,2026-05-05T16:44:48+00:00
 results/mistral_small_24b_2501_bnb_4bit_hard.json,hf,,,4,1.0,4,1.0,4,0.25,4,0.663141,4,0.75,,,unsloth/Mistral-Small-24B-Instruct-2501-unsloth-bnb-4bit,open-weight,0.732628,,main,2026-05-09T07:58:35+00:00
+results/qwen3_30b_a3b_instruct_2507_hard.json,hf,,,4,1.0,4,0.25,4,0.5,4,0.53125,4,1.0,,,Qwen/Qwen3-30B-A3B-Instruct-2507,open-weight,0.65625,,main,2026-05-09T12:35:27+00:00
 results/qwen3_14b_4bit_hard.json,hf,,,4,1.0,4,0.25,4,0.25,4,0.646329,4,1.0,,,Qwen/Qwen3-14B,open-weight,0.629266,,main,2026-05-05T20:57:18+00:00
 results/qwen3_8b_hard.json,hf,,,4,1.0,4,0.25,4,0.5,4,0.546474,4,0.75,,,Qwen/Qwen3-8B,open-weight,0.609295,,main,2026-05-09T07:38:02+00:00
 results/qwen2_5_0_5b_fast.json,hf,4,0.0,,,,,,,,,,,4,0.25,Qwen/Qwen2.5-0.5B-Instruct,open-weight,0.125,,main,2026-05-05T16:38:51+00:00
