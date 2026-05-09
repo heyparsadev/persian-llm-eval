@@ -1,0 +1,289 @@
+{
+  "model_id": "unsloth/Qwen2.5-72B-Instruct-bnb-4bit",
+  "model_type": "open-weight",
+  "revision": null,
+  "backend": "hf",
+  "task_scores": {
+    "hard_culture": {
+      "score": 1.0,
+      "n": 4
+    },
+    "hard_instruction": {
+      "score": 0.25,
+      "n": 4
+    },
+    "hard_math": {
+      "score": 0.25,
+      "n": 4
+    },
+    "hard_reading": {
+      "score": 0.41666666666666663,
+      "n": 4
+    },
+    "hard_reasoning": {
+      "score": 1.0,
+      "n": 4
+    }
+  },
+  "overall_score": 0.5833333333333333,
+  "run_config": {
+    "data": [
+      "data/persian_eval_v1.hard.jsonl"
+    ],
+    "tasks": "all",
+    "split": null,
+    "max_new_tokens": 32,
+    "temperature": 0.0,
+    "dtype": "bfloat16",
+    "quantization": null
+  },
+  "timestamp": "2026-05-09T12:38:40+00:00",
+  "samples": [
+    {
+      "id": "peval-hard-reasoning-001",
+      "track": "hard_reasoning",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-002",
+      "track": "hard_reasoning",
+      "prediction": "الف)",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف)"
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-003",
+      "track": "hard_reasoning",
+      "prediction": "الف) مریم به داده خام دسترسی ندارد",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف) مریم به داده خام دسترسی ندارد"
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-004",
+      "track": "hard_reasoning",
+      "prediction": "الف)",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف)"
+      }
+    },
+    {
+      "id": "peval-hard-math-001",
+      "track": "hard_math",
+      "prediction": "-4%",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۴ درصد کاهش",
+          "4 درصد کاهش",
+          "کاهش ۴ درصد",
+          "کاهش 4 درصد"
+        ],
+        "normalized_prediction": "4",
+        "scored_candidate": "-4%"
+      }
+    },
+    {
+      "id": "peval-hard-math-002",
+      "track": "hard_math",
+      "prediction": "10",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۲۰",
+          "20"
+        ],
+        "normalized_prediction": "10",
+        "scored_candidate": "10"
+      }
+    },
+    {
+      "id": "peval-hard-math-003",
+      "track": "hard_math",
+      "prediction": "48",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۵۰",
+          "50"
+        ],
+        "normalized_prediction": "48",
+        "scored_candidate": "48"
+      }
+    },
+    {
+      "id": "peval-hard-math-004",
+      "track": "hard_math",
+      "prediction": "الف) ۱/۵",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف) ۱/۵"
+      }
+    },
+    {
+      "id": "peval-hard-reading-001",
+      "track": "hard_reading",
+      "prediction": "علت نهایی برگزار نشدن اردو عدم رزرو اتوبوس بود.",
+      "score": 0.5,
+      "details": {
+        "best_answer": "رزرو نشدن اتوبوس",
+        "scored_candidate": "علت نهایی برگزار نشدن اردو عدم رزرو اتوبوس بود."
+      }
+    },
+    {
+      "id": "peval-hard-reading-002",
+      "track": "hard_reading",
+      "prediction": "دلیل تغییر تصمیم کمیته، ریسک کمتر و ایجاد زیرساخت بل",
+      "score": 0.5,
+      "details": {
+        "best_answer": "ریسک کمتر و ساخت زیرساخت بلندمدت",
+        "scored_candidate": "دلیل تغییر تصمیم کمیته، ریسک کمتر و ایجاد زیرساخت بل"
+      }
+    },
+    {
+      "id": "peval-hard-reading-003",
+      "track": "hard_reading",
+      "prediction": "مشکل اصلی طراحی این بود که بهینه‌سازی تعداد کلیک‌ها باع",
+      "score": 0.0,
+      "details": {
+        "best_answer": "",
+        "scored_candidate": ""
+      }
+    },
+    {
+      "id": "peval-hard-reading-004",
+      "track": "hard_reading",
+      "prediction": "سطح تحصیلات و درآمد مردم در آن شهرها.",
+      "score": 0.6666666666666666,
+      "details": {
+        "best_answer": "درآمد و سطح تحصیلات",
+        "scored_candidate": "سطح تحصیلات و درآمد مردم در آن شهرها."
+      }
+    },
+    {
+      "id": "peval-hard-instruction-001",
+      "track": "hard_instruction",
+      "prediction": "نتیجه: مطالعه گروهی باعث افزایش تمرکز و دریافت بازخورد",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": false,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 0.8
+      }
+    },
+    {
+      "id": "peval-hard-instruction-002",
+      "track": "hard_instruction",
+      "prediction": "درک می‌کنم که ناراحت هستید؛ لطفاً اطلاع دهید که ما در حال",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "required_keywords": false,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 0.8
+      }
+    },
+    {
+      "id": "peval-hard-instruction-003",
+      "track": "hard_instruction",
+      "prediction": "امنیت رمز عبور یکی از مهم‌ترین مراحل احراز هویت است. رمز",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true
+        },
+        "constraint_score": 1.0
+      }
+    },
+    {
+      "id": "peval-hard-instruction-004",
+      "track": "hard_instruction",
+      "prediction": "اگر اولویت‌های روزانه را مشخص کنیم، برنامه‌ریزی",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true,
+          "required_suffix": false
+        },
+        "constraint_score": 0.8
+      }
+    },
+    {
+      "id": "peval-hard-culture-001",
+      "track": "hard_culture",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      }
+    },
+    {
+      "id": "peval-hard-culture-002",
+      "track": "hard_culture",
+      "prediction": "الف)",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف)"
+      }
+    },
+    {
+      "id": "peval-hard-culture-003",
+      "track": "hard_culture",
+      "prediction": "الف)",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف)"
+      }
+    },
+    {
+      "id": "peval-hard-culture-004",
+      "track": "hard_culture",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      }
+    }
+  ]
+}
