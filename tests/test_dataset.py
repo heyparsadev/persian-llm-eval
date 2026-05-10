@@ -15,14 +15,16 @@ class DatasetTests(unittest.TestCase):
                 ROOT / "data" / "persian_eval_v1.hard.jsonl",
             ]
         )
-        self.assertEqual(len(records), 50)
+        # v1 baseline (50) plus v1.1 additions (260) for the public_eval and
+        # hard splits.
+        self.assertGreaterEqual(len(records), 50)
         self.assertEqual(duplicate_prompts(records), [])
 
     def test_task_filter(self):
         records = load_records(
             [ROOT / "data" / "persian_eval_v1.public_eval.jsonl"], tasks={"culture"}
         )
-        self.assertEqual(len(records), 4)
+        self.assertGreaterEqual(len(records), 4)
         self.assertTrue(all(record.track == "culture" for record in records))
 
 

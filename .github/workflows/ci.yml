@@ -28,6 +28,8 @@ jobs:
         run: persian-eval validate --dataset data/persian_eval_v1.dev.jsonl data/persian_eval_v1.public_eval.jsonl data/persian_eval_v1.hard.jsonl
       - name: Run duplicate prompt check
         run: persian-eval leakage data/persian_eval_v1.dev.jsonl data/persian_eval_v1.public_eval.jsonl data/persian_eval_v1.hard.jsonl
+      - name: Validate dataset quality
+        run: python scripts/validate_dataset.py --strict-min-count data/persian_eval_v1.dev.jsonl data/persian_eval_v1.public_eval.jsonl data/persian_eval_v1.hard.jsonl
       - name: Run tests with coverage
         run: pytest --cov=persian_eval --cov-report=term-missing
       - name: Smoke run
