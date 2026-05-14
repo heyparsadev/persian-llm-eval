@@ -17,15 +17,15 @@
       "n": 30
     },
     "reading": {
-      "score": 0.6701281461343381,
+      "score": 0.8234656084656086,
       "n": 30
     },
     "short_qa": {
-      "score": 0.23333333333333334,
+      "score": 0.9,
       "n": 30
     }
   },
-  "overall_score": 0.747358962560201,
+  "overall_score": 0.9113597883597885,
   "run_config": {
     "data": [
       "data/persian_eval_v1.public_eval.jsonl"
@@ -38,7 +38,7 @@
     "quantization": null,
     "reasoning_effort": null
   },
-  "timestamp": "2026-05-14T12:33:06+00:00",
+  "timestamp": "2026-05-14T12:40:05+00:00",
   "samples": [
     {
       "id": "peval-public-knowledge-001",
@@ -96,21 +96,23 @@
           "خورشیدی"
         ],
         "normalized_prediction": "تقویم هجری شمسی یا تقویم جلالی",
-        "scored_candidate": "تقویم **هجری شمسی** (یا تقویم جلالی)."
+        "scored_candidate": "تقویم **هجری شمسی** (یا تقویم جلالی).",
+        "match_kind": "none"
       }
     },
     {
       "id": "peval-public-shortqa-002",
       "track": "short_qa",
       "prediction": "ابوعلی سینا بیشتر با **پزشکی و فلسفه** شناخته می‌شود. کتاب **«قانون در طب»** او قرن‌ها در دانشگاه‌های اروپا و جهان اسلام تدریس می‌شد.",
-      "score": 0.0,
+      "score": 1.0,
       "details": {
         "accepted": [
           "پزشکی",
           "طب"
         ],
         "normalized_prediction": "ابوعلی سینا بیشتر با پزشکی و فلسفه شناخته می شود کتاب قانون در طب او قرن ها در دانشگاه های اروپا و جهان اسلام تدریس می شد",
-        "scored_candidate": "ابوعلی سینا بیشتر با **پزشکی و فلسفه** شناخته می‌شود. کتاب **«قانون در طب»** او قرن‌ها در دانشگاه‌های اروپا و جهان اسلام تدریس می‌شد."
+        "scored_candidate": "ابوعلی سینا بیشتر با **پزشکی و فلسفه** شناخته می‌شود. کتاب **«قانون در طب»** او قرن‌ها در دانشگاه‌های اروپا و جهان اسلام تدریس می‌شد.",
+        "match_kind": "subsequence"
       }
     },
     {
@@ -123,7 +125,8 @@
           "سنتور"
         ],
         "normalized_prediction": "سنتور",
-        "scored_candidate": "**سنتور**"
+        "scored_candidate": "**سنتور**",
+        "match_kind": "exact"
       }
     },
     {
@@ -136,7 +139,8 @@
           "خلیج فارس"
         ],
         "normalized_prediction": "خلیج فارس",
-        "scored_candidate": "**خلیج فارس**"
+        "scored_candidate": "**خلیج فارس**",
+        "match_kind": "exact"
       }
     },
     {
@@ -163,7 +167,7 @@
       "id": "peval-public-reading-003",
       "track": "reading",
       "prediction": "آرش پس از نوشتن جدول، **رابطه بین عددها را پیدا کرد**.",
-      "score": 0.7058823529411764,
+      "score": 1.0,
       "details": {
         "best_answer": "رابطه بین عددها را پیدا کرد",
         "scored_candidate": "آرش پس از نوشتن جدول، **رابطه بین عددها را پیدا کرد**."
@@ -173,7 +177,7 @@
       "id": "peval-public-reading-004",
       "track": "reading",
       "prediction": "چون جعبه باید **سبک** می‌بود و چوب کاج سبک‌تر (و ارزان‌تر) بود.",
-      "score": 0.5714285714285715,
+      "score": 1.0,
       "details": {
         "best_answer": "سبک تر و ارزان تر بود",
         "scored_candidate": "چون جعبه باید **سبک** می‌بود و چوب کاج سبک‌تر (و ارزان‌تر) بود."
@@ -572,67 +576,72 @@
       "id": "peval-public-shortqa-005",
       "track": "short_qa",
       "prediction": "بلندترین قله رشته‌کوه البرز، **دماوند** نام دارد که با ارتفاع ۵۶۱۰ متر، بلندترین کوه ایران نیز محسوب می‌شود.",
-      "score": 0.0,
+      "score": 1.0,
       "details": {
         "accepted": [
           "دماوند",
           "قله دماوند"
         ],
         "normalized_prediction": "بلندترین قله رشته کوه البرز دماوند نام دارد که با ارتفاع 5610 متر بلندترین کوه ایران نیز محسوب می شود",
-        "scored_candidate": "بلندترین قله رشته‌کوه البرز، **دماوند** نام دارد که با ارتفاع ۵۶۱۰ متر، بلندترین کوه ایران نیز محسوب می‌شود."
+        "scored_candidate": "بلندترین قله رشته‌کوه البرز، **دماوند** نام دارد که با ارتفاع ۵۶۱۰ متر، بلندترین کوه ایران نیز محسوب می‌شود.",
+        "match_kind": "subsequence"
       }
     },
     {
       "id": "peval-public-shortqa-006",
       "track": "short_qa",
       "prediction": "پایتخت (مرکز) استان خراسان رضوی **مشهد** نام دارد.",
-      "score": 0.0,
+      "score": 1.0,
       "details": {
         "accepted": [
           "مشهد"
         ],
         "normalized_prediction": "پایتخت مرکز استان خراسان رضوی مشهد نام دارد",
-        "scored_candidate": "پایتخت (مرکز) استان خراسان رضوی **مشهد** نام دارد."
+        "scored_candidate": "پایتخت (مرکز) استان خراسان رضوی **مشهد** نام دارد.",
+        "match_kind": "subsequence"
       }
     },
     {
       "id": "peval-public-shortqa-007",
       "track": "short_qa",
       "prediction": "نام دیگر آن **تنگه هرمز** است (که به آن **تنگه هرموز** نیز گفته می‌شود).",
-      "score": 0.0,
+      "score": 1.0,
       "details": {
         "accepted": [
           "تنگه هرمز"
         ],
         "normalized_prediction": "نام دیگر آن تنگه هرمز است که به آن تنگه هرموز نیز گفته می شود",
-        "scored_candidate": "نام دیگر آن **تنگه هرمز** است (که به آن **تنگه هرموز** نیز گفته می‌شود)."
+        "scored_candidate": "نام دیگر آن **تنگه هرمز** است (که به آن **تنگه هرموز** نیز گفته می‌شود).",
+        "match_kind": "subsequence"
       }
     },
     {
       "id": "peval-public-shortqa-008",
       "track": "short_qa",
       "prediction": "بزرگ‌ترین جزیره ایران در خلیج فارس **قشم** نام دارد.",
-      "score": 0.0,
+      "score": 1.0,
       "details": {
         "accepted": [
           "قشم",
           "جزیره قشم"
         ],
         "normalized_prediction": "بزرگ ترین جزیره ایران در خلیج فارس قشم نام دارد",
-        "scored_candidate": "بزرگ‌ترین جزیره ایران در خلیج فارس **قشم** نام دارد."
+        "scored_candidate": "بزرگ‌ترین جزیره ایران در خلیج فارس **قشم** نام دارد.",
+        "match_kind": "subsequence"
       }
     },
     {
       "id": "peval-public-shortqa-009",
       "track": "short_qa",
       "prediction": "میدان نقش جهان در شهر **اصفهان** واقع شده است.",
-      "score": 0.0,
+      "score": 1.0,
       "details": {
         "accepted": [
           "اصفهان"
         ],
         "normalized_prediction": "میدان نقش جهان در شهر اصفهان واقع شده است",
-        "scored_candidate": "میدان نقش جهان در شهر **اصفهان** واقع شده است."
+        "scored_candidate": "میدان نقش جهان در شهر **اصفهان** واقع شده است.",
+        "match_kind": "subsequence"
       }
     },
     {
@@ -645,14 +654,15 @@
           "فروردین"
         ],
         "normalized_prediction": "فروردین",
-        "scored_candidate": "**فروردین**"
+        "scored_candidate": "**فروردین**",
+        "match_kind": "exact"
       }
     },
     {
       "id": "peval-public-shortqa-011",
       "track": "short_qa",
       "prediction": "سیزدهم فروردین",
-      "score": 0.0,
+      "score": 1.0,
       "details": {
         "accepted": [
           "سیزدهم",
@@ -660,20 +670,22 @@
           "13"
         ],
         "normalized_prediction": "سیزدهم فروردین",
-        "scored_candidate": "سیزدهم فروردین"
+        "scored_candidate": "سیزدهم فروردین",
+        "match_kind": "subsequence"
       }
     },
     {
       "id": "peval-public-shortqa-012",
       "track": "short_qa",
       "prediction": "مرکز استان آذربایجان شرقی **تبریز** است.",
-      "score": 0.0,
+      "score": 1.0,
       "details": {
         "accepted": [
           "تبریز"
         ],
         "normalized_prediction": "مرکز استان آذربایجان شرقی تبریز است",
-        "scored_candidate": "مرکز استان آذربایجان شرقی **تبریز** است."
+        "scored_candidate": "مرکز استان آذربایجان شرقی **تبریز** است.",
+        "match_kind": "subsequence"
       }
     },
     {
@@ -686,27 +698,29 @@
           "تابستان"
         ],
         "normalized_prediction": "تابستان",
-        "scored_candidate": "**تابستان**"
+        "scored_candidate": "**تابستان**",
+        "match_kind": "exact"
       }
     },
     {
       "id": "peval-public-shortqa-014",
       "track": "short_qa",
       "prediction": "رنگ **سفید** در میانه پرچم سه‌رنگ ایران قرار دارد.",
-      "score": 0.0,
+      "score": 1.0,
       "details": {
         "accepted": [
           "سفید"
         ],
         "normalized_prediction": "رنگ سفید در میانه پرچم سه رنگ ایران قرار دارد",
-        "scored_candidate": "رنگ **سفید** در میانه پرچم سه‌رنگ ایران قرار دارد."
+        "scored_candidate": "رنگ **سفید** در میانه پرچم سه‌رنگ ایران قرار دارد.",
+        "match_kind": "subsequence"
       }
     },
     {
       "id": "peval-public-shortqa-015",
       "track": "short_qa",
       "prediction": "یک کیلومتر **۱۰۰۰ متر** است.",
-      "score": 0.0,
+      "score": 1.0,
       "details": {
         "accepted": [
           "هزار",
@@ -715,48 +729,52 @@
           "1000"
         ],
         "normalized_prediction": "یک کیلومتر 1000 متر است",
-        "scored_candidate": "یک کیلومتر **۱۰۰۰ متر** است."
+        "scored_candidate": "یک کیلومتر **۱۰۰۰ متر** است.",
+        "match_kind": "subsequence"
       }
     },
     {
       "id": "peval-public-shortqa-016",
       "track": "short_qa",
       "prediction": "قطب جنوب در **نیم‌کره جنوبی** زمین قرار دارد.",
-      "score": 0.0,
+      "score": 1.0,
       "details": {
         "accepted": [
           "نیم‌کره جنوبی",
           "جنوبی"
         ],
         "normalized_prediction": "قطب جنوب در نیم کره جنوبی زمین قرار دارد",
-        "scored_candidate": "قطب جنوب در **نیم‌کره جنوبی** زمین قرار دارد."
+        "scored_candidate": "قطب جنوب در **نیم‌کره جنوبی** زمین قرار دارد.",
+        "match_kind": "subsequence"
       }
     },
     {
       "id": "peval-public-shortqa-017",
       "track": "short_qa",
       "prediction": "**مشتری (Jupiter)**",
-      "score": 0.0,
+      "score": 1.0,
       "details": {
         "accepted": [
           "مشتری",
           "سیاره مشتری"
         ],
         "normalized_prediction": "مشتری jupiter",
-        "scored_candidate": "**مشتری (Jupiter)**"
+        "scored_candidate": "**مشتری (Jupiter)**",
+        "match_kind": "subsequence"
       }
     },
     {
       "id": "peval-public-shortqa-018",
       "track": "short_qa",
       "prediction": "مخالف (متضاد) کلمه «روز» در فارسی، **شب** است.",
-      "score": 0.0,
+      "score": 1.0,
       "details": {
         "accepted": [
           "شب"
         ],
         "normalized_prediction": "مخالف متضاد کلمه روز در فارسی شب است",
-        "scored_candidate": "مخالف (متضاد) کلمه «روز» در فارسی، **شب** است."
+        "scored_candidate": "مخالف (متضاد) کلمه «روز» در فارسی، **شب** است.",
+        "match_kind": "subsequence"
       }
     },
     {
@@ -770,21 +788,23 @@
           "همه اعداد",
           "هر عددی"
         ],
-        "normalized_prediction": "هر عددی",
-        "scored_candidate": "**هر عددی**"
+        "normalized_prediction": "هر عددی را در صفر ضرب کنیم حاصل صفر می شود",
+        "scored_candidate": "هر عددی را در صفر ضرب کنیم، حاصل صفر می‌شود.",
+        "match_kind": "subsequence"
       }
     },
     {
       "id": "peval-public-shortqa-020",
       "track": "short_qa",
       "prediction": "مرکز استان گیلان **رشت** است.",
-      "score": 0.0,
+      "score": 1.0,
       "details": {
         "accepted": [
           "رشت"
         ],
         "normalized_prediction": "مرکز استان گیلان رشت است",
-        "scored_candidate": "مرکز استان گیلان **رشت** است."
+        "scored_candidate": "مرکز استان گیلان **رشت** است.",
+        "match_kind": "subsequence"
       }
     },
     {
@@ -797,21 +817,23 @@
           "سبز"
         ],
         "normalized_prediction": "سبز",
-        "scored_candidate": "**سبز**"
+        "scored_candidate": "**سبز**",
+        "match_kind": "exact"
       }
     },
     {
       "id": "peval-public-shortqa-022",
       "track": "short_qa",
       "prediction": "خون پاک (اکسیژن‌دار) از **بطن چپ** به آئورت می‌رود.",
-      "score": 0.0,
+      "score": 1.0,
       "details": {
         "accepted": [
           "بطن چپ",
           "چپ"
         ],
         "normalized_prediction": "خون پاک اکسیژن دار از بطن چپ به آئورت می رود",
-        "scored_candidate": "خون پاک (اکسیژن‌دار) از **بطن چپ** به آئورت می‌رود."
+        "scored_candidate": "خون پاک (اکسیژن‌دار) از **بطن چپ** به آئورت می‌رود.",
+        "match_kind": "subsequence"
       }
     },
     {
@@ -826,47 +848,51 @@
           "پل سی و سه پل"
         ],
         "normalized_prediction": "پل خواجو و همچنین سی وسه پل که هر دو از دوره صفویه باقی مانده اند اما معروف ترین و شاخص ترین آن ها پل خواجو است که در دوره شاه عباس دوم ساخته شد",
-        "scored_candidate": "**پل خواجو** (و همچنین **سی‌وسه‌پل** که هر دو از دوره صفویه باقی مانده‌اند، اما معروف‌ترین و شاخص‌ترین آن‌ها **پل خواجو** است که در دوره شاه عباس دوم ساخته شد.)"
+        "scored_candidate": "**پل خواجو** (و همچنین **سی‌وسه‌پل** که هر دو از دوره صفویه باقی مانده‌اند، اما معروف‌ترین و شاخص‌ترین آن‌ها **پل خواجو** است که در دوره شاه عباس دوم ساخته شد.)",
+        "match_kind": "none"
       }
     },
     {
       "id": "peval-public-shortqa-024",
       "track": "short_qa",
       "prediction": "جشن **نوروز** (سال نو ایرانی)",
-      "score": 0.0,
+      "score": 1.0,
       "details": {
         "accepted": [
           "نوروز",
           "عید نوروز"
         ],
         "normalized_prediction": "جشن نوروز سال نو ایرانی",
-        "scored_candidate": "جشن **نوروز** (سال نو ایرانی)"
+        "scored_candidate": "جشن **نوروز** (سال نو ایرانی)",
+        "match_kind": "subsequence"
       }
     },
     {
       "id": "peval-public-shortqa-025",
       "track": "short_qa",
       "prediction": "روز معلم در ایران در **اردیبهشت** ماه (۱۲ اردیبهشت) است.",
-      "score": 0.0,
+      "score": 1.0,
       "details": {
         "accepted": [
           "اردیبهشت"
         ],
         "normalized_prediction": "روز معلم در ایران در اردیبهشت ماه 12 اردیبهشت است",
-        "scored_candidate": "روز معلم در ایران در **اردیبهشت** ماه (۱۲ اردیبهشت) است."
+        "scored_candidate": "روز معلم در ایران در **اردیبهشت** ماه (۱۲ اردیبهشت) است.",
+        "match_kind": "subsequence"
       }
     },
     {
       "id": "peval-public-shortqa-026",
       "track": "short_qa",
       "prediction": "جزیره کیش در استان **هرمزگان** قرار دارد.",
-      "score": 0.0,
+      "score": 1.0,
       "details": {
         "accepted": [
           "هرمزگان"
         ],
         "normalized_prediction": "جزیره کیش در استان هرمزگان قرار دارد",
-        "scored_candidate": "جزیره کیش در استان **هرمزگان** قرار دارد."
+        "scored_candidate": "جزیره کیش در استان **هرمزگان** قرار دارد.",
+        "match_kind": "subsequence"
       }
     },
     {
@@ -880,21 +906,23 @@
           "ردیف بالای حروف"
         ],
         "normalized_prediction": "حرف ش روی ردیف میانی home row صفحه کلید فارسی قرار دارد روی کلید s",
-        "scored_candidate": "حرف «ش» روی **ردیف میانی** (Home Row) صفحه‌کلید فارسی قرار دارد، روی کلید **S**."
+        "scored_candidate": "حرف «ش» روی **ردیف میانی** (Home Row) صفحه‌کلید فارسی قرار دارد، روی کلید **S**.",
+        "match_kind": "none"
       }
     },
     {
       "id": "peval-public-shortqa-028",
       "track": "short_qa",
       "prediction": "**اقیانوس آرام (Pacific Ocean)**",
-      "score": 0.0,
+      "score": 1.0,
       "details": {
         "accepted": [
           "اقیانوس آرام",
           "آرام"
         ],
         "normalized_prediction": "اقیانوس آرام pacific ocean",
-        "scored_candidate": "**اقیانوس آرام (Pacific Ocean)**"
+        "scored_candidate": "**اقیانوس آرام (Pacific Ocean)**",
+        "match_kind": "subsequence"
       }
     },
     {
@@ -908,20 +936,22 @@
           "میروم"
         ],
         "normalized_prediction": "می روم",
-        "scored_candidate": "**می‌روم**"
+        "scored_candidate": "**می‌روم**",
+        "match_kind": "exact"
       }
     },
     {
       "id": "peval-public-shortqa-030",
       "track": "short_qa",
       "prediction": "**جیوه (Mercury - Hg)**\n\nجیوه تنها فلزی است که در دمای اتاق به حالت مایع است. نقطه ذوب آن **۳۸.۸۳- درجه سانتیگراد** است.",
-      "score": 0.0,
+      "score": 1.0,
       "details": {
         "accepted": [
           "جیوه"
         ],
-        "normalized_prediction": "جیوه mercury hg جیوه تنها فلزی است که در دمای اتاق به حالت مایع است نقطه ذوب آن 3883 درجه سانتیگراد است",
-        "scored_candidate": "**جیوه (Mercury - Hg)**\n\nجیوه تنها فلزی است که در دمای اتاق به حالت مایع است. نقطه ذوب آن **۳۸.۸۳- درجه سانتیگراد** است."
+        "normalized_prediction": "جیوه تنها فلزی است که در دمای اتاق به حالت مایع است نقطه ذوب آن 3883 درجه سانتیگراد است",
+        "scored_candidate": "جیوه تنها فلزی است که در دمای اتاق به حالت مایع است. نقطه ذوب آن **۳۸.۸۳- درجه سانتیگراد** است.",
+        "match_kind": "subsequence"
       }
     },
     {
@@ -938,7 +968,7 @@
       "id": "peval-public-reading-006",
       "track": "reading",
       "prediction": "کیان متوجه شد که در روزهایی که شب کتاب می‌خواند، صبح راحت‌تر بیدار می‌شود.",
-      "score": 0.3636363636363636,
+      "score": 0.8000000000000002,
       "details": {
         "best_answer": "راحت‌تر بیدار شدن صبح",
         "scored_candidate": "کیان متوجه شد که در روزهایی که شب کتاب می‌خواند، صبح راحت‌تر بیدار می‌شود."
@@ -948,7 +978,7 @@
       "id": "peval-public-reading-007",
       "track": "reading",
       "prediction": "**نبود آب لوله‌کشی** (فقدان دسترسی به آب سالم)",
-      "score": 0.6153846153846153,
+      "score": 1.0,
       "details": {
         "best_answer": "نبود آب لوله‌کشی",
         "scored_candidate": "**نبود آب لوله‌کشی** (فقدان دسترسی به آب سالم)"
@@ -968,7 +998,7 @@
       "id": "peval-public-reading-009",
       "track": "reading",
       "prediction": "**کمبود آفتاب** در آن گوشه از باغ.",
-      "score": 0.2,
+      "score": 0.3333333333333333,
       "details": {
         "best_answer": "کم بودن آفتاب",
         "scored_candidate": "**کمبود آفتاب** در آن گوشه از باغ."
@@ -978,7 +1008,7 @@
       "id": "peval-public-reading-010",
       "track": "reading",
       "prediction": "هزینه ایاب و ذهاب بعد از سه ماه به **نصف** کاهش یافت.",
-      "score": 0.5555555555555556,
+      "score": 0.6666666666666666,
       "details": {
         "best_answer": "نصف شدن هزینه ایاب و ذهاب",
         "scored_candidate": "هزینه ایاب و ذهاب بعد از سه ماه به **نصف** کاهش یافت."
@@ -998,9 +1028,9 @@
       "id": "peval-public-reading-012",
       "track": "reading",
       "prediction": "**یافته اصلی:** در خانه‌هایی که گیاه آپارتمانی دارند، رطوبت هوا کمی بیشتر است.",
-      "score": 0.38095238095238093,
+      "score": 0.5,
       "details": {
-        "best_answer": "افزایش رطوبت در خانه‌های با گیاه",
+        "best_answer": "بالاتر بودن رطوبت در خانه‌های دارای گیاه",
         "scored_candidate": "**یافته اصلی:** در خانه‌هایی که گیاه آپارتمانی دارند، رطوبت هوا کمی بیشتر است."
       }
     },
@@ -1008,7 +1038,7 @@
       "id": "peval-public-reading-013",
       "track": "reading",
       "prediction": "تعداد گزارش‌های خطا به یک‌سوم کاهش یافت.",
-      "score": 0.8,
+      "score": 0.8333333333333334,
       "details": {
         "best_answer": "کاهش گزارش خطا به یک‌سوم",
         "scored_candidate": "تعداد گزارش‌های خطا به یک‌سوم کاهش یافت."
@@ -1018,7 +1048,7 @@
       "id": "peval-public-reading-014",
       "track": "reading",
       "prediction": "کتاب‌ها از **اهالی روستا** هدیه گرفته شدند.",
-      "score": 0.5454545454545454,
+      "score": 1.0,
       "details": {
         "best_answer": "از اهالی روستا",
         "scored_candidate": "کتاب‌ها از **اهالی روستا** هدیه گرفته شدند."
@@ -1028,7 +1058,7 @@
       "id": "peval-public-reading-015",
       "track": "reading",
       "prediction": "هر صبح فقط **سه کار مهم** یادداشت می‌کرد (به‌جای فهرست بلند).",
-      "score": 0.5263157894736842,
+      "score": 0.8333333333333334,
       "details": {
         "best_answer": "یادداشت سه کار مهم در صبح",
         "scored_candidate": "هر صبح فقط **سه کار مهم** یادداشت می‌کرد (به‌جای فهرست بلند)."
@@ -1038,7 +1068,7 @@
       "id": "peval-public-reading-016",
       "track": "reading",
       "prediction": "علت کاهش مصرف، **جایگزینی شیرهای آب با شیرهای جدیدی بود که هوا را با آب مخلوط می‌کنند**، که باعث شد با همان احساس فشار آب، مقدار کمتری آب مصرف شود.",
-      "score": 0.2105263157894737,
+      "score": 0.42857142857142855,
       "details": {
         "best_answer": "تعویض شیرها با شیرهای مخلوط‌کن هوا",
         "scored_candidate": "علت کاهش مصرف، **جایگزینی شیرهای آب با شیرهای جدیدی بود که هوا را با آب مخلوط می‌کنند**، که باعث شد با همان احساس فشار آب، مقدار کمتری آب مصرف شود."
@@ -1068,7 +1098,7 @@
       "id": "peval-public-reading-019",
       "track": "reading",
       "prediction": "تصمیم مدیر بر پایه **مشاهده الگوی رفتار مشتریان** (مراجعه بیشتر در صبح زود) گرفته شد.",
-      "score": 0.28571428571428575,
+      "score": 0.5,
       "details": {
         "best_answer": "آمدن مشتری‌ها در صبح زود",
         "scored_candidate": "تصمیم مدیر بر پایه **مشاهده الگوی رفتار مشتریان** (مراجعه بیشتر در صبح زود) گرفته شد."
@@ -1078,7 +1108,7 @@
       "id": "peval-public-reading-020",
       "track": "reading",
       "prediction": "زباله‌ای که به سطل عمومی می‌رود **نصف شده است**.",
-      "score": 0.5000000000000001,
+      "score": 0.6,
       "details": {
         "best_answer": "نصف شدن زباله سطل عمومی",
         "scored_candidate": "زباله‌ای که به سطل عمومی می‌رود **نصف شده است**."
@@ -1108,9 +1138,9 @@
       "id": "peval-public-reading-023",
       "track": "reading",
       "prediction": "معلم به‌جای امتحان نهایی کتبی، از هر دانش‌آموز یک **پروژه عملی** خواست.",
-      "score": 0.6666666666666666,
+      "score": 1.0,
       "details": {
-        "best_answer": "یک پروژه عملی از هر دانش‌آموز",
+        "best_answer": "پروژه عملی",
         "scored_candidate": "معلم به‌جای امتحان نهایی کتبی، از هر دانش‌آموز یک **پروژه عملی** خواست."
       }
     },
@@ -1128,7 +1158,7 @@
       "id": "peval-public-reading-025",
       "track": "reading",
       "prediction": "هزینه برق روشنایی پارک‌ها **۳۰ درصد کاهش** یافت.",
-      "score": 0.46153846153846156,
+      "score": 0.75,
       "details": {
         "best_answer": "حدود ۳۰ درصد کاهش",
         "scored_candidate": "هزینه برق روشنایی پارک‌ها **۳۰ درصد کاهش** یافت."
@@ -1158,7 +1188,7 @@
       "id": "peval-public-reading-028",
       "track": "reading",
       "prediction": "پژوهشگران از دانش‌آموزان خواستند هر روز **سی دقیقه پیاده‌روی** کنند.",
-      "score": 0.47058823529411764,
+      "score": 0.8000000000000002,
       "details": {
         "best_answer": "پیاده‌روی روزانه سی دقیقه",
         "scored_candidate": "پژوهشگران از دانش‌آموزان خواستند هر روز **سی دقیقه پیاده‌روی** کنند."
@@ -1168,7 +1198,7 @@
       "id": "peval-public-reading-029",
       "track": "reading",
       "prediction": "محدود کردن خرید نسیه به **مبلغ مشخص** برای مشتری‌های همیشگی.",
-      "score": 0.7777777777777778,
+      "score": 1.0,
       "details": {
         "best_answer": "محدود کردن خرید نسیه به مبلغ مشخص",
         "scored_candidate": "محدود کردن خرید نسیه به **مبلغ مشخص** برای مشتری‌های همیشگی."
@@ -1178,9 +1208,9 @@
       "id": "peval-public-reading-030",
       "track": "reading",
       "prediction": "بچه‌های روستا دیگر مجبور نیستند مسیر طولانی را دور بزنند و راحت‌تر به مدرسه می‌رسند.",
-      "score": 0.30769230769230765,
+      "score": 0.5,
       "details": {
-        "best_answer": "نیاز نداشتن به دور زدن از مسیر طولانی",
+        "best_answer": "حذف دور زدن از مسیر طولانی",
         "scored_candidate": "بچه‌های روستا دیگر مجبور نیستند مسیر طولانی را دور بزنند و راحت‌تر به مدرسه می‌رسند."
       }
     },
