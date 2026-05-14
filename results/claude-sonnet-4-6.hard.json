@@ -1,0 +1,1935 @@
+{
+  "model_id": "claude-sonnet-4-6",
+  "model_type": "api",
+  "revision": null,
+  "backend": "anthropic",
+  "task_scores": {
+    "hard_culture": {
+      "score": 1.0,
+      "n": 30
+    },
+    "hard_instruction": {
+      "score": 0.9333333333333333,
+      "n": 30
+    },
+    "hard_math": {
+      "score": 0.16666666666666666,
+      "n": 30
+    },
+    "hard_reading": {
+      "score": 0.29762872740521124,
+      "n": 30
+    },
+    "hard_reasoning": {
+      "score": 0.9,
+      "n": 30
+    }
+  },
+  "overall_score": 0.6595257454810423,
+  "run_config": {
+    "data": [
+      "data/persian_eval_v1.hard.jsonl"
+    ],
+    "tasks": "all",
+    "split": null,
+    "max_new_tokens": 256,
+    "temperature": 0.0,
+    "dtype": "bfloat16",
+    "quantization": null,
+    "reasoning_effort": null
+  },
+  "timestamp": "2026-05-14T12:35:15+00:00",
+  "samples": [
+    {
+      "id": "peval-hard-reasoning-001",
+      "track": "hard_reasoning",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-002",
+      "track": "hard_reasoning",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-003",
+      "track": "hard_reasoning",
+      "prediction": "الف و ب\n\nبا توجه به اینکه دو گزینه درست وجود دارد، اما اگر باید یکی انتخاب شود:\n\n**الف و ب** هر دو حتماً درست هستند.\n\n---\n\n**توضیح کوتاه:**\n- از «مریم آموزش ندیده» ← پس به داده خام دسترسی ندارد (الف ✓)\n- چون دسترسی به داده خام ندارد و فقط دارندگان پروژه محرمانه دسترسی دارند ← مریم پروژه محرمانه ندارد (ب ✓)",
+      "score": 0.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 0,
+        "scored_candidate": "- چون دسترسی به داده خام ندارد و فقط دارندگان پروژه محرمانه دسترسی دارند ← مریم پروژه محرمانه ندارد (ب ✓)"
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-004",
+      "track": "hard_reasoning",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      }
+    },
+    {
+      "id": "peval-hard-math-001",
+      "track": "hard_math",
+      "prediction": "۴ درصد کاهش",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "۴ درصد کاهش",
+          "4 درصد کاهش",
+          "کاهش ۴ درصد",
+          "کاهش 4 درصد"
+        ],
+        "normalized_prediction": "4 درصد کاهش",
+        "scored_candidate": "۴ درصد کاهش"
+      }
+    },
+    {
+      "id": "peval-hard-math-002",
+      "track": "hard_math",
+      "prediction": "مجموع پنج عدد = ۱۸ × ۵ = ۹۰\n\nمجموع چهار عدد = ۱۲ + ۱۶ + ۲۰ + ۲۲ = ۷۰\n\nعدد پنجم = ۹۰ - ۷۰ = **۲۰**",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۲۰",
+          "20"
+        ],
+        "normalized_prediction": "مجموع پنج عدد 18 × 5 90 مجموع چهار عدد 12 16 20 22 70 عدد پنجم 90 70 20",
+        "scored_candidate": "مجموع پنج عدد = ۱۸ × ۵ = ۹۰\n\nمجموع چهار عدد = ۱۲ + ۱۶ + ۲۰ + ۲۲ = ۷۰\n\nعدد پنجم = ۹۰ - ۷۰ = **۲۰**"
+      }
+    },
+    {
+      "id": "peval-hard-math-003",
+      "track": "hard_math",
+      "prediction": "زمان بخش اول: 180/60 = 3 ساعت\nزمان بخش دوم: 120/40 = 3 ساعت\nکل مسافت: 300 کیلومتر\nکل زمان: 6 ساعت\nمیانگین سرعت: 300/6 = **50**",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۵۰",
+          "50"
+        ],
+        "normalized_prediction": "زمان بخش اول 18060 3 ساعت زمان بخش دوم 12040 3 ساعت کل مسافت 300 کیلومتر کل زمان 6 ساعت میانگین سرعت 3006 50",
+        "scored_candidate": "زمان بخش اول: 180/60 = 3 ساعت\nزمان بخش دوم: 120/40 = 3 ساعت\nکل مسافت: 300 کیلومتر\nکل زمان: 6 ساعت\nمیانگین سرعت: 300/6 = **50**"
+      }
+    },
+    {
+      "id": "peval-hard-math-004",
+      "track": "hard_math",
+      "prediction": "احتمال = C(3,2)/C(6,2) = 3/15 = **۱/۵**\n\n**الف**",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "**الف**"
+      }
+    },
+    {
+      "id": "peval-hard-reading-001",
+      "track": "hard_reading",
+      "prediction": "**علت نهایی برگزار نشدن اردو، رزرو نشدن اتوبوس بود.**",
+      "score": 0.5,
+      "details": {
+        "best_answer": "رزرو نشدن اتوبوس",
+        "scored_candidate": "**علت نهایی برگزار نشدن اردو، رزرو نشدن اتوبوس بود.**"
+      }
+    },
+    {
+      "id": "peval-hard-reading-002",
+      "track": "hard_reading",
+      "prediction": "**دلیل تغییر تصمیم:**\nمشخص شد پروژه ب با همان هزینه، **ریسک کمتر** و **زیرساخت بلندمدت** ارائه می‌دهد؛ مزایایی که پروژه الف نداشت.",
+      "score": 0.3846153846153846,
+      "details": {
+        "best_answer": "ریسک کمتر و ساخت زیرساخت بلندمدت",
+        "scored_candidate": "مشخص شد پروژه ب با همان هزینه، **ریسک کمتر** و **زیرساخت بلندمدت** ارائه می‌دهد؛ مزایایی که پروژه الف نداشت."
+      }
+    },
+    {
+      "id": "peval-hard-reading-003",
+      "track": "hard_reading",
+      "prediction": "**مشکل اصلی:** بهینه‌سازی معیار اشتباه (کاهش کلیک) به جای بهینه‌سازی **زمان واقعی انجام کار**؛ کاهش کلیک لزوماً به معنای بهبود تجربه کاربری نیست.",
+      "score": 0.0,
+      "details": {
+        "best_answer": "",
+        "scored_candidate": ""
+      }
+    },
+    {
+      "id": "peval-hard-reading-004",
+      "track": "hard_reading",
+      "prediction": "**متغیر مخدوش‌کننده (Confounding Variable)**\n\nدرآمد و سطح تحصیلات احتمالاً هم باعث ساخت کتابخانه‌های بیشتر و هم باعث مطالعه بیشتر می‌شدند، نه خود کتابخانه‌ها. رابطه اولیه ظاهری بود و ناشی از این متغیرهای مخدوش‌کننده بود.",
+      "score": 0.21052631578947367,
+      "details": {
+        "best_answer": "درآمد و سطح تحصیلات",
+        "scored_candidate": "درآمد و سطح تحصیلات احتمالاً هم باعث ساخت کتابخانه‌های بیشتر و هم باعث مطالعه بیشتر می‌شدند، نه خود کتابخانه‌ها. رابطه اولیه ظاهری بود و ناشی از این متغیرهای مخدوش‌کننده بود."
+      }
+    },
+    {
+      "id": "peval-hard-instruction-001",
+      "track": "hard_instruction",
+      "prediction": "نتیجه: مطالعه گروهی یکی از روش‌های مؤثر یادگیری است که مزایای چشمگیری برای دانش‌آموزان و دانشجویان دارد. در این شیوه، افراد می‌توانند از **بازخورد** فوری دوستان و همگروهی‌های خود بهره‌مند شوند و نقاط ضعف خود را سریع‌تر شناسایی کنند. همچنین، حضور در یک محیط مشترک به افراد کمک می‌کند تا **تمرکز** بهتری داشته باشند، زیرا فضای جمعی انگیزه‌ای قوی برای ادامه مطالعه ایجاد می‌کند. علاوه بر این، تبادل",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": false,
+          "required_prefix": true
+        },
+        "constraint_score": 0.8
+      }
+    },
+    {
+      "id": "peval-hard-instruction-002",
+      "track": "hard_instruction",
+      "prediction": "درک می‌کنم که این وضعیت ناراحت‌کننده است و به شما اطمینان می‌دهم که مشکلتان را با جدیت پیگیری خواهیم کرد.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      }
+    },
+    {
+      "id": "peval-hard-instruction-003",
+      "track": "hard_instruction",
+      "prediction": "## امنیت رمز عبور\n\n**رمز عبور** یکی از مهم‌ترین ابزارهای حفاظت از اطلاعات شخصی و حساب‌های کاربری است. انتخاب یک رمز عبور قوی و منحصربه‌فرد می‌تواند از دسترسی غیرمجاز به اطلاعات حساس جلوگیری کند.\n\n### ویژگی‌های یک رمز عبور مناسب\n\n- ترکیبی از حروف بزرگ و کوچک، اعداد و نمادهای خاص باشد\n- به اندازه کافی طولانی باشد\n- از کلمات ساده و قابل حدس مانند نام یا تاریخ تولد پرهیز شود\n- برای هر ح",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "required_keywords": false,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": false
+        },
+        "constraint_score": 0.5
+      }
+    },
+    {
+      "id": "peval-hard-instruction-004",
+      "track": "hard_instruction",
+      "prediction": "اگر هر روز صبح اولویت‌های کارهایت را مشخص کنی، زندگی منظم‌تر و موفق‌تری خواهی داشت و به اهدافت راحت‌تر دست پیدا می‌شود.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true,
+          "required_suffix": true
+        },
+        "constraint_score": 1.0
+      }
+    },
+    {
+      "id": "peval-hard-culture-001",
+      "track": "hard_culture",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      }
+    },
+    {
+      "id": "peval-hard-culture-002",
+      "track": "hard_culture",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      }
+    },
+    {
+      "id": "peval-hard-culture-003",
+      "track": "hard_culture",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      }
+    },
+    {
+      "id": "peval-hard-culture-004",
+      "track": "hard_culture",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-005",
+      "track": "hard_reasoning",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-006",
+      "track": "hard_reasoning",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-007",
+      "track": "hard_reasoning",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-008",
+      "track": "hard_reasoning",
+      "prediction": "ت)",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت)"
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-009",
+      "track": "hard_reasoning",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-010",
+      "track": "hard_reasoning",
+      "prediction": "با استفاده از اصل شمول و طرد:\n\nفوتبال یا شطرنج = ۳ + ۴ - ۲ = ۵\n\nهیچ‌کدام = ۶ - ۵ = **۱**\n\n**ب**",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "**ب**"
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-011",
+      "track": "hard_reasoning",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-012",
+      "track": "hard_reasoning",
+      "prediction": "پ",
+      "score": 0.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 3,
+        "scored_candidate": "پ"
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-013",
+      "track": "hard_reasoning",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-014",
+      "track": "hard_reasoning",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-015",
+      "track": "hard_reasoning",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-016",
+      "track": "hard_reasoning",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-017",
+      "track": "hard_reasoning",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-018",
+      "track": "hard_reasoning",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-019",
+      "track": "hard_reasoning",
+      "prediction": "با استفاده از اصل شمول و طرد:\n\nحداقل تعداد افرادی که هر دو زبان می‌دانند = (۴ + ۵) - ۷ = **۲**\n\nپ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-020",
+      "track": "hard_reasoning",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-021",
+      "track": "hard_reasoning",
+      "prediction": "ب",
+      "score": 0.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 0,
+        "scored_candidate": "ب"
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-022",
+      "track": "hard_reasoning",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-023",
+      "track": "hard_reasoning",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-024",
+      "track": "hard_reasoning",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-025",
+      "track": "hard_reasoning",
+      "prediction": "با استفاده از اصل شمول و طرد:\n\n- فقط فوتبال: ۱۲ - ۵ = ۷\n- فقط والیبال: ۹ - ۵ = ۴\n- فقط یکی از دو ورزش: ۷ + ۴ = **۱۱**\n\n**الف**",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "**الف**"
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-026",
+      "track": "hard_reasoning",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-027",
+      "track": "hard_reasoning",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-028",
+      "track": "hard_reasoning",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-029",
+      "track": "hard_reasoning",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-030",
+      "track": "hard_reasoning",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      }
+    },
+    {
+      "id": "peval-hard-math-005",
+      "track": "hard_math",
+      "prediction": "## محاسبه:\n\n**قیمت اولیه:** ۲۵۰,۰۰۰ تومان\n\n**بعد از ۱۰٪ گرانی:**\n250,000 × 1.1 = **275,000 تومان**\n\n**بعد از ۲۰٪ تخفیف:**\n275,000 × 0.8 = **220,000 تومان**\n\n---\n\n**قیمت نهایی: ۲۲۰,۰۰۰ تومان**",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۲۲۰۰۰۰",
+          "220000",
+          "۲۲۰ هزار",
+          "220 هزار",
+          "دویست و بیست هزار"
+        ],
+        "normalized_prediction": "محاسبه قیمت اولیه 250000 تومان بعد از 10 گرانی 250000 × 11 275000 تومان بعد از 20 تخفیف 275000 × 08 220000 تومان قیمت نهایی 220000 تومان",
+        "scored_candidate": "## محاسبه:\n\n**قیمت اولیه:** ۲۵۰,۰۰۰ تومان\n\n**بعد از ۱۰٪ گرانی:**\n250,000 × 1.1 = **275,000 تومان**\n\n**بعد از ۲۰٪ تخفیف:**\n275,000 × 0.8 = **220,000 تومان**\n\n---\n\n**قیمت نهایی: ۲۲۰,۰۰۰ تومان**"
+      }
+    },
+    {
+      "id": "peval-hard-math-006",
+      "track": "hard_math",
+      "prediction": "## حل مسئله\n\n**مجموع چهار عدد اول:**\n$$4 \\times 15 = 60$$\n\n**مجموع پنج عدد باید باشد:**\n$$5 \\times 18 = 90$$\n\n**پس x برابر است با:**\n$$x = 90 - 60 = \\boxed{30}$$",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "۳۰",
+          "30"
+        ],
+        "normalized_prediction": "30",
+        "scored_candidate": "30"
+      }
+    },
+    {
+      "id": "peval-hard-math-007",
+      "track": "hard_math",
+      "prediction": "## حل مسئله\n\n**سرعت کار هر نفر در یک ساعت:**\n\n- نفر اول: ۱/۶\n- نفر دوم: ۱/۸\n- نفر سوم: ۱/۱۲\n\n**سرعت کل:**\n\n$$\\frac{1}{6} + \\frac{1}{8} + \\frac{1}{12} = \\frac{4}{24} + \\frac{3}{24} + \\frac{2}{24} = \\frac{9}{24} = \\frac{3}{8}$$\n\n**زمان لازم:**\n\n$$t = \\frac{1}{\\frac{3}{8}} = \\frac{8}{3} \\approx 2.67 \\text{ ساعت}$$\n\n### **پاسخ: ۸/۳ ساعت (۲ ساعت و ۴۰ دقیقه)**",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۸/۳",
+          "8/3",
+          "۲ و ۲/۳",
+          "2 و 2/3"
+        ],
+        "normalized_prediction": "حل مسئله سرعت کار هر نفر در یک ساعت نفر اول 16 نفر دوم 18 نفر سوم 112 سرعت کل frac16 frac18 frac112 frac424 frac324 frac224 frac924 frac38 زمان لازم t frac1frac38 frac83 approx 267 text ساعت پاسخ 83 ساعت 2 ساعت و 40 دقیقه",
+        "scored_candidate": "## حل مسئله\n\n**سرعت کار هر نفر در یک ساعت:**\n\n- نفر اول: ۱/۶\n- نفر دوم: ۱/۸\n- نفر سوم: ۱/۱۲\n\n**سرعت کل:**\n\n$$\\frac{1}{6} + \\frac{1}{8} + \\frac{1}{12} = \\frac{4}{24} + \\frac{3}{24} + \\frac{2}{24} = \\frac{9}{24} = \\frac{3}{8}$$\n\n**زمان لازم:**\n\n$$t = \\frac{1}{\\frac{3}{8}} = \\frac{8}{3} \\approx 2.67 \\text{ ساعت}$$\n\n### **پاسخ: ۸/۳ ساعت (۲ ساعت و ۴۰ دقیقه)**"
+      }
+    },
+    {
+      "id": "peval-hard-math-008",
+      "track": "hard_math",
+      "prediction": "## محاسبه سرعت میانگین\n\n**زمان بخش اول:**\n$$t_1 = \\frac{120}{80} = 1.5 \\text{ ساعت}$$\n\n**زمان بخش دوم:**\n$$t_2 = \\frac{80}{40} = 2 \\text{ ساعت}$$\n\n**سرعت میانگین:**\n$$v_{avg} = \\frac{\\text{کل مسافت}}{\\text{کل زمان}} = \\frac{120 + 80}{1.5 + 2} = \\frac{200}{3.5}$$\n\n$$\\boxed{v_{avg} \\approx 57.14 \\text{ کیلومتر بر ساعت}}$$",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۵۷.۱۴",
+          "۵۷.۱",
+          "57.1",
+          "57.14",
+          "حدود ۵۷"
+        ],
+        "normalized_prediction": "محاسبه سرعت میانگین زمان بخش اول t1 frac12080 15 text ساعت زمان بخش دوم t2 frac8040 2 text ساعت سرعت میانگین vavg fractextکل مسافتtextکل زمان frac120 8015 2 frac20035 boxedvavg approx 5714 text کیلومتر بر ساعت",
+        "scored_candidate": "## محاسبه سرعت میانگین\n\n**زمان بخش اول:**\n$$t_1 = \\frac{120}{80} = 1.5 \\text{ ساعت}$$\n\n**زمان بخش دوم:**\n$$t_2 = \\frac{80}{40} = 2 \\text{ ساعت}$$\n\n**سرعت میانگین:**\n$$v_{avg} = \\frac{\\text{کل مسافت}}{\\text{کل زمان}} = \\frac{120 + 80}{1.5 + 2} = \\frac{200}{3.5}$$\n\n$$\\boxed{v_{avg} \\approx 57.14 \\text{ کیلومتر بر ساعت}}$$"
+      }
+    },
+    {
+      "id": "peval-hard-math-009",
+      "track": "hard_math",
+      "prediction": "مثلث با اضلاع ۳، ۴ و ۵ یک **مثلث قائم‌الزاویه** است (چون ۳² + ۴² = ۵²).\n\n**مساحت = (۳ × ۴) ÷ ۲ = ۶ سانتی‌متر مربع**",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۶",
+          "6",
+          "شش"
+        ],
+        "normalized_prediction": "مثلث با اضلاع 3 4 و 5 یک مثلث قائم الزاویه است چون 32 42 52 مساحت 3 × 4 ÷ 2 6 سانتی متر مربع",
+        "scored_candidate": "مثلث با اضلاع ۳، ۴ و ۵ یک **مثلث قائم‌الزاویه** است (چون ۳² + ۴² = ۵²).\n\n**مساحت = (۳ × ۴) ÷ ۲ = ۶ سانتی‌متر مربع**"
+      }
+    },
+    {
+      "id": "peval-hard-math-010",
+      "track": "hard_math",
+      "prediction": "## حل مسئله\n\n**تعداد کل مهره‌ها:** ۴ قرمز + ۶ آبی = ۱۰ مهره\n\n**احتمال قرمز بودن مهره اول:**\n$$P_1 = \\frac{4}{10}$$\n\n**احتمال قرمز بودن مهره دوم (بدون جایگذاری):**\n$$P_2 = \\frac{3}{9}$$\n\n**احتمال هر دو قرمز:**\n$$P = \\frac{4}{10} \\times \\frac{3}{9} = \\frac{12}{90} = \\boxed{\\dfrac{2}{15}}$$",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۲/۱۵",
+          "2/15"
+        ],
+        "normalized_prediction": "حل مسئله تعداد کل مهره ها 4 قرمز 6 آبی 10 مهره احتمال قرمز بودن مهره اول p1 frac410 احتمال قرمز بودن مهره دوم بدون جایگذاری p2 frac39 احتمال هر دو قرمز p frac410 times frac39 frac1290 boxeddfrac215",
+        "scored_candidate": "## حل مسئله\n\n**تعداد کل مهره‌ها:** ۴ قرمز + ۶ آبی = ۱۰ مهره\n\n**احتمال قرمز بودن مهره اول:**\n$$P_1 = \\frac{4}{10}$$\n\n**احتمال قرمز بودن مهره دوم (بدون جایگذاری):**\n$$P_2 = \\frac{3}{9}$$\n\n**احتمال هر دو قرمز:**\n$$P = \\frac{4}{10} \\times \\frac{3}{9} = \\frac{12}{90} = \\boxed{\\dfrac{2}{15}}$$"
+      }
+    },
+    {
+      "id": "peval-hard-math-011",
+      "track": "hard_math",
+      "prediction": "**x = 5**\n\nچون ۲⁵ = ۳۲",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۵",
+          "5",
+          "پنج"
+        ],
+        "normalized_prediction": "x 5 چون 25 32",
+        "scored_candidate": "**x = 5**\n\nچون ۲⁵ = ۳۲"
+      }
+    },
+    {
+      "id": "peval-hard-math-012",
+      "track": "hard_math",
+      "prediction": "**۲۰ سانتی‌متر**\n\nچون محیط دایره (۲πr) با شعاع رابطه مستقیم دارد، دو برابر شدن شعاع → دو برابر شدن محیط.",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۲۰",
+          "20",
+          "بیست"
+        ],
+        "normalized_prediction": "20 سانتی متر چون محیط دایره 2πr با شعاع رابطه مستقیم دارد دو برابر شدن شعاع → دو برابر شدن محیط",
+        "scored_candidate": "**۲۰ سانتی‌متر**\n\nچون محیط دایره (۲πr) با شعاع رابطه مستقیم دارد، دو برابر شدن شعاع → دو برابر شدن محیط."
+      }
+    },
+    {
+      "id": "peval-hard-math-013",
+      "track": "hard_math",
+      "prediction": "## حل مسئله\n\nفرض کنیم **x سال** دیگر این اتفاق بیفتد:\n\n- سن علی: 5 + x\n- سن پدر: 35 + x\n\n**معادله:**\n35 + x = 2(5 + x)\n35 + x = 10 + 2x\n**x = 25**\n\n### ✅ پاسخ: **۲۵ سال دیگر**\n(علی ۳۰ ساله و پدر ۶۰ ساله می‌شود)",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۲۵",
+          "25",
+          "بیست و پنج"
+        ],
+        "normalized_prediction": "حل مسئله فرض کنیم x سال دیگر این اتفاق بیفتد سن علی 5 x سن پدر 35 x معادله 35 x 25 x 35 x 10 2x x 25 ✅ پاسخ 25 سال دیگر علی 30 ساله و پدر 60 ساله می شود",
+        "scored_candidate": "## حل مسئله\n\nفرض کنیم **x سال** دیگر این اتفاق بیفتد:\n\n- سن علی: 5 + x\n- سن پدر: 35 + x\n\n**معادله:**\n35 + x = 2(5 + x)\n35 + x = 10 + 2x\n**x = 25**\n\n### ✅ پاسخ: **۲۵ سال دیگر**\n(علی ۳۰ ساله و پدر ۶۰ ساله می‌شود)"
+      }
+    },
+    {
+      "id": "peval-hard-math-014",
+      "track": "hard_math",
+      "prediction": "عدد وسط **۱۶** است.\n\n(چون مجموع سه عدد متوالی برابر سه برابر عدد وسط است: ۴۸ ÷ ۳ = ۱۶)",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۱۶",
+          "16",
+          "شانزده"
+        ],
+        "normalized_prediction": "عدد وسط 16 است چون مجموع سه عدد متوالی برابر سه برابر عدد وسط است 48 ÷ 3 16",
+        "scored_candidate": "عدد وسط **۱۶** است.\n\n(چون مجموع سه عدد متوالی برابر سه برابر عدد وسط است: ۴۸ ÷ ۳ = ۱۶)"
+      }
+    },
+    {
+      "id": "peval-hard-math-015",
+      "track": "hard_math",
+      "prediction": "**۱۰۰,۰۰۰ تومان**\n\n**محاسبه:**\nقیمت اصلی × ۰٫۸ = ۸۰,۰۰۰\nقیمت اصلی = ۸۰,۰۰۰ ÷ ۰٫۸ = **۱۰۰,۰۰۰ تومان**",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۱۰۰۰۰۰",
+          "100000",
+          "۱۰۰ هزار",
+          "100 هزار",
+          "صد هزار"
+        ],
+        "normalized_prediction": "100000 تومان محاسبه قیمت اصلی × 08 80000 قیمت اصلی 80000 ÷ 08 100000 تومان",
+        "scored_candidate": "**۱۰۰,۰۰۰ تومان**\n\n**محاسبه:**\nقیمت اصلی × ۰٫۸ = ۸۰,۰۰۰\nقیمت اصلی = ۸۰,۰۰۰ ÷ ۰٫۸ = **۱۰۰,۰۰۰ تومان**"
+      }
+    },
+    {
+      "id": "peval-hard-math-016",
+      "track": "hard_math",
+      "prediction": "**قیمت خرید = ۱۰۰,۰۰۰ تومان**\n\n**محاسبه:**\nقیمت فروش = قیمت خرید × ۱.۲۵\n\nقیمت خرید = ۱۲۵,۰۰۰ ÷ ۱.۲۵ = **۱۰۰,۰۰۰ تومان**",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۱۰۰۰۰۰",
+          "100000",
+          "۱۰۰ هزار",
+          "100 هزار",
+          "صد هزار"
+        ],
+        "normalized_prediction": "قیمت خرید 100000 تومان محاسبه قیمت فروش قیمت خرید × 125 قیمت خرید 125000 ÷ 125 100000 تومان",
+        "scored_candidate": "**قیمت خرید = ۱۰۰,۰۰۰ تومان**\n\n**محاسبه:**\nقیمت فروش = قیمت خرید × ۱.۲۵\n\nقیمت خرید = ۱۲۵,۰۰۰ ÷ ۱.۲۵ = **۱۰۰,۰۰۰ تومان**"
+      }
+    },
+    {
+      "id": "peval-hard-math-017",
+      "track": "hard_math",
+      "prediction": "**۳۰**\n\n(نفر اول: ۲۰، نفر دوم: ۳۰ — چون ۲۰+۳۰=۵۰ و نسبت ۲:۳ برقرار است)",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "۳۰",
+          "30",
+          "سی"
+        ],
+        "normalized_prediction": "30",
+        "scored_candidate": "**۳۰**"
+      }
+    },
+    {
+      "id": "peval-hard-math-018",
+      "track": "hard_math",
+      "prediction": "## محاسبه مساحت دایره\n\n**فرمول:** مساحت = π × r²\n\n**جایگذاری:**\n\nمساحت = (22/7) × 7² = (22/7) × 49 = 22 × 7 = **154 سانتی‌متر مربع**",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۱۵۴",
+          "154",
+          "صد و پنجاه و چهار"
+        ],
+        "normalized_prediction": "محاسبه مساحت دایره فرمول مساحت π × r2 جایگذاری مساحت 227 × 72 227 × 49 22 × 7 154 سانتی متر مربع",
+        "scored_candidate": "## محاسبه مساحت دایره\n\n**فرمول:** مساحت = π × r²\n\n**جایگذاری:**\n\nمساحت = (22/7) × 7² = (22/7) × 49 = 22 × 7 = **154 سانتی‌متر مربع**"
+      }
+    },
+    {
+      "id": "peval-hard-math-019",
+      "track": "hard_math",
+      "prediction": "اعداد بزرگ‌تر از ۴ روی تاس: **۵ و ۶** → ۲ حالت مطلوب از ۶ حالت ممکن\n\n$$P = \\frac{2}{6} = \\boxed{\\dfrac{1}{3}}$$",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۱/۳",
+          "1/3"
+        ],
+        "normalized_prediction": "اعداد بزرگ تر از 4 روی تاس 5 و 6 → 2 حالت مطلوب از 6 حالت ممکن p frac26 boxeddfrac13",
+        "scored_candidate": "اعداد بزرگ‌تر از ۴ روی تاس: **۵ و ۶** → ۲ حالت مطلوب از ۶ حالت ممکن\n\n$$P = \\frac{2}{6} = \\boxed{\\dfrac{1}{3}}$$"
+      }
+    },
+    {
+      "id": "peval-hard-math-020",
+      "track": "hard_math",
+      "prediction": "مقسوم‌علیه‌های مثبت ۱۲: ۱، ۲، ۳، ۴، ۶، ۱۲\n\n**۶ تا**",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۶",
+          "6",
+          "شش"
+        ],
+        "normalized_prediction": "مقسوم علیه های مثبت 12 1 2 3 4 6 12 6 تا",
+        "scored_candidate": "مقسوم‌علیه‌های مثبت ۱۲: ۱، ۲، ۳، ۴، ۶، ۱۲\n\n**۶ تا**"
+      }
+    },
+    {
+      "id": "peval-hard-math-021",
+      "track": "hard_math",
+      "prediction": "## حل مسئله\n\nتعداد فرزندان: ۳  \nاحتمال پسر بودن هر فرزند: ½\n\nاز فرمول توزیع دوجمله‌ای:\n\n$$P(X=2) = \\binom{3}{2} \\times \\left(\\frac{1}{2}\\right)^2 \\times \\left(\\frac{1}{2}\\right)^1$$\n\n$$P(X=2) = 3 \\times \\frac{1}{4} \\times \\frac{1}{2} = \\frac{3}{8}$$\n\n**پاسخ: ۳/۸**",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "۳/۸",
+          "3/8"
+        ],
+        "normalized_prediction": "38",
+        "scored_candidate": "۳/۸**"
+      }
+    },
+    {
+      "id": "peval-hard-math-022",
+      "track": "hard_math",
+      "prediction": "**حل:**\n\nمجموع ۵ عدد = ۵ × ۲۰ = **۱۰۰**\n\nمجموع ۴ عدد باقی‌مانده = ۱۰۰ − ۱۵ = **۸۵**\n\nمیانگین = ۸۵ ÷ ۴ = **۲۱.۲۵**",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۲۱.۲۵",
+          "21.25",
+          "بیست و یک و یک‌چهارم"
+        ],
+        "normalized_prediction": "حل مجموع 5 عدد 5 × 20 100 مجموع 4 عدد باقی مانده 100 − 15 85 میانگین 85 ÷ 4 2125",
+        "scored_candidate": "**حل:**\n\nمجموع ۵ عدد = ۵ × ۲۰ = **۱۰۰**\n\nمجموع ۴ عدد باقی‌مانده = ۱۰۰ − ۱۵ = **۸۵**\n\nمیانگین = ۸۵ ÷ ۴ = **۲۱.۲۵**"
+      }
+    },
+    {
+      "id": "peval-hard-math-023",
+      "track": "hard_math",
+      "prediction": "**x = 12**\n\n**حل:**\n3x − 7 = 2x + 5\n3x − 2x = 5 + 7\nx = 12",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۱۲",
+          "12",
+          "دوازده"
+        ],
+        "normalized_prediction": "x 12 حل 3x − 7 2x 5 3x − 2x 5 7 x 12",
+        "scored_candidate": "**x = 12**\n\n**حل:**\n3x − 7 = 2x + 5\n3x − 2x = 5 + 7\nx = 12"
+      }
+    },
+    {
+      "id": "peval-hard-math-024",
+      "track": "hard_math",
+      "prediction": "## حل مسئله\n\n**نرخ پر شدن:**\n- شیر اول: ۱/۶ مخزن در ساعت\n- شیر دوم: ۱/۹ مخزن در ساعت\n\n**با هم:**\n\n$$\\frac{1}{6} + \\frac{1}{9} = \\frac{3}{18} + \\frac{2}{18} = \\frac{5}{18}$$\n\n**زمان لازم:**\n\n$$t = \\frac{18}{5} = 3.6 \\text{ ساعت}$$\n\n**پاسخ: ۳.۶ ساعت (۳ ساعت و ۳۶ دقیقه)**",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۱۸/۵",
+          "18/5",
+          "۳ و ۳/۵",
+          "3 و 3/5",
+          "۳.۶",
+          "3.6"
+        ],
+        "normalized_prediction": "حل مسئله نرخ پر شدن شیر اول 16 مخزن در ساعت شیر دوم 19 مخزن در ساعت با هم frac16 frac19 frac318 frac218 frac518 زمان لازم t frac185 36 text ساعت پاسخ 36 ساعت 3 ساعت و 36 دقیقه",
+        "scored_candidate": "## حل مسئله\n\n**نرخ پر شدن:**\n- شیر اول: ۱/۶ مخزن در ساعت\n- شیر دوم: ۱/۹ مخزن در ساعت\n\n**با هم:**\n\n$$\\frac{1}{6} + \\frac{1}{9} = \\frac{3}{18} + \\frac{2}{18} = \\frac{5}{18}$$\n\n**زمان لازم:**\n\n$$t = \\frac{18}{5} = 3.6 \\text{ ساعت}$$\n\n**پاسخ: ۳.۶ ساعت (۳ ساعت و ۳۶ دقیقه)**"
+      }
+    },
+    {
+      "id": "peval-hard-math-025",
+      "track": "hard_math",
+      "prediction": "**۵ متر**\n\nبا استفاده از قضیه فیثاغورس:\nقطر = √(4² + 3²) = √(16 + 9) = √25 = **5 متر**",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۵",
+          "5",
+          "پنج"
+        ],
+        "normalized_prediction": "5 متر با استفاده از قضیه فیثاغورس قطر √42 32 √16 9 √25 5 متر",
+        "scored_candidate": "**۵ متر**\n\nبا استفاده از قضیه فیثاغورس:\nقطر = √(4² + 3²) = √(16 + 9) = √25 = **5 متر**"
+      }
+    },
+    {
+      "id": "peval-hard-math-026",
+      "track": "hard_math",
+      "prediction": "**200 ÷ 7 = 28 هفته و 4 روز باقی‌مانده**\n\nدوشنبه + 4 روز = **جمعه**",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "شنبه"
+        ],
+        "normalized_prediction": "200 ÷ 7 28 هفته و 4 روز باقی مانده دوشنبه 4 روز جمعه",
+        "scored_candidate": "**200 ÷ 7 = 28 هفته و 4 روز باقی‌مانده**\n\nدوشنبه + 4 روز = **جمعه**"
+      }
+    },
+    {
+      "id": "peval-hard-math-027",
+      "track": "hard_math",
+      "prediction": "## حل مسئله\n\nفرض کنیم عدد دو رقمی = **10a + b**\n\n**شرط اول:** عدد جابه‌جا شده ۲۷ بیشتر است:\n$$10b + a = 10a + b + 27$$\n$$9b - 9a = 27$$\n$$b - a = 3$$\n\n**شرط دوم:** مجموع رقم‌ها ۹ است:\n$$a + b = 9$$\n\n**حل دستگاه:**\n$$b - a = 3$$\n$$b + a = 9$$\n\nجمع دو معادله: **2b = 12 → b = 6**، پس **a = 3**\n\n## عدد اصلی: **36**\n\n✅ بررسی: 63 - 36 = 27 ✓ و 3 + 6 = 9 ✓",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۳۶",
+          "36",
+          "سی و شش"
+        ],
+        "normalized_prediction": "حل مسئله فرض کنیم عدد دو رقمی 10a b شرط اول عدد جابه جا شده 27 بیشتر است 10b a 10a b 27 9b 9a 27 b a 3 شرط دوم مجموع رقم ها 9 است a b 9 حل دستگاه b a 3 b a 9 جمع دو معادله 2b 12 → b 6 پس a 3 عدد اصلی 36 ✅ بررسی 63 36 27 ✓ و 3 6 9 ✓",
+        "scored_candidate": "## حل مسئله\n\nفرض کنیم عدد دو رقمی = **10a + b**\n\n**شرط اول:** عدد جابه‌جا شده ۲۷ بیشتر است:\n$$10b + a = 10a + b + 27$$\n$$9b - 9a = 27$$\n$$b - a = 3$$\n\n**شرط دوم:** مجموع رقم‌ها ۹ است:\n$$a + b = 9$$\n\n**حل دستگاه:**\n$$b - a = 3$$\n$$b + a = 9$$\n\nجمع دو معادله: **2b = 12 → b = 6**، پس **a = 3**\n\n## عدد اصلی: **36**\n\n✅ بررسی: 63 - 36 = 27 ✓ و 3 + 6 = 9 ✓"
+      }
+    },
+    {
+      "id": "peval-hard-math-028",
+      "track": "hard_math",
+      "prediction": "## حل مسئله\n\n- کارگر اول: در ۸ روز → در هر روز **۱/۸** کار انجام می‌دهد\n- کارگر دوم: در ۱۲ روز → در هر روز **۱/۱۲** کار انجام می‌دهد\n\n**کار مشترک در هر روز:**\n\n$$\\frac{1}{8} + \\frac{1}{12} = \\frac{3}{24} + \\frac{2}{24} = \\frac{5}{24}$$\n\n**تعداد روز:**\n\n$$\\frac{1}{\\frac{5}{24}} = \\frac{24}{5} = 4.8 \\text{ روز}$$\n\n---\n\n**پاسخ: ۴.۸ روز**",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۲۴/۵",
+          "24/5",
+          "۴.۸",
+          "4.8"
+        ],
+        "normalized_prediction": "حل مسئله کارگر اول در 8 روز → در هر روز 18 کار انجام می دهد کارگر دوم در 12 روز → در هر روز 112 کار انجام می دهد کار مشترک در هر روز frac18 frac112 frac324 frac224 frac524 تعداد روز frac1frac524 frac245 48 text روز پاسخ 48 روز",
+        "scored_candidate": "## حل مسئله\n\n- کارگر اول: در ۸ روز → در هر روز **۱/۸** کار انجام می‌دهد\n- کارگر دوم: در ۱۲ روز → در هر روز **۱/۱۲** کار انجام می‌دهد\n\n**کار مشترک در هر روز:**\n\n$$\\frac{1}{8} + \\frac{1}{12} = \\frac{3}{24} + \\frac{2}{24} = \\frac{5}{24}$$\n\n**تعداد روز:**\n\n$$\\frac{1}{\\frac{5}{24}} = \\frac{24}{5} = 4.8 \\text{ روز}$$\n\n---\n\n**پاسخ: ۴.۸ روز**"
+      }
+    },
+    {
+      "id": "peval-hard-math-029",
+      "track": "hard_math",
+      "prediction": "## حل مسئله\n\nاعداد طبیعی اول (اول به معنای Prime) را به ترتیب جمع می‌کنیم:\n\n| تعداد (n) | اعداد | مجموع |\n|-----------|-------|-------|\n| 1 | 2 | 2 |\n| 2 | 2+3 | 5 |\n| 3 | 2+3+5 | 10 |\n| 4 | 2+3+5+7 | 17 |\n| 5 | 2+3+5+7+11 | 28 |\n| 6 | 2+3+5+7+11+13 | 41 |\n| **7** | 2+3+5+7+11+13+**14**... | |\n\nبررسی: ۲+۳+۵+۷+۱۱+۱۳+۱۷ = **۵۸** (ز",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۱۰",
+          "10",
+          "ده"
+        ],
+        "normalized_prediction": "حل مسئله اعداد طبیعی اول اول به معنای prime را به ترتیب جمع می کنیم تعداد n اعداد مجموع 1 2 2 2 23 5 3 235 10 4 2357 17 5 235711 28 6 23571113 41 7 2357111314 بررسی 2357111317 58 ز",
+        "scored_candidate": "## حل مسئله\n\nاعداد طبیعی اول (اول به معنای Prime) را به ترتیب جمع می‌کنیم:\n\n| تعداد (n) | اعداد | مجموع |\n|-----------|-------|-------|\n| 1 | 2 | 2 |\n| 2 | 2+3 | 5 |\n| 3 | 2+3+5 | 10 |\n| 4 | 2+3+5+7 | 17 |\n| 5 | 2+3+5+7+11 | 28 |\n| 6 | 2+3+5+7+11+13 | 41 |\n| **7** | 2+3+5+7+11+13+**14**... | |\n\nبررسی: ۲+۳+۵+۷+۱۱+۱۳+۱۷ = **۵۸** (ز"
+      }
+    },
+    {
+      "id": "peval-hard-math-030",
+      "track": "hard_math",
+      "prediction": "حالت‌های مطلوب (مجموع ۷):\n(1,6), (2,5), (3,4), (4,3), (5,2), (6,1) → **۶ حالت**\n\nکل حالت‌ها: 6×6 = **۳۶**\n\n$$P = \\frac{6}{36} = \\boxed{\\dfrac{1}{6}}$$",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۱/۶",
+          "1/6"
+        ],
+        "normalized_prediction": "حالت های مطلوب مجموع 7 16 25 34 43 52 61 → 6 حالت کل حالت ها 6×6 36 p frac636 boxeddfrac16",
+        "scored_candidate": "حالت‌های مطلوب (مجموع ۷):\n(1,6), (2,5), (3,4), (4,3), (5,2), (6,1) → **۶ حالت**\n\nکل حالت‌ها: 6×6 = **۳۶**\n\n$$P = \\frac{6}{36} = \\boxed{\\dfrac{1}{6}}$$"
+      }
+    },
+    {
+      "id": "peval-hard-reading-005",
+      "track": "hard_reading",
+      "prediction": "چون سادگی اولیه باعث می‌شد کاربران در مراحل بعدی سردرگم شوند و کار را نیمه‌کاره رها کنند، در حالی که صفحه پیچیده‌تر با وجود تأخیر اولیه، کاربران را تا **تکمیل موفق** هدایت می‌کرد. **نرخ تکمیل نهایی** مهم‌تر از سرعت شروع بود.",
+      "score": 0.04,
+      "details": {
+        "best_answer": "سردرگمی در گام بعد",
+        "scored_candidate": "چون سادگی اولیه باعث می‌شد کاربران در مراحل بعدی سردرگم شوند و کار را نیمه‌کاره رها کنند، در حالی که صفحه پیچیده‌تر با وجود تأخیر اولیه، کاربران را تا **تکمیل موفق** هدایت می‌کرد. **نرخ تکمیل نهایی** مهم‌تر از سرعت شروع بود."
+      }
+    },
+    {
+      "id": "peval-hard-reading-006",
+      "track": "hard_reading",
+      "prediction": "**عامل پنهان:** شرایط خانوادگی (خواب منظم و حمایت تحصیلی) است که هم باعث خوردن صبحانه می‌شود و هم نمرات بهتر — نه خود صبحانه به‌تنهایی.",
+      "score": 0.25,
+      "details": {
+        "best_answer": "حمایت خانوادگی و خواب کافی",
+        "scored_candidate": "**عامل پنهان:** شرایط خانوادگی (خواب منظم و حمایت تحصیلی) است که هم باعث خوردن صبحانه می‌شود و هم نمرات بهتر — نه خود صبحانه به‌تنهایی."
+      }
+    },
+    {
+      "id": "peval-hard-reading-007",
+      "track": "hard_reading",
+      "prediction": "چون هزینه‌های تعمیر و پشتیبانی ناشی از نرخ خرابی بالای خط الف (۸٪) در نهایت کل سود را از بین می‌برد، و خط ب با نرخ خرابی پایین‌تر (۲٪) از نظر **سودآوری کلی** مقرون‌به‌صرفه‌تر است.",
+      "score": 0.25,
+      "details": {
+        "best_answer": "پایین بودن نرخ خرابی و هزینه تعمیر",
+        "scored_candidate": "چون هزینه‌های تعمیر و پشتیبانی ناشی از نرخ خرابی بالای خط الف (۸٪) در نهایت کل سود را از بین می‌برد، و خط ب با نرخ خرابی پایین‌تر (۲٪) از نظر **سودآوری کلی** مقرون‌به‌صرفه‌تر است."
+      }
+    },
+    {
+      "id": "peval-hard-reading-008",
+      "track": "hard_reading",
+      "prediction": "**داده‌های پیشخدمت اول قابل اعتماد نیستند.**\n\nچون او فرم را **خودش پر می‌کرد**، نه مشتریان؛ پس نتایجش تحریف‌شده و غیرواقعی است. مقایسه این دو داده بی‌معناست.",
+      "score": 0.26666666666666666,
+      "details": {
+        "best_answer": "سوگیری در جمع‌آوری داده توسط خود پیشخدمت",
+        "scored_candidate": "**داده‌های پیشخدمت اول قابل اعتماد نیستند.**"
+      }
+    },
+    {
+      "id": "peval-hard-reading-009",
+      "track": "hard_reading",
+      "prediction": "**علت اصلی تاخیر، دیر باز شدن قفل در ورودی پارک (نیم‌ساعت تأخیر) بود.**",
+      "score": 0.6666666666666666,
+      "details": {
+        "best_answer": "دیر باز شدن قفل در ورودی پارک",
+        "scored_candidate": "**علت اصلی تاخیر، دیر باز شدن قفل در ورودی پارک (نیم‌ساعت تأخیر) بود.**"
+      }
+    },
+    {
+      "id": "peval-hard-reading-010",
+      "track": "hard_reading",
+      "prediction": "## پاسخ کوتاه:\n\nاحتمالاً **جابجایی جرم/تصادف** رخ داده است:\n\nرانندگان از آن سه چهارراه دوربین‌دار اجتناب کرده و به **خیابان‌ها و تقاطع‌های دیگر** منتقل شدند، بنابراین تصادفات در نقاط دیگر شهر **افزایش یافت** و کاهش محلی را در سطح کل شهر خنثی کرد.",
+      "score": 0.18181818181818182,
+      "details": {
+        "best_answer": "جابه‌جایی تصادف به چهارراه‌های دیگر",
+        "scored_candidate": "رانندگان از آن سه چهارراه دوربین‌دار اجتناب کرده و به **خیابان‌ها و تقاطع‌های دیگر** منتقل شدند، بنابراین تصادفات در نقاط دیگر شهر **افزایش یافت** و کاهش محلی را در سطح کل شهر خنثی کرد."
+      }
+    },
+    {
+      "id": "peval-hard-reading-011",
+      "track": "hard_reading",
+      "prediction": "**ایراد اصلی:** نصاب جلسه (کورام) رعایت نشده است.\n\nاگر فقط نیمی از اعضا حاضر بودند و آیین‌نامه نیاز به ۵۰٪ + یک رأی از **کل اعضا** دارد، جلسه فاقد حد نصاب قانونی بوده و تصمیم رد پروژه **فاقد اعتبار** است.",
+      "score": 0.3,
+      "details": {
+        "best_answer": "حضور نیمی از اعضا و عدم حد نصاب",
+        "scored_candidate": "اگر فقط نیمی از اعضا حاضر بودند و آیین‌نامه نیاز به ۵۰٪ + یک رأی از **کل اعضا** دارد، جلسه فاقد حد نصاب قانونی بوده و تصمیم رد پروژه **فاقد اعتبار** است."
+      }
+    },
+    {
+      "id": "peval-hard-reading-012",
+      "track": "hard_reading",
+      "prediction": "## ضعف اصلی: حجم نمونه نابرابر\n\nنمونه روش ب **بسیار کوچک** است (۲۰ نفر در برابر ۲۰۰ نفر)، بنابراین نتایج آن از **قابلیت اطمینان آماری کافی** برخوردار نیست و نمی‌توان نتیجه‌گیری معتبری درباره برتری آن کرد.",
+      "score": 0.3636363636363636,
+      "details": {
+        "best_answer": "حجم نمونه کوچک و عدم تعمیم",
+        "scored_candidate": "## ضعف اصلی: حجم نمونه نابرابر"
+      }
+    },
+    {
+      "id": "peval-hard-reading-013",
+      "track": "hard_reading",
+      "prediction": "چون همزمان یک **کمپین تلویزیونی** هم شروع شده بود و نمی‌توان مشخص کرد کدام عامل باعث رشد فروش شده است. (متغیر مداخله‌گر وجود دارد)",
+      "score": 0.13333333333333336,
+      "details": {
+        "best_answer": "همزمانی با کمپین تلویزیونی",
+        "scored_candidate": "چون همزمان یک **کمپین تلویزیونی** هم شروع شده بود و نمی‌توان مشخص کرد کدام عامل باعث رشد فروش شده است. (متغیر مداخله‌گر وجود دارد)"
+      }
+    },
+    {
+      "id": "peval-hard-reading-014",
+      "track": "hard_reading",
+      "prediction": "**خطای همبستگی کاذب (یا رابطه علّی اشتباه)**\n\nکارگزار بین سد شمال و تأمین آب مرکز، رابطه علّی فرض کرد، در حالی که این دو مستقل از هم بودند. او همبستگی ظاهری را با رابطه علّت و معلولی اشتباه گرفت.",
+      "score": 0.35,
+      "details": {
+        "best_answer": "فرض غلط رابطه علی بین شمال و مرکز",
+        "scored_candidate": "کارگزار بین سد شمال و تأمین آب مرکز، رابطه علّی فرض کرد، در حالی که این دو مستقل از هم بودند. او همبستگی ظاهری را با رابطه علّت و معلولی اشتباه گرفت."
+      }
+    },
+    {
+      "id": "peval-hard-reading-015",
+      "track": "hard_reading",
+      "prediction": "**علت قطعی نقض وعده:** قطعه یدکی مورد نیاز در بازار موجود نبود.",
+      "score": 0.5882352941176471,
+      "details": {
+        "best_answer": "نبود قطعه یدکی در بازار",
+        "scored_candidate": "**علت قطعی نقض وعده:** قطعه یدکی مورد نیاز در بازار موجود نبود."
+      }
+    },
+    {
+      "id": "peval-hard-reading-016",
+      "track": "hard_reading",
+      "prediction": "**فصل تابستان (گرما)**\n\nدر تابستان هم فروش بستنی بیشتر می‌شود و هم مردم بیشتر به آب می‌روند، بنابراین هر دو متغیر نتیجه یک علت مشترک‌اند، نه علت و معلول یکدیگر.",
+      "score": 0.8571428571428571,
+      "details": {
+        "best_answer": "گرما و فصل تابستان",
+        "scored_candidate": "**فصل تابستان (گرما)**"
+      }
+    },
+    {
+      "id": "peval-hard-reading-017",
+      "track": "hard_reading",
+      "prediction": "**نبود دستور جلسه از پیش تعیین‌شده**، که باعث بحث‌های فرعی و طولانی شدن جلسات می‌شد.",
+      "score": 0.4347826086956522,
+      "details": {
+        "best_answer": "نبود دستور جلسه از پیش",
+        "scored_candidate": "**نبود دستور جلسه از پیش تعیین‌شده**، که باعث بحث‌های فرعی و طولانی شدن جلسات می‌شد."
+      }
+    },
+    {
+      "id": "peval-hard-reading-018",
+      "track": "hard_reading",
+      "prediction": "**تعصب انتخابی (Selection Bias)**\n\nنمونه‌گیری غیرتصادفی از یک زیرگروه خاص و تعمیم نتایج به کل جامعه.",
+      "score": 0.125,
+      "details": {
+        "best_answer": "سوگیری انتخاب نمونه",
+        "scored_candidate": "نمونه‌گیری غیرتصادفی از یک زیرگروه خاص و تعمیم نتایج به کل جامعه."
+      }
+    },
+    {
+      "id": "peval-hard-reading-019",
+      "track": "hard_reading",
+      "prediction": "**علت:** اضافه شدن ضوابط جدید ارزیابی، که با وجود رسیدن نرخ قبولی به ۸۵٪، مانع معرفی معلم برتر شد.",
+      "score": 0.4166666666666667,
+      "details": {
+        "best_answer": "اضافه شدن ضوابط جدید ارزیابی",
+        "scored_candidate": "**علت:** اضافه شدن ضوابط جدید ارزیابی، که با وجود رسیدن نرخ قبولی به ۸۵٪، مانع معرفی معلم برتر شد."
+      }
+    },
+    {
+      "id": "peval-hard-reading-020",
+      "track": "hard_reading",
+      "prediction": "چون **ساعت تدریس بیشتر** (دو برابر) می‌تواند علت بهتر بودن نمره‌ها باشد، نه توانایی ذاتی دختران. تفاوت نمرات به **شرایط نابرابر آموزشی** برمی‌گردد، نه به قوی‌تر بودن دختران در آن درس.",
+      "score": 0.20512820512820512,
+      "details": {
+        "best_answer": "تفاوت در ساعت تدریس",
+        "scored_candidate": "چون **ساعت تدریس بیشتر** (دو برابر) می‌تواند علت بهتر بودن نمره‌ها باشد، نه توانایی ذاتی دختران. تفاوت نمرات به **شرایط نابرابر آموزشی** برمی‌گردد، نه به قوی‌تر بودن دختران در آن درس."
+      }
+    },
+    {
+      "id": "peval-hard-reading-021",
+      "track": "hard_reading",
+      "prediction": "**مغالطه قمارباز** (Gambler's Fallacy)",
+      "score": 0.3333333333333333,
+      "details": {
+        "best_answer": "خطای قمارباز",
+        "scored_candidate": "**مغالطه قمارباز** (Gambler's Fallacy)"
+      }
+    },
+    {
+      "id": "peval-hard-reading-022",
+      "track": "hard_reading",
+      "prediction": "**کاهش قیمت** احتمالاً نقش اصلی داشته، نه بزرگ‌تر شدن دکمه — چون هر دو تغییر همزمان اتفاق افتادند و نمی‌توان علت واقعی را تشخیص داد (مشکل همبستگی vs. علیت).",
+      "score": 0.1142857142857143,
+      "details": {
+        "best_answer": "نصف شدن قیمت محصول",
+        "scored_candidate": "**کاهش قیمت** احتمالاً نقش اصلی داشته، نه بزرگ‌تر شدن دکمه — چون هر دو تغییر همزمان اتفاق افتادند و نمی‌توان علت واقعی را تشخیص داد (مشکل همبستگی vs. علیت)."
+      }
+    },
+    {
+      "id": "peval-hard-reading-023",
+      "track": "hard_reading",
+      "prediction": "**تصمیم‌گیری بر اساس اقلیت (۱۰٪) و نادیده گرفتن نظر اکثریت (۹۰٪)**\n\nمدیر فقط به شکایات عده‌ای کوچک توجه کرد و داده کافی و جامع جمع‌آوری نکرد.",
+      "score": 0.375,
+      "details": {
+        "best_answer": "تصمیم بر مبنای اقلیت",
+        "scored_candidate": "**تصمیم‌گیری بر اساس اقلیت (۱۰٪) و نادیده گرفتن نظر اکثریت (۹۰٪)**"
+      }
+    },
+    {
+      "id": "peval-hard-reading-024",
+      "track": "hard_reading",
+      "prediction": "چون ساکنان قبلی (که شاید ناراضی بودند) **اسباب‌کشی کرده‌اند** و افراد جدیدتری جایشان را گرفته‌اند. پس کاهش شکایت‌ها نشانه بهبود کیفیت زندگی نیست، بلکه نتیجه **تغییر جمعیت** است. این یک **خطای انتخاب** (Selection Bias) است.",
+      "score": 0.04651162790697674,
+      "details": {
+        "best_answer": "جابه‌جایی ساکنان شاکی",
+        "scored_candidate": "چون ساکنان قبلی (که شاید ناراضی بودند) **اسباب‌کشی کرده‌اند** و افراد جدیدتری جایشان را گرفته‌اند. پس کاهش شکایت‌ها نشانه بهبود کیفیت زندگی نیست، بلکه نتیجه **تغییر جمعیت** است. این یک **خطای انتخاب** (Selection Bias) است."
+      }
+    },
+    {
+      "id": "peval-hard-reading-025",
+      "track": "hard_reading",
+      "prediction": "**رابطه علّی معکوس بود (یا همبستگی کاذب):**\n\nکاربران به خاطر **محتوای جذاب‌تر** آن صفحات بیشتر می‌ماندند، نه به خاطر سوالی بودن عنوان. عنوان سوالی نشانه‌ای از محتوای بهتر بود، نه علت ماندن کاربر. تغییر فرم عنوان بدون بهبود محتوا تأثیری نداشت.",
+      "score": 0.13953488372093023,
+      "details": {
+        "best_answer": "اشباع شدن کاربر از عناوین سوالی",
+        "scored_candidate": "کاربران به خاطر **محتوای جذاب‌تر** آن صفحات بیشتر می‌ماندند، نه به خاطر سوالی بودن عنوان. عنوان سوالی نشانه‌ای از محتوای بهتر بود، نه علت ماندن کاربر. تغییر فرم عنوان بدون بهبود محتوا تأثیری نداشت."
+      }
+    },
+    {
+      "id": "peval-hard-reading-026",
+      "track": "hard_reading",
+      "prediction": "فقط بهینه‌سازی **صفحه پروفایل**، چون مشکل واقعی همان‌جاست و بازنویسی همه صفحات هزینه و زمان اضافی بی‌دلیل است.",
+      "score": 0.32,
+      "details": {
+        "best_answer": "بازنویسی فقط صفحه پروفایل",
+        "scored_candidate": "فقط بهینه‌سازی **صفحه پروفایل**، چون مشکل واقعی همان‌جاست و بازنویسی همه صفحات هزینه و زمان اضافی بی‌دلیل است."
+      }
+    },
+    {
+      "id": "peval-hard-reading-027",
+      "track": "hard_reading",
+      "prediction": "**سن جمعیت**\n\nمیانگین سن بالاتر می‌تواند هم مصرف قهوه و هم آمار سکته را توضیح دهد، نه رابطه مستقیم بین قهوه و سکته.",
+      "score": 0.6666666666666666,
+      "details": {
+        "best_answer": "بیشتر بودن سن جمعیت",
+        "scored_candidate": "**سن جمعیت**"
+      }
+    },
+    {
+      "id": "peval-hard-reading-028",
+      "track": "hard_reading",
+      "prediction": "تصمیم با ضابطه اعلام‌شده **تناسبی ندارد**، چون ضابطه فقط درباره **اولویت‌بندی** بود (هر دو زبان = اولویت بیشتر)، نه شرط لازم برای پذیرش. پذیرفتن مهتاب با دانستن فقط آلمانی **مغایرتی با قانون ندارد** و کاملاً منطقی است.",
+      "score": 0.18604651162790697,
+      "details": {
+        "best_answer": "ناسازگار با ضابطه اعلام‌شده",
+        "scored_candidate": "تصمیم با ضابطه اعلام‌شده **تناسبی ندارد**، چون ضابطه فقط درباره **اولویت‌بندی** بود (هر دو زبان = اولویت بیشتر)، نه شرط لازم برای پذیرش. پذیرفتن مهتاب با دانستن فقط آلمانی **مغایرتی با قانون ندارد** و کاملاً منطقی است."
+      }
+    },
+    {
+      "id": "peval-hard-reading-029",
+      "track": "hard_reading",
+      "prediction": "چون مدیر فقط **درآمد کل** را دیده، اما افزایش درآمد ناشی از **گرانی قیمت** بوده، نه بهبود واقعی عملکرد. در واقع **تعداد مشتریان و فروش نصف شده** که نشانه‌ی ضعف است، نه موفقیت.",
+      "score": 0.14634146341463417,
+      "details": {
+        "best_answer": "افت تعداد فروش با وجود رشد درآمد",
+        "scored_candidate": "چون مدیر فقط **درآمد کل** را دیده، اما افزایش درآمد ناشی از **گرانی قیمت** بوده، نه بهبود واقعی عملکرد. در واقع **تعداد مشتریان و فروش نصف شده** که نشانه‌ی ضعف است، نه موفقیت."
+      }
+    },
+    {
+      "id": "peval-hard-reading-030",
+      "track": "hard_reading",
+      "prediction": "**احتمال جایگزین:** تیم‌های میهمان در آن دوره ضعیف‌تر بوده‌اند (یا تیم‌های حریف خانگی قوی‌تر)، نه اینکه زمین خانگی عامل اصلی باشد. همچنین ممکن است **عامل تصادف یا نمونه کوچک** (سه ماه) باعث این الگو شده باشد، نه مزیت واقعی زمین خانگی.",
+      "score": 0.07692307692307691,
+      "details": {
+        "best_answer": "حریفان خارج از خانه قوی‌تر",
+        "scored_candidate": "**احتمال جایگزین:** تیم‌های میهمان در آن دوره ضعیف‌تر بوده‌اند (یا تیم‌های حریف خانگی قوی‌تر)، نه اینکه زمین خانگی عامل اصلی باشد. همچنین ممکن است **عامل تصادف یا نمونه کوچک** (سه ماه) باعث این الگو شده باشد، نه مزیت واقعی زمین خانگی."
+      }
+    },
+    {
+      "id": "peval-hard-instruction-005",
+      "track": "hard_instruction",
+      "prediction": "درک می‌کنم که قطعی اینترنت آزاردهنده است. موضوع شما را پیگیری می‌کنیم و در اسرع وقت راهکار مناسب ارائه خواهیم داد. از صبر و شکیبایی شما سپاسگزاریم.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      }
+    },
+    {
+      "id": "peval-hard-instruction-006",
+      "track": "hard_instruction",
+      "prediction": "همکاری میان اعضای یک تیم، زمانی به موفقیت می‌انجامد که همه حول یک **هدف مشترک** گرد هم آیند. تبادل **بازخورد** سازنده، توانایی‌های فردی را تقویت کرده و بهره‌وری گروه را افزایش می‌دهد.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      }
+    },
+    {
+      "id": "peval-hard-instruction-007",
+      "track": "hard_instruction",
+      "prediction": "از نظر امنیتی، انتخاب یک رمز عبور قوی و پیچیده نقش حیاتی در حفاظت از اطلاعات شخصی دارد. فرآیند احراز هویت زمانی مطمئن است که رمز عبور شامل ترکیبی از حروف، نمادها و کاراکترهای متنوع باشد.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      }
+    },
+    {
+      "id": "peval-hard-instruction-008",
+      "track": "hard_instruction",
+      "prediction": "اگر دانشجویان با تقویم هفتگی اولویت‌های درسی خود را مشخص کنند، هم وقت آزاد بیشتری خواهند داشت و هم موفق‌تر می‌شود",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true,
+          "required_suffix": true
+        },
+        "constraint_score": 1.0
+      }
+    },
+    {
+      "id": "peval-hard-instruction-009",
+      "track": "hard_instruction",
+      "prediction": "با سلام،\n\nاز پیشنهاد همکاری شما صمیمانه قدردانی می‌کنم. متأسفانه در حال حاضر امکان پذیرش این همکاری برای ما فراهم نیست. امیدوارم در آینده فرصت همکاری مشترک فراهم شود.\n\nبا احترام",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      }
+    },
+    {
+      "id": "peval-hard-instruction-010",
+      "track": "hard_instruction",
+      "prediction": "درست می‌فرمایید، تأخیر در ارسال سفارش شما قابل قبول نیست. برای جبران این مشکل، یک کد تخفیف ویژه به حساب شما اضافه خواهیم کرد.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      }
+    },
+    {
+      "id": "peval-hard-instruction-011",
+      "track": "hard_instruction",
+      "prediction": "دعوت می‌کنیم به کارگاه آنلاین مهارت‌های ارتباطی شرکت کنید. ثبت‌نام رایگان است و ظرفیت محدود می‌باشد. همین حالا از طریق لینک زیر اقدام کنید: www.workshop.ir",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      }
+    },
+    {
+      "id": "peval-hard-instruction-012",
+      "track": "hard_instruction",
+      "prediction": "به‌طور کلی، ورزش روزانه سلامت قلب را تقویت می‌کند، کیفیت خواب را بهبود می‌بخشد، روحیه را ارتقا می‌دهد و انرژی بدن را افزایش می‌دهد. همچنین در کاهش استرس و تقویت سیستم ایمنی نقش مهمی دارد.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      }
+    },
+    {
+      "id": "peval-hard-instruction-013",
+      "track": "hard_instruction",
+      "prediction": "از پیشنهاد شما متشکریم، اما طبق سیاست شرکت امکان ارائه تخفیف در حال حاضر وجود ندارد و قیمت‌های ما ثابت و شفاف تعیین شده‌اند.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      }
+    },
+    {
+      "id": "peval-hard-instruction-014",
+      "track": "hard_instruction",
+      "prediction": "مهندس نرم‌افزار با تمرکز بر توسعه بک‌اند و علاقه به حل مسائل پیچیده فنی. به همکاری تیمی اهمیت زیادی می‌دهم و تلاش می‌کنم با یادگیری مستمر، در پروژه‌های مختلف ارزش‌آفرینی کنم.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      }
+    },
+    {
+      "id": "peval-hard-instruction-015",
+      "track": "hard_instruction",
+      "prediction": "استاد گرامی،\n\nاز راهنمایی‌های ارزشمند شما در طول این نیمسال سپاسگزارم. حضور پرمهر و دانش شما چراغ راهم بود و آموخته‌هایم را ماندگار ساخت.\n\nارادتمند شما",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true,
+          "required_suffix": true
+        },
+        "constraint_score": 1.0
+      }
+    },
+    {
+      "id": "peval-hard-instruction-016",
+      "track": "hard_instruction",
+      "prediction": "برای امنیت بیشتر، لطفاً **مرورگر** خود را **به‌روزرسانی** کنید تا از آخرین محافظت‌های امنیتی بهره‌مند شوید.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      }
+    },
+    {
+      "id": "peval-hard-instruction-017",
+      "track": "hard_instruction",
+      "prediction": "در حال حاضر به دلیل حجم بالای درخواست‌ها، سیستم نوبت‌بندی و اولویت‌بندی تیکت‌ها زمان بیشتری نیاز دارد. از صبر و شکیبایی شما سپاسگزاریم.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      }
+    },
+    {
+      "id": "peval-hard-instruction-018",
+      "track": "hard_instruction",
+      "prediction": "مسابقه عکاسی «لحظه‌های ناب» برگزار می‌شود. عکس‌های خود را تا پایان مهرماه ارسال کنید. داوری توسط هیئت متخصص انجام می‌شود و بهترین آثار جایزه نقدی دریافت می‌کنند. منتظر خلاقیت شما هستیم.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      }
+    },
+    {
+      "id": "peval-hard-instruction-019",
+      "track": "hard_instruction",
+      "prediction": "به اطلاع کلیه کارمندان محترم می‌رساند که **ساعت کاری جدید** شرکت **از هفته آینده** به صورت ۸ صبح تا ۴ بعدازظهر تغییر می‌یابد. خواهشمند است در این زمینه همکاری لازم را داشته باشید.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      }
+    },
+    {
+      "id": "peval-hard-instruction-020",
+      "track": "hard_instruction",
+      "prediction": "مشتری گرامی، نظر شما برای ما ارزشمند است. با شرکت در نظرسنجی کوتاه ما، در بهبود خدمات سهیم شوید. ممنون از همراهی صمیمانه‌تان.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      }
+    },
+    {
+      "id": "peval-hard-instruction-021",
+      "track": "hard_instruction",
+      "prediction": "پشتیبان‌گیری منظم از داده‌ها، خطر از دست رفتن اطلاعات مهم را به شدت کاهش می‌دهد. در صورت بروز خرابی یا حمله سایبری، بازیابی سریع اطلاعات تنها با داشتن نسخه پشتیبان امکان‌پذیر خواهد بود.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      }
+    },
+    {
+      "id": "peval-hard-instruction-022",
+      "track": "hard_instruction",
+      "prediction": "رشد فروش ما حاصل ورود به **بازار جدید** در مناطق شمالی کشور و تقویت **خدمات پس از فروش** بوده است. این دو عامل اعتماد مشتریان را افزایش داده و موجب جذب مشتریان بیشتری در ماه‌های اخیر شده است.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      }
+    },
+    {
+      "id": "peval-hard-instruction-023",
+      "track": "hard_instruction",
+      "prediction": "جناب آقای دکتر رضایی، با احترام از شما دعوت می‌کنیم در یک گفت‌وگوی تخصصی در قالب پادکست ما شرکت کنید. حضور شما می‌تواند ارزش بسیاری برای مخاطبان ما داشته باشد. منتظر پاسخ شما هستیم.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true
+        },
+        "constraint_score": 1.0
+      }
+    },
+    {
+      "id": "peval-hard-instruction-024",
+      "track": "hard_instruction",
+      "prediction": "از تماس شما متشکریم. موضوع بررسی فاکتور شما را با جدیت پیگیری خواهیم کرد و در اسرع وقت نتیجه را به اطلاع شما می‌رسانیم. از صبر و شکیبایی شما سپاسگزاریم.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      }
+    },
+    {
+      "id": "peval-hard-instruction-025",
+      "track": "hard_instruction",
+      "prediction": "برای جست‌وجو، عبارت موردنظر خود را در کادر بالای صفحه وارد کنید، سپس روی دکمه جست‌وجو کلیک کنید تا نتایج مرتبط نمایش داده شوند.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      }
+    },
+    {
+      "id": "peval-hard-instruction-026",
+      "track": "hard_instruction",
+      "prediction": "هشدار: ارسال اطلاعات حساس از طریق ایمیل بدون رمزنگاری می‌تواند خطرناک باشد. لطفاً پیش از ارسال، از ابزارهای رمزنگاری معتبر استفاده کنید تا امنیت داده‌های شما تضمین شود.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      }
+    },
+    {
+      "id": "peval-hard-instruction-027",
+      "track": "hard_instruction",
+      "prediction": "معرفی می‌کنیم **نوآپ**؛ راه‌حلی هوشمند برای مدیریت وظایف روزانه. این ابزار به هر کاربر کمک می‌کند تا زمان خود را بهتر سازماندهی کند و بهره‌وری واقعی را تجربه نماید.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      }
+    },
+    {
+      "id": "peval-hard-instruction-028",
+      "track": "hard_instruction",
+      "prediction": "پیرو ایمیل شما، جزئیات تکمیلی مربوط به گزارش درخواستی در پیوست این نامه ارسال شده است. امیدواریم اطلاعات ارائه‌شده پاسخگوی نیاز شما باشد و در صورت لزوم آماده همکاری بیشتر هستیم.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      }
+    },
+    {
+      "id": "peval-hard-instruction-029",
+      "track": "hard_instruction",
+      "prediction": "همکاران گرامی،\n\nشما را به یک نشست **هم‌فکری** صمیمانه درباره **فرهنگ سازمانی** دعوت می‌کنیم. این فرصتی است تا ایده‌ها و پیشنهادهای ارزشمند خود را با یکدیگر در میان بگذاریم. حضور گرم شما مایه افتخار ماست.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      }
+    },
+    {
+      "id": "peval-hard-instruction-030",
+      "track": "hard_instruction",
+      "prediction": "انتقاد شما را با کمال احترام دریافت کردیم. پس از بازنگری دقیق در فرآیندهای خود، تمام تلاشمان را برای بهبود کیفیت خدمات به‌کار خواهیم بست. سپاسگزار توجه شما هستیم.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      }
+    },
+    {
+      "id": "peval-hard-culture-005",
+      "track": "hard_culture",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      }
+    },
+    {
+      "id": "peval-hard-culture-006",
+      "track": "hard_culture",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      }
+    },
+    {
+      "id": "peval-hard-culture-007",
+      "track": "hard_culture",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      }
+    },
+    {
+      "id": "peval-hard-culture-008",
+      "track": "hard_culture",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      }
+    },
+    {
+      "id": "peval-hard-culture-009",
+      "track": "hard_culture",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      }
+    },
+    {
+      "id": "peval-hard-culture-010",
+      "track": "hard_culture",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      }
+    },
+    {
+      "id": "peval-hard-culture-011",
+      "track": "hard_culture",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      }
+    },
+    {
+      "id": "peval-hard-culture-012",
+      "track": "hard_culture",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      }
+    },
+    {
+      "id": "peval-hard-culture-013",
+      "track": "hard_culture",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      }
+    },
+    {
+      "id": "peval-hard-culture-014",
+      "track": "hard_culture",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      }
+    },
+    {
+      "id": "peval-hard-culture-015",
+      "track": "hard_culture",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      }
+    },
+    {
+      "id": "peval-hard-culture-016",
+      "track": "hard_culture",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      }
+    },
+    {
+      "id": "peval-hard-culture-017",
+      "track": "hard_culture",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      }
+    },
+    {
+      "id": "peval-hard-culture-018",
+      "track": "hard_culture",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      }
+    },
+    {
+      "id": "peval-hard-culture-019",
+      "track": "hard_culture",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      }
+    },
+    {
+      "id": "peval-hard-culture-020",
+      "track": "hard_culture",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      }
+    },
+    {
+      "id": "peval-hard-culture-021",
+      "track": "hard_culture",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      }
+    },
+    {
+      "id": "peval-hard-culture-022",
+      "track": "hard_culture",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      }
+    },
+    {
+      "id": "peval-hard-culture-023",
+      "track": "hard_culture",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      }
+    },
+    {
+      "id": "peval-hard-culture-024",
+      "track": "hard_culture",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      }
+    },
+    {
+      "id": "peval-hard-culture-025",
+      "track": "hard_culture",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      }
+    },
+    {
+      "id": "peval-hard-culture-026",
+      "track": "hard_culture",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      }
+    },
+    {
+      "id": "peval-hard-culture-027",
+      "track": "hard_culture",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      }
+    },
+    {
+      "id": "peval-hard-culture-028",
+      "track": "hard_culture",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      }
+    },
+    {
+      "id": "peval-hard-culture-029",
+      "track": "hard_culture",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      }
+    },
+    {
+      "id": "peval-hard-culture-030",
+      "track": "hard_culture",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      }
+    }
+  ]
+}
