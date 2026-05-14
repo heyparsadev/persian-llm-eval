@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from .backends import BaseBackend
-from .dataset import DatasetRecord
+from .dataset import DatasetRecord, load_records
 from .results import utc_now
 from .scoring import score_record
 
@@ -71,6 +71,62 @@ def run_records(
     if include_samples:
         result["samples"] = samples
     return result
+
+
+def rescore_result(
+    result: dict[str, Any], *, data_paths: list[str | Path] | None = None
+) -> dict[str, Any]:
+    """Re-apply current scoring rules to the saved predictions of a result file."""
+
+    samples = result.get("samples")
+    if not isinstance(samples, list) or not samples:
+        raise ValueError("result has no samples; cannot rescore")
+
+    paths = data_paths or [str(default_dataset_path().parent / name) for name in (
+        "persian_eval_v1.dev.jsonl",
+        "persian_eval_v1.public_eval.jsonl",
+        "persian_eval_v1.hard.jsonl",
+    )]
+    paths = [path for path in paths if Path(path).exists()]
+    records = {record.id: record for record in load_records(paths)}
+
+    totals: dict[str, float] = defaultdict(float)
+    counts: dict[str, int] = defaultdict(int)
+    new_samples: list[dict[str, Any]] = []
+    for sample in samples:
+        record = records.get(sample["id"])
+        if record is None:
+            raise ValueError(f"rescore: dataset record not found for {sample['id']}")
+        score, details = score_record(record, sample.get("prediction", ""))
+        totals[record.track] += score
+        counts[record.track] += 1
+        new_samples.append(
+            {
+                "id": record.id,
+                "track": record.track,
+                "prediction": sample.get("prediction", ""),
+                "score": score,
+                "details": details,
+            }
+        )
+
+    task_scores = {
+        track: {"score": totals[track] / counts[track], "n": counts[track]}
+        for track in sorted(counts)
+        if counts[track] > 0
+    }
+    overall_score = (
+        sum(item["score"] for item in task_scores.values()) / len(task_scores)
+        if task_scores
+        else 0.0
+    )
+
+    rescored = dict(result)
+    rescored["task_scores"] = task_scores
+    rescored["overall_score"] = overall_score
+    rescored["samples"] = new_samples
+    rescored["timestamp"] = utc_now()
+    return rescored
 
 
 def default_dataset_path() -> Path:

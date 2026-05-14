@@ -28,7 +28,11 @@ def format_prompt(record: DatasetRecord) -> str:
         )
         return f"{record.prompt}\n\nگزینه ها:\n{rendered_choices}\n\nفقط برچسب گزینه درست را بنویس."
     if scoring in {"exact", "f1"}:
-        return f"{record.prompt}\n\nپاسخ کوتاه:"
+        return (
+            f"{record.prompt}\n\n"
+            "فقط پاسخ نهایی را در یک خط بنویس. "
+            "بدون توضیح، بدون فرمول، بدون مارک‌داون، بدون پیشوند «پاسخ:»."
+        )
     return record.prompt
 
 
