@@ -1,0 +1,166 @@
+{
+  "model_id": "claude-haiku-4-5",
+  "model_type": "api",
+  "revision": null,
+  "backend": "anthropic",
+  "task_scores": {
+    "culture": {
+      "score": 1.0,
+      "n": 2
+    },
+    "instruction": {
+      "score": 0.5,
+      "n": 2
+    },
+    "knowledge": {
+      "score": 1.0,
+      "n": 2
+    },
+    "reading": {
+      "score": 0.75,
+      "n": 2
+    },
+    "short_qa": {
+      "score": 0.0,
+      "n": 2
+    }
+  },
+  "overall_score": 0.65,
+  "run_config": {
+    "data": [
+      "data/persian_eval_v1.dev.jsonl"
+    ],
+    "tasks": "all",
+    "split": null,
+    "max_new_tokens": 128,
+    "temperature": 0.0,
+    "dtype": "bfloat16",
+    "quantization": null,
+    "reasoning_effort": null
+  },
+  "timestamp": "2026-05-14T12:21:16+00:00",
+  "samples": [
+    {
+      "id": "peval-dev-knowledge-001",
+      "track": "knowledge",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      }
+    },
+    {
+      "id": "peval-dev-knowledge-002",
+      "track": "knowledge",
+      "prediction": "پ) فروردین",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ) فروردین"
+      }
+    },
+    {
+      "id": "peval-dev-shortqa-001",
+      "track": "short_qa",
+      "prediction": "واحد پول رسمی ایران **ریال** است.",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "ریال",
+          "ریال ایران"
+        ],
+        "normalized_prediction": "واحد پول رسمی ایران ریال است",
+        "scored_candidate": "واحد پول رسمی ایران **ریال** است."
+      }
+    },
+    {
+      "id": "peval-dev-shortqa-002",
+      "track": "short_qa",
+      "prediction": "شاهنامه اثر **فردوسی** است. این شاعر ایرانی در قرن 10 میلادی این حماسه بزرگ را سروده که یکی از مهم‌ترین آثار ادبی فارسی به شمار می‌رود.",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "فردوسی",
+          "ابوالقاسم فردوسی",
+          "حکیم ابوالقاسم فردوسی"
+        ],
+        "normalized_prediction": "شاهنامه اثر فردوسی است این شاعر ایرانی در قرن 10 میلادی این حماسه بزرگ را سروده که یکی از مهم ترین آثار ادبی فارسی به شمار می رود",
+        "scored_candidate": "شاهنامه اثر **فردوسی** است. این شاعر ایرانی در قرن 10 میلادی این حماسه بزرگ را سروده که یکی از مهم‌ترین آثار ادبی فارسی به شمار می‌رود."
+      }
+    },
+    {
+      "id": "peval-dev-reading-001",
+      "track": "reading",
+      "prediction": "**ساختن لوله کشی جدید**\n\nاین لوله کشی باعث شد که مردم نیازی به رفتن روزانه به چشمه برای جمع آوری آب نداشته باشند.",
+      "score": 1.0,
+      "details": {
+        "best_answer": "ساختن لوله کشی جدید",
+        "scored_candidate": "**ساختن لوله کشی جدید**"
+      }
+    },
+    {
+      "id": "peval-dev-reading-002",
+      "track": "reading",
+      "prediction": "موضوع پوستر دوم **بازیافت کاغذ** بود.",
+      "score": 0.5,
+      "details": {
+        "best_answer": "بازیافت کاغذ",
+        "scored_candidate": "موضوع پوستر دوم **بازیافت کاغذ** بود."
+      }
+    },
+    {
+      "id": "peval-dev-instruction-001",
+      "track": "instruction",
+      "prediction": "نوروز آغاز بهار است که خانواده‌ها در کنار یکدیگر جشن می‌گیرند.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "min_words": true,
+          "max_words": true
+        },
+        "constraint_score": 1.0
+      }
+    },
+    {
+      "id": "peval-dev-instruction-002",
+      "track": "instruction",
+      "prediction": "به نظر من کتابخانه یکی از بهترین اماکن برای مطالعه و یادگیری است. در این فضای آرام می‌توان به کتاب‌ها و منابع مختلف دسترسی پیدا کرد و دانش خود را افزایش داد. کتابخانه‌ها نقش مهمی در پیشرفت فرهنگی جامعه",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "min_words": true,
+          "max_words": false,
+          "required_prefix": true
+        },
+        "constraint_score": 0.75
+      }
+    },
+    {
+      "id": "peval-dev-culture-001",
+      "track": "culture",
+      "prediction": "الف) سمنو",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف) سمنو"
+      }
+    },
+    {
+      "id": "peval-dev-culture-002",
+      "track": "culture",
+      "prediction": "ب) اصفهان",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب) اصفهان"
+      }
+    }
+  ]
+}
