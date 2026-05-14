@@ -10,7 +10,7 @@ from .backends import GenerationConfig, create_backend
 from .dataset import DatasetError, duplicate_prompts, load_records
 from .leaderboard import build_leaderboard, write_csv, write_leaderboard
 from .results import ResultError, load_result, write_result
-from .runner import default_dataset_path, run_records
+from .runner import default_dataset_path, rescore_result, run_records
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -25,6 +25,8 @@ def main(argv: list[str] | None = None) -> int:
             return leaderboard_command(args)
         if args.command == "leakage":
             return leakage_command(args)
+        if args.command == "rescore":
+            return rescore_command(args)
     except (DatasetError, ResultError, RuntimeError, ValueError) as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 1
@@ -82,6 +84,19 @@ def build_parser() -> argparse.ArgumentParser:
         "leakage", help="Check duplicate prompts across JSONL datasets"
     )
     leakage_parser.add_argument("paths", nargs="+")
+
+    rescore_parser = subparsers.add_parser(
+        "rescore",
+        help="Re-apply current scoring to a result file's saved sample predictions",
+    )
+    rescore_parser.add_argument("input", help="Path to existing result JSON")
+    rescore_parser.add_argument("--output", required=True, help="Path to write rescored result")
+    rescore_parser.add_argument(
+        "--data",
+        nargs="+",
+        default=None,
+        help="Dataset JSONL files (defaults to the three v1 splits)",
+    )
 
     leaderboard_parser = subparsers.add_parser("leaderboard", help="Leaderboard operations")
     leaderboard_subparsers = leaderboard_parser.add_subparsers(
@@ -159,6 +174,17 @@ def leaderboard_command(args: argparse.Namespace) -> int:
     print(
         f"wrote {args.output} | main={len(leaderboard['main'])} | "
         f"reference={len(leaderboard['reference'])}"
+    )
+    return 0
+
+
+def rescore_command(args: argparse.Namespace) -> int:
+    original = load_result(args.input)
+    rescored = rescore_result(original, data_paths=args.data)
+    write_result(args.output, rescored)
+    print(
+        f"rescored {args.input} -> {args.output} | "
+        f"overall {original['overall_score']:.4f} -> {rescored['overall_score']:.4f}"
     )
     return 0
 

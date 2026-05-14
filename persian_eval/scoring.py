@@ -47,6 +47,7 @@ def score_mcq(record: DatasetRecord, prediction: str) -> tuple[float, dict[str, 
 def score_exact(record: DatasetRecord, prediction: str) -> tuple[float, dict[str, Any]]:
     accepted = _accepted_answers(record.answer)
     normalized_accepted = [strip_punctuation(item) for item in accepted]
+    accepted_token_lists = [tokenize(item) for item in accepted]
     for candidate in prediction_candidates(prediction):
         normalized_prediction = strip_punctuation(candidate)
         if normalized_prediction in normalized_accepted:
@@ -54,13 +55,33 @@ def score_exact(record: DatasetRecord, prediction: str) -> tuple[float, dict[str
                 "accepted": accepted,
                 "normalized_prediction": normalized_prediction,
                 "scored_candidate": candidate,
+                "match_kind": "exact",
             }
+        candidate_tokens = tokenize(candidate)
+        for accepted_tokens in accepted_token_lists:
+            if accepted_tokens and _contains_subsequence(candidate_tokens, accepted_tokens):
+                return 1.0, {
+                    "accepted": accepted,
+                    "normalized_prediction": normalized_prediction,
+                    "scored_candidate": candidate,
+                    "match_kind": "subsequence",
+                }
     normalized_prediction = strip_punctuation(strip_reasoning(prediction))
     return 0.0, {
         "accepted": accepted,
         "normalized_prediction": normalized_prediction,
         "scored_candidate": strip_reasoning(prediction),
+        "match_kind": "none",
     }
+
+
+def _contains_subsequence(haystack: list[str], needle: list[str]) -> bool:
+    if not needle or len(needle) > len(haystack):
+        return False
+    for index in range(len(haystack) - len(needle) + 1):
+        if haystack[index : index + len(needle)] == needle:
+            return True
+    return False
 
 
 def score_f1(record: DatasetRecord, prediction: str) -> tuple[float, dict[str, Any]]:
@@ -71,12 +92,33 @@ def score_f1(record: DatasetRecord, prediction: str) -> tuple[float, dict[str, A
     for candidate in prediction_candidates(prediction):
         prediction_tokens = tokenize(candidate)
         for answer in accepted:
-            current = token_f1(prediction_tokens, tokenize(answer))
+            answer_tokens = tokenize(answer)
+            current = token_f1(prediction_tokens, answer_tokens)
+            window = _best_window_f1(prediction_tokens, answer_tokens)
+            if window > current:
+                current = window
             if current > best:
                 best = current
                 best_answer = answer
                 best_candidate = candidate
     return best, {"best_answer": best_answer, "scored_candidate": best_candidate}
+
+
+def _best_window_f1(prediction_tokens: list[str], answer_tokens: list[str]) -> float:
+    """Best F1 across all sliding windows of size |answer_tokens| in the prediction."""
+
+    if not prediction_tokens or not answer_tokens:
+        return 0.0
+    size = len(answer_tokens)
+    if size > len(prediction_tokens):
+        return 0.0
+    best = 0.0
+    for start in range(len(prediction_tokens) - size + 1):
+        window = prediction_tokens[start : start + size]
+        score = token_f1(window, answer_tokens)
+        if score > best:
+            best = score
+    return best
 
 
 def score_instruction(record: DatasetRecord, prediction: str) -> tuple[float, dict[str, Any]]:
