@@ -209,9 +209,10 @@ class AnthropicBackend(BaseBackend):
         if not raw_base.endswith("/v1"):
             raw_base = f"{raw_base}/v1"
         self.base_url = raw_base
-        self.api_key = os.getenv("ANTHROPIC_API_KEY")
-        if not self.api_key:
+        api_key = os.getenv("ANTHROPIC_API_KEY")
+        if not api_key:
             raise RuntimeError("ANTHROPIC_API_KEY is required for the anthropic backend")
+        self.api_key: str = api_key
 
     def generate(self, record: DatasetRecord) -> str:
         effort = self.config.reasoning_effort

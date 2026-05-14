@@ -82,11 +82,14 @@ def rescore_result(
     if not isinstance(samples, list) or not samples:
         raise ValueError("result has no samples; cannot rescore")
 
-    paths = data_paths or [str(default_dataset_path().parent / name) for name in (
-        "persian_eval_v1.dev.jsonl",
-        "persian_eval_v1.public_eval.jsonl",
-        "persian_eval_v1.hard.jsonl",
-    )]
+    paths = data_paths or [
+        str(default_dataset_path().parent / name)
+        for name in (
+            "persian_eval_v1.dev.jsonl",
+            "persian_eval_v1.public_eval.jsonl",
+            "persian_eval_v1.hard.jsonl",
+        )
+    ]
     paths = [path for path in paths if Path(path).exists()]
     records = {record.id: record for record in load_records(paths)}
 

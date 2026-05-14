@@ -1,115 +1,144 @@
-# Persian LLM Eval Benchmark v1
+# Persian LLM Eval (v1.1)
 
-A practical benchmark runner and leaderboard scaffold for evaluating LLMs on Iranian Persian.
+A practical benchmark runner and leaderboard scaffold for evaluating large
+language models on **Iranian Persian**. The repo ships a CLI, a JSONL dataset
+(300 items across two splits, ten tracks), deterministic scoring with bootstrap
+confidence intervals, and pluggable backends for the major API families plus
+local Hugging Face models.
 
-The v1 goal is adoption: objective scoring, reproducible JSON outputs, simple Hugging Face publication paths, and enough structure for teams to submit comparable model results.
+> **Status:** v1.1 dataset; 23 reference result files from frontier models
+> (Claude Opus/Sonnet/Haiku, GPT‑5 / 5.5 with and without reasoning). See
+> [`docs/BENCHMARK_REPORT.md`](docs/BENCHMARK_REPORT.md) for the full
+> methodology write-up and per-track tables.
 
-## What Is Included
+## Headline results
 
-- A lightweight `persian-eval` CLI.
-- Curated Persian JSONL dev/public-eval samples using the v1 dataset schema.
-- Deterministic scoring for MCQ, short QA, reading comprehension, instruction-following constraints, and Persian culture/knowledge tasks.
-- Optional backends for Hugging Face Transformers and OpenAI-compatible chat APIs.
-- Result validation and leaderboard generation.
-- A minimal Hugging Face Space app under `spaces/leaderboard`.
+| Rank | Model | Mode | public_eval | hard | combined |
+|:---:|---|---|:---:|:---:|:---:|
+| 1 | gpt-5.5 | + thinking (high) | 0.9460 | 0.8654 | **0.9057** |
+| 2 | gpt-5.5 | standard | 0.9429 | 0.8641 | 0.9035 |
+| 3 | gpt-5.5 | + thinking (medium) | 0.9436 | 0.8554 | 0.8995 |
+| 4 | gpt-5 | standard | 0.9459 | 0.8376 | 0.8918 |
+| 5 | gpt-5-mini | standard | 0.9354 | 0.8422 | 0.8888 |
+| 6 | claude-sonnet-4-6 | standard | 0.9063 | **0.8692** | 0.8878 |
+| 7 | claude-opus-4-7 | standard | 0.9160 | 0.8464 | 0.8812 |
 
-Existing Persian benchmarks such as PerMMLU, Persian IFEval, ParsiNLU, PerCul, and FarsEval-PKBETS are referenced in `data/external_sources.yml` but not vendored. Their licenses and release policies should be respected when creating larger official splits.
+Bootstrap 95% CIs overlap heavily across the top eight rows — no two adjacent
+rows are statistically distinguishable on n=30 per track.
 
 ## Quickstart
-
-If you do not code, start with the Persian guide:
-
-```text
-START_HERE_FA.md
-```
-
-On macOS, you can also double-click:
-
-```text
-RUN_ME.command
-```
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -e ".[dev]"
 
-persian-eval run --model smoke --backend mock --data data/persian_eval_v1.dev.jsonl --output results/smoke.json
+# Smoke test against the mock backend (no API key, no GPU).
+persian-eval run --model smoke --backend mock \
+  --data data/persian_eval_v1.dev.jsonl --output results/smoke.json
 persian-eval validate results/smoke.json
-persian-eval leaderboard build results/*.json --output leaderboard/leaderboard.json --csv leaderboard/leaderboard.csv
+persian-eval leaderboard build results/*.json \
+  --output leaderboard/leaderboard.json --csv leaderboard/leaderboard.csv
 ```
 
-Run the tests:
+Run the test suite:
 
 ```bash
-python3 -m unittest discover -s tests
+pytest -q
 ```
 
-## Running Real Models
+If you do not code, start with the Persian guide [`START_HERE_FA.md`](START_HERE_FA.md)
+or on macOS, double-click [`RUN_ME.command`](RUN_ME.command).
 
-Hugging Face local/open-weight model:
+## Backends
+
+| Backend | Models | Required env |
+|---|---|---|
+| `mock` | Deterministic stub for smoke tests | — |
+| `hf` | Any Hugging Face causal LM, optionally 4/8-bit quantised | install with `.[hf]` |
+| `openai-compatible` | GPT-4.x, GPT-5 family, and any OpenAI-compatible Chat Completions endpoint | `OPENAI_API_KEY`, optional `OPENAI_BASE_URL` |
+| `openai-responses` | GPT-5 family Responses API with `--reasoning-effort` | `OPENAI_API_KEY` |
+| `anthropic` | Claude 3.x, 4.x, and 4.7 (with adaptive thinking via `--reasoning-effort`) | `ANTHROPIC_API_KEY`, optional `ANTHROPIC_BASE_URL` |
 
 ```bash
+# Anthropic — Claude Sonnet 4.6
+export ANTHROPIC_API_KEY=...
+persian-eval run --model claude-sonnet-4-6 --backend anthropic \
+  --data data/persian_eval_v1.public_eval.jsonl \
+  --output results/claude-sonnet-4-6.public_eval.json
+
+# Anthropic — Claude Opus 4.7 with low-effort extended thinking
+persian-eval run --model claude-opus-4-7 --backend anthropic \
+  --reasoning-effort low \
+  --data data/persian_eval_v1.hard.jsonl \
+  --output results/claude-opus-4-7-thinking.hard.json
+
+# OpenAI — GPT-5 with medium reasoning (Responses API)
+export OPENAI_API_KEY=...
+persian-eval run --model gpt-5 --backend openai-responses \
+  --reasoning-effort medium --max-new-tokens 512 \
+  --data data/persian_eval_v1.hard.jsonl \
+  --output results/gpt-5-thinking-medium.hard.json
+
+# Hugging Face — any open-weight Persian-tuned model
 pip install -e ".[hf]"
-persian-eval run \
-  --model PartAI/Dorna2-Llama3.1-8B-Instruct \
-  --backend hf \
-  --model-type open-weight \
+persian-eval run --model PartAI/Dorna2-Llama3.1-8B-Instruct --backend hf \
   --data data/persian_eval_v1.public_eval.jsonl \
   --output results/dorna2.json
 ```
 
-OpenAI-compatible API baseline:
-
-```bash
-export OPENAI_API_KEY=...
-export OPENAI_BASE_URL=https://api.openai.com/v1
-persian-eval run \
-  --model gpt-4.1-mini \
-  --backend openai-compatible \
-  --model-type api \
-  --data data/persian_eval_v1.public_eval.jsonl \
-  --output results/gpt-4.1-mini.json
-```
-
-API baselines are marked as reference rows by the leaderboard builder.
+`--reasoning-effort` accepts `minimal`, `low`, `medium`, `high`, `xhigh`. The
+Anthropic backend maps these to the Claude 4.7 adaptive thinking API
+(`low`/`medium`/`high`) and sets a max-tokens headroom; the OpenAI Responses
+backend forwards the effort to the API directly.
 
 ## CLI
 
 ```bash
-persian-eval run --model <model_id> --tasks all --output results/<model>.json
-persian-eval validate results/<model>.json
-persian-eval validate --dataset data/persian_eval_v1.public_eval.jsonl
-persian-eval leakage data/*.jsonl
-persian-eval leaderboard build results/*.json
+persian-eval run        --model <id> --backend <name> --data <jsonl ...> --output <out.json>
+persian-eval rescore    <result.json> --output <rescored.json>
+persian-eval validate   <result.json | --dataset <jsonl ...>>
+persian-eval leakage    <jsonl ...>
+persian-eval leaderboard build <result.json ...> --output <out.json> [--csv <out.csv>]
 ```
 
-Task selection accepts `all` or a comma-separated list of tracks:
+- **`run`** generates predictions, scores them in-process, and writes the
+  result schema. Filter tracks with `--tasks knowledge,reading` and splits
+  with `--split public_eval`. Reasoning models often need
+  `--max-new-tokens 512` or `768`.
+- **`rescore`** re-applies the current scoring rules to a previously written
+  result file's saved sample predictions. Use this whenever you tighten an
+  accepted-answer list or fix an item — no model re-run is needed:
 
-```bash
-persian-eval run --model smoke --backend mock --tasks knowledge,reading --output results/smoke_subset.json
-```
+  ```bash
+  persian-eval rescore results/claude-opus-4-7.hard.json \
+    --output results/claude-opus-4-7.hard.rescored.json
+  ```
 
-Harder curated examples are available in:
+- **`validate`** type-checks a result JSON or a dataset JSONL.
+- **`leakage`** flags duplicate prompts across the provided JSONLs.
+- **`leaderboard build`** aggregates result files, sorts by overall score,
+  and attaches bootstrap CIs (1000 iterations, 95% by default). Open-weight
+  rows land in `main`; API-backed rows in `reference`. The Hugging Face
+  Space under `spaces/leaderboard/` reads the resulting JSON.
 
-```bash
-persian-eval run --model smoke --backend mock --data data/persian_eval_v1.hard.jsonl --output results/smoke_hard.json
-```
+## Dataset (v1.1)
 
-Advanced open-weight examples for a 24GB GPU:
+300 items across three JSONL files in [`data/`](data):
 
-```bash
-scripts/run_qwen3_8b_hard.sh
-scripts/run_qwen3_14b_4bit_hard.sh
-scripts/run_deepseek_r1_distill_8b_hard.sh
-scripts/run_deepseek_r1_distill_qwen_14b_4bit_hard.sh
-```
+| File | Items | Use |
+|---|:---:|---|
+| `persian_eval_v1.dev.jsonl` | 10 | Smoke and debug |
+| `persian_eval_v1.public_eval.jsonl` | 150 | Public leaderboard |
+| `persian_eval_v1.hard.jsonl` | 150 | Harder public split |
 
-`Qwen3-14B` uses `--quantization 4bit` so it can fit on a single RTX 4090-class GPU.
+Each split carries five tracks at 30 items each. `public_eval` covers
+`knowledge`, `short_qa`, `reading`, `instruction`, `culture`. `hard` covers
+`hard_reasoning`, `hard_math`, `hard_reading`, `hard_instruction`,
+`hard_culture`. A separate **hidden** split is documented in
+[`data/hidden/README.md`](data/hidden/README.md); never commit it.
 
-## Dataset Schema
-
-Each JSONL row uses this shape:
+### Schema
 
 ```json
 {
@@ -121,7 +150,8 @@ Each JSONL row uses this shape:
   "metadata": {
     "scoring": "mcq",
     "answer_index": 0,
-    "category": "geography"
+    "category": "geography",
+    "review": {"author": "human", "status": "accepted", "rubric": {...}}
   },
   "source": "curated:v1",
   "split": "public_eval"
@@ -130,46 +160,113 @@ Each JSONL row uses this shape:
 
 Supported `metadata.scoring` values:
 
-- `mcq`: multiple-choice label or choice-text matching.
-- `exact`: normalized exact match against one or more accepted answers.
-- `f1`: token-level F1, useful for short QA and reading comprehension.
-- `instruction`: automatic constraint checks such as required keywords, forbidden tokens, and word limits.
+- `mcq` — label or choice-text matching.
+- `exact` — normalised string equality with a contiguous token-subsequence
+  fallback (a correct final answer embedded in a longer rationale still
+  scores 1.0).
+- `f1` — token F1, evaluated both on the full candidate and on every
+  sliding window of size equal to the gold answer; the maximum wins.
+- `instruction` — strict pass/fail on a constraint dict
+  (`required_keywords`, `forbidden`, `min_words`, `max_words`,
+  `required_prefix`, `required_suffix`). One violated constraint scores 0.
 
-## Result Schema
+Contributing items, the authoring checklist, and the review rubric are in
+[`CONTRIBUTING_DATASET.md`](CONTRIBUTING_DATASET.md). Mechanical checks are
+enforced in CI via [`scripts/validate_dataset.py`](scripts/validate_dataset.py).
 
-The CLI writes JSON with the required fields from the plan:
+## Methodology
+
+The runner applies a uniform short-answer prompt for `exact`/`f1` tracks:
+
+```
+{prompt}
+
+فقط پاسخ نهایی را در یک خط بنویس. بدون توضیح، بدون فرمول، بدون مارک‌داون،
+بدون پیشوند «پاسخ:».
+```
+
+Notes:
+
+- **Verbosity penalty is real**: the `instruction` scorer is strict
+  pass/fail. Verbose models (Opus 4.7 in particular) lose `hard_instruction`
+  by violating `max_words` even when the content is correct. Extended
+  thinking amplifies this — see the Opus thinking sweep in
+  [`docs/BENCHMARK_REPORT.md`](docs/BENCHMARK_REPORT.md).
+- **Bootstrap CIs**: the leaderboard reports 95% CIs over 1000 resamples
+  per row. At n=30 items per track the CI is roughly ±5–7 pp; most
+  rankings inside the top eight rows are not statistically distinguishable.
+- **Persian text normalisation** unifies ی/ك, ZWNJ usage, NFKC, and
+  Arabic↔Persian digits before scoring.
+
+## Result schema
 
 ```json
 {
-  "model_id": "PartAI/Dorna2-Llama3.1-8B-Instruct",
-  "model_type": "open-weight",
+  "model_id": "claude-sonnet-4-6",
+  "model_type": "api",
   "revision": null,
-  "backend": "hf",
+  "backend": "anthropic",
   "task_scores": {
-    "knowledge": {"score": 0.5, "n": 10}
+    "knowledge": {"score": 1.0, "n": 30},
+    "short_qa":  {"score": 0.9, "n": 30}
   },
-  "overall_score": 0.5,
-  "run_config": {},
-  "timestamp": "2026-05-01T00:00:00+00:00"
+  "overall_score": 0.9063,
+  "run_config": {"...": "..."},
+  "timestamp": "2026-05-14T...",
+  "samples": [{"id": "...", "track": "...", "prediction": "...", "score": 1.0, "details": {...}}]
 }
 ```
 
-Sample-level predictions are included by default for public runs. Do not publish sample targets for a private hidden split.
+Sample-level predictions are included by default and are what makes
+`persian-eval rescore` possible. Use `--no-samples` only when running the
+hidden official split.
 
-## Hidden Official Split
+## Cost guidance (approx, per split of 150 items)
 
-`data/hidden/README.md` documents the expected private split workflow. Keep the official hidden JSONL outside the public repo and run it with:
+| Model | Per split | Both splits |
+|---|:---:|:---:|
+| claude-haiku-4-5 | $0.11 | $0.22 |
+| gpt-5-nano | ~$0.05 | ~$0.10 |
+| gpt-5-mini | ~$0.15 | ~$0.30 |
+| claude-sonnet-4-6 | $0.32 | $0.64 |
+| gpt-5 standard | ~$0.40 | ~$0.80 |
+| gpt-5.5 standard | ~$0.50 | ~$1.00 |
+| claude-opus-4-7 | $1.58 | $3.16 |
+| gpt-5 / 5.5 + thinking | $1–4 | $2–8 |
+
+Running the full Claude + GPT matrix used in this report came in under $25.
+
+## Repository tour
+
+- [`persian_eval/`](persian_eval) — dep-free runtime package: CLI, backends,
+  dataset loading, scoring, leaderboard, normalisation.
+- [`data/`](data) — JSONL splits plus
+  [`data/external_sources.yml`](data/external_sources.yml) referencing PerMMLU,
+  Persian IFEval, ParsiNLU, PerCul, and FarsEval-PKBETS.
+- [`docs/`](docs) — current benchmark report and the Codex prompt used for
+  reproducible OpenAI runs.
+- [`results/`](results) — per-model result JSONs (gitignored; force-add to
+  commit). Pre-v1.1 results live in [`results/legacy/`](results/legacy) and
+  are skipped by the leaderboard builder.
+- [`scripts/`](scripts) — model launch scripts (`run_*.sh`), the dataset
+  validator, and `build_leaderboard.sh`.
+- [`tests/`](tests) — unittest-style tests run through pytest.
+- [`configs/baselines.yml`](configs/baselines.yml) — suggested baseline matrix.
+- [`spaces/leaderboard/`](spaces/leaderboard) — Gradio HF Space template.
+
+## Hidden official split
+
+[`data/hidden/README.md`](data/hidden/README.md) documents the private split
+workflow. Keep the JSONL outside the public repo and use `--no-samples` when
+publishing official numbers:
 
 ```bash
-persian-eval run --data /secure/path/persian_eval_v1.hidden.jsonl --no-samples --output results/model_official.json
+persian-eval run \
+  --data /secure/path/persian_eval_v1.hidden.jsonl \
+  --no-samples \
+  --output results/<model>_official.json
 ```
 
-## Hugging Face Space
+## License
 
-Build the leaderboard artifact, then copy `leaderboard/leaderboard.json` next to `spaces/leaderboard/app.py` when deploying the Space:
-
-```bash
-persian-eval leaderboard build results/*.json --output spaces/leaderboard/leaderboard.json --csv spaces/leaderboard/leaderboard.csv
-```
-
-The Space separates main open-weight rows from API reference baselines.
+MIT. See [`LICENSE`](LICENSE).

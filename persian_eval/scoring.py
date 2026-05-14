@@ -95,8 +95,7 @@ def score_f1(record: DatasetRecord, prediction: str) -> tuple[float, dict[str, A
             answer_tokens = tokenize(answer)
             current = token_f1(prediction_tokens, answer_tokens)
             window = _best_window_f1(prediction_tokens, answer_tokens)
-            if window > current:
-                current = window
+            current = max(current, window)
             if current > best:
                 best = current
                 best_answer = answer
@@ -116,8 +115,7 @@ def _best_window_f1(prediction_tokens: list[str], answer_tokens: list[str]) -> f
     for start in range(len(prediction_tokens) - size + 1):
         window = prediction_tokens[start : start + size]
         score = token_f1(window, answer_tokens)
-        if score > best:
-            best = score
+        best = max(best, score)
     return best
 
 

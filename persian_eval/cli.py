@@ -12,25 +12,26 @@ from .leaderboard import build_leaderboard, write_csv, write_leaderboard
 from .results import ResultError, load_result, write_result
 from .runner import default_dataset_path, rescore_result, run_records
 
+COMMANDS = {
+    "run": "run_command",
+    "validate": "validate_command",
+    "leaderboard": "leaderboard_command",
+    "leakage": "leakage_command",
+    "rescore": "rescore_command",
+}
+
 
 def main(argv: list[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
+    handler = globals().get(COMMANDS.get(args.command, ""))
+    if handler is None:
+        return 0
     try:
-        if args.command == "run":
-            return run_command(args)
-        if args.command == "validate":
-            return validate_command(args)
-        if args.command == "leaderboard":
-            return leaderboard_command(args)
-        if args.command == "leakage":
-            return leakage_command(args)
-        if args.command == "rescore":
-            return rescore_command(args)
+        return handler(args)
     except (DatasetError, ResultError, RuntimeError, ValueError) as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 1
-    return 0
 
 
 def build_parser() -> argparse.ArgumentParser:
