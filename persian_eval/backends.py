@@ -222,6 +222,12 @@ class AnthropicBackend(BaseBackend):
             # Legacy enabled-thinking API needs explicit budget plus headroom.
             budget = _resolve_thinking_budget(effort)
             max_tokens = max(self.config.max_new_tokens + budget, budget + 256)
+        elif use_thinking and is_47plus:
+            # Adaptive thinking on 4.7+ shares max_tokens between thinking and
+            # the final answer; raise the ceiling so high-effort runs have
+            # room for both.
+            headroom = _adaptive_thinking_headroom(effort)
+            max_tokens = max(self.config.max_new_tokens + headroom, headroom)
         payload: dict[str, Any] = {
             "model": self.model_id,
             "max_tokens": max_tokens,
@@ -265,6 +271,19 @@ class AnthropicBackend(BaseBackend):
         return post_json(request, timeout=300)
 
 
+def _adaptive_thinking_headroom(effort: str | None) -> int:
+    # Max tokens budget the model can spend on thinking before the final
+    # answer. Pick generous defaults so high-effort runs do not exhaust the
+    # budget before emitting text.
+    return {
+        "minimal": 2048,
+        "low": 4096,
+        "medium": 8192,
+        "high": 16384,
+        "xhigh": 32768,
+    }.get(effort or "", 8192)
+
+
 def _map_effort_47(effort: str | None) -> str:
     # The 4.7+ adaptive thinking API accepts low/medium/high; coalesce the
     # finer-grained effort levels we expose elsewhere into the closest match.
@@ -298,7 +317,10 @@ def _extract_anthropic_text(data: dict[str, Any]) -> str:
                 chunks.append(text)
     if chunks:
         return "\n".join(chunks).strip()
-    raise RuntimeError("Anthropic API response did not include text content")
+    # No text block: most often the model exhausted max_tokens on thinking.
+    # Return empty so the run continues; scoring will register a 0 for this
+    # item rather than aborting the whole benchmark.
+    return ""
 
 
 class OpenAIResponsesBackend(BaseBackend):
