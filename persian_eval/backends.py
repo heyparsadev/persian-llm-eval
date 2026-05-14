@@ -229,9 +229,17 @@ class AnthropicBackend(BaseBackend):
         }
         if thinking_budget:
             payload["thinking"] = {"type": "enabled", "budget_tokens": thinking_budget}
-        else:
-            # Anthropic API rejects temperature when thinking is enabled.
+        elif self._accepts_temperature():
             payload["temperature"] = self.config.temperature
+        data = self._post(payload)
+        return _extract_anthropic_text(data)
+
+    def _accepts_temperature(self) -> bool:
+        # Claude 4.7+ models deprecate the temperature parameter on Messages API.
+        deprecated_prefixes = ("claude-opus-4-7", "claude-sonnet-4-7", "claude-haiku-4-7")
+        return not self.model_id.startswith(deprecated_prefixes)
+
+    def _post(self, payload: dict[str, Any]) -> dict[str, Any]:
         request = urllib.request.Request(
             f"{self.base_url}/messages",
             data=json.dumps(payload).encode("utf-8"),
@@ -242,8 +250,7 @@ class AnthropicBackend(BaseBackend):
             },
             method="POST",
         )
-        data = post_json(request, timeout=300)
-        return _extract_anthropic_text(data)
+        return post_json(request, timeout=300)
 
 
 def _resolve_thinking_budget(effort: str | None) -> int:
