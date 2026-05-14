@@ -25,3 +25,6 @@ leaderboard/*.csv
 # Local secrets
 .env
 .env.local
+
+# Dataset review working file
+data/review_proposals.jsonl
