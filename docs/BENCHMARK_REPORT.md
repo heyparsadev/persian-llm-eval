@@ -19,8 +19,10 @@
 | 7 | claude-opus-4-7 | standard | 0.9160 | 0.8464 | 0.8812 |
 | 8 | gpt-5 | +thinking (medium) | 0.9292 | 0.8202 | 0.8747 |
 | 9 | claude-opus-4-7 | +thinking (low) | — | 0.8615 | — |
-| 10 | gpt-5-nano | standard | 0.9190 | 0.7958 | 0.8574 |
-| 11 | claude-haiku-4-5 | standard | 0.8226 | 0.7705 | 0.7965 |
+| 10 | claude-opus-4-7 | +thinking (medium) | — | 0.8520 | — |
+| 11 | claude-opus-4-7 | +thinking (high) | — | 0.8167 | — |
+| 12 | gpt-5-nano | standard | 0.9190 | 0.7958 | 0.8574 |
+| 13 | claude-haiku-4-5 | standard | 0.8226 | 0.7705 | 0.7965 |
 
 All scores are macro-averages across the five tracks in each split. The
 combined column is a plain mean of the two split overall scores; it is not
@@ -64,19 +66,36 @@ including thinking. The win is driven by `hard_reasoning` (0.933) and
 `hard_instruction` (0.933) — both tracks where staying on-format and not
 over-writing matters more than raw smarts.
 
-### 3. Reasoning sometimes hurts
+### 3. Reasoning sometimes hurts, and Opus thinking has a sweet spot at "low"
+
+We ran four points on the Opus 4.7 thinking-effort curve on the hard
+split:
+
+| Effort | hard | hard_instruction | hard_reading | hard_reasoning |
+|---|:---:|:---:|:---:|:---:|
+| standard (no thinking) | 0.8464 | 0.733 | 0.665 | 0.867 |
+| + thinking low | **0.8615** | 0.767 | **0.708** | 0.867 |
+| + thinking medium | 0.8520 | 0.767 | 0.660 | 0.867 |
+| + thinking high | 0.8167 | 0.633 | 0.650 | 0.833 |
+
+Performance peaks at **low** effort and degrades from there. The collapse
+is concentrated in `hard_instruction` (0.767 → 0.633 from low to high): more
+thinking produces longer final answers that blow through `max_words`
+limits. `hard_reasoning` also dips at high effort, suggesting the extra
+thinking lets the model second-guess otherwise-correct answers.
+
+Similar pattern in the GPT family:
 - gpt-5 + thinking medium scores **lower** than gpt-5 standard (0.8747 vs
   0.8918). The thinking variant over-elaborates on simple Q&A.
 - gpt-5.5 + thinking medium scores **lower** than gpt-5.5 standard on `hard`
   (0.8554 vs 0.8641).
 - gpt-5.5 + thinking high recovers and edges out standard by 0.002 — within
   noise.
-- Claude Opus 4.7 + thinking low does help: hard rises from 0.8464 to 0.8615.
 
-The pattern: thinking helps on tracks that benefit from re-reading or
-constraint checking (reading, instruction). It hurts on tracks where a
-direct answer is wanted, by encouraging verbose justification that fails
-`max_words` or buries the final answer.
+The takeaway: thinking helps on tracks that benefit from re-reading or
+constraint checking (reading at low effort, instruction at low effort). It
+hurts when it pushes the model to write more than the prompt asked for.
+"More thinking ≠ better" on short-answer Persian.
 
 ### 4. The verbosity penalty is real and reproducible
 Opus 4.7 fails `hard_instruction` at 0.733; every constraint check passes
