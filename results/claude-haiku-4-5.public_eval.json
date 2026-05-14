@@ -1,31 +1,31 @@
 {
-  "model_id": "claude-sonnet-4-6",
+  "model_id": "claude-haiku-4-5",
   "model_type": "api",
   "revision": null,
   "backend": "anthropic",
   "task_scores": {
     "culture": {
-      "score": 1.0,
+      "score": 0.9666666666666667,
       "n": 30
     },
     "instruction": {
-      "score": 0.8,
+      "score": 0.5333333333333333,
       "n": 30
     },
     "knowledge": {
-      "score": 1.0,
+      "score": 0.9666666666666667,
       "n": 30
     },
     "reading": {
-      "score": 0.8316666666666668,
+      "score": 0.813021978021978,
       "n": 30
     },
     "short_qa": {
-      "score": 0.9,
+      "score": 0.8333333333333334,
       "n": 30
     }
   },
-  "overall_score": 0.9063333333333334,
+  "overall_score": 0.8226043956043956,
   "run_config": {
     "data": [
       "data/persian_eval_v1.public_eval.jsonl"
@@ -38,28 +38,28 @@
     "quantization": null,
     "reasoning_effort": null
   },
-  "timestamp": "2026-05-14T12:45:24+00:00",
+  "timestamp": "2026-05-14T12:43:49+00:00",
   "samples": [
     {
       "id": "peval-public-knowledge-001",
       "track": "knowledge",
-      "prediction": "الف",
+      "prediction": "الف) دماوند",
       "score": 1.0,
       "details": {
         "predicted_index": 0,
         "answer_index": 0,
-        "scored_candidate": "الف"
+        "scored_candidate": "الف) دماوند"
       }
     },
     {
       "id": "peval-public-knowledge-002",
       "track": "knowledge",
-      "prediction": "الف",
+      "prediction": "الف) پایتون",
       "score": 1.0,
       "details": {
         "predicted_index": 0,
         "answer_index": 0,
-        "scored_candidate": "الف"
+        "scored_candidate": "الف) پایتون"
       }
     },
     {
@@ -76,18 +76,18 @@
     {
       "id": "peval-public-knowledge-004",
       "track": "knowledge",
-      "prediction": "ب",
+      "prediction": "ب) دریای خزر",
       "score": 1.0,
       "details": {
         "predicted_index": 1,
         "answer_index": 1,
-        "scored_candidate": "ب"
+        "scored_candidate": "ب) دریای خزر"
       }
     },
     {
       "id": "peval-public-shortqa-001",
       "track": "short_qa",
-      "prediction": "تقویم هجری شمسی (جلالی)",
+      "prediction": "تقویم جلالی یا تقویم هجری شمسی",
       "score": 0.0,
       "details": {
         "accepted": [
@@ -95,38 +95,38 @@
           "تقویم هجری خورشیدی",
           "خورشیدی"
         ],
-        "normalized_prediction": "تقویم هجری شمسی جلالی",
-        "scored_candidate": "تقویم هجری شمسی (جلالی)",
+        "normalized_prediction": "تقویم جلالی یا تقویم هجری شمسی",
+        "scored_candidate": "تقویم جلالی یا تقویم هجری شمسی",
         "match_kind": "none"
       }
     },
     {
       "id": "peval-public-shortqa-002",
       "track": "short_qa",
-      "prediction": "پزشکی و فلسفه",
+      "prediction": "ابوعلی سینا بیشتر با حوزه پزشکی و فلسفه شناخته می‌شود.",
       "score": 1.0,
       "details": {
         "accepted": [
           "پزشکی",
           "طب"
         ],
-        "normalized_prediction": "پزشکی و فلسفه",
-        "scored_candidate": "پزشکی و فلسفه",
+        "normalized_prediction": "ابوعلی سینا بیشتر با حوزه پزشکی و فلسفه شناخته می شود",
+        "scored_candidate": "ابوعلی سینا بیشتر با حوزه پزشکی و فلسفه شناخته می‌شود.",
         "match_kind": "subsequence"
       }
     },
     {
       "id": "peval-public-shortqa-003",
       "track": "short_qa",
-      "prediction": "سنتور",
-      "score": 1.0,
+      "prediction": "تار",
+      "score": 0.0,
       "details": {
         "accepted": [
           "سنتور"
         ],
-        "normalized_prediction": "سنتور",
-        "scored_candidate": "سنتور",
-        "match_kind": "exact"
+        "normalized_prediction": "تار",
+        "scored_candidate": "تار",
+        "match_kind": "none"
       }
     },
     {
@@ -146,11 +146,11 @@
     {
       "id": "peval-public-reading-001",
       "track": "reading",
-      "prediction": "کاهش مصرف پلاستیک",
+      "prediction": "کاهش مصرف پلاستیک و حفاظت از محیط زیست",
       "score": 1.0,
       "details": {
         "best_answer": "کاهش مصرف پلاستیک",
-        "scored_candidate": "کاهش مصرف پلاستیک"
+        "scored_candidate": "کاهش مصرف پلاستیک و حفاظت از محیط زیست"
       }
     },
     {
@@ -176,17 +176,17 @@
     {
       "id": "peval-public-reading-004",
       "track": "reading",
-      "prediction": "سبک بودن و ارزان‌تر بودن چوب کاج برای ساخت جعبه سبک مناسب‌تر بود.",
-      "score": 0.8571428571428571,
+      "prediction": "چوب کاج سبک‌تر و ارزان‌تر بود و شاگرد برای جعبه سفارشی سبک نیاز به چوب سبک داشت.",
+      "score": 1.0,
       "details": {
-        "best_answer": "سبک تر بودن و ارزان تر بودن",
-        "scored_candidate": "سبک بودن و ارزان‌تر بودن چوب کاج برای ساخت جعبه سبک مناسب‌تر بود."
+        "best_answer": "سبک تر و ارزان تر بود",
+        "scored_candidate": "چوب کاج سبک‌تر و ارزان‌تر بود و شاگرد برای جعبه سفارشی سبک نیاز به چوب سبک داشت."
       }
     },
     {
       "id": "peval-public-instruction-001",
       "track": "instruction",
-      "prediction": "صرفه‌جویی در **آب** امروز، سرمایه‌گذاری برای **آینده** نسل‌های بعدی است.\nهر قطره **آب** که حفظ کنیم، گامی به سوی **آینده**‌ای پایدارتر برمی‌داریم.",
+      "prediction": "صرفه‌جویی در آب یکی از مهم‌ترین وظایف ما برای حفاظت از منابع طبیعی و تأمین نیاز نسل‌های آینده است. با کاهش مصرف آب در زندگی روزمره، می‌توانیم آینده سبزتری برای فرزندان خود بسازیم.",
       "score": 1.0,
       "details": {
         "checks": {
@@ -200,14 +200,14 @@
     {
       "id": "peval-public-instruction-002",
       "track": "instruction",
-      "prediction": "**اول یک برنامه مشخص برای مطالعه تنظیم کن، بعد با ذهنی آرام و متمرکز شروع به خواندن کن.**",
+      "prediction": "اول باید یک برنامه مطالعه منظم برای خود تعیین کنید. هر روز زمان مشخصی را برای مطالعه اختصاص دهید و از حواس پرتی دور شوید. کتاب‌های مفید انتخاب کنید و یادداشت برداری کنید تا یادگیری بهتر شود.",
       "score": 0.0,
       "details": {
         "checks": {
           "required_keywords": true,
           "min_words": true,
-          "max_words": true,
-          "required_prefix": false
+          "max_words": false,
+          "required_prefix": true
         },
         "constraint_score": 0.75
       }
@@ -215,7 +215,7 @@
     {
       "id": "peval-public-instruction-003",
       "track": "instruction",
-      "prediction": "بازیافت فرآیندی است که در آن مواد دور ریخته شده مانند کاغذ و پلاستیک و فلز دوباره به چرخه تولید بازمی‌گردند. این کار به کاهش زباله و حفظ منابع طبیعی کمک می‌کند و محیط زیست را سالم‌تر نگه می‌دارد.",
+      "prediction": "# بازیافت\n\nبازیافت فرآیندی است که در آن مواد استفاده شده دوباره به کار برده می‌شوند. این کار باعث کاهش زباله و حفاظت از منابع طبیعی می‌شود. کاغذ یکی از مهم‌ترین مواد قابل بازیافت است. با بازیافت کاغذ می‌توان درختان کمتری را قطع کرد و انرژی کمتری مصرف کرد. شیشه و فلزات نیز می‌توانند بازیافت شوند. این عمل برای محیط زیست بسیار مفید است و همه ما می‌توانیم در این امر مشارکت کنیم.",
       "score": 0.0,
       "details": {
         "checks": {
@@ -230,7 +230,7 @@
     {
       "id": "peval-public-instruction-004",
       "track": "instruction",
-      "prediction": "کتاب بهترین همراه انسان در مسیر دانش و آگاهی است.",
+      "prediction": "کتاب بهترین دوست انسان در تنهایی و سفر است.",
       "score": 0.0,
       "details": {
         "checks": {
@@ -256,23 +256,23 @@
     {
       "id": "peval-public-culture-002",
       "track": "culture",
-      "prediction": "الف",
+      "prediction": "الف) هندوانه",
       "score": 1.0,
       "details": {
         "predicted_index": 0,
         "answer_index": 0,
-        "scored_candidate": "الف"
+        "scored_candidate": "الف) هندوانه"
       }
     },
     {
       "id": "peval-public-culture-003",
       "track": "culture",
-      "prediction": "الف",
+      "prediction": "الف) حافظ",
       "score": 1.0,
       "details": {
         "predicted_index": 0,
         "answer_index": 0,
-        "scored_candidate": "الف"
+        "scored_candidate": "الف) حافظ"
       }
     },
     {
@@ -289,89 +289,89 @@
     {
       "id": "peval-public-knowledge-005",
       "track": "knowledge",
-      "prediction": "الف",
+      "prediction": "الف) مشهد",
       "score": 1.0,
       "details": {
         "predicted_index": 0,
         "answer_index": 0,
-        "scored_candidate": "الف"
+        "scored_candidate": "الف) مشهد"
       }
     },
     {
       "id": "peval-public-knowledge-006",
       "track": "knowledge",
-      "prediction": "ب",
+      "prediction": "ب) افغانستان",
       "score": 1.0,
       "details": {
         "predicted_index": 1,
         "answer_index": 1,
-        "scored_candidate": "ب"
+        "scored_candidate": "ب) افغانستان"
       }
     },
     {
       "id": "peval-public-knowledge-007",
       "track": "knowledge",
-      "prediction": "پ",
+      "prediction": "پ) شیراز",
       "score": 1.0,
       "details": {
         "predicted_index": 2,
         "answer_index": 2,
-        "scored_candidate": "پ"
+        "scored_candidate": "پ) شیراز"
       }
     },
     {
       "id": "peval-public-knowledge-008",
       "track": "knowledge",
-      "prediction": "ت)",
+      "prediction": "ت) شمال‌غرب",
       "score": 1.0,
       "details": {
         "predicted_index": 3,
         "answer_index": 3,
-        "scored_candidate": "ت)"
+        "scored_candidate": "ت) شمال‌غرب"
       }
     },
     {
       "id": "peval-public-knowledge-009",
       "track": "knowledge",
-      "prediction": "الف)",
+      "prediction": "الف) البرز",
       "score": 1.0,
       "details": {
         "predicted_index": 0,
         "answer_index": 0,
-        "scored_candidate": "الف)"
+        "scored_candidate": "الف) البرز"
       }
     },
     {
       "id": "peval-public-knowledge-010",
       "track": "knowledge",
-      "prediction": "ب",
+      "prediction": "ب) شهریور",
       "score": 1.0,
       "details": {
         "predicted_index": 1,
         "answer_index": 1,
-        "scored_candidate": "ب"
+        "scored_candidate": "ب) شهریور"
       }
     },
     {
       "id": "peval-public-knowledge-011",
       "track": "knowledge",
-      "prediction": "پ",
-      "score": 1.0,
+      "prediction": "ت) یازدهم",
+      "score": 0.0,
       "details": {
-        "predicted_index": 2,
+        "predicted_index": 3,
         "answer_index": 2,
-        "scored_candidate": "پ"
+        "scored_candidate": "ت) یازدهم"
       }
     },
     {
       "id": "peval-public-knowledge-012",
       "track": "knowledge",
-      "prediction": "ت",
+      "prediction": "ت) مهر",
       "score": 1.0,
       "details": {
         "predicted_index": 3,
         "answer_index": 3,
-        "scored_candidate": "ت"
+        "scored_candidate": "ت) مهر"
       }
     },
     {
@@ -388,29 +388,29 @@
     {
       "id": "peval-public-knowledge-014",
       "track": "knowledge",
-      "prediction": "ب",
+      "prediction": "ب) طلا",
       "score": 1.0,
       "details": {
         "predicted_index": 1,
         "answer_index": 1,
-        "scored_candidate": "ب"
+        "scored_candidate": "ب) طلا"
       }
     },
     {
       "id": "peval-public-knowledge-015",
       "track": "knowledge",
-      "prediction": "پ",
+      "prediction": "پ) هیدروژن",
       "score": 1.0,
       "details": {
         "predicted_index": 2,
         "answer_index": 2,
-        "scored_candidate": "پ"
+        "scored_candidate": "پ) هیدروژن"
       }
     },
     {
       "id": "peval-public-knowledge-016",
       "track": "knowledge",
-      "prediction": "ت",
+      "prediction": "ت\n\nسرعت نور در خلا تقریباً ۳۰۰,۰۰۰ کیلومتر بر ثانیه (یا ۳ × ۱۰⁸ متر بر ثانیه) است.",
       "score": 1.0,
       "details": {
         "predicted_index": 3,
@@ -421,34 +421,34 @@
     {
       "id": "peval-public-knowledge-017",
       "track": "knowledge",
-      "prediction": "الف",
+      "prediction": "الف) HTTP",
       "score": 1.0,
       "details": {
         "predicted_index": 0,
         "answer_index": 0,
-        "scored_candidate": "الف"
+        "scored_candidate": "الف) HTTP"
       }
     },
     {
       "id": "peval-public-knowledge-018",
       "track": "knowledge",
-      "prediction": "ب",
+      "prediction": "ب) HTML",
       "score": 1.0,
       "details": {
         "predicted_index": 1,
         "answer_index": 1,
-        "scored_candidate": "ب"
+        "scored_candidate": "ب) HTML"
       }
     },
     {
       "id": "peval-public-knowledge-019",
       "track": "knowledge",
-      "prediction": "پ",
+      "prediction": "پ) لینوکس",
       "score": 1.0,
       "details": {
         "predicted_index": 2,
         "answer_index": 2,
-        "scored_candidate": "پ"
+        "scored_candidate": "پ) لینوکس"
       }
     },
     {
@@ -476,34 +476,34 @@
     {
       "id": "peval-public-knowledge-022",
       "track": "knowledge",
-      "prediction": "ب",
+      "prediction": "ب) هخامنشی",
       "score": 1.0,
       "details": {
         "predicted_index": 1,
         "answer_index": 1,
-        "scored_candidate": "ب"
+        "scored_candidate": "ب) هخامنشی"
       }
     },
     {
       "id": "peval-public-knowledge-023",
       "track": "knowledge",
-      "prediction": "پ",
+      "prediction": "پ) فردوسی",
       "score": 1.0,
       "details": {
         "predicted_index": 2,
         "answer_index": 2,
-        "scored_candidate": "پ"
+        "scored_candidate": "پ) فردوسی"
       }
     },
     {
       "id": "peval-public-knowledge-024",
       "track": "knowledge",
-      "prediction": "ت)",
+      "prediction": "ت) مولوی",
       "score": 1.0,
       "details": {
         "predicted_index": 3,
         "answer_index": 3,
-        "scored_candidate": "ت)"
+        "scored_candidate": "ت) مولوی"
       }
     },
     {
@@ -520,12 +520,12 @@
     {
       "id": "peval-public-knowledge-026",
       "track": "knowledge",
-      "prediction": "ب",
+      "prediction": "ب) خوزستان",
       "score": 1.0,
       "details": {
         "predicted_index": 1,
         "answer_index": 1,
-        "scored_candidate": "ب"
+        "scored_candidate": "ب) خوزستان"
       }
     },
     {
@@ -542,12 +542,12 @@
     {
       "id": "peval-public-knowledge-028",
       "track": "knowledge",
-      "prediction": "ت",
+      "prediction": "ت) نهنگ",
       "score": 1.0,
       "details": {
         "predicted_index": 3,
         "answer_index": 3,
-        "scored_candidate": "ت"
+        "scored_candidate": "ت) نهنگ"
       }
     },
     {
@@ -564,12 +564,12 @@
     {
       "id": "peval-public-knowledge-030",
       "track": "knowledge",
-      "prediction": "ب",
+      "prediction": "ب) نادرست است\n\nخط استوا از نزدیکی خط استوا (0 درجه عرض جغرافیایی) می‌گذرد و ایران در شمال استوا قرار دارد (بین 25 تا 40 درجه عرض شمالی). بنابراین خط استوا از داخل خاک ایران نمی‌گذرد.",
       "score": 1.0,
       "details": {
         "predicted_index": 1,
         "answer_index": 1,
-        "scored_candidate": "ب"
+        "scored_candidate": "ب) نادرست است"
       }
     },
     {
@@ -661,7 +661,7 @@
     {
       "id": "peval-public-shortqa-011",
       "track": "short_qa",
-      "prediction": "سیزدهم",
+      "prediction": "سیزدهم فروردین",
       "score": 1.0,
       "details": {
         "accepted": [
@@ -669,9 +669,9 @@
           "۱۳",
           "13"
         ],
-        "normalized_prediction": "سیزدهم",
-        "scored_candidate": "سیزدهم",
-        "match_kind": "exact"
+        "normalized_prediction": "سیزدهم فروردین",
+        "scored_candidate": "سیزدهم فروردین",
+        "match_kind": "subsequence"
       }
     },
     {
@@ -719,7 +719,7 @@
     {
       "id": "peval-public-shortqa-015",
       "track": "short_qa",
-      "prediction": "۱۰۰۰ متر",
+      "prediction": "یک کیلومتر ۱۰۰۰ متر است.",
       "score": 1.0,
       "details": {
         "accepted": [
@@ -728,39 +728,39 @@
           "۱۰۰۰",
           "1000"
         ],
-        "normalized_prediction": "1000 متر",
-        "scored_candidate": "۱۰۰۰ متر",
+        "normalized_prediction": "یک کیلومتر 1000 متر است",
+        "scored_candidate": "یک کیلومتر ۱۰۰۰ متر است.",
         "match_kind": "subsequence"
       }
     },
     {
       "id": "peval-public-shortqa-016",
       "track": "short_qa",
-      "prediction": "نیم‌کره جنوبی",
+      "prediction": "قطب جنوب در نیمکره جنوبی زمین قرار دارد.",
       "score": 1.0,
       "details": {
         "accepted": [
           "نیم‌کره جنوبی",
           "جنوبی"
         ],
-        "normalized_prediction": "نیم کره جنوبی",
-        "scored_candidate": "نیم‌کره جنوبی",
-        "match_kind": "exact"
+        "normalized_prediction": "قطب جنوب در نیمکره جنوبی زمین قرار دارد",
+        "scored_candidate": "قطب جنوب در نیمکره جنوبی زمین قرار دارد.",
+        "match_kind": "subsequence"
       }
     },
     {
       "id": "peval-public-shortqa-017",
       "track": "short_qa",
-      "prediction": "مشتری (Jupiter)",
+      "prediction": "مشتری",
       "score": 1.0,
       "details": {
         "accepted": [
           "مشتری",
           "سیاره مشتری"
         ],
-        "normalized_prediction": "مشتری jupiter",
-        "scored_candidate": "مشتری (Jupiter)",
-        "match_kind": "subsequence"
+        "normalized_prediction": "مشتری",
+        "scored_candidate": "مشتری",
+        "match_kind": "exact"
       }
     },
     {
@@ -839,7 +839,7 @@
     {
       "id": "peval-public-shortqa-023",
       "track": "short_qa",
-      "prediction": "پل خواجو و پل سی‌وسه‌پل (الله‌وردی‌خان)",
+      "prediction": "پل خواجو",
       "score": 0.0,
       "details": {
         "accepted": [
@@ -847,38 +847,38 @@
           "سی‌و‌سه پل",
           "پل سی و سه پل"
         ],
-        "normalized_prediction": "پل خواجو و پل سی وسه پل الله وردی خان",
-        "scored_candidate": "پل خواجو و پل سی‌وسه‌پل (الله‌وردی‌خان)",
+        "normalized_prediction": "پل خواجو",
+        "scored_candidate": "پل خواجو",
         "match_kind": "none"
       }
     },
     {
       "id": "peval-public-shortqa-024",
       "track": "short_qa",
-      "prediction": "نوروز",
+      "prediction": "جشن نوروز",
       "score": 1.0,
       "details": {
         "accepted": [
           "نوروز",
           "عید نوروز"
         ],
-        "normalized_prediction": "نوروز",
-        "scored_candidate": "نوروز",
-        "match_kind": "exact"
+        "normalized_prediction": "جشن نوروز",
+        "scored_candidate": "جشن نوروز",
+        "match_kind": "subsequence"
       }
     },
     {
       "id": "peval-public-shortqa-025",
       "track": "short_qa",
-      "prediction": "اردیبهشت",
-      "score": 1.0,
+      "prediction": "اسفند",
+      "score": 0.0,
       "details": {
         "accepted": [
           "اردیبهشت"
         ],
-        "normalized_prediction": "اردیبهشت",
-        "scored_candidate": "اردیبهشت",
-        "match_kind": "exact"
+        "normalized_prediction": "اسفند",
+        "scored_candidate": "اسفند",
+        "match_kind": "none"
       }
     },
     {
@@ -898,15 +898,15 @@
     {
       "id": "peval-public-shortqa-027",
       "track": "short_qa",
-      "prediction": "ردیف میانی (Home Row)",
+      "prediction": "ردیف دوم (ردیف QWERTY)",
       "score": 0.0,
       "details": {
         "accepted": [
           "ردیف بالا",
           "ردیف بالای حروف"
         ],
-        "normalized_prediction": "ردیف میانی home row",
-        "scored_candidate": "ردیف میانی (Home Row)",
+        "normalized_prediction": "ردیف دوم ردیف qwerty",
+        "scored_candidate": "ردیف دوم (ردیف QWERTY)",
         "match_kind": "none"
       }
     },
@@ -967,71 +967,71 @@
     {
       "id": "peval-public-reading-006",
       "track": "reading",
-      "prediction": "صبح‌ها راحت‌تر بیدار می‌شود.",
+      "prediction": "کیان متوجه شد که خواندن کتاب شب باعث می‌شود صبح راحت‌تر بیدار شود.",
       "score": 0.8000000000000002,
       "details": {
         "best_answer": "راحت‌تر بیدار شدن صبح",
-        "scored_candidate": "صبح‌ها راحت‌تر بیدار می‌شود."
+        "scored_candidate": "کیان متوجه شد که خواندن کتاب شب باعث می‌شود صبح راحت‌تر بیدار شود."
       }
     },
     {
       "id": "peval-public-reading-007",
       "track": "reading",
-      "prediction": "نبود آب لوله‌کشی و دسترسی نداشتن به آب سالم.",
-      "score": 1.0,
+      "prediction": "عدم دسترسی به آب لوله‌کشی و آب سالم",
+      "score": 0.75,
       "details": {
         "best_answer": "نبود آب لوله‌کشی",
-        "scored_candidate": "نبود آب لوله‌کشی و دسترسی نداشتن به آب سالم."
+        "scored_candidate": "عدم دسترسی به آب لوله‌کشی و آب سالم"
       }
     },
     {
       "id": "peval-public-reading-008",
       "track": "reading",
-      "prediction": "پختن ظرف‌ها در کوره",
-      "score": 1.0,
+      "prediction": "پخت ظرف‌ها در کوره",
+      "score": 0.8000000000000002,
       "details": {
         "best_answer": "پختن ظرف‌ها در کوره",
-        "scored_candidate": "پختن ظرف‌ها در کوره"
+        "scored_candidate": "پخت ظرف‌ها در کوره"
       }
     },
     {
       "id": "peval-public-reading-009",
       "track": "reading",
-      "prediction": "کمبود نور آفتاب در آن گوشه از باغ.",
-      "score": 0.6666666666666666,
+      "prediction": "کمبود نور خورشید",
+      "score": 0.3333333333333333,
       "details": {
         "best_answer": "نور آفتاب کم",
-        "scored_candidate": "کمبود نور آفتاب در آن گوشه از باغ."
+        "scored_candidate": "کمبود نور خورشید"
       }
     },
     {
       "id": "peval-public-reading-010",
       "track": "reading",
-      "prediction": "هزینه ایاب و ذهاب پس از سه ماه به نصف کاهش یافت.",
-      "score": 0.6666666666666666,
+      "prediction": "هزینه ایاب و ذهاب به نصف کاهش یافت.",
+      "score": 0.8333333333333334,
       "details": {
         "best_answer": "نصف شدن هزینه ایاب و ذهاب",
-        "scored_candidate": "هزینه ایاب و ذهاب پس از سه ماه به نصف کاهش یافت."
+        "scored_candidate": "هزینه ایاب و ذهاب به نصف کاهش یافت."
       }
     },
     {
       "id": "peval-public-reading-011",
       "track": "reading",
-      "prediction": "آماده کردن لباس‌های روز بعد در شب قبل.",
-      "score": 0.7142857142857143,
+      "prediction": "آماده کردن لباس‌های روز بعد شب قبل",
+      "score": 0.7692307692307693,
       "details": {
         "best_answer": "آماده کردن لباس شب قبل",
-        "scored_candidate": "آماده کردن لباس‌های روز بعد در شب قبل."
+        "scored_candidate": "آماده کردن لباس‌های روز بعد شب قبل"
       }
     },
     {
       "id": "peval-public-reading-012",
       "track": "reading",
-      "prediction": "در خانه‌هایی که گیاه آپارتمانی دارند، رطوبت هوا کمی بیشتر است.",
-      "score": 0.5,
+      "prediction": "گیاهان آپارتمانی باعث افزایش کمی رطوبت هوا در خانه می‌شوند.",
+      "score": 0.5714285714285714,
       "details": {
-        "best_answer": "بالاتر بودن رطوبت در خانه‌های دارای گیاه",
-        "scored_candidate": "در خانه‌هایی که گیاه آپارتمانی دارند، رطوبت هوا کمی بیشتر است."
+        "best_answer": "افزایش رطوبت در خانه‌های با گیاه",
+        "scored_candidate": "گیاهان آپارتمانی باعث افزایش کمی رطوبت هوا در خانه می‌شوند."
       }
     },
     {
@@ -1047,41 +1047,41 @@
     {
       "id": "peval-public-reading-014",
       "track": "reading",
-      "prediction": "از هدایای اهالی روستا.",
-      "score": 0.8571428571428571,
+      "prediction": "از اهالی روستا هدیه گرفته شد.",
+      "score": 1.0,
       "details": {
         "best_answer": "از اهالی روستا",
-        "scored_candidate": "از هدایای اهالی روستا."
+        "scored_candidate": "از اهالی روستا هدیه گرفته شد."
       }
     },
     {
       "id": "peval-public-reading-015",
       "track": "reading",
-      "prediction": "یادداشت کردن فقط سه کار مهم در ابتدای روز به‌جای فهرست بلند.",
-      "score": 0.7142857142857143,
+      "prediction": "تمرکز بر سه کار مهم به جای فهرست طولانی",
+      "score": 0.5,
       "details": {
-        "best_answer": "نوشتن سه کار مهم در آغاز روز",
-        "scored_candidate": "یادداشت کردن فقط سه کار مهم در ابتدای روز به‌جای فهرست بلند."
+        "best_answer": "یادداشت سه کار مهم در صبح",
+        "scored_candidate": "تمرکز بر سه کار مهم به جای فهرست طولانی"
       }
     },
     {
       "id": "peval-public-reading-016",
       "track": "reading",
-      "prediction": "نصب شیرهای جدیدی که هوا را با آب مخلوط می‌کنند.",
-      "score": 0.5,
+      "prediction": "شیرهای جدید با مخلوط کردن هوا با آب، جریان آب را کاهش دادند و در نتیجه مصرف کم شد.",
+      "score": 0.6666666666666666,
       "details": {
         "best_answer": "نصب شیرهای جدید مخلوط‌کننده هوا",
-        "scored_candidate": "نصب شیرهای جدیدی که هوا را با آب مخلوط می‌کنند."
+        "scored_candidate": "شیرهای جدید با مخلوط کردن هوا با آب، جریان آب را کاهش دادند و در نتیجه مصرف کم شد."
       }
     },
     {
       "id": "peval-public-reading-017",
       "track": "reading",
-      "prediction": "هزینه خرید لیوان کاغذی به یک‌چهارم مقدار قبلی کاهش یافت.",
-      "score": 0.8571428571428571,
+      "prediction": "هزینه خرید لیوان کاغذی به یک‌چهارم کاهش یافت.",
+      "score": 0.8750000000000001,
       "details": {
         "best_answer": "کاهش هزینه لیوان کاغذی به یک‌چهارم",
-        "scored_candidate": "هزینه خرید لیوان کاغذی به یک‌چهارم مقدار قبلی کاهش یافت."
+        "scored_candidate": "هزینه خرید لیوان کاغذی به یک‌چهارم کاهش یافت."
       }
     },
     {
@@ -1097,41 +1097,41 @@
     {
       "id": "peval-public-reading-019",
       "track": "reading",
-      "prediction": "مشاهده الگوی رفتار مشتریان (بیشتر مشتری‌ها صبح زود می‌آیند).",
-      "score": 0.6666666666666666,
+      "prediction": "بر پایه مشاهده و تجزیه رفتار مشتریان که بیشتر آنها صبح زود می‌آیند.",
+      "score": 0.3333333333333333,
       "details": {
         "best_answer": "آمدن مشتری‌ها در صبح زود",
-        "scored_candidate": "مشاهده الگوی رفتار مشتریان (بیشتر مشتری‌ها صبح زود می‌آیند)."
+        "scored_candidate": "بر پایه مشاهده و تجزیه رفتار مشتریان که بیشتر آنها صبح زود می‌آیند."
       }
     },
     {
       "id": "peval-public-reading-020",
       "track": "reading",
-      "prediction": "زباله‌ای که به سطل عمومی می‌رود نصف شده است.",
+      "prediction": "کاهش نصفی زباله در سطل عمومی",
       "score": 0.6,
       "details": {
         "best_answer": "نصف شدن زباله سطل عمومی",
-        "scored_candidate": "زباله‌ای که به سطل عمومی می‌رود نصف شده است."
+        "scored_candidate": "کاهش نصفی زباله در سطل عمومی"
       }
     },
     {
       "id": "peval-public-reading-021",
       "track": "reading",
-      "prediction": "کم‌خوابی و کم‌نوشیدن آب.",
+      "prediction": "کم‌خوابی و کم‌نوشیدن آب",
       "score": 1.0,
       "details": {
         "best_answer": "کم‌خوابی و کم‌نوشیدن آب",
-        "scored_candidate": "کم‌خوابی و کم‌نوشیدن آب."
+        "scored_candidate": "کم‌خوابی و کم‌نوشیدن آب"
       }
     },
     {
       "id": "peval-public-reading-022",
       "track": "reading",
-      "prediction": "۸ نفر",
+      "prediction": "8 نفر",
       "score": 1.0,
       "details": {
         "best_answer": "۸ نفر",
-        "scored_candidate": "۸ نفر"
+        "scored_candidate": "8 نفر"
       }
     },
     {
@@ -1147,21 +1147,21 @@
     {
       "id": "peval-public-reading-024",
       "track": "reading",
-      "prediction": "تعداد سفارش‌ها دو برابر شد.",
-      "score": 0.6666666666666666,
+      "prediction": "اپلیکیشن باعث افزایش دو برابری سفارش‌ها شد.",
+      "score": 0.8000000000000002,
       "details": {
-        "best_answer": "دو برابر شدن تعداد سفارش روزانه",
-        "scored_candidate": "تعداد سفارش‌ها دو برابر شد."
+        "best_answer": "افزایش دو برابری سفارش روزانه",
+        "scored_candidate": "اپلیکیشن باعث افزایش دو برابری سفارش‌ها شد."
       }
     },
     {
       "id": "peval-public-reading-025",
       "track": "reading",
-      "prediction": "هزینه برق روشنایی پارک‌ها ۳۰ درصد کاهش یافت.",
+      "prediction": "هزینه برق پارک‌ها ۳۰ درصد کاهش یافت.",
       "score": 0.75,
       "details": {
         "best_answer": "حدود ۳۰ درصد کاهش",
-        "scored_candidate": "هزینه برق روشنایی پارک‌ها ۳۰ درصد کاهش یافت."
+        "scored_candidate": "هزینه برق پارک‌ها ۳۰ درصد کاهش یافت."
       }
     },
     {
@@ -1187,11 +1187,11 @@
     {
       "id": "peval-public-reading-028",
       "track": "reading",
-      "prediction": "هر روز سی دقیقه پیاده‌روی کنند.",
+      "prediction": "هر روز سی دقیقه پیاده‌روی کردن",
       "score": 0.8000000000000002,
       "details": {
         "best_answer": "پیاده‌روی روزانه سی دقیقه",
-        "scored_candidate": "هر روز سی دقیقه پیاده‌روی کنند."
+        "scored_candidate": "هر روز سی دقیقه پیاده‌روی کردن"
       }
     },
     {
@@ -1207,31 +1207,31 @@
     {
       "id": "peval-public-reading-030",
       "track": "reading",
-      "prediction": "بچه‌های روستا دیگر مجبور نیستند برای رفتن به مدرسه مسیر طولانی را دور بزنند.",
-      "score": 0.5,
+      "prediction": "بچه‌های روستا مسیر کوتاه‌تری برای رفتن به مدرسه پیدا کردند و دیگر مجبور به دور زدن نیستند.",
+      "score": 0.375,
       "details": {
         "best_answer": "نیاز نداشتن به دور زدن از مسیر طولانی",
-        "scored_candidate": "بچه‌های روستا دیگر مجبور نیستند برای رفتن به مدرسه مسیر طولانی را دور بزنند."
+        "scored_candidate": "بچه‌های روستا مسیر کوتاه‌تری برای رفتن به مدرسه پیدا کردند و دیگر مجبور به دور زدن نیستند."
       }
     },
     {
       "id": "peval-public-instruction-005",
       "track": "instruction",
-      "prediction": "سلام! فردا **صبح** زود بریم **پارک** یه پیاده‌روی حسابی بزنیم؟ هوا عالیه! 🌿",
-      "score": 1.0,
+      "prediction": "# پیام دعوت\n\nسلام! فردا صبح ساعت ۷ می‌رم پارک. دوست داشتم تو هم همراهم باشی. یک پیاده‌روی خوب و تازه‌کننده خواهد بود. می‌خوای بیای؟",
+      "score": 0.0,
       "details": {
         "checks": {
           "required_keywords": true,
           "min_words": true,
-          "max_words": true
+          "max_words": false
         },
-        "constraint_score": 1.0
+        "constraint_score": 0.6666666666666666
       }
     },
     {
       "id": "peval-public-instruction-006",
       "track": "instruction",
-      "prediction": "هنگام خروج از اتاق، لامپ‌ها را خاموش کنید تا در مصرف برق صرفه‌جویی کنید.",
+      "prediction": "لامپ‌های LED را جایگزین کنید، زیرا مصرف برق کمتری دارند. دستگاه‌های الکترونیکی را از پریز جدا کنید و از نور طبیعی استفاده کنید.",
       "score": 1.0,
       "details": {
         "checks": {
@@ -1246,7 +1246,7 @@
     {
       "id": "peval-public-instruction-007",
       "track": "instruction",
-      "prediction": "اگر هر روز تمرین کنی، به هدفت خواهی رسید.",
+      "prediction": "اگر هر روز تمرین کنی، مهارت‌های خود را بهبود خواهی بخشید.",
       "score": 1.0,
       "details": {
         "checks": {
@@ -1261,7 +1261,7 @@
     {
       "id": "peval-public-instruction-008",
       "track": "instruction",
-      "prediction": "مطالعه منظم، دانش انسان را گسترش می‌دهد و بهترین راه رسیدن به آن، کتاب است.",
+      "prediction": "مطالعه منظم و مستمر باعث افزایش دانش و بهبود تفکر انسان می‌شود و هر کتاب.",
       "score": 0.0,
       "details": {
         "checks": {
@@ -1276,22 +1276,22 @@
     {
       "id": "peval-public-instruction-009",
       "track": "instruction",
-      "prediction": "صرفه‌جویی در آب یکی از مهم‌ترین مسئولیت‌های ماست. با بستن شیر آب هنگام مسواک زدن و رفع نشتی‌ها، می‌توانیم مقدار زیادی آب را حفظ کنیم.",
-      "score": 1.0,
+      "prediction": "صرفه‌جویی در آب یکی از مهم‌ترین وظایف ما است. بسته کردن شیر آب هنگام شستشو و استفاده از دوش کوتاه‌مدت می‌تواند مقدار زیادی آب را صرفه‌جویی کند. این عادات ساده به حفاظت از منابع آبی کمک می‌کند.",
+      "score": 0.0,
       "details": {
         "checks": {
           "required_keywords": true,
           "forbidden": true,
           "min_words": true,
-          "max_words": true
+          "max_words": false
         },
-        "constraint_score": 1.0
+        "constraint_score": 0.75
       }
     },
     {
       "id": "peval-public-instruction-010",
       "track": "instruction",
-      "prediction": "«ممنون از همکاری صمیمانه‌ات؛ حضورت در تیم واقعاً ارزشمند است.»",
+      "prediction": "از همکاری صادقانه‌ات در این پروژه سپاسگزارم. کمک و پشتیبانی‌ات واقعاً ارزشمند بود و موفقیت ما را ممکن کرد.",
       "score": 1.0,
       "details": {
         "checks": {
@@ -1306,36 +1306,36 @@
     {
       "id": "peval-public-instruction-011",
       "track": "instruction",
-      "prediction": "آب دریا با گرمای خورشید بالا می‌رود و **ابر** می‌سازد. وقتی ابرها سنگین می‌شوند، **باران** می‌بارد و دوباره به دریا برمی‌گردد!",
-      "score": 1.0,
+      "prediction": "# چرخه آب\n\nآب دریا توسط خورشید گرم می‌شود و بخار می‌شود. این بخار به آسمان بالا می‌رود و ابر تشکیل می‌دهد. وقتی ابر سرد شود، باران می‌بارد و آب دوباره به زمین برمی‌گردد.",
+      "score": 0.0,
       "details": {
         "checks": {
           "required_keywords": true,
           "min_words": true,
-          "max_words": true
+          "max_words": false
         },
-        "constraint_score": 1.0
+        "constraint_score": 0.6666666666666666
       }
     },
     {
       "id": "peval-public-instruction-012",
       "track": "instruction",
-      "prediction": "سلام! من یک دستیار هوش مصنوعی هستم. **هدف** من کمک به یادگیری و پاسخ به سوال‌های شما به بهترین شکل ممکن است.",
-      "score": 1.0,
+      "prediction": "سلام! من یک دستیار هوشمند فارسی هستم. هدف من کمک به یادگیری و پاسخ‌دهی به سؤالات شما به‌صورت دقیق و ساده است. خوشحال می‌شوم با شما همکاری کنم.",
+      "score": 0.0,
       "details": {
         "checks": {
           "required_keywords": true,
           "min_words": true,
-          "max_words": true,
+          "max_words": false,
           "required_prefix": true
         },
-        "constraint_score": 1.0
+        "constraint_score": 0.75
       }
     },
     {
       "id": "peval-public-instruction-013",
       "track": "instruction",
-      "prediction": "**\"امروز هر صفحه‌ای که می‌خوانی، آجری است برای ساختن آینده‌ات. ادامه بده!\"** 💪📚",
+      "prediction": "امروز هر ساعتی که درس می‌خوانی، برای آینده‌ای درخشان سرمایه‌گذاری می‌کنی. تو می‌تونی!",
       "score": 1.0,
       "details": {
         "checks": {
@@ -1349,7 +1349,7 @@
     {
       "id": "peval-public-instruction-014",
       "track": "instruction",
-      "prediction": "پیاده‌روی روزانه به بهبود **سلامت** جسم و روح کمک می‌کند و انرژی و نشاط بیشتری به زندگی می‌بخشد.",
+      "prediction": "پیاده‌روی روزانه برای سلامت بدن بسیار مفید است. این فعالیت قلب را تقویت می‌کند، وزن را کاهش می‌دهد و اضطراب را کم می‌کند.",
       "score": 1.0,
       "details": {
         "checks": {
@@ -1364,21 +1364,21 @@
     {
       "id": "peval-public-instruction-015",
       "track": "instruction",
-      "prediction": "**معرفی کتاب «بوف کور» اثر صادق هدایت**\n\nاین کتاب یکی از شاهکارهای ادبیات فارسی است. داستان آن درباره‌ی ذهن آشفته‌ی یک نقاش تنهاست که با واقعیت و توهم دست‌وپنجه نرم می‌کند. خواندنش تجربه‌ای عمیق و فراموش‌نشدنی است.",
-      "score": 1.0,
+      "prediction": "# معرفی کتاب\n\nکتاب «شازده کوچک» اثر آنتوان دو سنت‌اگزوپری یکی از زیباترین آثار ادبی جهان است. این داستان فلسفی درباره یک شاهزاده کوچک است که از سیاره خود سفر می‌کند. کتاب با زبانی ساده اما عمیق، درس‌های زندگی را به خواننده منتقل می‌کند.",
+      "score": 0.0,
       "details": {
         "checks": {
           "required_keywords": true,
           "min_words": true,
-          "max_words": true
+          "max_words": false
         },
-        "constraint_score": 1.0
+        "constraint_score": 0.6666666666666666
       }
     },
     {
       "id": "peval-public-instruction-016",
       "track": "instruction",
-      "prediction": "سلام، خواهش می‌کنم یک **جلسه** برای فردا **ساعت ۱۰** صبح رزرو کنید. موضوع بررسی پروژه جدید است. منتظر تأیید شما هستم. با تشکر.",
+      "prediction": "سلام،\n\nمی‌خواهم جلسه‌ای را برای بحث درباره پروژه رزرو کنم. آیا ساعت ۱۰ صبح روز پنج‌شنبه برایتان مناسب است؟\n\nمنتظر تایید شما هستم.\n\nبا تشکر",
       "score": 1.0,
       "details": {
         "checks": {
@@ -1393,7 +1393,7 @@
     {
       "id": "peval-public-instruction-017",
       "track": "instruction",
-      "prediction": "ایمیل یکی از مهم‌ترین ابزارهای ارتباط حرفه‌ای در محیط کار است که تبادل اطلاعات را سریع و مستند می‌کند.",
+      "prediction": "ایمیل یکی از مهم‌ترین ابزارهای ارتباط در محیط کار است که امکان تبادل اطلاعات سریع و رسمی بین کارمندان و مدیران را فراهم می‌کند.",
       "score": 1.0,
       "details": {
         "checks": {
@@ -1408,7 +1408,7 @@
     {
       "id": "peval-public-instruction-018",
       "track": "instruction",
-      "prediction": "تبریک به خاطر این موفقیت بزرگ! افتخار داشتن دوستی مثل تو برای من بسیار ارزشمند است.",
+      "prediction": "تبریک به تو برای این موفقیت درخشان که ثمره تلاش و پشتکار تو است.",
       "score": 0.0,
       "details": {
         "checks": {
@@ -1423,7 +1423,7 @@
     {
       "id": "peval-public-instruction-019",
       "track": "instruction",
-      "prediction": "سلام،\nلطفاً فردا **ناهار** را برای ۱۰ نفر آماده کنید. غذا باید **ساعت** ۱۲ حاضر باشد.\nممنون 🙏",
+      "prediction": "# یادداشت برای آشپز\n\nسفارش فردا: لطفاً برای ناهار ۲۰ نفر غذا آماده کنید. منو شامل خورش قیمه، برنج و سالاد است. تحویل ساعت ۱۲ ظهر ضروری است.",
       "score": 1.0,
       "details": {
         "checks": {
@@ -1437,7 +1437,7 @@
     {
       "id": "peval-public-instruction-020",
       "track": "instruction",
-      "prediction": "اگر می‌خواهی انرژی بیشتری داشته باشی و تمرکزت در طول روز بالا باشد، زود خوابیدن بهتر است.",
+      "prediction": "اگر هر شب زود بخوابی، بدنت استراحت کافی می‌گیرد و توانایی تمرکز و یادگیری افزایش می‌یابد، بهتر است.",
       "score": 0.0,
       "details": {
         "checks": {
@@ -1452,51 +1452,51 @@
     {
       "id": "peval-public-instruction-021",
       "track": "instruction",
-      "prediction": "تیم‌ورک یعنی همکاری مؤثر میان اعضای یک گروه برای رسیدن به **هدف مشترک**. هر **همکار** با مهارت و تلاش خود، بخشی از موفقیت کل تیم را می‌سازد.",
-      "score": 1.0,
+      "prediction": "# تیم‌ورک در محیط اداری\n\nتیم‌ورک به همکاری مؤثر میان همکاران برای دستیابی به هدف مشترک اشاره دارد. در این فرایند، هر فرد نقش خود را ایفا کرده و با دیگران هماهنگ عمل می‌کند. این روش باعث افزایش بهره‌وری، کاهش خطاها و ایجاد فضای کاری مثبت می‌شود.",
+      "score": 0.0,
       "details": {
         "checks": {
           "required_keywords": true,
           "min_words": true,
-          "max_words": true
+          "max_words": false
         },
-        "constraint_score": 1.0
+        "constraint_score": 0.6666666666666666
       }
     },
     {
       "id": "peval-public-instruction-022",
       "track": "instruction",
-      "prediction": "**راهنمای استفاده از نان‌توستر**\n\n۱. نان را داخل شکاف‌های دستگاه **قرار بده**.\n۲. سطح برشتگی دلخواه را **تنظیم کن**.\n۳. دکمه را پایین **بفشار** و منتظر بمان.\n۴. پس از آماده شدن، نان را بردار.",
-      "score": 1.0,
+      "prediction": "# راهنمای استفاده از نان‌توستر\n\n**مرحله اول:** نان‌توستر را به برق وصل کنید.\n\n**مرحله دوم:** نان را در شکاف‌های دستگاه قرار دهید.\n\n**مرحله سوم:** میزان تیرگی را با دکمه تنظیم کنید.\n\n**مرحله چهارم:** دکمه شروع را فشار دهید و منتظر بمانید.\n\n**مرحله پنجم:** وقتی نان بیرون آمد، آن را احتیاط‌آمیز بردارید.",
+      "score": 0.0,
       "details": {
         "checks": {
           "required_keywords": true,
           "forbidden": true,
           "min_words": true,
-          "max_words": true
+          "max_words": false
         },
-        "constraint_score": 1.0
+        "constraint_score": 0.75
       }
     },
     {
       "id": "peval-public-instruction-023",
       "track": "instruction",
-      "prediction": "سلام، امروز به خاطر ترافیک سنگین بزرگراه دیر رسیدم. ممنون از صبر و درک شما.",
-      "score": 1.0,
+      "prediction": "سلام،\n\nامروز به دلیل ترافیک سنگین در مسیر منزل تا دفتر، متأسفانه دیر رسیدم. از این تأخیر عذرخواهی می‌کنم و تلاش می‌کنم جبران کنم.\n\nبا تشکر",
+      "score": 0.0,
       "details": {
         "checks": {
           "required_keywords": true,
           "forbidden": true,
           "min_words": true,
-          "max_words": true
+          "max_words": false
         },
-        "constraint_score": 1.0
+        "constraint_score": 0.75
       }
     },
     {
       "id": "peval-public-instruction-024",
       "track": "instruction",
-      "prediction": "خانواده عزیزم، جمعه این هفته دور هم جمع می‌شیم. منتظرتون هستم! 🌸",
+      "prediction": "خانواده عزیز، با امید به دیدار شما، دعوتنامه این است که جمعه ساعت ۶ بعدازظهر در منزل ما جمع شویم. انتظار داریم.",
       "score": 1.0,
       "details": {
         "checks": {
@@ -1511,7 +1511,7 @@
     {
       "id": "peval-public-instruction-025",
       "track": "instruction",
-      "prediction": "یادگیری زبان دوم فرصت‌های شغلی و اجتماعی بیشتری را در اختیار شما قرار می‌دهد و دریچه‌ای تازه به فرهنگ‌های مختلف جهان می‌گشاید.",
+      "prediction": "یادگیری زبان دوم فرصتی بی‌نظیر برای گسترش افق‌های شغلی و فرهنگی فراهم می‌کند و درهای جدیدی را در زندگی باز می‌کند.",
       "score": 1.0,
       "details": {
         "checks": {
@@ -1526,7 +1526,7 @@
     {
       "id": "peval-public-instruction-026",
       "track": "instruction",
-      "prediction": "ممنون از دعوتت، متأسفانه آن روز برنامه‌ی دیگری دارم. امیدوارم دفعه‌ی بعد بتوانم بیایم!",
+      "prediction": "ممنون از دعوتتان. متأسفانه امروز برنامه‌های دیگری دارم و نمی‌توانم شرکت کنم. امیدوارم فرصت دیگری پیش آید.",
       "score": 1.0,
       "details": {
         "checks": {
@@ -1540,7 +1540,7 @@
     {
       "id": "peval-public-instruction-027",
       "track": "instruction",
-      "prediction": "سلام،\n\nاحتراماً به اطلاع می‌رسانم فرزندم علی فردا به دلیل اینکه بیمار است، در کلاس حاضر نخواهد شد. پوزش می‌طلبم.\n\nبا احترام",
+      "prediction": "سلام،\n\nبا احترام اطلاع می‌دهم که فرزندم فردا به دلیل بیمار بودن غایب خواهد بود. از توجه و درک شما سپاسگزارم.\n\nبا احترام",
       "score": 1.0,
       "details": {
         "checks": {
@@ -1555,7 +1555,7 @@
     {
       "id": "peval-public-instruction-028",
       "track": "instruction",
-      "prediction": "دکتر عزیز، از صبر و مراقبت‌های بی‌دریغ شما سپاسگزارم. حضور دلسوزانه‌تان آرامش‌بخش بود. ممنون از همه چیز.",
+      "prediction": "**پیام تشکر:**\n\nدکتر گرامی، از صبر و مهربانی شما در درمان و راهنمایی ما سپاسگزاریم. خدمات ارزشمندتان برای سلامتی خانواده ما بسیار مهم است.",
       "score": 1.0,
       "details": {
         "checks": {
@@ -1570,7 +1570,7 @@
     {
       "id": "peval-public-instruction-029",
       "track": "instruction",
-      "prediction": "ورزش صبحگاهی به بدن انرژی تازه‌ای می‌بخشد و ذهن را برای مواجهه با چالش‌های روز آماده می‌کند.",
+      "prediction": "ورزش صبحگاهی باعث افزایش انرژی و تمرکز در طول روز می‌شود و سلامت جسمی و روانی را بهبود می‌بخشد.",
       "score": 1.0,
       "details": {
         "checks": {
@@ -1585,7 +1585,7 @@
     {
       "id": "peval-public-instruction-030",
       "track": "instruction",
-      "prediction": "سلام، لطفاً به **خیابان** ولیعصر، نبش کوچه بهار بیایید. **پلاک** ۱۲ است، ساختمان آبی‌رنگ. منتظرتان هستم. ممنون! 🙏",
+      "prediction": "سلام، لطفاً به خیابان ولیعصر، پلاک ۴۵ برروید. ساختمان سفید رنگ با درب آهنی است. از ایستگاه متروی نزدیک ۲۰۰ متر فاصله دارد. متشکرم.",
       "score": 1.0,
       "details": {
         "checks": {
@@ -1610,12 +1610,12 @@
     {
       "id": "peval-public-culture-006",
       "track": "culture",
-      "prediction": "ب",
+      "prediction": "ب) سنجد",
       "score": 1.0,
       "details": {
         "predicted_index": 1,
         "answer_index": 1,
-        "scored_candidate": "ب"
+        "scored_candidate": "ب) سنجد"
       }
     },
     {
@@ -1632,12 +1632,12 @@
     {
       "id": "peval-public-culture-008",
       "track": "culture",
-      "prediction": "ت",
-      "score": 1.0,
+      "prediction": "الف) شب نوروز",
+      "score": 0.0,
       "details": {
-        "predicted_index": 3,
+        "predicted_index": 0,
         "answer_index": 3,
-        "scored_candidate": "ت"
+        "scored_candidate": "الف) شب نوروز"
       }
     },
     {
@@ -1654,34 +1654,34 @@
     {
       "id": "peval-public-culture-010",
       "track": "culture",
-      "prediction": "ب)",
+      "prediction": "ب) سعدی",
       "score": 1.0,
       "details": {
         "predicted_index": 1,
         "answer_index": 1,
-        "scored_candidate": "ب)"
+        "scored_candidate": "ب) سعدی"
       }
     },
     {
       "id": "peval-public-culture-011",
       "track": "culture",
-      "prediction": "پ)",
+      "prediction": "پ) حافظ",
       "score": 1.0,
       "details": {
         "predicted_index": 2,
         "answer_index": 2,
-        "scored_candidate": "پ)"
+        "scored_candidate": "پ) حافظ"
       }
     },
     {
       "id": "peval-public-culture-012",
       "track": "culture",
-      "prediction": "ت",
+      "prediction": "ت) نوروز",
       "score": 1.0,
       "details": {
         "predicted_index": 3,
         "answer_index": 3,
-        "scored_candidate": "ت"
+        "scored_candidate": "ت) نوروز"
       }
     },
     {
@@ -1698,34 +1698,34 @@
     {
       "id": "peval-public-culture-014",
       "track": "culture",
-      "prediction": "ب",
+      "prediction": "ب) سنتور",
       "score": 1.0,
       "details": {
         "predicted_index": 1,
         "answer_index": 1,
-        "scored_candidate": "ب"
+        "scored_candidate": "ب) سنتور"
       }
     },
     {
       "id": "peval-public-culture-015",
       "track": "culture",
-      "prediction": "پ",
+      "prediction": "پ) قورمه‌سبزی",
       "score": 1.0,
       "details": {
         "predicted_index": 2,
         "answer_index": 2,
-        "scored_candidate": "پ"
+        "scored_candidate": "پ) قورمه‌سبزی"
       }
     },
     {
       "id": "peval-public-culture-016",
       "track": "culture",
-      "prediction": "ت)",
+      "prediction": "ت",
       "score": 1.0,
       "details": {
         "predicted_index": 3,
         "answer_index": 3,
-        "scored_candidate": "ت)"
+        "scored_candidate": "ت"
       }
     },
     {
@@ -1742,12 +1742,12 @@
     {
       "id": "peval-public-culture-018",
       "track": "culture",
-      "prediction": "ب",
+      "prediction": "ب) بیضی و کشیده",
       "score": 1.0,
       "details": {
         "predicted_index": 1,
         "answer_index": 1,
-        "scored_candidate": "ب"
+        "scored_candidate": "ب) بیضی و کشیده"
       }
     },
     {
@@ -1841,34 +1841,34 @@
     {
       "id": "peval-public-culture-027",
       "track": "culture",
-      "prediction": "پ",
+      "prediction": "پ) چهار",
       "score": 1.0,
       "details": {
         "predicted_index": 2,
         "answer_index": 2,
-        "scored_candidate": "پ"
+        "scored_candidate": "پ) چهار"
       }
     },
     {
       "id": "peval-public-culture-028",
       "track": "culture",
-      "prediction": "ت)",
+      "prediction": "ت",
       "score": 1.0,
       "details": {
         "predicted_index": 3,
         "answer_index": 3,
-        "scored_candidate": "ت)"
+        "scored_candidate": "ت"
       }
     },
     {
       "id": "peval-public-culture-029",
       "track": "culture",
-      "prediction": "الف",
+      "prediction": "الف) حافظیه",
       "score": 1.0,
       "details": {
         "predicted_index": 0,
         "answer_index": 0,
-        "scored_candidate": "الف"
+        "scored_candidate": "الف) حافظیه"
       }
     },
     {
