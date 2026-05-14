@@ -38,7 +38,9 @@ def build_parser() -> argparse.ArgumentParser:
     run_parser = subparsers.add_parser("run", help="Run a model on a Persian Eval JSONL dataset")
     run_parser.add_argument("--model", required=True, help="Model ID or API model name")
     run_parser.add_argument(
-        "--backend", default="mock", choices=["mock", "hf", "openai-compatible", "openai-responses"]
+        "--backend",
+        default="mock",
+        choices=["mock", "hf", "openai-compatible", "openai-responses", "anthropic"],
     )
     run_parser.add_argument(
         "--model-type", default=None, choices=["open-weight", "open-source", "api", "mock", "other"]
@@ -179,7 +181,7 @@ def parse_tasks(value: str) -> set[str] | None:
 
 
 def infer_model_type(backend: str) -> str:
-    if backend in {"openai-compatible", "openai-responses"}:
+    if backend in {"openai-compatible", "openai-responses", "anthropic"}:
         return "api"
     if backend == "mock":
         return "mock"
