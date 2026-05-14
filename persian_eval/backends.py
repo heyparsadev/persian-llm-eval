@@ -214,11 +214,14 @@ class AnthropicBackend(BaseBackend):
             raise RuntimeError("ANTHROPIC_API_KEY is required for the anthropic backend")
 
     def generate(self, record: DatasetRecord) -> str:
-        thinking_budget = _resolve_thinking_budget(self.config.reasoning_effort)
+        effort = self.config.reasoning_effort
+        use_thinking = bool(effort and effort != "none")
+        is_47plus = self._is_47plus()
         max_tokens = self.config.max_new_tokens
-        if thinking_budget:
-            # Anthropic requires max_tokens > thinking budget.
-            max_tokens = max(self.config.max_new_tokens + thinking_budget, thinking_budget + 256)
+        if use_thinking and not is_47plus:
+            # Legacy enabled-thinking API needs explicit budget plus headroom.
+            budget = _resolve_thinking_budget(effort)
+            max_tokens = max(self.config.max_new_tokens + budget, budget + 256)
         payload: dict[str, Any] = {
             "model": self.model_id,
             "max_tokens": max_tokens,
@@ -227,17 +230,26 @@ class AnthropicBackend(BaseBackend):
                 {"role": "user", "content": format_prompt(record)},
             ],
         }
-        if thinking_budget:
-            payload["thinking"] = {"type": "enabled", "budget_tokens": thinking_budget}
-        elif self._accepts_temperature():
+        if use_thinking:
+            if is_47plus:
+                payload["thinking"] = {"type": "adaptive"}
+                payload["output_config"] = {"effort": _map_effort_47(effort)}
+            else:
+                payload["thinking"] = {
+                    "type": "enabled",
+                    "budget_tokens": _resolve_thinking_budget(effort),
+                }
+        elif not is_47plus:
             payload["temperature"] = self.config.temperature
         data = self._post(payload)
         return _extract_anthropic_text(data)
 
+    def _is_47plus(self) -> bool:
+        prefixes = ("claude-opus-4-7", "claude-sonnet-4-7", "claude-haiku-4-7")
+        return self.model_id.startswith(prefixes)
+
     def _accepts_temperature(self) -> bool:
-        # Claude 4.7+ models deprecate the temperature parameter on Messages API.
-        deprecated_prefixes = ("claude-opus-4-7", "claude-sonnet-4-7", "claude-haiku-4-7")
-        return not self.model_id.startswith(deprecated_prefixes)
+        return not self._is_47plus()
 
     def _post(self, payload: dict[str, Any]) -> dict[str, Any]:
         request = urllib.request.Request(
@@ -251,6 +263,16 @@ class AnthropicBackend(BaseBackend):
             method="POST",
         )
         return post_json(request, timeout=300)
+
+
+def _map_effort_47(effort: str | None) -> str:
+    # The 4.7+ adaptive thinking API accepts low/medium/high; coalesce the
+    # finer-grained effort levels we expose elsewhere into the closest match.
+    if effort in {"minimal", "low"}:
+        return "low"
+    if effort in {"high", "xhigh"}:
+        return "high"
+    return "medium"
 
 
 def _resolve_thinking_budget(effort: str | None) -> int:
