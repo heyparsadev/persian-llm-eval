@@ -21,3 +21,7 @@ leaderboard/*.json
 leaderboard/*.csv
 !results/.gitkeep
 !leaderboard/.gitkeep
+
+# Local secrets
+.env
+.env.local
