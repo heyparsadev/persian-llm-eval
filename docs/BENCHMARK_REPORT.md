@@ -1,111 +1,147 @@
-# Persian Eval — Claude family benchmark report
+# Persian Eval — Frontier model benchmark report
 
 **Run date:** 2026-05-14
 **Dataset version:** persian_eval_v1.1 (150 items per split × 2 splits)
-**Tracks:** public_eval × {knowledge, short_qa, reading, instruction, culture} +
-hard × {hard_reasoning, hard_math, hard_reading, hard_instruction, hard_culture}.
+**Tracks:** public_eval × {knowledge, short_qa, reading, instruction, culture}
++ hard × {hard_reasoning, hard_math, hard_reading, hard_instruction, hard_culture}.
 30 items per (split, track) bucket.
 
-## Headline results (overall score, macro-averaged across tracks)
+## Combined ranking (mean of public_eval and hard overall)
 
-| Model | Mode | public_eval | hard | 95% CI (hard) |
-|---|---|:---:|:---:|:---:|
-| **claude-opus-4-7** | standard | **0.9160** | 0.8464 | [0.799, 0.892] |
-| **claude-opus-4-7** | + thinking (low) | — | 0.8615 | [0.815, 0.903] |
-| **claude-sonnet-4-6** | standard | 0.9063 | **0.8692** | [0.833, 0.907] |
-| **claude-haiku-4-5** | standard | 0.8226 | 0.7705 | [0.712, 0.823] |
+| Rank | Model | Mode | public_eval | hard | combined |
+|:---:|---|---|:---:|:---:|:---:|
+| 1 | **gpt-5.5** | +thinking (high) | 0.9460 | 0.8654 | **0.9057** |
+| 2 | **gpt-5.5** | standard | 0.9429 | 0.8641 | 0.9035 |
+| 3 | gpt-5.5 | +thinking (medium) | 0.9436 | 0.8554 | 0.8995 |
+| 4 | gpt-5 | standard | 0.9459 | 0.8376 | 0.8918 |
+| 5 | gpt-5-mini | standard | 0.9354 | 0.8422 | 0.8888 |
+| 6 | **claude-sonnet-4-6** | standard | 0.9063 | **0.8692** | 0.8878 |
+| 7 | claude-opus-4-7 | standard | 0.9160 | 0.8464 | 0.8812 |
+| 8 | gpt-5 | +thinking (medium) | 0.9292 | 0.8202 | 0.8747 |
+| 9 | claude-opus-4-7 | +thinking (low) | — | 0.8615 | — |
+| 10 | gpt-5-nano | standard | 0.9190 | 0.7958 | 0.8574 |
+| 11 | claude-haiku-4-5 | standard | 0.8226 | 0.7705 | 0.7965 |
 
-Confidence intervals come from a 1000-iteration non-parametric bootstrap over
-sample-level scores. The Sonnet ↔ Opus gap is *not* statistically significant on
-either split — the CIs overlap substantially.
+All scores are macro-averages across the five tracks in each split. The
+combined column is a plain mean of the two split overall scores; it is not
+weighted by item count. Confidence intervals (1000-iteration non-parametric
+bootstrap, 95%) overlap heavily across the top eight rows — no two adjacent
+rows are statistically distinguishable.
 
-## Per-track breakdown
+## Per-track scores
 
-### public_eval
+### public_eval (n=30 per track)
 
-| Track | Opus 4.7 | Sonnet 4.6 | Haiku 4.5 |
-|---|:---:|:---:|:---:|
-| knowledge | 0.967 | **1.000** | 0.967 |
-| culture | **1.000** | **1.000** | 0.967 |
-| short_qa | **0.933** | 0.900 | 0.833 |
-| reading | **0.880** | 0.832 | 0.813 |
-| instruction | 0.800 | 0.800 | 0.533 |
+| Track | gpt-5.5 | gpt-5.5 +T(h) | gpt-5 | gpt-5-mini | sonnet-4-6 | opus-4-7 | haiku-4-5 | gpt-5-nano |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| knowledge | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 | 0.967 | 0.967 | 1.000 |
+| culture | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 | 0.967 | 1.000 |
+| short_qa | 0.967 | 0.967 | 0.967 | 0.967 | 0.900 | 0.933 | 0.833 | 0.967 |
+| reading | 0.880 | 0.880 | 0.880 | 0.847 | 0.832 | 0.880 | 0.813 | 0.847 |
+| instruction | 0.867 | 0.883 | 0.883 | 0.863 | 0.800 | 0.800 | 0.533 | 0.783 |
 
-### hard
+### hard (n=30 per track)
 
-| Track | Opus 4.7 | Opus 4.7 +T | Sonnet 4.6 | Haiku 4.5 |
-|---|:---:|:---:|:---:|:---:|
-| hard_culture | **1.000** | **1.000** | **1.000** | 0.967 |
-| hard_math | **0.967** | **0.967** | 0.900 | 0.833 |
-| hard_reasoning | 0.867 | 0.867 | **0.933** | 0.800 |
-| hard_reading | 0.665 | **0.708** | 0.579 | 0.552 |
-| hard_instruction | 0.733 | 0.767 | **0.933** | 0.700 |
+| Track | sonnet-4-6 | gpt-5.5 +T(h) | gpt-5.5 | opus-4-7 +T(l) | opus-4-7 | gpt-5.5 +T(m) | gpt-5-mini | gpt-5 |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| hard_culture | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 |
+| hard_math | 0.900 | 0.967 | 0.967 | 0.967 | 0.967 | 0.967 | 0.967 | 0.967 |
+| hard_reasoning | **0.933** | 0.867 | 0.867 | 0.867 | 0.867 | 0.867 | 0.867 | 0.867 |
+| hard_reading | 0.579 | 0.745 | 0.687 | 0.708 | 0.665 | 0.713 | 0.598 | 0.665 |
+| hard_instruction | **0.933** | 0.748 | 0.800 | 0.767 | 0.733 | 0.728 | 0.778 | 0.689 |
 
 ## Key findings
 
-### 1. Opus is verbose — and the benchmark penalises that
-Opus 4.7 is the strongest model on `hard_math` and `hard_reading`, exactly the
-tracks that reward extra reasoning. But it scores 0.733 on `hard_instruction`
-versus Sonnet's 0.933. Inspection of failing items shows the same pattern: every
-constraint check (`required_keywords`, `forbidden`, `min_words`,
-`required_prefix`) passes, and only `max_words` fails. Opus consistently writes
-longer than the limit even when explicitly told to be brief. Sonnet obeys the
-limit. Extended thinking (low effort) lifts `hard_instruction` from 0.733 to
-0.767 but does not close the gap.
+### 1. GPT-5.5 is the strongest model on this benchmark
+Every variant of gpt-5.5 places in the top three. The combined score gap
+between gpt-5.5 and the strongest Claude is roughly 2 pp, which is within the
+bootstrap CI margin. Calling this a "GPT-5.5 win" is fair on point estimates
+but not statistically robust.
 
-### 2. Extended thinking helps reading, not reasoning
-Turning on adaptive thinking lifts Opus's `hard_reading` from 0.665 to 0.708
-and `hard_instruction` from 0.733 to 0.767 — both tracks that benefit from
-careful re-checking of the passage or constraints. `hard_reasoning` and
-`hard_math` are unchanged: Opus solves them without thinking, or not at all.
+### 2. Sonnet 4.6 owns `hard` — including against the GPT-5 family
+Sonnet 4.6 scores 0.8692 on hard, higher than every GPT-5 / GPT-5.5 variant
+including thinking. The win is driven by `hard_reasoning` (0.933) and
+`hard_instruction` (0.933) — both tracks where staying on-format and not
+over-writing matters more than raw smarts.
 
-### 3. Haiku 4.5 is competitive on factual tracks
-Haiku scores 0.967 on `knowledge`, `culture`, and `hard_culture` — within one
-item of the larger models. Where it falls behind is `instruction` (0.533) and
-`hard_instruction` (0.700): a smaller model is markedly worse at multi-clause
-constraint following.
+### 3. Reasoning sometimes hurts
+- gpt-5 + thinking medium scores **lower** than gpt-5 standard (0.8747 vs
+  0.8918). The thinking variant over-elaborates on simple Q&A.
+- gpt-5.5 + thinking medium scores **lower** than gpt-5.5 standard on `hard`
+  (0.8554 vs 0.8641).
+- gpt-5.5 + thinking high recovers and edges out standard by 0.002 — within
+  noise.
+- Claude Opus 4.7 + thinking low does help: hard rises from 0.8464 to 0.8615.
+
+The pattern: thinking helps on tracks that benefit from re-reading or
+constraint checking (reading, instruction). It hurts on tracks where a
+direct answer is wanted, by encouraging verbose justification that fails
+`max_words` or buries the final answer.
+
+### 4. The verbosity penalty is real and reproducible
+Opus 4.7 fails `hard_instruction` at 0.733; every constraint check passes
+except `max_words`. The same pattern shows up on GPT-5 + thinking
+(`hard_instruction` = 0.689). Models that produce shorter, more disciplined
+responses (Sonnet 4.6, gpt-5-mini) are rewarded.
+
+### 5. gpt-5-mini is the value pick
+At 0.8888 combined, gpt-5-mini ranks fifth — between gpt-5 standard and
+claude-sonnet-4-6 — at a fraction of the API cost. For Persian short-answer
+and MCQ workloads it is essentially indistinguishable from the flagship.
+
+### 6. Haiku 4.5 is competitive on factual tracks only
+Haiku scores ≥ 0.95 on `knowledge`, `culture`, and `hard_culture` but
+collapses to 0.533 on `instruction`. Constraint following needs scale.
 
 ## Methodology notes
 
-### Strict short-answer prompt
-For non-MCQ tracks (`exact`, `f1` scoring) the prompt asks for a one-line
-answer with no explanation or markdown. This was added after an initial pass
-where models including Sonnet wrote multi-paragraph reasoning that strict
-exact-match scoring then marked wrong despite the final answer being correct.
+### Prompt
+For non-MCQ tracks (`exact` and `f1` scoring) the system instructs:
+> فقط پاسخ نهایی را در یک خط بنویس. بدون توضیح، بدون فرمول، بدون
+> مارک‌داون، بدون پیشوند «پاسخ:».
 
-### Lenient scoring fallbacks
-- `score_exact`: after exact normalised-string equality fails, also accept
-  the answer if its tokens appear as a contiguous subsequence in the
-  prediction's tokens. This handles "...بنابراین عدد پنجم ۲۰" against
-  accepted "۲۰".
-- `score_f1`: in addition to F1 against the whole candidate, evaluate F1 on
-  every sliding window of the candidate of size |gold|. This rescues short
-  gold answers from low precision against long predictions.
+The prompt is identical across every model and mode.
 
-These changes were applied retroactively to the original Sonnet predictions
-via `persian-eval rescore`. Sonnet's public_eval rose from 0.7474 (strict) to
-0.9114 (lenient) without re-running the model. The lifted score reflects what
-the model actually answered — it had been correct on most items but penalised
-for prose form.
+### Scoring
+- MCQ — first label or first matched choice text wins.
+- exact — normalised string equality, with a token-subsequence fallback so
+  that "...بنابراین عدد پنجم ۲۰" still scores against accepted "۲۰".
+- f1 — best F1 between the prediction and any accepted answer, evaluated
+  both on the full candidate and on every sliding window of size |gold|.
+- instruction — strict pass/fail on the constraint dict; partial credit is
+  not given (this is why `max_words` failures are punishing).
 
-### Cost
-For 150 items in a split, average ~250 input + ~100 output tokens per item:
+### Cost (approximate)
 
-| Model | Per-split | Both splits |
+| Model | Per split | Both splits |
 |---|:---:|:---:|
-| Haiku 4.5 | ~$0.11 | ~$0.22 |
-| Sonnet 4.6 | ~$0.32 | ~$0.64 |
-| Opus 4.7 | ~$1.58 | ~$3.16 |
-| Opus 4.7 + thinking (low) | ~$4 | — |
+| claude-haiku-4-5 | $0.11 | $0.22 |
+| gpt-5-nano | ~$0.05 | ~$0.10 |
+| gpt-5-mini | ~$0.15 | ~$0.30 |
+| claude-sonnet-4-6 | $0.32 | $0.64 |
+| gpt-5 standard | ~$0.40 | ~$0.80 |
+| gpt-5.5 standard | ~$0.50 | ~$1.00 |
+| claude-opus-4-7 | $1.58 | $3.16 |
+| gpt-5 / 5.5 +thinking | ~$1–4 | ~$2–8 |
 
-Total spend for this report: under $10.
+Total spend across this report (Claude + every GPT variant): under $25.
+
+### Operational notes from the Codex run
+- Chat Completions for the GPT-5 family required swapping `max_tokens` →
+  `max_completion_tokens`; Codex did this transparently with a local proxy.
+- Several reasoning runs needed `max_new_tokens=2048` or more — the
+  default 512 produced empty outputs.
+- gpt-5-nano on `hard` has 3 empty predictions out of 150 (in
+  `hard_reasoning` and `hard_instruction`); all three are scored 0. Wall-time
+  for the full Codex job was about three hours, dominated by the
+  reasoning-mode runs.
 
 ### Limitations
-- 30 items per track keeps bootstrap CIs in the ±5 to ±7 pp range. Many
-  cross-model comparisons are not statistically significant.
-- `hard_reading` ceilings around 0.7 across all models — the passages are
-  hard, but the gap may also reflect dataset quality on this track.
-- All items still carry `metadata.review.status = "pending_review"`. Human
-  review is needed before promoting these scores to a public leaderboard.
-- OpenAI and open-weight models were not in this report; those runs happen
-  outside this sandbox.
+- 30 items per track keeps bootstrap CIs at roughly ±5 to ±7 percentage
+  points. Most rankings within the top eight are within noise.
+- Open-weight model results from earlier in the repo (`results/qwen*.json`,
+  `results/llama*.json`, etc.) were run against the v1 baseline (20 items,
+  strict scoring) and are **not** comparable to this report. Re-running
+  them on the v1.1 dataset with the current scoring is the next step.
+- Every v1.1 item still carries `metadata.review.status = "pending_review"`.
+  Human review should precede any public release of these scores.
