@@ -38,7 +38,9 @@ def build_parser() -> argparse.ArgumentParser:
     run_parser = subparsers.add_parser("run", help="Run a model on a Persian Eval JSONL dataset")
     run_parser.add_argument("--model", required=True, help="Model ID or API model name")
     run_parser.add_argument(
-        "--backend", default="mock", choices=["mock", "hf", "openai-compatible", "openai-responses"]
+        "--backend",
+        default="mock",
+        choices=["mock", "hf", "openai-compatible", "openai-responses", "anthropic"],
     )
     run_parser.add_argument(
         "--model-type", default=None, choices=["open-weight", "open-source", "api", "mock", "other"]
@@ -54,8 +56,20 @@ def build_parser() -> argparse.ArgumentParser:
     run_parser.add_argument(
         "--reasoning-effort",
         default=None,
-        choices=["none", "minimal", "low", "medium", "high", "xhigh"],
-        help="Optional Responses API reasoning effort for reasoning models",
+        choices=["none", "minimal", "low", "medium", "high", "xhigh", "max"],
+        help="Optional reasoning/effort level for reasoning models",
+    )
+    run_parser.add_argument(
+        "--thinking",
+        default=None,
+        choices=["adaptive", "enabled", "disabled"],
+        help="Optional Anthropic thinking mode",
+    )
+    run_parser.add_argument(
+        "--thinking-budget-tokens",
+        type=int,
+        default=None,
+        help="Optional Anthropic manual thinking token budget",
     )
     run_parser.add_argument(
         "--dtype", default="bfloat16", choices=["auto", "bfloat16", "float16", "float32"]
@@ -109,6 +123,8 @@ def run_command(args: argparse.Namespace) -> int:
         dtype=args.dtype,
         quantization=args.quantization,
         reasoning_effort=args.reasoning_effort,
+        thinking_type=args.thinking,
+        thinking_budget_tokens=args.thinking_budget_tokens,
     )
     backend = create_backend(args.backend, args.model, revision=args.revision, config=config)
     run_config = {
@@ -120,6 +136,8 @@ def run_command(args: argparse.Namespace) -> int:
         "dtype": args.dtype,
         "quantization": args.quantization,
         "reasoning_effort": args.reasoning_effort,
+        "thinking": args.thinking,
+        "thinking_budget_tokens": args.thinking_budget_tokens,
     }
     result = run_records(
         records,
@@ -179,7 +197,7 @@ def parse_tasks(value: str) -> set[str] | None:
 
 
 def infer_model_type(backend: str) -> str:
-    if backend in {"openai-compatible", "openai-responses"}:
+    if backend in {"openai-compatible", "openai-responses", "anthropic"}:
         return "api"
     if backend == "mock":
         return "mock"
