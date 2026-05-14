@@ -193,6 +193,81 @@ class OpenAICompatibleBackend(BaseBackend):
         return data["choices"][0]["message"]["content"].strip()
 
 
+class AnthropicBackend(BaseBackend):
+    name = "anthropic"
+
+    def __init__(self, model_id: str, *, config: GenerationConfig):
+        self.model_id = model_id
+        self.config = config
+        raw_base = (
+            config.base_url or os.getenv("ANTHROPIC_BASE_URL") or "https://api.anthropic.com"
+        ).rstrip("/")
+        if not raw_base.endswith("/v1"):
+            raw_base = f"{raw_base}/v1"
+        self.base_url = raw_base
+        self.api_key = os.getenv("ANTHROPIC_API_KEY")
+        if not self.api_key:
+            raise RuntimeError("ANTHROPIC_API_KEY is required for the anthropic backend")
+
+    def generate(self, record: DatasetRecord) -> str:
+        thinking_budget = _resolve_thinking_budget(self.config.reasoning_effort)
+        max_tokens = self.config.max_new_tokens
+        if thinking_budget:
+            # Anthropic requires max_tokens > thinking budget.
+            max_tokens = max(self.config.max_new_tokens + thinking_budget, thinking_budget + 256)
+        payload: dict[str, Any] = {
+            "model": self.model_id,
+            "max_tokens": max_tokens,
+            "system": SYSTEM_PROMPT,
+            "messages": [
+                {"role": "user", "content": format_prompt(record)},
+            ],
+        }
+        if thinking_budget:
+            payload["thinking"] = {"type": "enabled", "budget_tokens": thinking_budget}
+        else:
+            # Anthropic API rejects temperature when thinking is enabled.
+            payload["temperature"] = self.config.temperature
+        request = urllib.request.Request(
+            f"{self.base_url}/messages",
+            data=json.dumps(payload).encode("utf-8"),
+            headers={
+                "x-api-key": self.api_key,
+                "anthropic-version": "2023-06-01",
+                "content-type": "application/json",
+            },
+            method="POST",
+        )
+        data = post_json(request, timeout=300)
+        return _extract_anthropic_text(data)
+
+
+def _resolve_thinking_budget(effort: str | None) -> int:
+    if not effort or effort == "none":
+        return 0
+    return {
+        "minimal": 1024,
+        "low": 2048,
+        "medium": 4096,
+        "high": 8192,
+        "xhigh": 16384,
+    }.get(effort, 0)
+
+
+def _extract_anthropic_text(data: dict[str, Any]) -> str:
+    chunks: list[str] = []
+    for block in data.get("content", []):
+        if not isinstance(block, dict):
+            continue
+        if block.get("type") == "text":
+            text = block.get("text")
+            if isinstance(text, str):
+                chunks.append(text)
+    if chunks:
+        return "\n".join(chunks).strip()
+    raise RuntimeError("Anthropic API response did not include text content")
+
+
 class OpenAIResponsesBackend(BaseBackend):
     name = "openai-responses"
 
@@ -285,4 +360,6 @@ def create_backend(
         return OpenAICompatibleBackend(model_id, config=config)
     if backend_name == "openai-responses":
         return OpenAIResponsesBackend(model_id, config=config)
+    if backend_name == "anthropic":
+        return AnthropicBackend(model_id, config=config)
     raise ValueError(f"Unsupported backend: {backend_name}")
