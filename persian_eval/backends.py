@@ -44,6 +44,8 @@ class GenerationConfig:
     dtype: str = "bfloat16"
     quantization: str | None = None
     reasoning_effort: str | None = None
+    thinking_type: str | None = None
+    thinking_budget_tokens: int | None = None
 
 
 class BaseBackend:
@@ -361,7 +363,65 @@ class OpenAIResponsesBackend(BaseBackend):
         return extract_response_text(data)
 
 
-def post_json(request: urllib.request.Request, *, timeout: int) -> dict[str, Any]:
+class AnthropicBackend(BaseBackend):
+    name = "anthropic"
+
+    def __init__(self, model_id: str, *, config: GenerationConfig):
+        self.model_id = model_id
+        self.config = config
+        self.messages_url = normalize_anthropic_messages_url(
+            config.base_url or os.getenv("ANTHROPIC_BASE_URL") or "https://api.anthropic.com"
+        )
+        api_key = os.getenv("ANTHROPIC_API_KEY")
+        if not api_key:
+            raise RuntimeError("ANTHROPIC_API_KEY is required for the anthropic backend")
+        self.api_key = api_key
+
+    def generate(self, record: DatasetRecord) -> str:
+        payload: dict[str, Any] = {
+            "model": self.model_id,
+            "system": SYSTEM_PROMPT,
+            "messages": [{"role": "user", "content": format_prompt(record)}],
+            "max_tokens": self.config.max_new_tokens,
+        }
+        if self.config.thinking_type:
+            thinking: dict[str, Any] = {"type": self.config.thinking_type}
+            if self.config.thinking_budget_tokens is not None:
+                thinking["budget_tokens"] = self.config.thinking_budget_tokens
+            payload["thinking"] = thinking
+        else:
+            payload["temperature"] = self.config.temperature
+        if self.config.reasoning_effort and self.config.reasoning_effort not in {
+            "none",
+            "minimal",
+        }:
+            payload["output_config"] = {"effort": self.config.reasoning_effort}
+        request = urllib.request.Request(
+            self.messages_url,
+            data=json.dumps(payload).encode("utf-8"),
+            headers={
+                "x-api-key": self.api_key,
+                "anthropic-version": "2023-06-01",
+                "Content-Type": "application/json",
+            },
+            method="POST",
+        )
+        data = post_json(request, timeout=300, provider="Anthropic")
+        return extract_anthropic_text(data)
+
+
+def normalize_anthropic_messages_url(base_url: str) -> str:
+    base = base_url.rstrip("/")
+    if base.endswith("/v1/messages"):
+        return base
+    if base.endswith("/v1"):
+        return f"{base}/messages"
+    return f"{base}/v1/messages"
+
+
+def post_json(
+    request: urllib.request.Request, *, timeout: int, provider: str = "OpenAI"
+) -> dict[str, Any]:
     retry_statuses = {408, 409, 429, 500, 502, 503, 504}
     last_error: Exception | None = None
     for attempt in range(4):
@@ -372,13 +432,13 @@ def post_json(request: urllib.request.Request, *, timeout: int) -> dict[str, Any
             last_error = exc
             if exc.code not in retry_statuses or attempt == 3:
                 detail = exc.read().decode("utf-8", errors="replace")
-                raise RuntimeError(f"OpenAI API error {exc.code}: {detail}") from exc
+                raise RuntimeError(f"{provider} API error {exc.code}: {detail}") from exc
         except (urllib.error.URLError, http.client.RemoteDisconnected, TimeoutError) as exc:
             last_error = exc
             if attempt == 3:
-                raise RuntimeError(f"OpenAI API request failed: {exc}") from exc
+                raise RuntimeError(f"{provider} API request failed: {exc}") from exc
         time.sleep(2**attempt)
-    raise RuntimeError(f"OpenAI API request failed: {last_error}")
+    raise RuntimeError(f"{provider} API request failed: {last_error}")
 
 
 def extract_response_text(data: dict[str, Any]) -> str:
@@ -399,6 +459,18 @@ def extract_response_text(data: dict[str, Any]) -> str:
     if chunks:
         return "\n".join(chunks).strip()
     raise RuntimeError("Responses API response did not include output text")
+
+
+def extract_anthropic_text(data: dict[str, Any]) -> str:
+    chunks: list[str] = []
+    for content in data.get("content", []):
+        if not isinstance(content, dict):
+            continue
+        if content.get("type") == "text" and isinstance(content.get("text"), str):
+            chunks.append(content["text"].strip())
+    if chunks:
+        return "\n".join(chunks).strip()
+    raise RuntimeError("Anthropic API response did not include text content")
 
 
 def create_backend(
