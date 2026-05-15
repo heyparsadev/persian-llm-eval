@@ -17,6 +17,37 @@
 > updated dataset — no model was re-run. Scores rose ~3 pp across the
 > board because accepted-answer lists are no longer artificially narrow.
 
+## Headline
+
+Overall scores on the hard split, sorted, with 1000-iteration bootstrap
+95% confidence intervals on the overall score:
+
+![Overall scores on hard split with bootstrap CI](charts/overall_hard.png)
+
+Generalisation between the public and hard splits — every model lands
+below `y = x`, which means hard is genuinely harder, not a calibration
+artefact:
+
+![Public-eval vs hard scatter](charts/public_vs_hard.png)
+
+Per-track heatmap on the hard split. `Reading` is the hardest track for
+every model; `Culture` and `Math` are saturated at the top:
+
+![Per-track heatmap on hard split](charts/track_heatmap.png)
+
+Best variant per family, broken down by track:
+
+![Best-of-family grouped bars across tracks](charts/top_models_tracks.png)
+
+Claude Opus 4.7 thinking-effort sweep. Overall peaks at `+T(low)` and
+then drops because more thinking inflates verbosity, which trips
+`max_words` penalties on the `Instruction` track:
+
+![Opus 4.7 thinking sweep across tracks](charts/opus_thinking.png)
+
+Regenerate any of these with `python3 scripts/build_charts.py`
+(requires `pip install -e ".[viz]"`).
+
 ## Combined ranking (mean of public_eval and hard overall)
 
 | Rank | Model | Mode | public_eval | hard | combined |
