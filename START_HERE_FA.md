@@ -1,52 +1,58 @@
 # از اینجا شروع کن
 
-این پروژه الان آماده‌ی استفاده‌ی اولیه است. لازم نیست برنامه‌نویس باشی.
-
-## کاری که این پروژه می‌کند
-
-این benchmark چند سوال و تست فارسی را به مدل‌های زبانی می‌دهد، جواب مدل را می‌گیرد، امتیاز می‌دهد، و یک leaderboard می‌سازد.
-
-فعلاً یک مدل آزمایشی به اسم `smoke` داریم که فقط برای تست مسیر اجراست. برای رتبه‌بندی واقعی باید بعداً مدل‌های واقعی مثل Dorna، PersianMind، Qwen، Llama یا APIها را اجرا کنیم.
+این پروژه یک بنچمارک فارسی ایرانی برای مدل‌های زبانی است: ۳۰۰ سوال، ۱۰ تِرَک
+موضوعی (دانش عمومی، فرهنگ، خوانش متن، پیروی از دستور، استدلال، ریاضی،
+تعارف، اصطلاحات و …)، اسکورینگ خودکار و یک leaderboard فعال با نتایج
+مدل‌های فرانتیر مثل Claude 4.x و GPT-5/5.5.
 
 ## ساده‌ترین راه اجرا
 
-روی فایل زیر دابل‌کلیک کن:
+روی macOS کافیست روی این فایل دابل‌کلیک کنی:
 
 ```text
 RUN_ME.command
 ```
 
-این کار خودش:
+این کار خودش تست‌ها را اجرا می‌کند، دیتاست را اعتبارسنجی می‌کند، یک
+اجرای آزمایشی با backend ساختگی (`mock`) می‌سازد، و یک leaderboard
+نمونه تولید می‌کند. اگر همه چیز درست باشد، در ترمینال پیام موفقیت
+می‌بینی.
 
-- تست‌های پروژه را اجرا می‌کند.
-- داده‌ها را چک می‌کند.
-- یک اجرای آزمایشی می‌سازد.
-- leaderboard نمونه را تولید می‌کند.
+## نتایج فعلی
 
-اگر همه چیز درست باشد، در ترمینال پیام موفقیت می‌بینی.
+نسخه‌ی فعلی دیتاست **v1.1** است (۱۵۰ سوال در split عمومی + ۱۵۰ سوال در
+split سخت). تا الان ۲۳ ران از مدل‌های فرانتیر منتشر شده‌اند. خلاصه و
+جدول کامل اینجا:
 
-## خروجی‌ها کجا هستند؟
+- [`docs/BENCHMARK_REPORT.md`](docs/BENCHMARK_REPORT.md) — گزارش کامل
+  با per-track و bootstrap CI.
+- [`leaderboard/leaderboard.csv`](leaderboard/leaderboard.csv) — جدول
+  قابل باز کردن در اکسل.
 
-- نتیجه‌ی اجرای آزمایشی:
-  - `results/smoke.json`
-  - `results/smoke_public.json`
-- leaderboard:
-  - `leaderboard/leaderboard.json`
-  - `leaderboard/leaderboard.csv`
-  - `leaderboard/index.html`
-- اپ ساده‌ی Hugging Face Space:
-  - `spaces/leaderboard/app.py`
+## مدل واقعی روی این بنچمارک اجرا کن
 
-## برای انتشار واقعی چه لازم است؟
+با کلید Anthropic یا OpenAI:
 
-من پروژه را آماده کرده‌ام، اما برای publish واقعی به حساب‌ها و ابزارهای زیر نیاز است:
+```bash
+export ANTHROPIC_API_KEY=...
+persian-eval run --model claude-sonnet-4-6 --backend anthropic \
+  --data data/persian_eval_v1.public_eval.jsonl \
+  --output results/claude-sonnet-4-6.public_eval.json
+```
 
-- GitHub برای repo
-- Hugging Face برای dataset و leaderboard Space
-- دسترسی API یا GPU/CPU مناسب برای اجرای مدل‌های واقعی
+با مدل open-weight روی GPU خودت (نیاز به `pip install -e ".[hf]"`):
 
-وقتی این‌ها آماده باشد، انتشارش می‌تواند با فایل‌های راهنما و اسکریپت‌های داخل `scripts/` انجام شود.
+```bash
+persian-eval run --model PartAI/Dorna2-Llama3.1-8B-Instruct --backend hf \
+  --data data/persian_eval_v1.public_eval.jsonl \
+  --output results/dorna2.json
+```
 
-## قدم بعدی پیشنهادی
+## مشارکت
 
-اول همین فایل `RUN_ME.command` را اجرا کن. بعد من می‌توانم مدل‌های واقعی را یکی‌یکی به leaderboard اضافه کنم، به شرطی که runtime/توکن/دسترسی لازم موجود باشد.
+- اضافه‌کردن سوال جدید یا اصلاح موجود:
+  [`CONTRIBUTING_DATASET.md`](CONTRIBUTING_DATASET.md)
+- اضافه‌کردن کد یا backend جدید:
+  [`CONTRIBUTING.md`](CONTRIBUTING.md)
+- ارسال نتیجه‌ی مدل خودت برای leaderboard:
+  [`SUBMISSION.md`](SUBMISSION.md)

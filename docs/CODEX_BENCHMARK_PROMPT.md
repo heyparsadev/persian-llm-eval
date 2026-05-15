@@ -17,7 +17,7 @@ results.
 **Repository and branch**
 
 - Repo: `heyparsadev/persian-llm-eval`
-- Branch (develop and push here): `claude/review-benchmarking-approach-1yQDg`
+- Branch (develop and push here): `main`
 - Do **not** push to `main` and do **not** open a pull request unless the user
   explicitly asks for it.
 
@@ -26,8 +26,8 @@ results.
 ```bash
 git clone https://github.com/heyparsadev/persian-llm-eval.git
 cd persian-llm-eval
-git checkout claude/review-benchmarking-approach-1yQDg
-git pull origin claude/review-benchmarking-approach-1yQDg
+git checkout main
+git pull origin main
 python3 -m venv .venv && source .venv/bin/activate   # optional but recommended
 pip install -e .
 export OPENAI_API_KEY="<OPENAI_API_KEY>"
@@ -129,7 +129,7 @@ git add -f results/gpt-5-mini.public_eval.json \
             results/gpt-5-thinking-medium.public_eval.json \
             results/gpt-5-thinking-medium.hard.json
 git commit -m "Add OpenAI GPT-5 benchmark results (public_eval + hard, with/without reasoning)"
-git push origin claude/review-benchmarking-approach-1yQDg
+git push origin main
 ```
 
 If you had to swap any model ID, include a one-line note in the commit message:
