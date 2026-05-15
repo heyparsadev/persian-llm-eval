@@ -106,8 +106,11 @@ hidden JSONL file or sample-level predictions from hidden runs. Use
 
 ## Dataset status
 
-260 of 300 v1.1 items carry `metadata.review.status = "pending_review"`
-with `author = "claude-review"`. They were produced by
-`scripts/build_v1_1_items.py`. A model-assisted review pass is the next
-planned cleanup; until then, take any per-track number with the
-appropriate grain of salt and rely on bootstrap CIs.
+The v1.1 review pass is complete (commit `0b1da03`). All 254 v1.1 items
+now carry `metadata.review.status = "accepted"`; 6 items were rejected
+and removed from the JSONL splits during the model-assisted review (see
+`docs/BENCHMARK_REPORT.md` → "Review log" for the per-bucket breakdown).
+The 40 original v1 items remain without a `metadata.review` block and
+continue to act as the curated baseline. All current Claude + GPT result
+files have been rescored against the post-review dataset via
+`persian-eval rescore`.
