@@ -28,3 +28,4 @@ leaderboard/*.csv
 
 # Dataset review working file
 data/review_proposals.jsonl
+data/review_decisions.jsonl
