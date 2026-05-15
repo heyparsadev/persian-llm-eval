@@ -23,7 +23,7 @@ dev = [
   "mypy>=1.10",
   "pre-commit>=3.7",
 ]
-hf = ["torch>=2", "transformers>=4.51,<5", "accelerate>=0.26", "bitsandbytes>=0.43,<0.49"]
+hf = ["torch>=2", "transformers>=4.51,<5", "accelerate>=0.26", "bitsandbytes>=0.43,<0.50"]
 space = ["gradio>=4", "pandas>=2"]
 viz = ["matplotlib>=3.7", "numpy>=1.24"]
 
