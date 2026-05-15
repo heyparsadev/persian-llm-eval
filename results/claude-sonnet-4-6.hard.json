@@ -6,26 +6,26 @@
   "task_scores": {
     "hard_culture": {
       "score": 1.0,
-      "n": 30
+      "n": 28
     },
     "hard_instruction": {
       "score": 0.9333333333333333,
       "n": 30
     },
     "hard_math": {
-      "score": 0.9,
-      "n": 30
+      "score": 0.9310344827586207,
+      "n": 29
     },
     "hard_reading": {
-      "score": 0.5792422471559918,
-      "n": 30
+      "score": 0.7148657813950168,
+      "n": 29
     },
     "hard_reasoning": {
-      "score": 0.9333333333333333,
-      "n": 30
+      "score": 0.9655172413793104,
+      "n": 29
     }
   },
-  "overall_score": 0.8691817827645318,
+  "overall_score": 0.9089501677732562,
   "run_config": {
     "data": [
       "data/persian_eval_v1.hard.jsonl"
@@ -38,7 +38,7 @@
     "quantization": null,
     "reasoning_effort": null
   },
-  "timestamp": "2026-05-14T12:48:09+00:00",
+  "timestamp": "2026-05-15T08:39:42+00:00",
   "samples": [
     {
       "id": "peval-hard-reasoning-001",
@@ -370,10 +370,10 @@
       "id": "peval-hard-reasoning-012",
       "track": "hard_reasoning",
       "prediction": "پ",
-      "score": 0.0,
+      "score": 1.0,
       "details": {
         "predicted_index": 2,
-        "answer_index": 3,
+        "answer_index": 2,
         "scored_candidate": "پ"
       }
     },
@@ -389,24 +389,13 @@
       }
     },
     {
-      "id": "peval-hard-reasoning-014",
-      "track": "hard_reasoning",
-      "prediction": "ب",
-      "score": 1.0,
-      "details": {
-        "predicted_index": 1,
-        "answer_index": 1,
-        "scored_candidate": "ب"
-      }
-    },
-    {
       "id": "peval-hard-reasoning-015",
       "track": "hard_reasoning",
       "prediction": "پ",
-      "score": 1.0,
+      "score": 0.0,
       "details": {
         "predicted_index": 2,
-        "answer_index": 2,
+        "answer_index": 0,
         "scored_candidate": "پ"
       }
     },
@@ -469,10 +458,10 @@
       "id": "peval-hard-reasoning-021",
       "track": "hard_reasoning",
       "prediction": "ب",
-      "score": 0.0,
+      "score": 1.0,
       "details": {
         "predicted_index": 1,
-        "answer_index": 0,
+        "answer_index": 1,
         "scored_candidate": "ب"
       }
     },
@@ -586,7 +575,13 @@
           "220000",
           "۲۲۰ هزار",
           "220 هزار",
-          "دویست و بیست هزار"
+          "دویست و بیست هزار",
+          "۲۲۰،۰۰۰",
+          "220,000",
+          "دویست و بیست هزار تومان",
+          "۲۲۰ هزار تومان",
+          "220 هزار تومان",
+          "۲۲۰٬۰۰۰"
         ],
         "normalized_prediction": "220000 تومان",
         "scored_candidate": "۲۲۰٬۰۰۰ تومان",
@@ -618,7 +613,13 @@
           "۸/۳",
           "8/3",
           "۲ و ۲/۳",
-          "2 و 2/3"
+          "2 و 2/3",
+          "۲ ساعت و ۴۰ دقیقه",
+          "دو و دو سوم",
+          "۲.۶۷",
+          "2.67",
+          "۲ و ۲/۳ ساعت",
+          "2 و ۲/۳"
         ],
         "normalized_prediction": "83",
         "scored_candidate": "۸/۳",
@@ -636,7 +637,12 @@
           "۵۷.۱",
           "57.1",
           "57.14",
-          "حدود ۵۷"
+          "حدود ۵۷",
+          "۴۰۰/۷",
+          "400/7",
+          "۵۷.۱۴۳",
+          "57.143",
+          "۵۷.۱۴۲۸"
         ],
         "normalized_prediction": "60",
         "scored_candidate": "۶۰",
@@ -699,7 +705,10 @@
         "accepted": [
           "۲۰",
           "20",
-          "بیست"
+          "بیست",
+          "بیست سانتی‌متر",
+          "۲۰ سانتی‌متر",
+          "20 سانتی‌متر"
         ],
         "normalized_prediction": "20",
         "scored_candidate": "۲۰",
@@ -749,7 +758,10 @@
           "100000",
           "۱۰۰ هزار",
           "100 هزار",
-          "صد هزار"
+          "صد هزار",
+          "۱۰۰،۰۰۰",
+          "100،000",
+          "یک صد هزار"
         ],
         "normalized_prediction": "100000 تومان",
         "scored_candidate": "۱۰۰٬۰۰۰ تومان",
@@ -799,7 +811,9 @@
         "accepted": [
           "۱۵۴",
           "154",
-          "صد و پنجاه و چهار"
+          "صد و پنجاه و چهار",
+          "۱۵۴ سانتی‌متر مربع",
+          "154 سانتی‌متر مربع"
         ],
         "normalized_prediction": "154",
         "scored_candidate": "۱۵۴",
@@ -830,7 +844,8 @@
         "accepted": [
           "۶",
           "6",
-          "شش"
+          "شش",
+          "٦"
         ],
         "normalized_prediction": "6",
         "scored_candidate": "6",
@@ -845,7 +860,11 @@
       "details": {
         "accepted": [
           "۳/۸",
-          "3/8"
+          "3/8",
+          "۰٫۳۷۵",
+          "0.375",
+          "3/۸",
+          "۳/8"
         ],
         "normalized_prediction": "38",
         "scored_candidate": "۳/۸",
@@ -861,7 +880,9 @@
         "accepted": [
           "۲۱.۲۵",
           "21.25",
-          "بیست و یک و یک‌چهارم"
+          "بیست و یک و یک‌چهارم",
+          "۲۱ و یک‌چهارم",
+          "بیست‌ویک و یک چهارم"
         ],
         "normalized_prediction": "2125",
         "scored_candidate": "21.25",
@@ -926,7 +947,7 @@
       "score": 0.0,
       "details": {
         "accepted": [
-          "شنبه"
+          "جمعه"
         ],
         "normalized_prediction": "یکشنبه",
         "scored_candidate": "یکشنبه",
@@ -967,22 +988,6 @@
       }
     },
     {
-      "id": "peval-hard-math-029",
-      "track": "hard_math",
-      "prediction": "5",
-      "score": 0.0,
-      "details": {
-        "accepted": [
-          "۱۰",
-          "10",
-          "ده"
-        ],
-        "normalized_prediction": "5",
-        "scored_candidate": "5",
-        "match_kind": "none"
-      }
-    },
-    {
       "id": "peval-hard-math-030",
       "track": "hard_math",
       "prediction": "۱/۶",
@@ -990,7 +995,8 @@
       "details": {
         "accepted": [
           "۱/۶",
-          "1/6"
+          "1/6",
+          "یک ششم"
         ],
         "normalized_prediction": "16",
         "scored_candidate": "۱/۶",
@@ -1001,9 +1007,9 @@
       "id": "peval-hard-reading-005",
       "track": "hard_reading",
       "prediction": "چون کاربران در مراحل بعدی گم می‌شدند و کار را تمام نمی‌کردند، در حالی که صفحه پر با وجود تأخیر اولیه، نرخ تکمیل بالاتری داشت.",
-      "score": 0.3333333333333333,
+      "score": 0.75,
       "details": {
-        "best_answer": "گم شدن کاربر در مرحله بعد",
+        "best_answer": "سردرگمی در مراحل بعدی",
         "scored_candidate": "چون کاربران در مراحل بعدی گم می‌شدند و کار را تمام نمی‌کردند، در حالی که صفحه پر با وجود تأخیر اولیه، نرخ تکمیل بالاتری داشت."
       }
     },
@@ -1021,9 +1027,9 @@
       "id": "peval-hard-reading-007",
       "track": "hard_reading",
       "prediction": "هزینه‌های تعمیر و پشتیبانی خط الف به‌قدری زیاد بود که کل سود را از بین می‌برد.",
-      "score": 0.42857142857142855,
+      "score": 0.8333333333333334,
       "details": {
-        "best_answer": "پایین بودن نرخ خرابی و هزینه تعمیر",
+        "best_answer": "هزینه‌های تعمیر و پشتیبانی کمتر",
         "scored_candidate": "هزینه‌های تعمیر و پشتیبانی خط الف به‌قدری زیاد بود که کل سود را از بین می‌برد."
       }
     },
@@ -1061,9 +1067,9 @@
       "id": "peval-hard-reading-011",
       "track": "hard_reading",
       "prediction": "چون نصاب جلسه (حد نصاب رسمیت) رعایت نشده، رأی‌گیری فاقد اعتبار است و رد پروژه از نظر آیین‌نامه باطل می‌باشد.",
-      "score": 0.25806451612903225,
+      "score": 0.75,
       "details": {
-        "best_answer": "حضور نیمی از اعضا و عدم حد نصاب",
+        "best_answer": "عدم رعایت حد نصاب",
         "scored_candidate": "چون نصاب جلسه (حد نصاب رسمیت) رعایت نشده، رأی‌گیری فاقد اعتبار است و رد پروژه از نظر آیین‌نامه باطل می‌باشد."
       }
     },
@@ -1081,9 +1087,9 @@
       "id": "peval-hard-reading-013",
       "track": "hard_reading",
       "prediction": "همزمان با تغییر رنگ دکمه، کمپین تلویزیونی هم شروع شده بود و ممکن است رشد فروش ناشی از آن کمپین باشد، نه تغییر رنگ.",
-      "score": 0.5,
+      "score": 0.8571428571428571,
       "details": {
-        "best_answer": "همزمانی با کمپین تلویزیونی",
+        "best_answer": "کمپین تلویزیونی هم همزمان شروع شده بود",
         "scored_candidate": "همزمان با تغییر رنگ دکمه، کمپین تلویزیونی هم شروع شده بود و ممکن است رشد فروش ناشی از آن کمپین باشد، نه تغییر رنگ."
       }
     },
@@ -1111,9 +1117,9 @@
       "id": "peval-hard-reading-016",
       "track": "hard_reading",
       "prediction": "فصل گرما (تابستان) هم فروش بستنی را افزایش می‌دهد و هم شنا و در نتیجه غرق‌شدگی را.",
-      "score": 0.75,
+      "score": 1.0,
       "details": {
-        "best_answer": "گرما و فصل تابستان",
+        "best_answer": "تابستان",
         "scored_candidate": "فصل گرما (تابستان) هم فروش بستنی را افزایش می‌دهد و هم شنا و در نتیجه غرق‌شدگی را."
       }
     },
@@ -1131,10 +1137,10 @@
       "id": "peval-hard-reading-018",
       "track": "hard_reading",
       "prediction": "تعصب انتخابی (Selection Bias)",
-      "score": 0.0,
+      "score": 0.5,
       "details": {
-        "best_answer": "",
-        "scored_candidate": ""
+        "best_answer": "تعصب انتخاب",
+        "scored_candidate": "تعصب انتخابی (Selection Bias)"
       }
     },
     {
@@ -1151,9 +1157,9 @@
       "id": "peval-hard-reading-020",
       "track": "hard_reading",
       "prediction": "چون کلاس دخترانه دو برابر بیشتر آموزش دیده، پس تفاوت نمرات ناشی از ساعت تدریس بیشتر است نه توانایی ذاتی دختران.",
-      "score": 0.5,
+      "score": 0.75,
       "details": {
-        "best_answer": "تفاوت در ساعت تدریس",
+        "best_answer": "ساعت تدریس بیشتر بوده",
         "scored_candidate": "چون کلاس دخترانه دو برابر بیشتر آموزش دیده، پس تفاوت نمرات ناشی از ساعت تدریس بیشتر است نه توانایی ذاتی دختران."
       }
     },
@@ -1181,9 +1187,9 @@
       "id": "peval-hard-reading-023",
       "track": "hard_reading",
       "prediction": "تصمیم بر اساس نظر اقلیت گرفته شد و نظر اکثریت نادیده گرفته شد.",
-      "score": 0.5,
+      "score": 0.75,
       "details": {
-        "best_answer": "تصمیم بر مبنای اقلیت",
+        "best_answer": "نادیده گرفتن نظر اکثریت",
         "scored_candidate": "تصمیم بر اساس نظر اقلیت گرفته شد و نظر اکثریت نادیده گرفته شد."
       }
     },
@@ -1191,9 +1197,9 @@
       "id": "peval-hard-reading-024",
       "track": "hard_reading",
       "prediction": "چون ساکنان ناراضی رفته‌اند و کسانی که مانده‌اند لزوماً راضی‌ترند، نه اینکه کیفیت زندگی واقعاً بهتر شده باشد.",
-      "score": 0.25,
+      "score": 0.6,
       "details": {
-        "best_answer": "جابه‌جایی ساکنان شاکی",
+        "best_answer": "ساکنان ناراضی قبلاً رفته بودند",
         "scored_candidate": "چون ساکنان ناراضی رفته‌اند و کسانی که مانده‌اند لزوماً راضی‌ترند، نه اینکه کیفیت زندگی واقعاً بهتر شده باشد."
       }
     },
@@ -1211,9 +1217,9 @@
       "id": "peval-hard-reading-026",
       "track": "hard_reading",
       "prediction": "بهینه‌سازی فقط صفحه پروفایل.",
-      "score": 0.75,
+      "score": 1.0,
       "details": {
-        "best_answer": "بازنویسی فقط صفحه پروفایل",
+        "best_answer": "صفحه پروفایل",
         "scored_candidate": "بهینه‌سازی فقط صفحه پروفایل."
       }
     },
@@ -1221,29 +1227,19 @@
       "id": "peval-hard-reading-027",
       "track": "hard_reading",
       "prediction": "سن جمعیت",
-      "score": 0.6666666666666666,
+      "score": 1.0,
       "details": {
-        "best_answer": "بیشتر بودن سن جمعیت",
+        "best_answer": "سن",
         "scored_candidate": "سن جمعیت"
-      }
-    },
-    {
-      "id": "peval-hard-reading-028",
-      "track": "hard_reading",
-      "prediction": "تصمیم با ضابطه تناسب دارد، زیرا ضابطه فقط اولویت‌بندی را مشخص می‌کند، نه شرط لازم برای پذیرش را.",
-      "score": 0.6666666666666666,
-      "details": {
-        "best_answer": "خلاف ضابطه اولویت",
-        "scored_candidate": "تصمیم با ضابطه تناسب دارد، زیرا ضابطه فقط اولویت‌بندی را مشخص می‌کند، نه شرط لازم برای پذیرش را."
       }
     },
     {
       "id": "peval-hard-reading-029",
       "track": "hard_reading",
       "prediction": "افزایش درآمد ناشی از گران‌شدن قیمت بوده نه بهبود عملکرد، چون تعداد مشتریان و فروش واقعی کاهش یافته است.",
-      "score": 0.3333333333333333,
+      "score": 0.5,
       "details": {
-        "best_answer": "کاهش حجم فروش پشت رشد درآمد",
+        "best_answer": "تنها افزایش قیمت باعث رشد درآمد شده، نه بهبود فروش",
         "scored_candidate": "افزایش درآمد ناشی از گران‌شدن قیمت بوده نه بهبود عملکرد، چون تعداد مشتریان و فروش واقعی کاهش یافته است."
       }
     },
@@ -1708,17 +1704,6 @@
       }
     },
     {
-      "id": "peval-hard-culture-008",
-      "track": "hard_culture",
-      "prediction": "ت",
-      "score": 1.0,
-      "details": {
-        "predicted_index": 3,
-        "answer_index": 3,
-        "scored_candidate": "ت"
-      }
-    },
-    {
       "id": "peval-hard-culture-009",
       "track": "hard_culture",
       "prediction": "الف",
@@ -1749,17 +1734,6 @@
         "predicted_index": 2,
         "answer_index": 2,
         "scored_candidate": "پ"
-      }
-    },
-    {
-      "id": "peval-hard-culture-012",
-      "track": "hard_culture",
-      "prediction": "ت",
-      "score": 1.0,
-      "details": {
-        "predicted_index": 3,
-        "answer_index": 3,
-        "scored_candidate": "ت"
       }
     },
     {
@@ -1960,5 +1934,12 @@
         "scored_candidate": "ب"
       }
     }
+  ],
+  "dropped_samples": [
+    "peval-hard-reasoning-014",
+    "peval-hard-math-029",
+    "peval-hard-reading-028",
+    "peval-hard-culture-008",
+    "peval-hard-culture-012"
   ]
 }

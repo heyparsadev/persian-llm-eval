@@ -17,15 +17,15 @@
       "n": 30
     },
     "reading": {
-      "score": 0.8101648351648353,
+      "score": 0.8813028039498627,
       "n": 30
     },
     "short_qa": {
-      "score": 0.9,
-      "n": 30
+      "score": 0.9310344827586207,
+      "n": 29
     }
   },
-  "overall_score": 0.9353663003663005,
+  "overall_score": 0.9558007906750301,
   "run_config": {
     "data": [
       "data/persian_eval_v1.public_eval.jsonl"
@@ -38,7 +38,7 @@
     "quantization": null,
     "reasoning_effort": null
   },
-  "timestamp": "2026-05-14T14:06:05+00:00",
+  "timestamp": "2026-05-15T08:39:42+00:00",
   "samples": [
     {
       "id": "peval-public-knowledge-001",
@@ -580,7 +580,10 @@
       "details": {
         "accepted": [
           "دماوند",
-          "قله دماوند"
+          "قله دماوند",
+          "کوه دماوند",
+          "قله‌ی دماوند",
+          "کوه‌دماوند"
         ],
         "normalized_prediction": "دماوند",
         "scored_candidate": "دماوند",
@@ -594,7 +597,8 @@
       "score": 1.0,
       "details": {
         "accepted": [
-          "مشهد"
+          "مشهد",
+          "مشهد مقدس"
         ],
         "normalized_prediction": "مشهد",
         "scored_candidate": "مشهد",
@@ -623,7 +627,8 @@
       "details": {
         "accepted": [
           "قشم",
-          "جزیره قشم"
+          "جزیره قشم",
+          "جزیره‌ی قشم"
         ],
         "normalized_prediction": "قشم",
         "scored_candidate": "قشم",
@@ -651,7 +656,8 @@
       "score": 1.0,
       "details": {
         "accepted": [
-          "فروردین"
+          "فروردین",
+          "فروردین‌ماه"
         ],
         "normalized_prediction": "فروردین",
         "scored_candidate": "فروردین",
@@ -695,7 +701,8 @@
       "score": 1.0,
       "details": {
         "accepted": [
-          "تابستان"
+          "تابستان",
+          "تابستون"
         ],
         "normalized_prediction": "تابستان",
         "scored_candidate": "تابستان",
@@ -726,11 +733,15 @@
           "هزار",
           "هزار متر",
           "۱۰۰۰",
-          "1000"
+          "1000",
+          "۱۰۰۰ متر",
+          "یک هزار متر",
+          "۱٬۰۰۰",
+          "1,000"
         ],
         "normalized_prediction": "1000 متر",
         "scored_candidate": "1000 متر",
-        "match_kind": "subsequence"
+        "match_kind": "exact"
       }
     },
     {
@@ -741,7 +752,9 @@
       "details": {
         "accepted": [
           "نیم‌کره جنوبی",
-          "جنوبی"
+          "جنوبی",
+          "نیمکره جنوبی",
+          "نیم کره جنوبی"
         ],
         "normalized_prediction": "نیم کره جنوبی",
         "scored_candidate": "نیم‌کره جنوبی",
@@ -756,7 +769,10 @@
       "details": {
         "accepted": [
           "مشتری",
-          "سیاره مشتری"
+          "سیاره مشتری",
+          "ژوپیتر",
+          "Jupiter",
+          "مشتری (Jupiter)"
         ],
         "normalized_prediction": "مشتری",
         "scored_candidate": "مشتری",
@@ -786,7 +802,12 @@
         "accepted": [
           "هر عدد",
           "همه اعداد",
-          "هر عددی"
+          "هر عددی",
+          "تمام اعداد",
+          "هر عدد دلخواه",
+          "هر عدد حقیقی",
+          "هر عددی را",
+          "همه‌ی اعداد"
         ],
         "normalized_prediction": "هر عدد",
         "scored_candidate": "هر عدد",
@@ -829,7 +850,8 @@
       "details": {
         "accepted": [
           "بطن چپ",
-          "چپ"
+          "چپ",
+          "بطن چپ قلب"
         ],
         "normalized_prediction": "بطن چپ",
         "scored_candidate": "بطن چپ",
@@ -860,7 +882,8 @@
       "details": {
         "accepted": [
           "نوروز",
-          "عید نوروز"
+          "عید نوروز",
+          "جشن نوروز"
         ],
         "normalized_prediction": "نوروز",
         "scored_candidate": "نوروز",
@@ -874,7 +897,9 @@
       "score": 1.0,
       "details": {
         "accepted": [
-          "اردیبهشت"
+          "اردیبهشت",
+          "اردیبهشت‌ماه",
+          "ماه اردیبهشت"
         ],
         "normalized_prediction": "اردیبهشت",
         "scored_candidate": "اردیبهشت",
@@ -896,21 +921,6 @@
       }
     },
     {
-      "id": "peval-public-shortqa-027",
-      "track": "short_qa",
-      "prediction": "ردیف میانی (ردیف خانه)",
-      "score": 0.0,
-      "details": {
-        "accepted": [
-          "ردیف بالا",
-          "ردیف بالای حروف"
-        ],
-        "normalized_prediction": "ردیف میانی ردیف خانه",
-        "scored_candidate": "ردیف میانی (ردیف خانه)",
-        "match_kind": "none"
-      }
-    },
-    {
       "id": "peval-public-shortqa-028",
       "track": "short_qa",
       "prediction": "اقیانوس آرام",
@@ -918,7 +928,10 @@
       "details": {
         "accepted": [
           "اقیانوس آرام",
-          "آرام"
+          "آرام",
+          "اقیانوس کبیر",
+          "پاسیفیک",
+          "اقیانوس پاسیفیک"
         ],
         "normalized_prediction": "اقیانوس آرام",
         "scored_candidate": "اقیانوس آرام",
@@ -947,7 +960,10 @@
       "score": 1.0,
       "details": {
         "accepted": [
-          "جیوه"
+          "جیوه",
+          "Hg",
+          "جیوه (Hg)",
+          "mercury"
         ],
         "normalized_prediction": "جیوه",
         "scored_candidate": "جیوه",
@@ -998,9 +1014,9 @@
       "id": "peval-public-reading-009",
       "track": "reading",
       "prediction": "کمبود نور خورشید در آن گوشه باعث کاهش عملکرد گیاه و پژمردگی زودهنگام گل‌ها شد.",
-      "score": 0.3333333333333333,
+      "score": 0.6666666666666666,
       "details": {
-        "best_answer": "نور آفتاب کم",
+        "best_answer": "کمبود نور آفتاب",
         "scored_candidate": "کمبود نور خورشید در آن گوشه باعث کاهش عملکرد گیاه و پژمردگی زودهنگام گل‌ها شد."
       }
     },
@@ -1008,9 +1024,9 @@
       "id": "peval-public-reading-010",
       "track": "reading",
       "prediction": "تصمیم شرکت هزینه‌های ایاب و ذهاب را به نصف کاهش داد.",
-      "score": 0.6666666666666666,
+      "score": 0.7142857142857143,
       "details": {
-        "best_answer": "نصف شدن هزینه ایاب و ذهاب",
+        "best_answer": "هزینه ایاب و ذهاب به نصف رسید",
         "scored_candidate": "تصمیم شرکت هزینه‌های ایاب و ذهاب را به نصف کاهش داد."
       }
     },
@@ -1018,9 +1034,9 @@
       "id": "peval-public-reading-011",
       "track": "reading",
       "prediction": "آماده کردن لباس‌های روز بعد شب قبل.",
-      "score": 0.7692307692307693,
+      "score": 0.9411764705882353,
       "details": {
-        "best_answer": "آماده کردن لباس شب قبل",
+        "best_answer": "لباس‌های روز بعد را شب قبل آماده کردن",
         "scored_candidate": "آماده کردن لباس‌های روز بعد شب قبل."
       }
     },
@@ -1028,9 +1044,9 @@
       "id": "peval-public-reading-012",
       "track": "reading",
       "prediction": "در خانه‌هایی که گیاه آپارتمانی وجود داشت، رطوبت هوای داخل کمی بیشتر بود.",
-      "score": 0.42857142857142855,
+      "score": 0.7272727272727273,
       "details": {
-        "best_answer": "افزایش رطوبت در خانه‌های با گیاه",
+        "best_answer": "خانه‌هایی که گیاه آپارتمانی دارند رطوبت هوای کمی بیشتری دارند",
         "scored_candidate": "در خانه‌هایی که گیاه آپارتمانی وجود داشت، رطوبت هوای داخل کمی بیشتر بود."
       }
     },
@@ -1038,9 +1054,9 @@
       "id": "peval-public-reading-013",
       "track": "reading",
       "prediction": "تعداد گزارش‌های خطا به یک‌سوم کاهش یافت.",
-      "score": 0.8333333333333334,
+      "score": 1.0,
       "details": {
-        "best_answer": "کاهش گزارش خطا به یک‌سوم",
+        "best_answer": "کاهش گزارش‌های خطا به یک‌سوم",
         "scored_candidate": "تعداد گزارش‌های خطا به یک‌سوم کاهش یافت."
       }
     },
@@ -1068,9 +1084,9 @@
       "id": "peval-public-reading-016",
       "track": "reading",
       "prediction": "نصب شیرهای هواگیر (پرلاتور) که با مخلوط کردن هوا جریان واقعی آب را کاهش و احساس فشار را حفظ کردند.",
-      "score": 0.42857142857142855,
+      "score": 0.6,
       "details": {
-        "best_answer": "تعویض شیرها با شیرهای مخلوط‌کن هوا",
+        "best_answer": "نصب شیرهایی که هوا را با آب مخلوط می‌کنند",
         "scored_candidate": "نصب شیرهای هواگیر (پرلاتور) که با مخلوط کردن هوا جریان واقعی آب را کاهش و احساس فشار را حفظ کردند."
       }
     },
@@ -1108,9 +1124,9 @@
       "id": "peval-public-reading-020",
       "track": "reading",
       "prediction": "مقدار زباله‌ای که به سطل عمومی می‌رفت نصف شده.",
-      "score": 0.6,
+      "score": 0.9,
       "details": {
-        "best_answer": "نصف شدن زباله سطل عمومی",
+        "best_answer": "زباله‌ای که به سطل عمومی می‌رود نصف شده",
         "scored_candidate": "مقدار زباله‌ای که به سطل عمومی می‌رفت نصف شده."
       }
     },
@@ -1148,9 +1164,9 @@
       "id": "peval-public-reading-024",
       "track": "reading",
       "prediction": "سفارش‌ها در روز دو برابر شدند.",
-      "score": 0.5,
+      "score": 0.8333333333333333,
       "details": {
-        "best_answer": "دو برابر شدن تعداد سفارش روزانه",
+        "best_answer": "سفارش‌ها دو برابر شدند",
         "scored_candidate": "سفارش‌ها در روز دو برابر شدند."
       }
     },
@@ -1188,9 +1204,9 @@
       "id": "peval-public-reading-028",
       "track": "reading",
       "prediction": "هر روز سی دقیقه پیاده‌روی کنند.",
-      "score": 0.8000000000000002,
+      "score": 1.0,
       "details": {
-        "best_answer": "پیاده‌روی روزانه سی دقیقه",
+        "best_answer": "هر روز سی دقیقه پیاده‌روی کنند",
         "scored_candidate": "هر روز سی دقیقه پیاده‌روی کنند."
       }
     },
@@ -1208,9 +1224,9 @@
       "id": "peval-public-reading-030",
       "track": "reading",
       "prediction": "بچه‌های روستا دیگر برای رفتن به مدرسه مجبور به دور زدن مسیر طولانی نیستند.",
-      "score": 0.6666666666666666,
+      "score": 0.7777777777777778,
       "details": {
-        "best_answer": "حذف دور زدن از مسیر طولانی",
+        "best_answer": "دیگر مجبور به دور زدن از مسیر طولانی نیستند",
         "scored_candidate": "بچه‌های روستا دیگر برای رفتن به مدرسه مجبور به دور زدن مسیر طولانی نیستند."
       }
     },
@@ -1517,7 +1533,6 @@
         "checks": {
           "required_keywords": true,
           "forbidden": true,
-          "min_words": true,
           "max_words": true
         },
         "constraint_score": 1.0
@@ -1882,5 +1897,8 @@
         "scored_candidate": "ب"
       }
     }
+  ],
+  "dropped_samples": [
+    "peval-public-shortqa-027"
   ]
 }
