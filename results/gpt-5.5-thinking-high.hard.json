@@ -6,26 +6,26 @@
   "task_scores": {
     "hard_culture": {
       "score": 1.0,
-      "n": 30
+      "n": 28
     },
     "hard_instruction": {
       "score": 1.0,
       "n": 30
     },
     "hard_math": {
-      "score": 0.9666666666666667,
-      "n": 30
+      "score": 1.0,
+      "n": 29
     },
     "hard_reading": {
-      "score": 0.5938744588744587,
-      "n": 30
+      "score": 0.7018745847346253,
+      "n": 29
     },
     "hard_reasoning": {
-      "score": 0.7666666666666667,
-      "n": 30
+      "score": 0.896551724137931,
+      "n": 29
     }
   },
-  "overall_score": 0.8654415584415585,
+  "overall_score": 0.9196852617745112,
   "run_config": {
     "data": [
       "data/persian_eval_v1.hard.jsonl"
@@ -38,7 +38,7 @@
     "quantization": null,
     "reasoning_effort": "high"
   },
-  "timestamp": "2026-05-14T22:25:10+00:00",
+  "timestamp": "2026-05-15T08:39:43+00:00",
   "samples": [
     {
       "id": "peval-hard-reasoning-001",
@@ -370,10 +370,10 @@
       "id": "peval-hard-reasoning-012",
       "track": "hard_reasoning",
       "prediction": "پ",
-      "score": 0.0,
+      "score": 1.0,
       "details": {
         "predicted_index": 2,
-        "answer_index": 3,
+        "answer_index": 2,
         "scored_candidate": "پ"
       }
     },
@@ -389,24 +389,13 @@
       }
     },
     {
-      "id": "peval-hard-reasoning-014",
-      "track": "hard_reasoning",
-      "prediction": "ت",
-      "score": 0.0,
-      "details": {
-        "predicted_index": 3,
-        "answer_index": 1,
-        "scored_candidate": "ت"
-      }
-    },
-    {
       "id": "peval-hard-reasoning-015",
       "track": "hard_reasoning",
       "prediction": "الف",
-      "score": 0.0,
+      "score": 1.0,
       "details": {
         "predicted_index": 0,
-        "answer_index": 2,
+        "answer_index": 0,
         "scored_candidate": "الف"
       }
     },
@@ -469,10 +458,10 @@
       "id": "peval-hard-reasoning-021",
       "track": "hard_reasoning",
       "prediction": "ب",
-      "score": 0.0,
+      "score": 1.0,
       "details": {
         "predicted_index": 1,
-        "answer_index": 0,
+        "answer_index": 1,
         "scored_candidate": "ب"
       }
     },
@@ -586,7 +575,13 @@
           "220000",
           "۲۲۰ هزار",
           "220 هزار",
-          "دویست و بیست هزار"
+          "دویست و بیست هزار",
+          "۲۲۰،۰۰۰",
+          "220,000",
+          "دویست و بیست هزار تومان",
+          "۲۲۰ هزار تومان",
+          "220 هزار تومان",
+          "۲۲۰٬۰۰۰"
         ],
         "normalized_prediction": "220000 تومان",
         "scored_candidate": "۲۲۰٬۰۰۰ تومان",
@@ -618,7 +613,13 @@
           "۸/۳",
           "8/3",
           "۲ و ۲/۳",
-          "2 و 2/3"
+          "2 و 2/3",
+          "۲ ساعت و ۴۰ دقیقه",
+          "دو و دو سوم",
+          "۲.۶۷",
+          "2.67",
+          "۲ و ۲/۳ ساعت",
+          "2 و ۲/۳"
         ],
         "normalized_prediction": "83 ساعت",
         "scored_candidate": "۸/۳ ساعت",
@@ -636,7 +637,12 @@
           "۵۷.۱",
           "57.1",
           "57.14",
-          "حدود ۵۷"
+          "حدود ۵۷",
+          "۴۰۰/۷",
+          "400/7",
+          "۵۷.۱۴۳",
+          "57.143",
+          "۵۷.۱۴۲۸"
         ],
         "normalized_prediction": "5714 کیلومتر بر ساعت",
         "scored_candidate": "۵۷٫۱۴ کیلومتر بر ساعت",
@@ -699,11 +705,14 @@
         "accepted": [
           "۲۰",
           "20",
-          "بیست"
+          "بیست",
+          "بیست سانتی‌متر",
+          "۲۰ سانتی‌متر",
+          "20 سانتی‌متر"
         ],
         "normalized_prediction": "20 سانتی متر",
         "scored_candidate": "۲۰ سانتی‌متر",
-        "match_kind": "subsequence"
+        "match_kind": "exact"
       }
     },
     {
@@ -749,7 +758,10 @@
           "100000",
           "۱۰۰ هزار",
           "100 هزار",
-          "صد هزار"
+          "صد هزار",
+          "۱۰۰،۰۰۰",
+          "100،000",
+          "یک صد هزار"
         ],
         "normalized_prediction": "100000 تومان",
         "scored_candidate": "۱۰۰۰۰۰ تومان",
@@ -799,11 +811,13 @@
         "accepted": [
           "۱۵۴",
           "154",
-          "صد و پنجاه و چهار"
+          "صد و پنجاه و چهار",
+          "۱۵۴ سانتی‌متر مربع",
+          "154 سانتی‌متر مربع"
         ],
         "normalized_prediction": "154 سانتی متر مربع",
         "scored_candidate": "۱۵۴ سانتی‌متر مربع",
-        "match_kind": "subsequence"
+        "match_kind": "exact"
       }
     },
     {
@@ -830,7 +844,8 @@
         "accepted": [
           "۶",
           "6",
-          "شش"
+          "شش",
+          "٦"
         ],
         "normalized_prediction": "6",
         "scored_candidate": "۶",
@@ -845,7 +860,11 @@
       "details": {
         "accepted": [
           "۳/۸",
-          "3/8"
+          "3/8",
+          "۰٫۳۷۵",
+          "0.375",
+          "3/۸",
+          "۳/8"
         ],
         "normalized_prediction": "38",
         "scored_candidate": "۳/۸",
@@ -861,7 +880,9 @@
         "accepted": [
           "۲۱.۲۵",
           "21.25",
-          "بیست و یک و یک‌چهارم"
+          "بیست و یک و یک‌چهارم",
+          "۲۱ و یک‌چهارم",
+          "بیست‌ویک و یک چهارم"
         ],
         "normalized_prediction": "2125",
         "scored_candidate": "۲۱٫۲۵",
@@ -923,14 +944,14 @@
       "id": "peval-hard-math-026",
       "track": "hard_math",
       "prediction": "جمعه",
-      "score": 0.0,
+      "score": 1.0,
       "details": {
         "accepted": [
-          "شنبه"
+          "جمعه"
         ],
         "normalized_prediction": "جمعه",
         "scored_candidate": "جمعه",
-        "match_kind": "none"
+        "match_kind": "exact"
       }
     },
     {
@@ -967,22 +988,6 @@
       }
     },
     {
-      "id": "peval-hard-math-029",
-      "track": "hard_math",
-      "prediction": "۱۰",
-      "score": 1.0,
-      "details": {
-        "accepted": [
-          "۱۰",
-          "10",
-          "ده"
-        ],
-        "normalized_prediction": "10",
-        "scored_candidate": "۱۰",
-        "match_kind": "exact"
-      }
-    },
-    {
       "id": "peval-hard-math-030",
       "track": "hard_math",
       "prediction": "۱/۶",
@@ -990,7 +995,8 @@
       "details": {
         "accepted": [
           "۱/۶",
-          "1/6"
+          "1/6",
+          "یک ششم"
         ],
         "normalized_prediction": "16",
         "scored_candidate": "۱/۶",
@@ -1001,9 +1007,9 @@
       "id": "peval-hard-reading-005",
       "track": "hard_reading",
       "prediction": "چون سادگیِ اولیه باعث سردرگمی بعدی و افت تکمیل کار می‌شد، اما صفحه پُرتر در نهایت کاربران را بهتر به پایان می‌رساند.",
-      "score": 0.25,
+      "score": 0.5,
       "details": {
-        "best_answer": "سردرگمی در گام بعد",
+        "best_answer": "سردرگمی در مراحل بعدی",
         "scored_candidate": "چون سادگیِ اولیه باعث سردرگمی بعدی و افت تکمیل کار می‌شد، اما صفحه پُرتر در نهایت کاربران را بهتر به پایان می‌رساند."
       }
     },
@@ -1021,9 +1027,9 @@
       "id": "peval-hard-reading-007",
       "track": "hard_reading",
       "prediction": "چون نرخ خرابی و هزینه‌های تعمیر و پشتیبانی خط ب کمتر است و سود نهایی بیشتری می‌دهد.",
-      "score": 0.7142857142857143,
+      "score": 0.8333333333333334,
       "details": {
-        "best_answer": "پایین بودن نرخ خرابی و هزینه تعمیر",
+        "best_answer": "هزینه‌های تعمیر و پشتیبانی کمتر",
         "scored_candidate": "چون نرخ خرابی و هزینه‌های تعمیر و پشتیبانی خط ب کمتر است و سود نهایی بیشتری می‌دهد."
       }
     },
@@ -1051,9 +1057,9 @@
       "id": "peval-hard-reading-010",
       "track": "hard_reading",
       "prediction": "آن سه چهارراه احتمالاً فقط حدود ۱۰٪ از کل تصادفات شهر را شامل می‌شدند.",
-      "score": 0.14285714285714285,
+      "score": 0.29411764705882354,
       "details": {
-        "best_answer": "جابه‌جایی تصادف به چهارراه‌های دیگر",
+        "best_answer": "سهم کوچک سه چهارراه از کل شهر (کاهش ۵۰٪ در تعداد کمی از نقاط تأثیر ناچیزی بر کل دارد)",
         "scored_candidate": "آن سه چهارراه احتمالاً فقط حدود ۱۰٪ از کل تصادفات شهر را شامل می‌شدند."
       }
     },
@@ -1081,9 +1087,9 @@
       "id": "peval-hard-reading-013",
       "track": "hard_reading",
       "prediction": "چون هم‌زمان کمپین تلویزیونی شروع شده و اثر آن با تغییر رنگ دکمه مخلوط شده است.",
-      "score": 0.5,
+      "score": 0.7142857142857143,
       "details": {
-        "best_answer": "همزمانی با کمپین تلویزیونی",
+        "best_answer": "کمپین تلویزیونی هم همزمان شروع شده بود",
         "scored_candidate": "چون هم‌زمان کمپین تلویزیونی شروع شده و اثر آن با تغییر رنگ دکمه مخلوط شده است."
       }
     },
@@ -1111,9 +1117,9 @@
       "id": "peval-hard-reading-016",
       "track": "hard_reading",
       "prediction": "گرمای هوا یا فصل تابستان",
-      "score": 0.5,
+      "score": 1.0,
       "details": {
-        "best_answer": "گرما و فصل تابستان",
+        "best_answer": "فصل تابستان",
         "scored_candidate": "گرمای هوا یا فصل تابستان"
       }
     },
@@ -1121,9 +1127,9 @@
       "id": "peval-hard-reading-017",
       "track": "hard_reading",
       "prediction": "نبود دستور جلسه مشخص از قبل",
-      "score": 0.8000000000000002,
+      "score": 0.9090909090909091,
       "details": {
-        "best_answer": "نبود دستور جلسه از پیش",
+        "best_answer": "نبود دستور جلسه از قبل",
         "scored_candidate": "نبود دستور جلسه مشخص از قبل"
       }
     },
@@ -1131,9 +1137,9 @@
       "id": "peval-hard-reading-018",
       "track": "hard_reading",
       "prediction": "سوگیری نمونه‌گیری",
-      "score": 0.6666666666666666,
+      "score": 1.0,
       "details": {
-        "best_answer": "سوگیری انتخاب نمونه",
+        "best_answer": "سوگیری نمونه‌گیری",
         "scored_candidate": "سوگیری نمونه‌گیری"
       }
     },
@@ -1181,9 +1187,9 @@
       "id": "peval-hard-reading-023",
       "track": "hard_reading",
       "prediction": "تصمیم‌گیری بر اساس داده ناقص و نادیده‌گرفتن نظر اکثریت",
-      "score": 0.5,
+      "score": 1.0,
       "details": {
-        "best_answer": "تصمیم بر مبنای اقلیت",
+        "best_answer": "نادیده گرفتن نظر اکثریت",
         "scored_candidate": "تصمیم‌گیری بر اساس داده ناقص و نادیده‌گرفتن نظر اکثریت"
       }
     },
@@ -1211,9 +1217,9 @@
       "id": "peval-hard-reading-026",
       "track": "hard_reading",
       "prediction": "بازنویسی یا بهینه‌سازی فقط صفحه پروفایل اقتصادی‌تر است.",
-      "score": 0.75,
+      "score": 1.0,
       "details": {
-        "best_answer": "بازنویسی فقط صفحه پروفایل",
+        "best_answer": "صفحه پروفایل",
         "scored_candidate": "بازنویسی یا بهینه‌سازی فقط صفحه پروفایل اقتصادی‌تر است."
       }
     },
@@ -1221,29 +1227,19 @@
       "id": "peval-hard-reading-027",
       "track": "hard_reading",
       "prediction": "میانگین سن جمعیت",
-      "score": 0.6666666666666666,
+      "score": 1.0,
       "details": {
-        "best_answer": "میانگین سن بالاتر",
+        "best_answer": "سن",
         "scored_candidate": "میانگین سن جمعیت"
-      }
-    },
-    {
-      "id": "peval-hard-reading-028",
-      "track": "hard_reading",
-      "prediction": "لزوماً مغایر ضابطه نیست، اما از آن هم نتیجه نمی‌شود.",
-      "score": 0.3333333333333333,
-      "details": {
-        "best_answer": "خلاف ضابطه اولویت",
-        "scored_candidate": "لزوماً مغایر ضابطه نیست، اما از آن هم نتیجه نمی‌شود."
       }
     },
     {
       "id": "peval-hard-reading-029",
       "track": "hard_reading",
       "prediction": "چون افزایش درآمد ممکن است فقط ناشی از گرانی باشد، در حالی‌که مقدار فروش کاهش یافته و عملکرد واقعی بهتر نشده است.",
-      "score": 0.3333333333333333,
+      "score": 0.4444444444444444,
       "details": {
-        "best_answer": "کاهش حجم فروش پشت رشد درآمد",
+        "best_answer": "عملکرد واقعی ضعیف است زیرا حجم فروش نصف شده",
         "scored_candidate": "چون افزایش درآمد ممکن است فقط ناشی از گرانی باشد، در حالی‌که مقدار فروش کاهش یافته و عملکرد واقعی بهتر نشده است."
       }
     },
@@ -1708,17 +1704,6 @@
       }
     },
     {
-      "id": "peval-hard-culture-008",
-      "track": "hard_culture",
-      "prediction": "ت",
-      "score": 1.0,
-      "details": {
-        "predicted_index": 3,
-        "answer_index": 3,
-        "scored_candidate": "ت"
-      }
-    },
-    {
       "id": "peval-hard-culture-009",
       "track": "hard_culture",
       "prediction": "الف",
@@ -1749,17 +1734,6 @@
         "predicted_index": 2,
         "answer_index": 2,
         "scored_candidate": "پ"
-      }
-    },
-    {
-      "id": "peval-hard-culture-012",
-      "track": "hard_culture",
-      "prediction": "ت",
-      "score": 1.0,
-      "details": {
-        "predicted_index": 3,
-        "answer_index": 3,
-        "scored_candidate": "ت"
       }
     },
     {
@@ -1960,5 +1934,12 @@
         "scored_candidate": "ب)"
       }
     }
+  ],
+  "dropped_samples": [
+    "peval-hard-reasoning-014",
+    "peval-hard-math-029",
+    "peval-hard-reading-028",
+    "peval-hard-culture-008",
+    "peval-hard-culture-012"
   ]
 }

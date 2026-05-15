@@ -42,6 +42,26 @@ SPLITS = {
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--auto-clear", action="store_true", help="Apply accepted+rejected only")
+    parser.add_argument(
+        "--auto-safe",
+        action="store_true",
+        help=(
+            "Auto-apply revise items whose only proposed changes are strict "
+            "improvements (answer_additions, and constraint_changes that "
+            "loosen min_words / max_words). Items with rewrite_prompt or "
+            "answer_replacement / answer_index_replacement are skipped."
+        ),
+    )
+    parser.add_argument(
+        "--auto-prompt-rewrite",
+        action="store_true",
+        help="Bulk-apply rewrite_prompt proposals (also any combined constraint loosen).",
+    )
+    parser.add_argument(
+        "--auto-rubric-only",
+        action="store_true",
+        help="Mark items accepted when the only proposed change is rubric/notes (no content edit).",
+    )
     parser.add_argument("--interactive", action="store_true", help="Walk through revise items")
     parser.add_argument("--track", default=None, help="Only process one track (filter)")
     parser.add_argument(
@@ -51,7 +71,13 @@ def main(argv: list[str] | None = None) -> int:
     )
     args = parser.parse_args(argv)
 
-    if not (args.auto_clear or args.interactive):
+    if not (
+        args.auto_clear
+        or args.auto_safe
+        or args.auto_rubric_only
+        or args.auto_prompt_rewrite
+        or args.interactive
+    ):
         args.auto_clear = True
         args.interactive = True
 
@@ -61,6 +87,12 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.auto_clear:
         _apply_auto_clear(proposals, dry_run=args.dry_run)
+    if args.auto_safe:
+        _apply_auto_safe(proposals, dry_run=args.dry_run)
+    if args.auto_rubric_only:
+        _apply_auto_rubric_only(proposals, dry_run=args.dry_run)
+    if args.auto_prompt_rewrite:
+        _apply_auto_prompt_rewrite(proposals, dry_run=args.dry_run)
     if args.interactive:
         _apply_interactive(proposals, dry_run=args.dry_run)
     return 0
@@ -131,6 +163,249 @@ def _apply_auto_clear(proposals: list[dict[str, Any]], *, dry_run: bool) -> None
         )
         if not dry_run:
             _write_dataset(path, out)
+
+
+def _is_safe_change_set(changes: dict[str, Any], item: dict[str, Any]) -> bool:
+    """Return True iff the proposal is strict-improvement only.
+
+    Safe ingredients:
+    - answer_additions (non-empty list of strings)
+    - constraint_changes that *loosen* min_words (decrease) or max_words
+      (increase) only. Anything else (forbidden, required_keywords,
+      required_prefix/suffix, tighter word bounds) is treated as risky.
+
+    Risky ingredients (any one makes the proposal not safe):
+    - rewrite_prompt
+    - answer_replacement
+    - answer_index_replacement
+    """
+
+    risky_keys = ("rewrite_prompt", "answer_replacement", "answer_index_replacement")
+    for key in risky_keys:
+        if changes.get(key) not in (None, "", []):
+            return False
+
+    additions = changes.get("answer_additions")
+    constraint_changes = changes.get("constraint_changes")
+
+    has_additions = bool(additions) and isinstance(additions, list)
+    has_constraints = isinstance(constraint_changes, dict) and bool(constraint_changes)
+
+    if not (has_additions or has_constraints):
+        return False
+
+    if has_constraints:
+        current = item.get("answer") if isinstance(item.get("answer"), dict) else {}
+        for key, value in constraint_changes.items():
+            if key == "max_words":
+                if not isinstance(value, int):
+                    return False
+                existing = current.get("max_words")
+                if isinstance(existing, int) and value < existing:
+                    return False  # tightening → risky
+            elif key == "min_words":
+                if not isinstance(value, int):
+                    return False
+                existing = current.get("min_words")
+                if isinstance(existing, int) and value > existing:
+                    return False  # tightening → risky
+            else:
+                return False  # forbidden / required_* / etc. are risky to auto-apply
+    return True
+
+
+def _apply_auto_safe(proposals: list[dict[str, Any]], *, dry_run: bool) -> None:
+    revise = [p for p in proposals if p.get("recommendation") == "revise"]
+    print(f"auto-safe: {len(revise)} revise items to scan", file=sys.stderr)
+    rows_by_split: dict[str, list[dict[str, Any]]] = {
+        name: _load_dataset(path) for name, path in SPLITS.items()
+    }
+    by_id: dict[str, dict[str, Any]] = {}
+    for rows in rows_by_split.values():
+        for row in rows:
+            by_id[row["id"]] = row
+
+    applied = 0
+    skipped_risky = 0
+    skipped_other = 0
+    dirty_splits: set[str] = set()
+
+    for proposal in revise:
+        item = by_id.get(proposal["id"])
+        if item is None:
+            continue
+        changes = proposal.get("proposed_changes")
+        if not isinstance(changes, dict):
+            skipped_other += 1
+            continue
+        if not _is_safe_change_set(changes, item):
+            skipped_risky += 1
+            continue
+        if _apply_one(item, proposal):
+            applied += 1
+            split_name = _split_for_id(proposal["id"])
+            dirty_splits.add(split_name)
+        else:
+            skipped_other += 1
+
+    print(
+        f"auto-safe: applied={applied} risky_skipped={skipped_risky} other_skipped={skipped_other}",
+        file=sys.stderr,
+    )
+    if dry_run or not dirty_splits:
+        return
+    for split_name in dirty_splits:
+        if split_name in SPLITS:
+            _write_dataset(SPLITS[split_name], rows_by_split[split_name])
+
+
+def _has_content_change(changes: dict[str, Any]) -> bool:
+    """True if the proposal has any concrete content change (vs rubric/notes only)."""
+
+    keys = (
+        "answer_additions",
+        "answer_replacement",
+        "answer_index_replacement",
+        "rewrite_prompt",
+        "constraint_changes",
+    )
+    for key in keys:
+        value = changes.get(key)
+        if value not in (None, "", [], {}):
+            return True
+    return False
+
+
+def _apply_auto_rubric_only(proposals: list[dict[str, Any]], *, dry_run: bool) -> None:
+    """For revise items with no concrete content change, flip status to accepted.
+
+    The reviewer often flags a 'revise' purely because a rubric score should
+    be lower (difficulty 3 → 2) or to add a note. These do not affect the
+    benchmark and can be accepted in bulk.
+    """
+
+    revise = [p for p in proposals if p.get("recommendation") == "revise"]
+    rows_by_split: dict[str, list[dict[str, Any]]] = {
+        name: _load_dataset(path) for name, path in SPLITS.items()
+    }
+    by_id: dict[str, dict[str, Any]] = {row["id"]: row for rows in rows_by_split.values() for row in rows}
+
+    applied = 0
+    dirty: set[str] = set()
+    for proposal in revise:
+        item = by_id.get(proposal["id"])
+        if item is None:
+            continue
+        if (
+            item.get("metadata", {}).get("review", {}).get("status") == "accepted"
+        ):
+            continue
+        changes = proposal.get("proposed_changes") or {}
+        if _has_content_change(changes):
+            continue
+        # Pure rubric/notes proposal — flip status, carry rubric over.
+        meta = item.setdefault("metadata", {})
+        review = meta.setdefault("review", {})
+        review["status"] = "accepted"
+        reviewers = review.setdefault("reviewers", [])
+        if "claude-sonnet-4-6" not in reviewers:
+            reviewers.append("claude-sonnet-4-6")
+        rubric = proposal.get("rubric")
+        if isinstance(rubric, dict):
+            review["rubric"] = rubric
+        applied += 1
+        dirty.add(_split_for_id(proposal["id"]))
+
+    print(f"auto-rubric-only: applied={applied}", file=sys.stderr)
+    if dry_run:
+        return
+    for split_name in dirty:
+        if split_name in SPLITS:
+            _write_dataset(SPLITS[split_name], rows_by_split[split_name])
+
+
+def _apply_auto_prompt_rewrite(proposals: list[dict[str, Any]], *, dry_run: bool) -> None:
+    """Bulk-apply rewrite_prompt proposals. Also applies any safe constraint
+    changes that ride along (difficulty-only, or loosening word bounds)."""
+
+    revise = [p for p in proposals if p.get("recommendation") == "revise"]
+    rows_by_split: dict[str, list[dict[str, Any]]] = {
+        name: _load_dataset(path) for name, path in SPLITS.items()
+    }
+    by_id: dict[str, dict[str, Any]] = {row["id"]: row for rows in rows_by_split.values() for row in rows}
+
+    applied = 0
+    dirty: set[str] = set()
+    for proposal in revise:
+        item = by_id.get(proposal["id"])
+        if item is None:
+            continue
+        if item.get("metadata", {}).get("review", {}).get("status") == "accepted":
+            continue
+        changes = proposal.get("proposed_changes") or {}
+        new_prompt = changes.get("rewrite_prompt")
+        if not isinstance(new_prompt, str) or not new_prompt.strip():
+            continue
+        # Skip if the proposal also wants to change the answer — those need
+        # human judgment.
+        if changes.get("answer_replacement") or changes.get("answer_index_replacement"):
+            continue
+        item["prompt"] = new_prompt.strip()
+        # If constraint_changes ride along and they only touch difficulty
+        # or loosen the word bounds, apply those too. Otherwise skip them.
+        cc = changes.get("constraint_changes")
+        if isinstance(cc, dict) and isinstance(item.get("answer"), dict):
+            safe = True
+            current_answer: dict[str, Any] = item["answer"]
+            for key, value in cc.items():
+                if key == "difficulty":
+                    continue
+                if key == "max_words":
+                    cur = current_answer.get("max_words")
+                    if not isinstance(value, int):
+                        safe = False
+                        break
+                    if isinstance(cur, int) and value < cur:
+                        safe = False
+                        break
+                elif key == "min_words":
+                    cur = current_answer.get("min_words")
+                    if value is None:
+                        continue
+                    if not isinstance(value, int):
+                        safe = False
+                        break
+                    if isinstance(cur, int) and value > cur:
+                        safe = False
+                        break
+                else:
+                    safe = False
+                    break
+            if safe:
+                for key, value in cc.items():
+                    if key == "difficulty":
+                        continue
+                    if value is None:
+                        current_answer.pop(key, None)
+                    else:
+                        current_answer[key] = value
+        # Flip status to accepted.
+        meta = item.setdefault("metadata", {})
+        review = meta.setdefault("review", {})
+        review["status"] = "accepted"
+        reviewers = review.setdefault("reviewers", [])
+        for r in ("claude-sonnet-4-6", "human-applied"):
+            if r not in reviewers:
+                reviewers.append(r)
+        applied += 1
+        dirty.add(_split_for_id(proposal["id"]))
+
+    print(f"auto-prompt-rewrite: applied={applied}", file=sys.stderr)
+    if dry_run:
+        return
+    for split_name in dirty:
+        if split_name in SPLITS:
+            _write_dataset(SPLITS[split_name], rows_by_split[split_name])
 
 
 def _load_decisions() -> dict[str, str]:

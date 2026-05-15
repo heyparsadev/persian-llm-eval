@@ -96,10 +96,14 @@ def rescore_result(
     totals: dict[str, float] = defaultdict(float)
     counts: dict[str, int] = defaultdict(int)
     new_samples: list[dict[str, Any]] = []
+    dropped: list[str] = []
     for sample in samples:
         record = records.get(sample["id"])
         if record is None:
-            raise ValueError(f"rescore: dataset record not found for {sample['id']}")
+            # Item was removed from the dataset (e.g. rejected during review).
+            # Drop it from the rescored result rather than aborting the pass.
+            dropped.append(sample["id"])
+            continue
         score, details = score_record(record, sample.get("prediction", ""))
         totals[record.track] += score
         counts[record.track] += 1
@@ -129,6 +133,8 @@ def rescore_result(
     rescored["overall_score"] = overall_score
     rescored["samples"] = new_samples
     rescored["timestamp"] = utc_now()
+    if dropped:
+        rescored["dropped_samples"] = dropped
     return rescored
 
 
