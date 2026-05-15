@@ -1,12 +1,39 @@
 # Persian Eval v1.1 — review proposals
 
-Auto-generated from `data/review_proposals.jsonl`. Total proposals: 226. Rejected: 4. Revise: 160. Accepted: 62. Parse errors: 0.
+Auto-generated from `data/review_proposals.jsonl`. Total proposals: 260. Rejected: 6. Revise: 169. Accepted: 85. Parse errors: 0.
 
 Use this file to triage what to apply. The reviewer is claude-sonnet-4-6, which is strict about Persian phrasing and constraint solvability. Take its 'reject' calls seriously; treat 'revise' as a useful suggestion to skim, not a requirement.
 
-## Rejected (4)
+## Rejected (6)
 
-### `hard_culture` — 1 items
+### `hard_culture` — 2 items
+
+#### `peval-hard-culture-008`
+
+**Prompt:** اگر در یک محیط رسمی، یک همکار به شما می‌گوید «قابل شما را ندارد»، مناسب‌ترین پاسخ ادب‌مند کدام است؟
+
+  - الف) نه ممنون، نمی‌خواهم
+  - ب) هر طور خودتان مایل هستید
+  - پ) چقدر می‌شود؟
+  - ت) بسیار ممنون، اگر زحمتی نیست لطف کنید ← labelled answer
+
+**Rubric:** clarity=5, ambiguity=3, cultural_fit=3, leakage_risk=1, difficulty=4
+
+**Issues:**
+  - Labelled answer treats a refusal ('قابل شما را ندارد') as if it were an offer, which is semantically incoherent
+  - The response 'بسیار ممنون، اگر زحمتی نیست لطف کنید' contradicts the colleague's stated inability/unwillingness
+  - Does not reflect authentic Iranian Persian taarof conventions for responding to polite refusals
+
+**Proposed changes:**
+```json
+{
+  "answer_replacement": "چشم، ممنون / نه خواهش می‌کنم، شما را زحمت نمی‌دهم",
+  "rewrite_prompt": "Consider rewriting the scenario and choices entirely. A corrected version might present the colleague's statement as an actual offer (e.g., 'می‌تونم کمکتون کنم') and then test appropriate taarof responses. Alternatively, keep the refusal but provide response choices that gracefully accept the colleague's declination.",
+  "notes": "The item conflates two opposite conversational moves. Either the prompt should present an offer (not a refusal), or the answer choices should include appropriate ways to accept a refusal politely in Persian."
+}
+```
+
+---
 
 #### `peval-hard-culture-012`
 
@@ -30,6 +57,31 @@ Use this file to triage what to apply. The reviewer is claude-sonnet-4-6, which 
 {
   "rewrite_prompt": "اگر کسی بگوید «سر فلانی را زیر آب کرد»، در زبان فارسی محاوره‌ای معمولاً چه برداشت می‌شود؟ با گزینه‌های: الف) او را فریب داد یا به او خیانت کرد، ب) او را به شنا یاد داد، ج) او را تنبیه کرد، د) او را نجات داد",
   "notes": "برای اصلاح این آیتم باید ضمیر مبهم برطرف شود و گزینه‌ها بازنویسی شوند تا معنای واقعی اصطلاح (فریب دادن/خیانت کردن) در پاسخ صحیح منعکس شود. در غیر این صورت آیتم باید حذف شود."
+}
+```
+
+---
+
+### `hard_math` — 1 items
+
+#### `peval-hard-math-029`
+
+**Prompt:** اگر مجموع n عدد طبیعی اول برابر ۵۵ باشد، n چند است؟
+
+**Accepted answers:** ['۱۰', '10', 'ده']
+
+**Rubric:** clarity=5, ambiguity=2, cultural_fit=5, leakage_risk=1, difficulty=3
+
+**Issues:**
+  - The labelled answer n = 10 is mathematically incorrect
+  - Sum of first 10 primes = 129, not 55
+  - A valid solution is 2 + 5 + 7 + 11 + 13 + 17 = 55, giving n = 6
+  - Question ambiguity: unclear if asking for any n primes or first n primes
+
+**Proposed changes:**
+```json
+{
+  "notes": "The item must be rejected due to incorrect answer. Either: (1) correct the answer to n = 6 if asking for any combination of n primes summing to 55, or (2) revise the question entirely if intending to ask about the first n primes (which never sum to 55). The mathematical error is fundamental and cannot be salvaged with minor edits."
 }
 ```
 
@@ -120,7 +172,7 @@ Use this file to triage what to apply. The reviewer is claude-sonnet-4-6, which 
 ---
 
 
-## Revise (160)
+## Revise (169)
 
 ### `culture` — 17 items
 
@@ -1043,7 +1095,7 @@ Use this file to triage what to apply. The reviewer is claude-sonnet-4-6, which 
 
 ---
 
-### `hard_math` — 18 items
+### `hard_math` — 19 items
 
 #### `peval-hard-math-005`
 
@@ -1153,6 +1205,26 @@ Use this file to triage what to apply. The reviewer is claude-sonnet-4-6, which 
     "۵۷.۱۴۲۸"
   ],
   "notes": "Remove 'حدود ۵۷' from answer list as it is incompatible with exact scoring. Add fraction and extended decimal forms. Lower difficulty from 4 to 3."
+}
+```
+
+---
+
+#### `peval-hard-math-011`
+
+**Prompt:** اگر ۲ به توان x برابر ۳۲ باشد، x چند است؟
+
+**Accepted answers:** ['۵', '5', 'پنج']
+
+**Rubric:** clarity=5, ambiguity=1, cultural_fit=5, leakage_risk=1, difficulty=2
+
+**Issues:**
+  - Item is classified in 'hard_math' track but difficulty is marked as 2 (trivial); this is a basic exponential equation suitable for middle school, not advanced mathematics
+
+**Proposed changes:**
+```json
+{
+  "notes": "The answer list is complete and correct. The mathematical content is sound. However, the track classification should be reconsidered—either move to an easier track or replace with a genuinely difficult exponential problem (e.g., solving 2^x = 100 or involving logarithms)."
 }
 ```
 
@@ -1518,7 +1590,35 @@ Use this file to triage what to apply. The reviewer is claude-sonnet-4-6, which 
 
 ---
 
-### `hard_reading` — 16 items
+### `hard_reading` — 24 items
+
+#### `peval-hard-reading-005`
+
+**Prompt:** متن را بخوان و پاسخ کوتاه بده: تیم محصول دو ایده برای صفحه ورود داشت: یکی صفحه‌ای بسیار ساده با یک دکمه و دیگری صفحه‌ای با چندین انتخاب. تست‌ها نشان داد کاربران با صفحه ساده، در مرحله بعد بیشتر گم می‌شوند و در صفحه پر، اول معطل می‌مانند ...
+
+**Accepted answers:** ['گم شدن کاربر در مرحله بعد', 'سردرگمی در گام بعد']
+
+**Rubric:** clarity=5, ambiguity=2, cultural_fit=4, leakage_risk=1, difficulty=4
+
+**Issues:**
+  - Answer list incomplete—missing natural Persian phrasings of the same concept
+  - Ambiguity about whether answer should be symptom (getting lost) or reasoning (trade-off analysis)
+  - Word 'گام' is slightly formal; 'مرحله' is more natural in this context
+
+**Proposed changes:**
+```json
+{
+  "answer_additions": [
+    "کاربران در مرحله بعد گم می‌شوند",
+    "سردرگمی در مراحل بعدی",
+    "گم شدن کاربران در مراحل بعد",
+    "اگرچه سریع‌تر است اما کاربران بعدا گم می‌شوند"
+  ],
+  "notes": "The current answers capture the key observation but should include more natural Persian variations. Consider whether the question is asking for the symptom (current answers) or the deeper reasoning about why speed alone doesn't guarantee a good UX. The second answer variant 'سردرگمی در گام بعد' uses formal 'گام' where 'مرحله' would be more natural in Iranian Persian."
+}
+```
+
+---
 
 #### `peval-hard-reading-006`
 
@@ -1546,6 +1646,33 @@ Use this file to triage what to apply. The reviewer is claude-sonnet-4-6, which 
   ],
   "rewrite_prompt": "متن را بخوان و پاسخ کوتاه بده: یک پژوهش در میان دانش‌آموزان نشان داد کسانی که صبحانه می‌خورند نمره‌های بهتری دارند. اما بررسی دقیق‌تر نشان داد این دانش‌آموزان معمولاً از خانواده‌هایی هستند که شب زود می‌خوابند و حمایت تحصیلی بیشتری دارند. سوال: چه عوامل پنهانی نتیجه ساده «صبحانه = نمره بهتر» را تردیدآمیز می‌کنند؟",
   "notes": "تغییر 'عامل پنهانی' به 'عوامل پنهانی' (جمع) با متن همخوانی بیشتری دارد و ابهام را برطرف می‌کند. همچنین سطح دشواری باید از 5 به 3 کاهش یابد."
+}
+```
+
+---
+
+#### `peval-hard-reading-007`
+
+**Prompt:** متن را بخوان و پاسخ کوتاه بده: یک کارخانه دو خط تولید دارد. خط الف سرعت بیشتر اما نرخ خرابی هشت درصد دارد، خط ب سرعت کم‌تر و نرخ خرابی دو درصد. مدیریت تصمیم گرفت از خط ب استفاده کند چون هزینه‌های تعمیر و پشتیبانی نهایتا کل سود را می‌خورد...
+
+**Accepted answers:** ['پایین بودن نرخ خرابی و هزینه تعمیر', 'کمتر بودن هزینه پشتیبانی']
+
+**Rubric:** clarity=5, ambiguity=1, cultural_fit=5, leakage_risk=1, difficulty=4
+
+**Issues:**
+  - Answer list is fragmented; repair and support costs should be unified as one reason
+  - Missing the most direct answer: 'نرخ خرابی کمتر' (lower defect rate)
+  - Second answer is somewhat redundant with the first
+
+**Proposed changes:**
+```json
+{
+  "answer_additions": [
+    "نرخ خرابی کمتر",
+    "هزینه‌های تعمیر و پشتیبانی کمتر",
+    "نرخ خرابی پایین‌تر باعث کاهش هزینه‌های تعمیر و پشتیبانی می‌شود"
+  ],
+  "notes": "For F1 scoring, the answer list should include the core reasoning: lower defect rate (2% vs 8%) leads to lower maintenance/support costs. Current answers are acceptable but incomplete. Suggest consolidating to: (1) 'نرخ خرابی کمتر' and (2) 'هزینه‌های تعمیر و پشتیبانی کمتر' as the two key acceptable answers, or merge them into one unified answer."
 }
 ```
 
@@ -1638,6 +1765,59 @@ Use this file to triage what to apply. The reviewer is claude-sonnet-4-6, which 
     "رانندگان مسیرهای جایگزین بدون دوربین را انتخاب کردند"
   ],
   "notes": "پاسخ‌های فعلی هر دو اثر جابه‌جایی را توصیف می‌کنند. باید یکی حذف و پاسخ‌های 'بازگشت به میانگین' و 'تأثیر ریاضی سهم کوچک' اضافه شوند. همچنین metadata باید ambiguity=3 و difficulty=3 را منعکس کند."
+}
+```
+
+---
+
+#### `peval-hard-reading-011`
+
+**Prompt:** متن را بخوان و پاسخ کوتاه بده: کمیته بودجه پروژه‌ای را رد کرد چون تنها ۲۰٪ اعضا موافق بودند، در حالی‌که آیین‌نامه نیاز به ۵۰٪+ یک رای دارد. کاربر بعد از یک ماه مطلع شد که در همان جلسه فقط نیمی از اعضا حاضر بودند. سوال: نتیجه رد پروژه از ...
+
+**Accepted answers:** ['نبود نصاب برای تصمیم\u200cگیری', 'حضور نیمی از اعضا و عدم حد نصاب']
+
+**Rubric:** clarity=5, ambiguity=1, cultural_fit=5, leakage_risk=1, difficulty=4
+
+**Issues:**
+  - Answer list is incomplete for F1 scoring—missing common alternative phrasings
+  - Second answer is somewhat redundant with the first; both express the same concept
+
+**Proposed changes:**
+```json
+{
+  "answer_additions": [
+    "عدم حضور نصاب اعضا",
+    "نقص نصاب",
+    "تصمیم بدون نصاب",
+    "عدم رعایت حد نصاب"
+  ],
+  "notes": "The core answer is correct. For F1 scoring, the answer list should include common synonymous phrasings that express 'lack of quorum' in different ways. Consider consolidating the two existing answers into one primary answer and expanding the list with alternatives."
+}
+```
+
+---
+
+#### `peval-hard-reading-012`
+
+**Prompt:** متن را بخوان و پاسخ کوتاه بده: یک تیم پزشکی دو روش درمان آزمایش کرد. روش الف در نمونه ۲۰۰ نفری ۸۰٪ بهبودی نشان داد، روش ب در نمونه ۲۰ نفری ۹۰٪. تیم نوشت روش ب بهتر است. سوال: چه ضعفی در این نتیجه‌گیری وجود دارد؟
+
+**Accepted answers:** ['کوچک بودن نمونه روش ب', 'حجم نمونه کوچک و عدم تعمیم']
+
+**Rubric:** clarity=5, ambiguity=1, cultural_fit=5, leakage_risk=1, difficulty=4
+
+**Issues:**
+  - Answer list is too restrictive; legitimate alternative phrasings should be accepted for F1 scoring
+
+**Proposed changes:**
+```json
+{
+  "answer_additions": [
+    "نمونه‌گیری نامناسب",
+    "عدم کفایت حجم نمونه",
+    "نمونه کوچک",
+    "اعتبار آماری پایین روش ب"
+  ],
+  "notes": "The core answer is correct. For F1 scoring on a reading comprehension task, the system should accept semantically equivalent phrasings that identify the small sample size flaw. The two provided answers are good anchors, but Persian allows multiple ways to express this statistical concept."
 }
 ```
 
@@ -1892,6 +2072,33 @@ Use this file to triage what to apply. The reviewer is claude-sonnet-4-6, which 
 
 ---
 
+#### `peval-hard-reading-022`
+
+**Prompt:** متن را بخوان و پاسخ کوتاه بده: تیم محصول گفت اگر دکمه ثبت‌نام بزرگ‌تر شود، تعداد کاربر دو برابر می‌شود. آن‌ها دکمه را بزرگ کردند و در عرض یک ماه تعداد کاربر دو برابر شد. اما همزمان قیمت محصول هم نصف شده بود. سوال: کدام عامل ممکن است نقش ...
+
+**Accepted answers:** ['نصف شدن قیمت محصول', 'کاهش قیمت به نصف']
+
+**Rubric:** clarity=5, ambiguity=1, cultural_fit=5, leakage_risk=1, difficulty=4
+
+**Issues:**
+  - Answer list is too narrow for F1 scoring; misses common synonymous phrasings like 'کاهش قیمت' or 'کاهش هزینه'
+
+**Proposed changes:**
+```json
+{
+  "answer_additions": [
+    "کاهش قیمت",
+    "کاهش قیمت محصول",
+    "نصف شدن هزینه",
+    "کاهش هزینه",
+    "تخفیف قیمت"
+  ],
+  "notes": "The core answer is correct and the prompt is well-designed for testing understanding of confounding variables. Expanding the answer list to include natural Persian synonyms will improve F1 scoring fairness."
+}
+```
+
+---
+
 #### `peval-hard-reading-023`
 
 **Prompt:** متن را بخوان و پاسخ کوتاه بده: یک مدیر گفت چون ده درصد کارمندان از کافه شکایت دارند، باید کافه را تعطیل کنیم. اعضای تیم گفتند بهتر است نظر ۹۰ درصد بقیه را هم پرسید. سوال: ضعف تصمیم اولیه مدیر چه بود؟
@@ -1954,6 +2161,61 @@ Use this file to triage what to apply. The reviewer is claude-sonnet-4-6, which 
 
 ---
 
+#### `peval-hard-reading-025`
+
+**Prompt:** متن را بخوان و پاسخ کوتاه بده: یک سایت خبری دید کاربران در صفحه‌هایی که عنوان آن‌ها سوالی است بیشتر می‌مانند. مدیر دستور داد همه عنوان‌ها سوالی شوند. بعد از یک ماه میانگین زمان ماندن کاربر در صفحه بدون تغییر بود. سوال: چه دلیلی توضیح می‌...
+
+**Accepted answers:** ['از بین رفتن جذابیت ویژه عنوان سوالی', 'اشباع شدن کاربر از عناوین سوالی']
+
+**Rubric:** clarity=5, ambiguity=2, cultural_fit=5, leakage_risk=1, difficulty=4
+
+**Issues:**
+  - Answer list incomplete for F1 scoring—missing synonymous phrasings like 'کاهش اثر تازگی' or 'عادت‌شدن'
+  - Ambiguity: other causal explanations (correlation vs. causation, confounding variables, external factors) are logically defensible but not in answer list
+  - Prompt could be tightened to exclude alternative explanations or answer list should expand
+
+**Proposed changes:**
+```json
+{
+  "answer_additions": [
+    "کاهش اثر تازگی",
+    "عادت‌شدن کاربران به عناوین سوالی",
+    "از دست رفتن تفاوت‌پذیری عنوان سوالی",
+    "تأثیر تازگی و نوآوری کاهش یافت"
+  ],
+  "rewrite_prompt": "Consider adding a constraint phrase like 'فرض کنید عوامل خارجی تغییری نکرده‌اند' (assume external factors didn't change) to eliminate alternative causal explanations.",
+  "notes": "The item tests understanding of why interventions fail (novelty effect, saturation), but the answer list should include common synonymous phrasings for F1 scoring. Additionally, the prompt's ambiguity regarding whether the original observation was causal or correlational could be reduced with a clarifying constraint."
+}
+```
+
+---
+
+#### `peval-hard-reading-026`
+
+**Prompt:** متن را بخوان و پاسخ کوتاه بده: کاربر گفت سایت خیلی کند است. تیم فنی متوجه شد فقط صفحه پروفایل کند است. تیم محصول می‌خواست همه صفحات را بازنویسی کند. سوال: کدام تصمیم اقتصادی‌تر است؟
+
+**Accepted answers:** ['بازنویسی فقط صفحه پروفایل', 'تمرکز بر صفحه پروفایل']
+
+**Rubric:** clarity=5, ambiguity=1, cultural_fit=5, leakage_risk=1, difficulty=3
+
+**Issues:**
+  - Answer list could be more comprehensive for F1 scoring to capture natural Persian variations
+
+**Proposed changes:**
+```json
+{
+  "answer_additions": [
+    "صفحه پروفایل",
+    "بازنویسی صفحه پروفایل",
+    "فقط صفحه پروفایل",
+    "تمرکز روی صفحه پروفایل"
+  ],
+  "notes": "The two existing answers are correct and semantically equivalent. Adding more natural variations will improve F1 scoring robustness and capture different ways Persian speakers might express the same economic reasoning."
+}
+```
+
+---
+
 #### `peval-hard-reading-027`
 
 **Prompt:** متن را بخوان و پاسخ کوتاه بده: یک پژوهش گفت در شهرهایی که قهوه بیشتری مصرف می‌شود، آمار سکته بالاتر است. بررسی نشان داد در همان شهرها میانگین سن جمعیت هم بیشتر است. سوال: متغیر مزاحم احتمالی چیست؟
@@ -1980,6 +2242,32 @@ Use this file to triage what to apply. The reviewer is claude-sonnet-4-6, which 
     "بالا بودن سن"
   ],
   "notes": "The item is conceptually sound and the labelled answers are correct. The main issue is that f1 scoring requires a broader set of accepted phrasings. Age (سن) in various forms should all be accepted. Leakage risk is moderate because this is a canonical epidemiology teaching example, but the Persian framing appears original enough to keep."
+}
+```
+
+---
+
+#### `peval-hard-reading-029`
+
+**Prompt:** متن را بخوان و پاسخ کوتاه بده: مدیر یک کارخانه گفت چون درآمد امسال نسبت به پارسال بیشتر شده، عملکرد ما خوب بوده. اما گزارش حسابدار نشان داد قیمت محصول دو برابر شده ولی تعداد فروش به نصف رسیده. سوال: چرا قضاوت اولیه مدیر کافی نیست؟
+
+**Accepted answers:** ['افت تعداد فروش با وجود رشد درآمد', 'کاهش حجم فروش پشت رشد درآمد']
+
+**Rubric:** clarity=5, ambiguity=1, cultural_fit=5, leakage_risk=1, difficulty=4
+
+**Issues:**
+  - Two provided answers are near-identical synonyms; answer list lacks diversity
+  - Answers focus on the symptom (sales decline) rather than the logical error (ignoring underlying causes)
+
+**Proposed changes:**
+```json
+{
+  "answer_additions": [
+    "تنها افزایش قیمت باعث رشد درآمد شده، نه بهبود فروش",
+    "مدیر فقط درآمد را بررسی کرد و علت آن را نادیده گرفت",
+    "عملکرد واقعی ضعیف است زیرا حجم فروش نصف شده"
+  ],
+  "notes": "The core answer is correct but would benefit from including phrasings that explicitly address the logical fallacy: the manager conflated revenue growth with good performance without examining the underlying cause (price increase vs. volume increase). Adding answers that capture this causal reasoning would make the answer key more robust for F1 scoring."
 }
 ```
 
@@ -4408,7 +4696,7 @@ Use this file to triage what to apply. The reviewer is claude-sonnet-4-6, which 
 ---
 
 
-## Accepted (62)
+## Accepted (85)
 
 ### `culture` — 9 items
 
@@ -4570,7 +4858,7 @@ Use this file to triage what to apply. The reviewer is claude-sonnet-4-6, which 
 
 ---
 
-### `hard_culture` — 4 items
+### `hard_culture` — 11 items
 
 #### `peval-hard-culture-006`
 
@@ -4622,6 +4910,61 @@ Use this file to triage what to apply. The reviewer is claude-sonnet-4-6, which 
 
 ---
 
+#### `peval-hard-culture-014`
+
+**Prompt:** اگر در فارسی کسی به دیگری بگوید «از این ستون به آن ستون فرج است»، چه پیامی دارد؟
+
+  - الف) هیچ راهی وجود ندارد
+  - ب) گذر زمان ممکن است گشایش بیاورد ← labelled answer
+  - پ) باید جای ستون‌ها را عوض کرد
+  - ت) ساختمان نیاز به تعمیر دارد
+
+**Rubric:** clarity=5, ambiguity=1, cultural_fit=5, leakage_risk=1, difficulty=4
+
+---
+
+#### `peval-hard-culture-018`
+
+**Prompt:** اگر کسی در فارسی بگوید «کلاهش پس معرکه است»، نزدیک‌ترین معنی محاوره‌ای چیست؟
+
+  - الف) کلاه او گم شده است
+  - ب) موقعیتش ضعیف یا کار از دستش رفته است ← labelled answer
+  - پ) در میدان شلوغ است
+  - ت) کلاهش جدید است
+
+**Rubric:** clarity=5, ambiguity=1, cultural_fit=5, leakage_risk=1, difficulty=4
+
+**Issues:**
+  - Distractor 2 is somewhat weak and unrelated; could be replaced with a more plausible wrong answer
+
+---
+
+#### `peval-hard-culture-020`
+
+**Prompt:** در فارسی محاوره‌ای، عبارت «جا انداخته» برای یک کلاس درس معمولا چه معنی می‌دهد؟
+
+  - الف) کلاس تاخیر داشته است
+  - ب) صندلی‌های کلاس جابه‌جا شده‌اند
+  - پ) غذا در کلاس پخش شده
+  - ت) موضوع به‌خوبی توضیح داده شده و فهمیده شده ← labelled answer
+
+**Rubric:** clarity=5, ambiguity=1, cultural_fit=5, leakage_risk=1, difficulty=3
+
+---
+
+#### `peval-hard-culture-022`
+
+**Prompt:** اگر مهمان ایرانی پس از پایان مهمانی بگوید «خانه‌تان آباد»، نزدیک‌ترین مفهوم چیست؟
+
+  - الف) گله از کیفیت پذیرایی
+  - ب) خداحافظ به سبک رسمی و دعای خیر برای میزبان ← labelled answer
+  - پ) اعلام علاقه به خرید خانه
+  - ت) درخواست بازگشت به مهمانی
+
+**Rubric:** clarity=5, ambiguity=1, cultural_fit=5, leakage_risk=1, difficulty=4
+
+---
+
 #### `peval-hard-culture-023`
 
 **Prompt:** در فارسی محاوره‌ای، اگر کسی بگوید «دستش به دهنش می‌رسد»، نزدیک‌ترین معنی چیست؟
@@ -4635,7 +4978,76 @@ Use this file to triage what to apply. The reviewer is claude-sonnet-4-6, which 
 
 ---
 
-### `hard_instruction` — 10 items
+#### `peval-hard-culture-025`
+
+**Prompt:** ضرب‌المثل «گر صبر کنی ز غوره حلوا سازی» چه پیامی دارد؟
+
+  - الف) صبر و پشتکار به نتیجه شیرین می‌رسد ← labelled answer
+  - ب) غوره خوش‌مزه‌تر از حلوا است
+  - پ) حلوا را باید فورا خورد
+  - ت) آشپزی نیاز به صبر ندارد
+
+**Rubric:** clarity=5, ambiguity=1, cultural_fit=5, leakage_risk=1, difficulty=4
+
+---
+
+#### `peval-hard-culture-028`
+
+**Prompt:** در فارسی، عبارت «یخ کسی را شکستن» در مکالمه‌ای دوستانه معمولا چه معنی می‌دهد؟
+
+  - الف) یخچال را تعمیر کردن
+  - ب) بستنی خوردن با یکدیگر
+  - پ) یک نوشیدنی سرد سفارش دادن
+  - ت) از حالت سکوت یا خجالت اولیه بیرون آوردن ← labelled answer
+
+**Rubric:** clarity=5, ambiguity=1, cultural_fit=5, leakage_risk=1, difficulty=3
+
+---
+
+#### `peval-hard-culture-030`
+
+**Prompt:** در فرهنگ ایرانی، اگر مهمانی به میزبان بگوید «دست‌ شما درد نکند»، نزدیک‌ترین مفهوم اجتماعی این عبارت چیست؟
+
+  - الف) درخواست غذای بیشتر
+  - ب) تشکر بابت زحمت پذیرایی ← labelled answer
+  - پ) نگرانی از سلامت میزبان
+  - ت) اعلام پایان مهمانی به‌صورت رسمی
+
+**Rubric:** clarity=5, ambiguity=1, cultural_fit=5, leakage_risk=1, difficulty=3
+
+---
+
+### `hard_instruction` — 20 items
+
+#### `peval-hard-instruction-007`
+
+**Prompt:** یک پاسخ فارسی درباره اهمیت رمز عبور قوی بنویس. باید شامل «رمز عبور» و «احراز هویت» باشد، هیچ رقم انگلیسی یا فارسی نداشته باشد، با «از نظر امنیتی» شروع شود و بین ۱۵ تا ۵۰ کلمه باشد.
+
+**Constraints:** `{"required_prefix": "از نظر امنیتی", "required_keywords": ["رمز عبور", "احراز هویت"], "forbidden": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"], "min_words": 15, "max_words": 50}`
+
+**Rubric:** clarity=5, ambiguity=1, cultural_fit=5, leakage_risk=1, difficulty=5
+
+---
+
+#### `peval-hard-instruction-008`
+
+**Prompt:** یک پاسخ فارسی درباره فایده مدیریت زمان برای دانشجوها بنویس که با «اگر» شروع شود، شامل «اولویت» و «تقویم» باشد، نباید نقطه بیاید و باید با «می‌شود» تمام شود. طول بین ۱۰ تا ۳۵ کلمه.
+
+**Constraints:** `{"required_prefix": "اگر", "required_suffix": "می‌شود", "required_keywords": ["اولویت", "تقویم"], "forbidden": ["."], "min_words": 10, "max_words": 35}`
+
+**Rubric:** clarity=5, ambiguity=1, cultural_fit=5, leakage_risk=1, difficulty=5
+
+---
+
+#### `peval-hard-instruction-009`
+
+**Prompt:** یک ایمیل کوتاه فارسی برای رد مودبانه یک پیشنهاد همکاری بنویس. باید با «با سلام» شروع شود، شامل «قدردانی» و «در حال حاضر» باشد، نباید کلمه «هرگز» داشته باشد، و طول بین ۲۰ تا ۵۰ کلمه.
+
+**Constraints:** `{"required_prefix": "با سلام", "required_keywords": ["قدردانی", "در حال حاضر"], "forbidden": ["هرگز"], "min_words": 20, "max_words": 50}`
+
+**Rubric:** clarity=5, ambiguity=1, cultural_fit=5, leakage_risk=1, difficulty=4
+
+---
 
 #### `peval-hard-instruction-010`
 
@@ -4648,6 +5060,36 @@ Use this file to triage what to apply. The reviewer is claude-sonnet-4-6, which 
 **Issues:**
   - Difficulty may be slightly overrated at 4; constraints are satisfiable with a single well-formed sentence
   - Forbidden list only bans ASCII '!' — Persian/Unicode variants (e.g., '‼') are not explicitly excluded, though this is a minor edge case
+
+---
+
+#### `peval-hard-instruction-011`
+
+**Prompt:** یک متن کوتاه برای دعوت به یک کارگاه آنلاین بنویس. باید شامل «ثبت‌نام» و یک «لینک» باشد، با «دعوت می‌کنیم» شروع شود، علامت سوال نداشته باشد و طول بین ۱۵ تا ۴۰ کلمه.
+
+**Constraints:** `{"required_prefix": "دعوت می‌کنیم", "required_keywords": ["ثبت‌نام", "لینک"], "forbidden": ["؟", "?"], "min_words": 15, "max_words": 40}`
+
+**Rubric:** clarity=5, ambiguity=1, cultural_fit=5, leakage_risk=1, difficulty=4
+
+---
+
+#### `peval-hard-instruction-012`
+
+**Prompt:** یک خلاصه فارسی از مزایای ورزش روزانه بنویس. باید با «به‌طور کلی» شروع شود، شامل «قلب» و «خواب» باشد، نباید عدد داشته باشد و طول بین ۱۵ تا ۴۵ کلمه.
+
+**Constraints:** `{"required_prefix": "به‌طور کلی", "required_keywords": ["قلب", "خواب"], "forbidden": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"], "min_words": 15, "max_words": 45}`
+
+**Rubric:** clarity=5, ambiguity=1, cultural_fit=5, leakage_risk=1, difficulty=4
+
+---
+
+#### `peval-hard-instruction-013`
+
+**Prompt:** یک پاسخ فارسی برای رد ادب‌مند درخواست تخفیف بنویس. باید با «از پیشنهاد» شروع شود، شامل «سیاست شرکت» باشد، نباید نقطه‌ویرگول داشته باشد و طول بین ۱۲ تا ۳۵ کلمه.
+
+**Constraints:** `{"required_prefix": "از پیشنهاد", "required_keywords": ["سیاست شرکت"], "forbidden": ["؛"], "min_words": 12, "max_words": 35}`
+
+**Rubric:** clarity=5, ambiguity=1, cultural_fit=5, leakage_risk=1, difficulty=4
 
 ---
 
@@ -4684,6 +5126,16 @@ Use this file to triage what to apply. The reviewer is claude-sonnet-4-6, which 
 
 ---
 
+#### `peval-hard-instruction-017`
+
+**Prompt:** یک پاسخ به سوال یک کاربر درباره علت تاخیر در پاسخ‌گویی پشتیبانی بنویس. باید با «در حال حاضر» شروع شود، شامل «نوبت‌بندی» و «اولویت‌بندی» باشد، نباید کلمه «شاید» داشته باشد و طول بین ۱۲ تا ۴۰ کلمه.
+
+**Constraints:** `{"required_prefix": "در حال حاضر", "required_keywords": ["نوبت‌بندی", "اولویت‌بندی"], "forbidden": ["شاید"], "min_words": 12, "max_words": 40}`
+
+**Rubric:** clarity=5, ambiguity=1, cultural_fit=5, leakage_risk=1, difficulty=4
+
+---
+
 #### `peval-hard-instruction-018`
 
 **Prompt:** یک متن فارسی برای فراخوان یک مسابقه عکاسی بنویس. باید با «مسابقه عکاسی» شروع شود، شامل «داوری» و «جایزه» باشد، نباید نقطه‌ویرگول داشته باشد و طول بین ۲۰ تا ۵۰ کلمه.
@@ -4695,6 +5147,26 @@ Use this file to triage what to apply. The reviewer is claude-sonnet-4-6, which 
 **Issues:**
   - Forbidden character '؛' (Persian semicolon) is rarely used in natural Persian writing, making this constraint trivially easy and reducing effective difficulty
   - Difficulty rating of 4 seems slightly inflated; 3 is more appropriate given the generous word range and weak forbidden constraint
+
+---
+
+#### `peval-hard-instruction-019`
+
+**Prompt:** یک یادداشت داخلی برای کارمندان درباره تغییر ساعت کاری بنویس. باید با «به اطلاع» شروع شود، شامل «ساعت کاری جدید» و «از هفته آینده» باشد، علامت سوال نداشته باشد و طول بین ۲۰ تا ۵۰ کلمه.
+
+**Constraints:** `{"required_prefix": "به اطلاع", "required_keywords": ["ساعت کاری جدید", "از هفته آینده"], "forbidden": ["؟", "?"], "min_words": 20, "max_words": 50}`
+
+**Rubric:** clarity=5, ambiguity=1, cultural_fit=5, leakage_risk=1, difficulty=4
+
+---
+
+#### `peval-hard-instruction-020`
+
+**Prompt:** یک پیام برای مشتری وفادار بنویس که از او دعوت می‌کنی در نظرسنجی شرکت کند. باید با «مشتری گرامی» شروع شود، شامل «نظر شما» و «بهبود خدمات» باشد، نباید عدد داشته باشد و طول بین ۱۵ تا ۴۰ کلمه.
+
+**Constraints:** `{"required_prefix": "مشتری گرامی", "required_keywords": ["نظر شما", "بهبود خدمات"], "forbidden": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"], "min_words": 15, "max_words": 40}`
+
+**Rubric:** clarity=5, ambiguity=1, cultural_fit=5, leakage_risk=1, difficulty=4
 
 ---
 
@@ -4773,6 +5245,16 @@ Use this file to triage what to apply. The reviewer is claude-sonnet-4-6, which 
 
 ---
 
+#### `peval-hard-instruction-027`
+
+**Prompt:** یک متن کوتاه برای معرفی محصول یک استارتاپ نوپا بنویس. باید با «معرفی می‌کنیم» شروع شود، شامل «راه‌حل» و «کاربر» باشد، نباید کلمه «بهترین» داشته باشد و طول بین ۱۵ تا ۴۰ کلمه.
+
+**Constraints:** `{"required_prefix": "معرفی می‌کنیم", "required_keywords": ["راه‌حل", "کاربر"], "forbidden": ["بهترین"], "min_words": 15, "max_words": 40}`
+
+**Rubric:** clarity=5, ambiguity=1, cultural_fit=5, leakage_risk=1, difficulty=4
+
+---
+
 #### `peval-hard-instruction-030`
 
 **Prompt:** یک پاسخ کوتاه و دیپلماتیک به یک پیام انتقادی از یک مشتری بنویس. باید با «انتقاد شما» شروع شود، شامل «بازنگری» و «بهبود» باشد، نباید کلمه «اشتباه» داشته باشد و طول بین ۱۵ تا ۴۰ کلمه.
@@ -4787,7 +5269,7 @@ Use this file to triage what to apply. The reviewer is claude-sonnet-4-6, which 
 
 ---
 
-### `hard_math` — 1 items
+### `hard_math` — 6 items
 
 #### `peval-hard-math-009`
 
@@ -4796,6 +5278,68 @@ Use this file to triage what to apply. The reviewer is claude-sonnet-4-6, which 
 **Accepted answers:** ['۶', '6', 'شش']
 
 **Rubric:** clarity=5, ambiguity=1, cultural_fit=5, leakage_risk=1, difficulty=3
+
+---
+
+#### `peval-hard-math-010`
+
+**Prompt:** در یک کیسه ۴ مهره قرمز و ۶ مهره آبی است. اگر دو مهره بدون جایگذاری برداریم، احتمال اینکه هر دو قرمز باشند چقدر است؟ پاسخ را به‌صورت کسر ساده‌شده بنویس.
+
+**Accepted answers:** ['۲/۱۵', '2/15']
+
+**Rubric:** clarity=5, ambiguity=1, cultural_fit=5, leakage_risk=1, difficulty=4
+
+---
+
+#### `peval-hard-math-016`
+
+**Prompt:** اگر یک کالا را با ۲۵٪ سود بفروشیم و قیمت فروش ۱۲۵ هزار تومان شود، قیمت خرید آن چقدر بوده است (به تومان)؟
+
+**Accepted answers:** ['۱۰۰۰۰۰', '100000', '۱۰۰ هزار', '100 هزار', 'صد هزار']
+
+**Rubric:** clarity=5, ambiguity=1, cultural_fit=5, leakage_risk=1, difficulty=3
+
+---
+
+#### `peval-hard-math-024`
+
+**Prompt:** یک مخزن آب در ۶ ساعت با شیر اول پر می‌شود و در ۹ ساعت با شیر دوم. اگر هر دو شیر همزمان باز باشند، مخزن در چند ساعت پر می‌شود؟ پاسخ را به ساعت بنویس.
+
+**Accepted answers:** ['۱۸/۵', '18/5', '۳ و ۳/۵', '3 و 3/5', '۳.۶', '3.6']
+
+**Rubric:** clarity=5, ambiguity=1, cultural_fit=5, leakage_risk=1, difficulty=4
+
+---
+
+#### `peval-hard-math-027`
+
+**Prompt:** از یک عدد دو رقمی، اگر رقم‌هایش را جابه‌جا کنیم، عدد جدید ۲۷ بیشتر از عدد اصلی می‌شود. اگر مجموع رقم‌های عدد ۹ باشد، عدد اصلی چیست؟
+
+**Accepted answers:** ['۳۶', '36', 'سی و شش']
+
+**Rubric:** clarity=5, ambiguity=1, cultural_fit=5, leakage_risk=1, difficulty=4
+
+---
+
+#### `peval-hard-math-028`
+
+**Prompt:** اگر یک کارگر در ۸ روز یک کار را انجام دهد و کارگر دیگر همان کار را در ۱۲ روز، اگر هر دو با هم کار کنند، چند روز طول می‌کشد؟ پاسخ را به روز بنویس.
+
+**Accepted answers:** ['۲۴/۵', '24/5', '۴.۸', '4.8']
+
+**Rubric:** clarity=5, ambiguity=1, cultural_fit=5, leakage_risk=1, difficulty=3
+
+---
+
+### `hard_reading` — 1 items
+
+#### `peval-hard-reading-021`
+
+**Prompt:** متن را بخوان و پاسخ کوتاه بده: یک پژوهشگر گفت سکه‌ای را ۱۰ بار پرت کرده و هر بار شیر آمده، پس بار یازدهم احتمالا خط می‌آید. سوال: نام این خطای استدلال چیست؟
+
+**Accepted answers:** ['خطای قمارباز', 'خطای قماربازی']
+
+**Rubric:** clarity=5, ambiguity=1, cultural_fit=5, leakage_risk=1, difficulty=4
 
 ---
 
