@@ -2,14 +2,18 @@
 
 A practical benchmark runner and leaderboard scaffold for evaluating large
 language models on **Iranian Persian**. The repo ships a CLI, a JSONL dataset
-(300 items across two splits, ten tracks), deterministic scoring with bootstrap
-confidence intervals, and pluggable backends for the major API families plus
-local Hugging Face models.
+(450 items across three splits, sixteen tracks), deterministic scoring with
+bootstrap confidence intervals, and pluggable backends for the major API
+families, OpenRouter, and local Hugging Face models.
 
-> **Status:** v1.1 dataset; 23 reference result files from frontier models
-> (Claude Opus/Sonnet/Haiku, GPT‑5 / 5.5 with and without reasoning). See
-> [`docs/BENCHMARK_REPORT.md`](docs/BENCHMARK_REPORT.md) for the full
-> methodology write-up and per-track tables.
+> **Status:** v1.1 dataset plus a new **`practical` split** (150 everyday-use
+> and creative items, pending native-speaker review); 23 reference result
+> files from frontier models (Claude Opus/Sonnet/Haiku, GPT‑5 / 5.5 with and
+> without reasoning). See [`docs/BENCHMARK_REPORT.md`](docs/BENCHMARK_REPORT.md)
+> for the methodology write-up and per-track tables, and
+> [`docs/ROADMAP_FA.md`](docs/ROADMAP_FA.md) (Persian) for the improvement plan
+> and the OpenRouter model matrix (Claude Fable 5.1 / Opus 5.5, GPT-6
+> Astra / Sol / Luna, and more).
 
 ## Headline results
 
@@ -59,6 +63,7 @@ or on macOS, double-click [`RUN_ME.command`](RUN_ME.command).
 | `openai-compatible` | GPT-4.x, GPT-5 family, and any OpenAI-compatible Chat Completions endpoint | `OPENAI_API_KEY`, optional `OPENAI_BASE_URL` |
 | `openai-responses` | GPT-5 family Responses API with `--reasoning-effort` | `OPENAI_API_KEY` |
 | `anthropic` | Claude 3.x, 4.x, and 4.7 (with adaptive thinking via `--reasoning-effort`) | `ANTHROPIC_API_KEY`, optional `ANTHROPIC_BASE_URL` |
+| `openrouter` | Any model on OpenRouter (Claude, GPT, Gemini, Grok, DeepSeek, Qwen, …) through one key, with unified reasoning control, provider pinning, and per-call cost tracking | `OPENROUTER_API_KEY`, optional `OPENROUTER_BASE_URL` |
 
 ```bash
 # Anthropic — Claude Sonnet 4.6
@@ -92,6 +97,44 @@ Anthropic backend maps these to the Claude 4.7 adaptive thinking API
 (`low`/`medium`/`high`) and sets a max-tokens headroom; the OpenAI Responses
 backend forwards the effort to the API directly.
 
+### OpenRouter
+
+One key reaches every provider, so the whole model matrix runs the same code
+path:
+
+```bash
+export OPENROUTER_API_KEY=sk-or-...
+
+# One model, one split, 6 requests in flight.
+persian-eval run --model anthropic/claude-opus-5.5 --backend openrouter \
+  --data data/persian_eval_v1.practical.jsonl --max-new-tokens 4096 \
+  --concurrency 6 --output results/claude-opus-5.5.practical.json
+
+# GPT-6 Sol with thinking; OpenRouter's unified `reasoning.effort`.
+persian-eval run --model openai/gpt-6-sol --backend openrouter \
+  --reasoning-effort medium --max-new-tokens 4096 --concurrency 6 \
+  --data data/persian_eval_v1.hard.jsonl --output results/gpt-6-sol-thinking-medium.hard.json
+
+# The full matrix in configs/openrouter_models.json over practical, hard, public_eval.
+python scripts/run_openrouter_matrix.py --dry-run   # plan + live slug/price check
+python scripts/run_openrouter_matrix.py
+```
+
+- `--reasoning-effort` maps to OpenRouter's `reasoning.effort` (`none` turns
+  thinking off where the model allows it; GPT-6 Astra does not). Thinking
+  shares `max_tokens` with the answer, so an effort-scaled headroom
+  (4K–64K) is added on top of `--max-new-tokens`. `--thinking-budget-tokens`
+  sends an explicit `reasoning.max_tokens` instead.
+- `--provider anthropic,google-vertex` pins the provider order,
+  `--no-fallbacks` forbids routing elsewhere, and `--data-collection deny`
+  only uses providers that do not store or train on prompts, which keeps the
+  eval set out of training data.
+- Every call records tokens, reasoning tokens, USD cost, latency, and the
+  serving provider; the result gets a `usage` block and the leaderboard a
+  `cost_usd` column.
+- Runs are checkpointed to `<output>.partial.jsonl`; if a run dies, rerun the
+  same command with `--resume` to skip the items already paid for.
+
 ## CLI
 
 ```bash
@@ -105,7 +148,9 @@ persian-eval leaderboard build <result.json ...> --output <out.json> [--csv <out
 - **`run`** generates predictions, scores them in-process, and writes the
   result schema. Filter tracks with `--tasks knowledge,reading` and splits
   with `--split public_eval`. Reasoning models often need
-  `--max-new-tokens 512` or `768`.
+  `--max-new-tokens 512` or `768`. `--concurrency N` runs N API requests in
+  parallel (results keep dataset order), and `--resume` continues an
+  interrupted run from its checkpoint.
 - **`rescore`** re-applies the current scoring rules to a previously written
   result file's saved sample predictions. Use this whenever you tighten an
   accepted-answer list or fix an item — no model re-run is needed:
@@ -122,21 +167,40 @@ persian-eval leaderboard build <result.json ...> --output <out.json> [--csv <out
   rows land in `main`; API-backed rows in `reference`. The Hugging Face
   Space under `spaces/leaderboard/` reads the resulting JSON.
 
-## Dataset (v1.1)
+## Dataset (v1.1 + practical)
 
-300 items across three JSONL files in [`data/`](data):
+450 items across four JSONL files in [`data/`](data):
 
 | File | Items | Use |
 |---|:---:|---|
 | `persian_eval_v1.dev.jsonl` | 10 | Smoke and debug |
 | `persian_eval_v1.public_eval.jsonl` | 150 | Public leaderboard |
 | `persian_eval_v1.hard.jsonl` | 150 | Harder public split |
+| `persian_eval_v1.practical.jsonl` | 150 | Everyday use and creative writing (new, `pending_review`) |
 
-Each split carries five tracks at 30 items each. `public_eval` covers
-`knowledge`, `short_qa`, `reading`, `instruction`, `culture`. `hard` covers
-`hard_reasoning`, `hard_math`, `hard_reading`, `hard_instruction`,
+`public_eval` and `hard` carry five tracks at ~30 items each. `public_eval`
+covers `knowledge`, `short_qa`, `reading`, `instruction`, `culture`. `hard`
+covers `hard_reasoning`, `hard_math`, `hard_reading`, `hard_instruction`,
 `hard_culture`. A separate **hidden** split is documented in
 [`data/hidden/README.md`](data/hidden/README.md); never commit it.
+
+The **`practical`** split asks for what people actually bring to an assistant
+in Persian, six tracks x 25 items:
+
+| Track | What it tests | Scoring |
+|---|---|---|
+| `practical_writing` | Leave requests, SMS, formal/colloquial register shifts, support replies, condolence and congratulation messages | `instruction` |
+| `practical_editing` | Text typed on the wrong keyboard layout, Finglish to Persian script, spelling (حیاط/حیات, نقص/نقض), ZWNJ (نیم‌فاصله) | `exact`, `f1`, `instruction` |
+| `practical_numbers` | Jalali↔Gregorian dates, date arithmetic across Esfand and leap years, weekdays, cheque amounts in words, toman/rial, discounts, VAT, installments | `exact` |
+| `practical_extraction` | Real-estate and car ads, bank SMS, tickets, receipts, prescriptions → JSON, including fields that must stay `null` | `json` |
+| `practical_pragmatics` | Taarof and social formulas (خسته نباشید، عافیت باشه، چشمتان روشن), natural EN↔FA translation of idioms | `mcq` |
+| `practical_creative` | Acrostics (توشیح), lipograms, rhyme and radif, alliteration, anagrams, riddles, abjad, idiom paraphrase | `instruction`, `exact` |
+
+The split is generated by
+[`scripts/build_practical_items.py`](scripts/build_practical_items.py):
+computable answers (calendar conversion, number words, keyboard mapping,
+abjad) come from code, and every non-MCQ item carries a
+`metadata.reference_response` that CI requires to score 1.0.
 
 ### Schema
 
@@ -169,6 +233,15 @@ Supported `metadata.scoring` values:
 - `instruction` — strict pass/fail on a constraint dict
   (`required_keywords`, `forbidden`, `min_words`, `max_words`,
   `required_prefix`, `required_suffix`). One violated constraint scores 0.
+  The practical split adds `required_any` (groups of alternatives),
+  `forbidden_chars` (lipograms), `required_exact`/`forbidden_exact`
+  (ZWNJ-sensitive), `starts_with`/`ends_with` (punctuation-tolerant),
+  `line_count`, `line_initials` (acrostics), `lines_end_with` and
+  `distinct_line_endings` (rhyme), and `word_initial` (alliteration).
+- `json` — the first JSON object in the reply is compared field by field with
+  the gold object; the score is the fraction of fields right. Numbers compare
+  numerically (`"8,500,000"` = `8500000`), a list of gold values means "any
+  of these", and a gold `null` is satisfied by null or a missing key.
 
 Contributing items, the authoring checklist, and the review rubric are in
 [`CONTRIBUTING_DATASET.md`](CONTRIBUTING_DATASET.md). Mechanical checks are
@@ -213,9 +286,13 @@ Notes:
   "overall_score": 0.9063,
   "run_config": {"...": "..."},
   "timestamp": "2026-05-14T...",
-  "samples": [{"id": "...", "track": "...", "prediction": "...", "score": 1.0, "details": {...}}]
+  "usage": {"calls": 150, "prompt_tokens": 41250, "completion_tokens": 9120, "cost_usd": 0.43, "providers": {"Anthropic": 150}},
+  "samples": [{"id": "...", "track": "...", "prediction": "...", "score": 1.0, "details": {...}, "meta": {"cost_usd": 0.0029, "provider": "Anthropic"}}]
 }
 ```
+
+`usage` and per-sample `meta` appear only for backends that report them
+(currently `openrouter`).
 
 Sample-level predictions are included by default and are what makes
 `persian-eval rescore` possible. Use `--no-samples` only when running the
@@ -252,6 +329,9 @@ Running the full Claude + GPT matrix used in this report came in under $25.
   validator, and `build_leaderboard.sh`.
 - [`tests/`](tests) — unittest-style tests run through pytest.
 - [`configs/baselines.yml`](configs/baselines.yml) — suggested baseline matrix.
+- [`configs/openrouter_models.json`](configs/openrouter_models.json) — the
+  OpenRouter model matrix run by
+  [`scripts/run_openrouter_matrix.py`](scripts/run_openrouter_matrix.py).
 - [`spaces/leaderboard/`](spaces/leaderboard) — Gradio HF Space template.
 
 ## Hidden official split

@@ -235,6 +235,15 @@ model-assisted review pass. The proposals are captured in
   `peval-hard-reading-028`, `peval-hard-culture-012`,
   `peval-hard-math-029`, `peval-hard-culture-008`).
 
+### Next run
+
+The next revision adds the `practical` split (150 everyday-use and creative
+items) and runs a new model matrix — Claude Fable 5.1 and Opus 5.5, GPT-6
+Astra / Sol / Luna, Gemini, Grok, DeepSeek — through OpenRouter with per-call
+cost tracking. See [`ROADMAP_FA.md`](ROADMAP_FA.md) and
+`configs/openrouter_models.json`. No results from that matrix are included
+here yet.
+
 ### Limitations
 - 30 items per track (now 29–30 after rejects) keeps bootstrap CIs at
   roughly ±5 to ±7 percentage points. Most rankings within the top eight
