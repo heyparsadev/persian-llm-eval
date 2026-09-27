@@ -292,5 +292,42 @@ class OpenRouterEndToEndTests(unittest.TestCase):
         self.assertEqual(result["run_config"]["data"], ["data/persian_eval_v1.dev.jsonl"])
 
 
+class CostEstimateTests(unittest.TestCase):
+    def setUp(self):
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import run_openrouter_matrix  # noqa: PLC0415 - script module, not a package
+
+        self.matrix = run_openrouter_matrix
+
+    def test_estimate_cost_counts_prompt_answer_and_thinking_tokens(self):
+        profile = {"items": 10, "prompt_chars": 2900.0, "answer_chars": 290.0}
+        model = {"slug": "openai/gpt-6-sol", "reasoning_effort": "low"}
+        cost = self.matrix.estimate_cost(model, profile, (2.0, 10.0))
+        # 2900/2.9 + 15*10 = 1150 input tokens; 290/2.9 + 600*10 = 6100 output tokens.
+        self.assertAlmostEqual(cost, (1150 * 2.0 + 6100 * 10.0) / 1_000_000)
+
+    def test_claude_rows_use_the_conservative_tokenizer_ratio(self):
+        self.assertEqual(self.matrix.chars_per_token({"slug": "anthropic/claude-opus-5.5"}), 1.0)
+        self.assertEqual(self.matrix.chars_per_token({"slug": "x-ai/grok-4.7"}), 2.0)
+
+    def test_prices_fall_back_to_listed_values(self):
+        model = {"slug": "openai/gpt-6-sol"}
+        listed = {"openai/gpt-6-sol": [2, 10]}
+        self.assertEqual(self.matrix.model_prices(model, None, listed), (2.0, 10.0))
+        live = {"openai/gpt-6-sol": {"pricing": {"prompt": "0.000003", "completion": "0.00001"}}}
+        self.assertEqual(self.matrix.model_prices(model, live, listed), (3.0, 10.0))
+        self.assertIsNone(self.matrix.model_prices({"slug": "x/unknown"}, None, listed))
+
+    def test_estimate_flag_runs_offline(self):
+        cwd = os.getcwd()
+        try:
+            code = self.matrix.main(
+                ["--estimate", "--skip-preflight", "--only", "opus-5.5", "--splits", "challenge"]
+            )
+        finally:
+            os.chdir(cwd)
+        self.assertEqual(code, 0)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -237,12 +237,14 @@ model-assisted review pass. The proposals are captured in
 
 ### Next run
 
-The next revision adds the `practical` split (150 everyday-use and creative
-items) and runs a new model matrix — Claude Fable 5.1 and Opus 5.5, GPT-6
-Astra / Sol / Luna, Gemini, Grok, DeepSeek — through OpenRouter with per-call
-cost tracking. See [`ROADMAP_FA.md`](ROADMAP_FA.md) and
-`configs/openrouter_models.json`. No results from that matrix are included
-here yet.
+The next revision adds two splits — `practical` (150 everyday-use and
+creative items) and `challenge` (100 items on false premises, unanswerable
+questions, ambiguity, chained knowledge, and word play) — and runs a new
+model matrix — Claude Fable 5.1 and Opus 5.5, GPT-6 Astra / Sol / Luna,
+Gemini, Grok, DeepSeek — through OpenRouter with per-call cost tracking
+(estimated at about $87 for all four splits). See
+[`ROADMAP_FA.md`](ROADMAP_FA.md) and `configs/openrouter_models.json`. No
+results from that matrix are included here yet.
 
 ### Limitations
 - 30 items per track (now 29–30 after rejects) keeps bootstrap CIs at
