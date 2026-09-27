@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import re
+from itertools import pairwise
 from typing import Any
 
 from .dataset import DatasetRecord
@@ -12,6 +13,7 @@ from .normalize import (
     normalize_keep_zwnj,
     normalize_persian,
     strip_punctuation,
+    strip_punctuation_keep_zwnj,
     tokenize,
 )
 
@@ -164,7 +166,7 @@ def score_instruction(record: DatasetRecord, prediction: str) -> tuple[float, di
             normalize_persian(constraints["required_suffix"])
         )
 
-    checks.update(_extended_instruction_checks(constraints, prediction, normalized_prediction))
+    checks.update(_extended_instruction_checks(constraints, prediction))
 
     if not checks:
         return 0.0, {"checks": checks, "constraint_score": 0.0}
@@ -174,47 +176,53 @@ def score_instruction(record: DatasetRecord, prediction: str) -> tuple[float, di
     return strict_score, {"checks": checks, "constraint_score": constraint_score}
 
 
-def _extended_instruction_checks(
-    constraints: dict[str, Any], prediction: str, normalized_prediction: str
-) -> dict[str, bool]:
-    """Constraint types added for the practical split (all optional, all strict).
+def _extended_instruction_checks(constraints: dict[str, Any], prediction: str) -> dict[str, bool]:
+    """Constraint types added for the practical and challenge splits (optional, strict).
 
-    - ``required_any``: list of groups; each group needs at least one option present.
-    - ``forbidden_chars``: characters that must not appear (lipograms).
-    - ``required_exact`` / ``forbidden_exact``: substrings matched with ZWNJ kept
-      significant, so «می‌خواهم» and «می خواهم» are different strings. A
-      ``required_exact`` entry may be a list of acceptable spellings.
-    - ``starts_with`` / ``ends_with``: like ``required_prefix``/``required_suffix``
-      but ignoring punctuation, so a closing period or opening quote is harmless.
-    - ``line_count``: exact number of non-empty lines.
-    - ``line_initials``: first letter of each non-empty line, in order (acrostic).
-    - ``lines_end_with``: every non-empty line ends with this suffix (or any of a list).
-    - ``distinct_line_endings``: the last word of every line is different.
-    - ``word_initial``: every word starts with this letter.
+    Content: ``required_any`` (groups of alternatives; punctuation-insensitive),
+    ``forbidden_chars`` (lipograms), ``required_exact``/``forbidden_exact``
+    (ZWNJ kept significant, so «می‌خواهم» differs from «می خواهم»; a
+    ``required_exact`` entry may be a list of spellings), ``starts_with``/
+    ``ends_with`` (like ``required_prefix``/``required_suffix`` but ignoring
+    punctuation).
+
+    Lines: ``line_count``, ``line_initials`` (acrostic), ``lines_end_with``
+    (rhyme/radif), ``distinct_line_endings``, ``words_per_line``.
+
+    Words: ``word_initial``/``word_final`` (every word starts/ends with),
+    ``word_palindrome`` (same word sequence backwards), ``letter_palindrome``
+    and ``min_letters``, ``word_length_step`` (each word exactly N letters
+    longer than the previous). Word-shape checks treat a ZWNJ compound such as
+    «می‌روم» as one word.
     """
 
+    checks = _content_checks(constraints, prediction)
+    checks.update(_line_checks(constraints, prediction))
+    checks.update(_word_checks(constraints, prediction))
+    return checks
+
+
+def _content_checks(constraints: dict[str, Any], prediction: str) -> dict[str, bool]:
     checks: dict[str, bool] = {}
+    loose_prediction = strip_punctuation(prediction)
     required_any = constraints.get("required_any", [])
     if required_any:
         checks["required_any"] = all(
-            any(normalize_persian(option) in normalized_prediction for option in group)
+            any(strip_punctuation(option) in loose_prediction for option in group)
             for group in required_any
         )
-
     forbidden_chars = constraints.get("forbidden_chars", [])
     if forbidden_chars:
+        normalized_prediction = normalize_persian(prediction)
         checks["forbidden_chars"] = all(
             normalize_persian(char) not in normalized_prediction for char in forbidden_chars
         )
-
-    loose_prediction = strip_punctuation(prediction)
     if "starts_with" in constraints:
         checks["starts_with"] = loose_prediction.startswith(
             strip_punctuation(constraints["starts_with"])
         )
     if "ends_with" in constraints:
         checks["ends_with"] = loose_prediction.endswith(strip_punctuation(constraints["ends_with"]))
-
     exact_prediction = normalize_keep_zwnj(prediction)
     required_exact = constraints.get("required_exact", [])
     if required_exact:
@@ -227,33 +235,68 @@ def _extended_instruction_checks(
         checks["forbidden_exact"] = all(
             normalize_keep_zwnj(item) not in exact_prediction for item in forbidden_exact
         )
+    return checks
 
+
+def _line_checks(constraints: dict[str, Any], prediction: str) -> dict[str, bool]:
+    checks: dict[str, bool] = {}
     lines = [line.strip() for line in prediction.splitlines() if strip_punctuation(line)]
     if "line_count" in constraints:
         checks["line_count"] = len(lines) == int(constraints["line_count"])
     if "line_initials" in constraints:
         expected = [_fold_letter(letter) for letter in constraints["line_initials"]]
-        actual = [_first_letter(line) for line in lines]
-        checks["line_initials"] = actual == expected
+        checks["line_initials"] = [_first_letter(line) for line in lines] == expected
     if "lines_end_with" in constraints:
-        suffixes = constraints["lines_end_with"]
-        if isinstance(suffixes, str):
-            suffixes = [suffixes]
-        normalized_suffixes = [strip_punctuation(item) for item in suffixes]
+        suffixes = [strip_punctuation(item) for item in _options(constraints["lines_end_with"])]
         checks["lines_end_with"] = bool(lines) and all(
-            any(strip_punctuation(line).endswith(suffix) for suffix in normalized_suffixes)
-            for line in lines
+            any(strip_punctuation(line).endswith(suffix) for suffix in suffixes) for line in lines
         )
     if constraints.get("distinct_line_endings"):
         last_words = [tokenize(line)[-1] for line in lines if tokenize(line)]
         checks["distinct_line_endings"] = len(last_words) == len(set(last_words))
+    if "words_per_line" in constraints:
+        counts = [len(_words(line)) for line in lines]
+        checks["words_per_line"] = counts == [int(item) for item in constraints["words_per_line"]]
+    return checks
+
+
+def _word_checks(constraints: dict[str, Any], prediction: str) -> dict[str, bool]:
+    checks: dict[str, bool] = {}
+    words = _words(prediction)
     if "word_initial" in constraints:
         letter = _fold_letter(constraints["word_initial"])
-        words = tokenize(prediction)
         checks["word_initial"] = bool(words) and all(
             _fold_letter(word[0]) == letter for word in words
         )
+    if "word_final" in constraints:
+        suffix = strip_punctuation(constraints["word_final"])
+        checks["word_final"] = bool(words) and all(word.endswith(suffix) for word in words)
+    if constraints.get("word_palindrome"):
+        checks["word_palindrome"] = len(words) >= 2 and words == words[::-1]
+    letters = _letters(prediction)
+    if constraints.get("letter_palindrome"):
+        checks["letter_palindrome"] = len(letters) >= 2 and letters == letters[::-1]
+    if "min_letters" in constraints:
+        checks["min_letters"] = len(letters) >= int(constraints["min_letters"])
+    if "word_length_step" in constraints:
+        step = int(constraints["word_length_step"])
+        lengths = [len(_letters(word)) for word in words]
+        checks["word_length_step"] = len(lengths) >= 2 and all(
+            later - earlier == step for earlier, later in pairwise(lengths)
+        )
     return checks
+
+
+def _words(text: str) -> list[str]:
+    """Words with ZWNJ compounds kept whole («می‌روم» is one word)."""
+
+    return strip_punctuation_keep_zwnj(text).split()
+
+
+def _letters(text: str) -> list[str]:
+    """Letters only (no spaces, ZWNJ, digits, or punctuation), alef-madda folded."""
+
+    return ["ا" if char == "آ" else char for char in strip_punctuation(text) if char.isalpha()]
 
 
 def _options(item: Any) -> list[Any]:

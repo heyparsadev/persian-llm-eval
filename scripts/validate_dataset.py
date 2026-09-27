@@ -42,11 +42,22 @@ PRACTICAL_TRACKS = {
     "practical_creative",
 }
 
+CHALLENGE_TRACKS = {
+    "challenge_premise",
+    "challenge_grounding",
+    "challenge_ambiguity",
+    "challenge_multihop",
+    "challenge_wordplay",
+}
+# Splits whose track names are `<split>_<id token>`.
+PREFIXED_SPLITS = {"practical", "challenge"}
+
 PER_SPLIT_TRACKS: dict[str, set[str]] = {
     "dev": DEV_TRACKS,
     "public_eval": PUBLIC_TRACKS,
     "hard": HARD_TRACKS,
     "practical": PRACTICAL_TRACKS,
+    "challenge": CHALLENGE_TRACKS,
 }
 
 # Minimum number of items per (split, track). dev is intentionally tiny;
@@ -57,6 +68,7 @@ PER_TRACK_MIN: dict[str, int] = {
     "public_eval": 20,
     "hard": 20,
     "practical": 20,
+    "challenge": 20,
 }
 
 # Minimum prompt length per track (in characters of the normalized prompt).
@@ -77,9 +89,14 @@ PROMPT_MIN_CHARS: dict[str, int] = {
     "practical_extraction": 80,
     "practical_pragmatics": 30,
     "practical_creative": 30,
+    "challenge_premise": 25,
+    "challenge_grounding": 80,
+    "challenge_ambiguity": 25,
+    "challenge_multihop": 25,
+    "challenge_wordplay": 25,
 }
 
-ID_PATTERN = re.compile(r"^peval-(dev|public|hard|practical)-([a-z]+)-(\d{3,})$")
+ID_PATTERN = re.compile(r"^peval-(dev|public|hard|practical|challenge)-([a-z]+)-(\d{3,})$")
 # Some legacy IDs spell tracks without an underscore (e.g. `shortqa` for
 # `short_qa`). The mapping below is the source of truth for id-token →
 # canonical track name within a split.
@@ -159,6 +176,7 @@ def check_id_format(records: Iterable[DatasetRecord]) -> list[str]:
             "public": "public_eval",
             "hard": "hard",
             "practical": "practical",
+            "challenge": "challenge",
         }[split_token]
         if record.split != expected_split:
             errors.append(
@@ -172,7 +190,7 @@ def check_id_format(records: Iterable[DatasetRecord]) -> list[str]:
         canonical_track = _resolve_track_alias(track_token, expected_split)
         if expected_split == "hard" and not record.track.startswith("hard_"):
             errors.append(f"{record.id}: hard split rows require a hard_* track")
-        elif expected_split == "practical" and record.track != f"practical_{track_token}":
+        elif expected_split in PREFIXED_SPLITS and record.track != f"{expected_split}_{track_token}":
             errors.append(
                 f"{record.id}: id track token {track_token!r} does not match "
                 f"row track {record.track!r}"
@@ -221,7 +239,8 @@ def check_no_answer_leakage(records: Iterable[DatasetRecord]) -> list[str]:
         # text (liar/truth, ordering, etc.).
         if scoring not in {"exact", "f1"}:
             continue
-        if record.track in {"reading", "hard_reading"}:
+        if record.track in {"reading", "hard_reading", "challenge_grounding"}:
+            # Reading answers come from the passage by design.
             continue
         prompt_tokens = tokenize(record.prompt)
         for accepted in _iter_accepted_strings(record.answer):
@@ -344,7 +363,13 @@ INSTRUCTION_KEYS = (
     "line_initials",
     "lines_end_with",
     "distinct_line_endings",
+    "words_per_line",
     "word_initial",
+    "word_final",
+    "word_palindrome",
+    "letter_palindrome",
+    "min_letters",
+    "word_length_step",
 )
 
 

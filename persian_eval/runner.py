@@ -272,6 +272,7 @@ def rescore_result(
             "persian_eval_v1.public_eval.jsonl",
             "persian_eval_v1.hard.jsonl",
             "persian_eval_v1.practical.jsonl",
+            "persian_eval_v1.challenge.jsonl",
         )
     ]
     paths = [path for path in paths if Path(path).exists()]

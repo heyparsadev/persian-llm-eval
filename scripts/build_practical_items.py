@@ -1942,20 +1942,32 @@ def build_rows() -> list[dict[str, Any]]:
         pragmatics_items(),
         creative_items(),
     ]
+    return assemble_rows(groups, split="practical", source=SOURCE, track_tokens=TRACK_TOKENS)
+
+
+def assemble_rows(
+    groups: list[list[dict]],
+    *,
+    split: str,
+    source: str,
+    track_tokens: dict[str, str],
+) -> list[dict[str, Any]]:
+    """Number items per track, place MCQ answers, attach the review block, verify."""
+
     rows: list[dict[str, Any]] = []
     for group in groups:
         mcq_seen = 0
         for index, item in enumerate(group, start=1):
             track = item["track"]
             row: dict[str, Any] = {
-                "id": f"peval-practical-{TRACK_TOKENS[track]}-{index:03d}",
+                "id": f"peval-{split}-{track_tokens[track]}-{index:03d}",
                 "track": track,
                 "prompt": item["prompt"],
                 "choices": None,
                 "answer": item.get("answer"),
                 "metadata": dict(item["metadata"]),
-                "source": SOURCE,
-                "split": "practical",
+                "source": source,
+                "split": split,
             }
             if "mcq" in item:
                 correct, distractors = item["mcq"]
@@ -1988,23 +2000,26 @@ def render(rows: list[dict[str, Any]]) -> str:
     return "".join(json.dumps(row, ensure_ascii=False) + "\n" for row in rows)
 
 
+def write_or_check(rows: list[dict[str, Any]], output: Path, *, check: bool) -> int:
+    content = render(rows)
+    if check:
+        current = output.read_text(encoding="utf-8") if output.exists() else ""
+        if current != content:
+            print(f"{output} is out of date; rerun its builder script", file=sys.stderr)
+            return 1
+        print(f"{output} is up to date")
+        return 0
+    output.write_text(content, encoding="utf-8")
+    print(f"wrote {output} ({len(rows)} items)")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--check", action="store_true", help="fail if the JSONL is out of date")
     parser.add_argument("--output", type=Path, default=OUTPUT)
     args = parser.parse_args(argv)
-
-    content = render(build_rows())
-    if args.check:
-        current = args.output.read_text(encoding="utf-8") if args.output.exists() else ""
-        if current != content:
-            print(f"{args.output} is out of date; rerun this script", file=sys.stderr)
-            return 1
-        print(f"{args.output} is up to date")
-        return 0
-    args.output.write_text(content, encoding="utf-8")
-    print(f"wrote {args.output} ({content.count(chr(10))} items)")
-    return 0
+    return write_or_check(build_rows(), args.output, check=args.check)
 
 
 if __name__ == "__main__":

@@ -92,6 +92,13 @@ def strip_punctuation(text: object) -> str:
     return WHITESPACE_RE.sub(" ", normalize_persian(text).translate(PUNCTUATION_TABLE)).strip()
 
 
+def strip_punctuation_keep_zwnj(text: object) -> str:
+    """Like ``strip_punctuation`` but ZWNJ stays inside words."""
+
+    value = normalize_keep_zwnj(text).lower().translate(PUNCTUATION_TABLE)
+    return WHITESPACE_RE.sub(" ", value).strip()
+
+
 def tokenize(text: object) -> list[str]:
     """Tokenize normalized Persian text with a whitespace baseline."""
 

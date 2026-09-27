@@ -166,6 +166,37 @@ class ExtendedInstructionTests(unittest.TestCase):
         self.assertEqual(score_record(record, "سارا سه سیب سرخ")[0], 1.0)
         self.assertEqual(score_record(record, "سارا سه سیب خرید")[0], 0.0)
 
+    def test_required_any_ignores_punctuation(self):
+        record = _instruction({"required_any": [["اولین روز هفته شنبه"]]})
+        self.assertEqual(score_record(record, "در ایران، اولین روز هفته، شنبه است.")[0], 1.0)
+
+    def test_word_palindrome(self):
+        record = _instruction({"word_palindrome": True, "min_words": 5})
+        self.assertEqual(score_record(record, "من و تو یکی و یکی تو و من")[0], 1.0)
+        self.assertEqual(score_record(record, "من و تو یکی هستیم")[0], 0.0)
+
+    def test_letter_palindrome_with_min_letters(self):
+        record = _instruction({"letter_palindrome": True, "min_letters": 8})
+        self.assertEqual(score_record(record, "شکر بترازوی وزارت برکش")[0], 1.0)
+        self.assertEqual(score_record(record, "کبک")[0], 0.0)
+        self.assertEqual(score_record(record, "شکر بترازو")[0], 0.0)
+
+    def test_word_length_step_rhopalic(self):
+        record = _instruction({"word_length_step": 1, "min_words": 5})
+        self.assertEqual(score_record(record, "و من باز آمدم امروز")[0], 1.0)
+        self.assertEqual(score_record(record, "و من امروز باز آمدم")[0], 0.0)
+
+    def test_words_per_line_keeps_zwnj_compounds_whole(self):
+        record = _instruction({"words_per_line": [3, 5]})
+        poem = "باران آرام می‌بارد\nقطره‌ها روی شیشه‌ی پنجره می‌رقصند"
+        self.assertEqual(score_record(record, poem)[0], 1.0)
+        self.assertEqual(score_record(record, "باران آرام می‌بارد")[0], 0.0)
+
+    def test_word_final(self):
+        record = _instruction({"word_final": "ان", "min_words": 4, "max_words": 4})
+        self.assertEqual(score_record(record, "دوستان مهربان خندان تهران")[0], 1.0)
+        self.assertEqual(score_record(record, "دوستان مهربان خندان شیراز")[0], 0.0)
+
     def test_legacy_constraints_unchanged_when_new_keys_absent(self):
         record = _instruction({"required_keywords": ["بهار"], "max_words": 3})
         score, details = score_record(record, "بهار آمد")
