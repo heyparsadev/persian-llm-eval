@@ -25,14 +25,18 @@ jobs:
       - name: Type check (mypy)
         run: mypy persian_eval
       - name: Validate seed datasets
-        run: persian-eval validate --dataset data/persian_eval_v1.dev.jsonl data/persian_eval_v1.public_eval.jsonl data/persian_eval_v1.hard.jsonl
+        run: persian-eval validate --dataset data/persian_eval_v1.dev.jsonl data/persian_eval_v1.public_eval.jsonl data/persian_eval_v1.hard.jsonl data/persian_eval_v1.practical.jsonl
       - name: Run duplicate prompt check
-        run: persian-eval leakage data/persian_eval_v1.dev.jsonl data/persian_eval_v1.public_eval.jsonl data/persian_eval_v1.hard.jsonl
+        run: persian-eval leakage data/persian_eval_v1.dev.jsonl data/persian_eval_v1.public_eval.jsonl data/persian_eval_v1.hard.jsonl data/persian_eval_v1.practical.jsonl
       - name: Validate dataset quality
-        run: python scripts/validate_dataset.py --strict-min-count data/persian_eval_v1.dev.jsonl data/persian_eval_v1.public_eval.jsonl data/persian_eval_v1.hard.jsonl
+        run: python scripts/validate_dataset.py --strict-min-count data/persian_eval_v1.dev.jsonl data/persian_eval_v1.public_eval.jsonl data/persian_eval_v1.hard.jsonl data/persian_eval_v1.practical.jsonl
+      - name: Check practical split is regenerated from its builder
+        run: python scripts/build_practical_items.py --check
       - name: Run tests with coverage
         run: pytest --cov=persian_eval --cov-report=term-missing
       - name: Smoke run
         run: persian-eval run --model smoke --backend mock --data data/persian_eval_v1.dev.jsonl --output /tmp/smoke.json
       - name: Validate smoke result
         run: persian-eval validate /tmp/smoke.json
+      - name: Smoke run on the practical split
+        run: persian-eval run --model smoke --backend mock --concurrency 4 --data data/persian_eval_v1.practical.jsonl --output /tmp/smoke-practical.json && persian-eval validate /tmp/smoke-practical.json
