@@ -65,9 +65,9 @@ class DatasetRecord:
         if not self.prompt.strip():
             raise DatasetError(f"{self.id}: prompt cannot be empty")
         scoring = self.metadata.get("scoring")
-        if scoring not in {"mcq", "exact", "f1", "instruction"}:
+        if scoring not in {"mcq", "exact", "f1", "instruction", "json"}:
             raise DatasetError(
-                f"{self.id}: metadata.scoring must be mcq, exact, f1, or instruction"
+                f"{self.id}: metadata.scoring must be mcq, exact, f1, instruction, or json"
             )
         if scoring == "mcq":
             if not self.choices:
@@ -79,6 +79,8 @@ class DatasetRecord:
                 raise DatasetError(f"{self.id}: metadata.answer_index is out of range")
         if scoring == "instruction" and not isinstance(self.answer, dict):
             raise DatasetError(f"{self.id}: instruction rows require an object answer")
+        if scoring == "json" and not (isinstance(self.answer, dict) and self.answer):
+            raise DatasetError(f"{self.id}: json rows require a non-empty object answer")
 
 
 def _require_str(row: dict[str, Any], key: str, prefix: str) -> str:

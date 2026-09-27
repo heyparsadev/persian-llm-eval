@@ -2,13 +2,24 @@
 
 from __future__ import annotations
 
+import json
 import re
 from typing import Any
 
 from .dataset import DatasetRecord
-from .normalize import normalize_persian, strip_punctuation, tokenize
+from .normalize import (
+    DIGITS,
+    normalize_keep_zwnj,
+    normalize_persian,
+    strip_punctuation,
+    tokenize,
+)
 
 DEFAULT_LABELS = ["الف", "ب", "پ", "ت", "ث", "ج", "چ", "ح"]
+
+# Leading list markers, numbering, quotes, and markdown that may precede the
+# first real letter of a line (acrostic checks look past them).
+LINE_MARKER_RE = re.compile(r"^[\s\d\-\*•#>\.\)\(:،؛«»\"'`_~|\[\]]+")
 
 
 def score_record(record: DatasetRecord, prediction: str) -> tuple[float, dict[str, Any]]:
@@ -21,6 +32,8 @@ def score_record(record: DatasetRecord, prediction: str) -> tuple[float, dict[st
         return score_f1(record, prediction)
     if scoring == "instruction":
         return score_instruction(record, prediction)
+    if scoring == "json":
+        return score_json(record, prediction)
     raise ValueError(f"Unsupported scoring type: {scoring}")
 
 
@@ -151,12 +164,206 @@ def score_instruction(record: DatasetRecord, prediction: str) -> tuple[float, di
             normalize_persian(constraints["required_suffix"])
         )
 
+    checks.update(_extended_instruction_checks(constraints, prediction, normalized_prediction))
+
     if not checks:
         return 0.0, {"checks": checks, "constraint_score": 0.0}
     passed = sum(1 for value in checks.values() if value)
     constraint_score = passed / len(checks)
     strict_score = 1.0 if passed == len(checks) else 0.0
     return strict_score, {"checks": checks, "constraint_score": constraint_score}
+
+
+def _extended_instruction_checks(
+    constraints: dict[str, Any], prediction: str, normalized_prediction: str
+) -> dict[str, bool]:
+    """Constraint types added for the practical split (all optional, all strict).
+
+    - ``required_any``: list of groups; each group needs at least one option present.
+    - ``forbidden_chars``: characters that must not appear (lipograms).
+    - ``required_exact`` / ``forbidden_exact``: substrings matched with ZWNJ kept
+      significant, so «می‌خواهم» and «می خواهم» are different strings. A
+      ``required_exact`` entry may be a list of acceptable spellings.
+    - ``starts_with`` / ``ends_with``: like ``required_prefix``/``required_suffix``
+      but ignoring punctuation, so a closing period or opening quote is harmless.
+    - ``line_count``: exact number of non-empty lines.
+    - ``line_initials``: first letter of each non-empty line, in order (acrostic).
+    - ``lines_end_with``: every non-empty line ends with this suffix (or any of a list).
+    - ``distinct_line_endings``: the last word of every line is different.
+    - ``word_initial``: every word starts with this letter.
+    """
+
+    checks: dict[str, bool] = {}
+    required_any = constraints.get("required_any", [])
+    if required_any:
+        checks["required_any"] = all(
+            any(normalize_persian(option) in normalized_prediction for option in group)
+            for group in required_any
+        )
+
+    forbidden_chars = constraints.get("forbidden_chars", [])
+    if forbidden_chars:
+        checks["forbidden_chars"] = all(
+            normalize_persian(char) not in normalized_prediction for char in forbidden_chars
+        )
+
+    loose_prediction = strip_punctuation(prediction)
+    if "starts_with" in constraints:
+        checks["starts_with"] = loose_prediction.startswith(
+            strip_punctuation(constraints["starts_with"])
+        )
+    if "ends_with" in constraints:
+        checks["ends_with"] = loose_prediction.endswith(strip_punctuation(constraints["ends_with"]))
+
+    exact_prediction = normalize_keep_zwnj(prediction)
+    required_exact = constraints.get("required_exact", [])
+    if required_exact:
+        checks["required_exact"] = all(
+            any(normalize_keep_zwnj(option) in exact_prediction for option in _options(item))
+            for item in required_exact
+        )
+    forbidden_exact = constraints.get("forbidden_exact", [])
+    if forbidden_exact:
+        checks["forbidden_exact"] = all(
+            normalize_keep_zwnj(item) not in exact_prediction for item in forbidden_exact
+        )
+
+    lines = [line.strip() for line in prediction.splitlines() if strip_punctuation(line)]
+    if "line_count" in constraints:
+        checks["line_count"] = len(lines) == int(constraints["line_count"])
+    if "line_initials" in constraints:
+        expected = [_fold_letter(letter) for letter in constraints["line_initials"]]
+        actual = [_first_letter(line) for line in lines]
+        checks["line_initials"] = actual == expected
+    if "lines_end_with" in constraints:
+        suffixes = constraints["lines_end_with"]
+        if isinstance(suffixes, str):
+            suffixes = [suffixes]
+        normalized_suffixes = [strip_punctuation(item) for item in suffixes]
+        checks["lines_end_with"] = bool(lines) and all(
+            any(strip_punctuation(line).endswith(suffix) for suffix in normalized_suffixes)
+            for line in lines
+        )
+    if constraints.get("distinct_line_endings"):
+        last_words = [tokenize(line)[-1] for line in lines if tokenize(line)]
+        checks["distinct_line_endings"] = len(last_words) == len(set(last_words))
+    if "word_initial" in constraints:
+        letter = _fold_letter(constraints["word_initial"])
+        words = tokenize(prediction)
+        checks["word_initial"] = bool(words) and all(
+            _fold_letter(word[0]) == letter for word in words
+        )
+    return checks
+
+
+def _options(item: Any) -> list[Any]:
+    return item if isinstance(item, list) else [item]
+
+
+def _first_letter(line: str) -> str:
+    stripped = LINE_MARKER_RE.sub("", normalize_persian(line))
+    return _fold_letter(stripped[:1])
+
+
+def _fold_letter(letter: str) -> str:
+    # Alef with madda counts as alef for acrostics and alliteration.
+    value = normalize_persian(letter)[:1]
+    return "ا" if value == "آ" else value
+
+
+def score_json(record: DatasetRecord, prediction: str) -> tuple[float, dict[str, Any]]:
+    """Field-level accuracy of a JSON object extracted from the prediction.
+
+    ``record.answer`` maps each expected key to its gold value. A list value
+    means "any of these". ``null`` gold values are satisfied by null, an empty
+    string, or a missing key (this is how items test for hallucinated fields).
+    Numbers compare numerically, so ``"8,500,000"`` and ``8500000`` both match.
+    """
+
+    expected = record.answer
+    parsed = extract_json_object(prediction)
+    if parsed is None:
+        return 0.0, {"parsed": False, "fields": {}, "field_accuracy": 0.0}
+    fields = {
+        key: _json_value_matches(gold, parsed.get(key, _MISSING)) for key, gold in expected.items()
+    }
+    accuracy = sum(1 for ok in fields.values() if ok) / len(fields) if fields else 0.0
+    return accuracy, {
+        "parsed": True,
+        "fields": fields,
+        "field_accuracy": accuracy,
+        "extra_keys": sorted(key for key in parsed if key not in expected),
+    }
+
+
+class _Missing:
+    pass
+
+
+_MISSING = _Missing()
+
+
+def extract_json_object(prediction: str) -> dict[str, Any] | None:
+    """Return the first JSON object found in a response, tolerating fences and prose."""
+
+    text = strip_reasoning(prediction).translate(DIGITS)
+    candidates = [
+        match.group(1) for match in re.finditer(r"```(?:json)?\s*(.*?)```", text, re.DOTALL)
+    ]
+    candidates.append(text)
+    decoder = json.JSONDecoder()
+    for candidate in candidates:
+        for start in [index for index, char in enumerate(candidate) if char == "{"]:
+            try:
+                value, _ = decoder.raw_decode(candidate, start)
+            except json.JSONDecodeError:
+                continue
+            if isinstance(value, dict):
+                return value
+    return None
+
+
+def _json_value_matches(gold: Any, value: Any) -> bool:
+    if isinstance(gold, list):
+        return any(_json_value_matches(option, value) for option in gold)
+    if gold is None:
+        return value is _MISSING or value is None or (isinstance(value, str) and not value.strip())
+    if value is _MISSING or value is None:
+        return False
+    if isinstance(gold, bool):
+        # JSON booleans, or the strings "true"/"false"; never 0/1.
+        text = value.strip().lower() if isinstance(value, str) else None
+        return value is gold or text == str(gold).lower()
+    if isinstance(gold, (int, float)):
+        number = _as_number(value)
+        return number is not None and abs(number - float(gold)) <= 1e-6 * max(1.0, abs(gold))
+    return _text_matches(str(gold), value)
+
+
+def _text_matches(gold: str, value: Any) -> bool:
+    # Exact after normalisation, or the gold phrase inside a slightly longer value
+    # ("محله سعادت‌آباد" for "سعادت آباد").
+    gold_tokens = tokenize(gold)
+    value_tokens = tokenize(value)
+    return value_tokens == gold_tokens or (
+        bool(gold_tokens)
+        and len(value_tokens) <= len(gold_tokens) + 2
+        and _contains_subsequence(value_tokens, gold_tokens)
+    )
+
+
+def _as_number(value: Any) -> float | None:
+    if isinstance(value, bool):
+        return None
+    if isinstance(value, (int, float)):
+        return float(value)
+    if isinstance(value, str):
+        cleaned = re.sub(r"[\s,٬_']", "", normalize_persian(value)).replace("٫", ".")
+        try:
+            return float(cleaned)
+        except ValueError:
+            return None
+    return None
 
 
 def token_f1(prediction_tokens: list[str], answer_tokens: list[str]) -> float:

@@ -41,6 +41,9 @@ def build_leaderboard(
         for track, score_data in result["task_scores"].items():
             row[f"{track}_score"] = round(float(score_data["score"]), 6)
             row[f"{track}_n"] = int(score_data["n"])
+        usage = result.get("usage")
+        if isinstance(usage, dict) and isinstance(usage.get("cost_usd"), (int, float)):
+            row["cost_usd"] = round(float(usage["cost_usd"]), 6)
         ci = compute_bootstrap_ci(
             result,
             iterations=bootstrap_iterations,

@@ -66,6 +66,26 @@ def normalize_persian(text: object) -> str:
     return value.strip().lower()
 
 
+def normalize_keep_zwnj(text: object) -> str:
+    """Normalize letters, digits, and diacritics but keep ZWNJ (نیم‌فاصله) significant.
+
+    ``normalize_persian`` folds ZWNJ into a space, which is right for answer
+    matching but makes spacing mistakes invisible. This variant is used by
+    the ZWNJ-sensitive ``required_exact`` / ``forbidden_exact`` constraints.
+    """
+
+    if text is None:
+        return ""
+    value = unicodedata.normalize("NFKC", str(text))
+    value = value.translate(ARABIC_TO_PERSIAN)
+    value = value.translate(DIGITS)
+    value = value.replace("\u200e", "").replace("\u200f", "")
+    value = DIACRITICS_RE.sub("", value)
+    # \s does not match U+200C, so collapsing whitespace leaves ZWNJ intact.
+    value = WHITESPACE_RE.sub(" ", value)
+    return value.strip()
+
+
 def strip_punctuation(text: object) -> str:
     """Normalize text and remove punctuation."""
 

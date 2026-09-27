@@ -16,6 +16,14 @@ from .dataset import DatasetRecord
 SYSTEM_PROMPT = "شما یک دستیار دقیق فارسی هستید. پاسخ را کوتاه، مستقیم و به زبان فارسی بدهید."
 
 
+class APIError(RuntimeError):
+    """An API call failed after retries; ``status`` is the HTTP status when there was one."""
+
+    def __init__(self, message: str, *, status: int | None = None):
+        super().__init__(message)
+        self.status = status
+
+
 def format_prompt(record: DatasetRecord) -> str:
     scoring = record.metadata.get("scoring")
     if scoring == "mcq" and record.choices:
@@ -33,6 +41,8 @@ def format_prompt(record: DatasetRecord) -> str:
             "فقط پاسخ نهایی را در یک خط بنویس. "
             "بدون توضیح، بدون فرمول، بدون مارک‌داون، بدون پیشوند «پاسخ:»."
         )
+    if scoring == "json":
+        return f"{record.prompt}\n\nفقط یک شیء JSON معتبر بنویس؛ بدون توضیح و بدون مارک‌داون."
     return record.prompt
 
 
@@ -46,6 +56,9 @@ class GenerationConfig:
     reasoning_effort: str | None = None
     thinking_type: str | None = None
     thinking_budget_tokens: int | None = None
+    provider_order: list[str] | None = None
+    allow_fallbacks: bool = True
+    data_collection: str | None = None
 
 
 class BaseBackend:
@@ -53,6 +66,11 @@ class BaseBackend:
 
     def generate(self, record: DatasetRecord) -> str:
         raise NotImplementedError
+
+    def generate_with_meta(self, record: DatasetRecord) -> tuple[str, dict[str, Any]]:
+        """Return the prediction plus optional call metadata (tokens, cost, provider)."""
+
+        return self.generate(record), {}
 
 
 class MockBackend(BaseBackend):
@@ -360,6 +378,164 @@ class OpenAIResponsesBackend(BaseBackend):
         return extract_response_text(data)
 
 
+OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
+OPENROUTER_APP_URL = "https://github.com/heyparsadev/persian-llm-eval"
+OPENROUTER_APP_TITLE = "persian-llm-eval"
+
+
+class OpenRouterUpstreamError(APIError):
+    """OpenRouter answered 200 but the routed provider failed; worth retrying."""
+
+
+class OpenRouterBackend(BaseBackend):
+    """Any model behind OpenRouter's OpenAI-compatible Chat Completions API.
+
+    One ``OPENROUTER_API_KEY`` reaches every provider. Reasoning uses
+    OpenRouter's unified ``reasoning`` parameter: ``--reasoning-effort`` maps
+    to ``effort`` and ``--thinking-budget-tokens`` to an explicit budget.
+    Reasoning tokens share ``max_tokens`` with the answer, so an effort-scaled
+    headroom is added on top of ``--max-new-tokens`` (same idea as the
+    Anthropic backend). Token usage, cost, and the serving provider are
+    returned as call metadata.
+    """
+
+    name = "openrouter"
+
+    def __init__(self, model_id: str, *, config: GenerationConfig):
+        self.model_id = model_id
+        self.config = config
+        self.base_url = (
+            config.base_url or os.getenv("OPENROUTER_BASE_URL") or OPENROUTER_BASE_URL
+        ).rstrip("/")
+        api_key = os.getenv("OPENROUTER_API_KEY")
+        if not api_key:
+            raise RuntimeError("OPENROUTER_API_KEY is required for the openrouter backend")
+        self.api_key: str = api_key
+
+    def build_payload(self, record: DatasetRecord) -> dict[str, Any]:
+        payload: dict[str, Any] = {
+            "model": self.model_id,
+            "messages": [
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": format_prompt(record)},
+            ],
+            "max_tokens": self.config.max_new_tokens + self._reasoning_headroom(),
+        }
+        reasoning = self._reasoning()
+        if reasoning is not None:
+            payload["reasoning"] = reasoning
+        if not self._reasoning_headroom():
+            payload["temperature"] = self.config.temperature
+        provider: dict[str, Any] = {}
+        if self.config.provider_order:
+            provider["order"] = list(self.config.provider_order)
+            provider["allow_fallbacks"] = self.config.allow_fallbacks
+        if self.config.data_collection:
+            provider["data_collection"] = self.config.data_collection
+        if provider:
+            payload["provider"] = provider
+        return payload
+
+    def _reasoning(self) -> dict[str, Any] | None:
+        if self.config.thinking_budget_tokens:
+            return {"max_tokens": self.config.thinking_budget_tokens, "exclude": True}
+        effort = self.config.reasoning_effort
+        if not effort:
+            return None
+        if effort == "none":
+            return {"effort": "none"}
+        return {"effort": effort, "exclude": True}
+
+    def _reasoning_headroom(self) -> int:
+        if self.config.thinking_budget_tokens:
+            return self.config.thinking_budget_tokens
+        effort = self.config.reasoning_effort
+        if not effort or effort == "none":
+            return 0
+        return {
+            "minimal": 2048,
+            "low": 4096,
+            "medium": 8192,
+            "high": 16384,
+            "xhigh": 32768,
+            "max": 65536,
+        }.get(effort, 8192)
+
+    def generate(self, record: DatasetRecord) -> str:
+        return self.generate_with_meta(record)[0]
+
+    def generate_with_meta(self, record: DatasetRecord) -> tuple[str, dict[str, Any]]:
+        body = json.dumps(self.build_payload(record)).encode("utf-8")
+        for attempt in range(3):
+            request = urllib.request.Request(
+                f"{self.base_url}/chat/completions",
+                data=body,
+                headers={
+                    "Authorization": f"Bearer {self.api_key}",
+                    "Content-Type": "application/json",
+                    "HTTP-Referer": OPENROUTER_APP_URL,
+                    "X-Title": OPENROUTER_APP_TITLE,
+                },
+                method="POST",
+            )
+            started = time.monotonic()
+            data = post_json(request, timeout=600, provider="OpenRouter", attempts=6)
+            try:
+                text = extract_openrouter_text(data)
+            except OpenRouterUpstreamError:
+                if attempt == 2:
+                    raise
+                time.sleep(2 ** (attempt + 1))
+                continue
+            meta = openrouter_call_meta(data)
+            meta["latency_s"] = round(time.monotonic() - started, 3)
+            return text, meta
+        raise RuntimeError("unreachable")
+
+
+def extract_openrouter_text(data: dict[str, Any]) -> str:
+    choices = data.get("choices")
+    if not isinstance(choices, list) or not choices or not isinstance(choices[0], dict):
+        raise OpenRouterUpstreamError(f"OpenRouter response had no choices: {data.get('error')}")
+    choice = choices[0]
+    if choice.get("error") or choice.get("finish_reason") == "error":
+        raise OpenRouterUpstreamError(f"OpenRouter upstream error: {choice.get('error')}")
+    message = choice.get("message") or {}
+    content = message.get("content") if isinstance(message, dict) else None
+    if isinstance(content, list):
+        content = "\n".join(
+            part["text"]
+            for part in content
+            if isinstance(part, dict) and isinstance(part.get("text"), str)
+        )
+    if not isinstance(content, str):
+        # Typically the whole budget went to reasoning (finish_reason=length).
+        # Return empty so the item scores 0 instead of aborting the run.
+        return ""
+    return content.strip()
+
+
+def openrouter_call_meta(data: dict[str, Any]) -> dict[str, Any]:
+    usage = _as_dict(data.get("usage"))
+    details = _as_dict(usage.get("completion_tokens_details"))
+    choices = data.get("choices")
+    choice = _as_dict(choices[0]) if isinstance(choices, list) and choices else {}
+    meta = {
+        "provider": data.get("provider"),
+        "served_model": data.get("model"),
+        "finish_reason": choice.get("finish_reason"),
+        "prompt_tokens": usage.get("prompt_tokens"),
+        "completion_tokens": usage.get("completion_tokens"),
+        "reasoning_tokens": details.get("reasoning_tokens"),
+        "cost_usd": usage.get("cost"),
+    }
+    return {key: value for key, value in meta.items() if value is not None}
+
+
+def _as_dict(value: Any) -> dict[str, Any]:
+    return value if isinstance(value, dict) else {}
+
+
 def normalize_anthropic_messages_url(base_url: str) -> str:
     base = base_url.rstrip("/")
     if base.endswith("/v1/messages"):
@@ -370,25 +546,49 @@ def normalize_anthropic_messages_url(base_url: str) -> str:
 
 
 def post_json(
-    request: urllib.request.Request, *, timeout: int, provider: str = "OpenAI"
+    request: urllib.request.Request,
+    *,
+    timeout: int,
+    provider: str = "OpenAI",
+    attempts: int = 4,
 ) -> dict[str, Any]:
     retry_statuses = {408, 409, 429, 500, 502, 503, 504}
     last_error: Exception | None = None
-    for attempt in range(4):
+    for attempt in range(attempts):
+        delay = float(2**attempt)
         try:
             with urllib.request.urlopen(request, timeout=timeout) as response:
                 return json.loads(response.read().decode("utf-8"))
         except urllib.error.HTTPError as exc:
             last_error = exc
-            if exc.code not in retry_statuses or attempt == 3:
+            if exc.code not in retry_statuses or attempt == attempts - 1:
                 detail = exc.read().decode("utf-8", errors="replace")
-                raise RuntimeError(f"{provider} API error {exc.code}: {detail}") from exc
-        except (urllib.error.URLError, http.client.RemoteDisconnected, TimeoutError) as exc:
+                raise APIError(
+                    f"{provider} API error {exc.code}: {detail}", status=exc.code
+                ) from exc
+            delay = max(delay, _retry_after_seconds(exc))
+        except (
+            urllib.error.URLError,
+            http.client.RemoteDisconnected,
+            http.client.IncompleteRead,
+            ConnectionError,
+            TimeoutError,
+        ) as exc:
             last_error = exc
-            if attempt == 3:
-                raise RuntimeError(f"{provider} API request failed: {exc}") from exc
-        time.sleep(2**attempt)
-    raise RuntimeError(f"{provider} API request failed: {last_error}")
+            if attempt == attempts - 1:
+                raise APIError(f"{provider} API request failed: {exc}") from exc
+        time.sleep(delay)
+    raise APIError(f"{provider} API request failed: {last_error}")
+
+
+def _retry_after_seconds(exc: urllib.error.HTTPError) -> float:
+    """Honour a numeric Retry-After header on 429/503, capped at one minute."""
+
+    value = exc.headers.get("Retry-After") if exc.headers else None
+    try:
+        return min(60.0, max(0.0, float(value))) if value else 0.0
+    except ValueError:
+        return 0.0
 
 
 def extract_response_text(data: dict[str, Any]) -> str:
@@ -428,4 +628,6 @@ def create_backend(
         return OpenAIResponsesBackend(model_id, config=config)
     if backend_name == "anthropic":
         return AnthropicBackend(model_id, config=config)
+    if backend_name == "openrouter":
+        return OpenRouterBackend(model_id, config=config)
     raise ValueError(f"Unsupported backend: {backend_name}")
