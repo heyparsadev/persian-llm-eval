@@ -124,9 +124,13 @@ python scripts/run_openrouter_matrix.py
 
 `--estimate` prices the planned runs from the real prompt sizes, measured
 Persian characters-per-token ratios, and an assumed thinking length per
-reasoning effort. For the default matrix (13 rows x 4 splits, 544 items per
-row) it comes to about **$87** (roughly $53–$156 depending on how long the
-models actually think); the two new splits alone are about $38.
+reasoning effort. For the default matrix (12 rows x 4 splits, 544 items per
+row) it comes to about **$102** (roughly $58–$190 depending on how long the
+models actually think); the two new splits alone are about $45. Claude
+Fable 5.1 and Opus 5.5 cannot turn thinking off, so their rows always set an
+effort. Running only the Claude models on Anthropic's own API costs the same
+per token, and half that through the Batch API; see
+[`docs/ROADMAP_FA.md`](docs/ROADMAP_FA.md) for the per-row tables.
 
 - `--reasoning-effort` maps to OpenRouter's `reasoning.effort` (`none` turns
   thinking off where the model allows it; GPT-6 Astra does not). Thinking

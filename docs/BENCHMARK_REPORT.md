@@ -242,7 +242,7 @@ creative items) and `challenge` (100 items on false premises, unanswerable
 questions, ambiguity, chained knowledge, and word play) — and runs a new
 model matrix — Claude Fable 5.1 and Opus 5.5, GPT-6 Astra / Sol / Luna,
 Gemini, Grok, DeepSeek — through OpenRouter with per-call cost tracking
-(estimated at about $87 for all four splits). See
+(estimated at about $102 for all four splits). See
 [`ROADMAP_FA.md`](ROADMAP_FA.md) and `configs/openrouter_models.json`. No
 results from that matrix are included here yet.
 

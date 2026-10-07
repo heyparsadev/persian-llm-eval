@@ -40,8 +40,9 @@ DEFAULT_CONFIG = ROOT / "configs" / "openrouter_models.json"
 
 # Persian characters per token, measured on this repo's prompts (Sep 2026) with
 # the o200k tokenizer (GPT-4o/5 family) and the public legacy Claude tokenizer.
-# The current Claude tokenizer is not public, so the Claude figure is a
-# conservative bound. Other providers get a middle assumption.
+# The current Claude tokenizer is not public, so the Claude figure is an
+# assumption; thinking tokens dominate, so a 30% error here moves a Claude row
+# by under 8%. Other providers get a middle assumption.
 CHARS_PER_TOKEN = {"openai/": 2.9, "anthropic/": 1.0}
 DEFAULT_CHARS_PER_TOKEN = 2.0
 # Assumed thinking tokens per item for these short tasks, by reasoning effort.
