@@ -243,9 +243,9 @@ questions, ambiguity, chained knowledge, and word play) — and runs a new
 model matrix — Claude Fable 5.1 and Opus 5.5, GPT-6 Astra / Sol / Luna,
 Gemini, Grok, DeepSeek — through OpenRouter with per-call cost tracking
 (estimated at about $102 for all four splits). A Claude-only matrix runs on
-Anthropic's own API as Message Batches: Opus 5.5 at low, medium, and max
-effort and Sonnet 5.5 without thinking and at low, medium, and max (about
-$153 at batch prices, most of it the two max rows). See
+Anthropic's own API as Message Batches: Opus 5.5 at low, medium, high, and
+max effort and Sonnet 5.5 without thinking and at the same four levels (about
+$187 at batch prices, most of it the two max rows). See
 [`ROADMAP_FA.md`](ROADMAP_FA.md), `configs/openrouter_models.json`, and
 `configs/anthropic_models.json`. No results from either matrix are included
 here yet.

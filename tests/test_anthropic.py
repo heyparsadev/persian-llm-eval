@@ -494,7 +494,7 @@ class AnthropicMatrixConfigTests(unittest.TestCase):
         path = ROOT / "configs" / "anthropic_models.json"
         prices = json.loads(path.read_text(encoding="utf-8"))["prices_usd_per_million"]
         _, models = self.matrix.load_config(path)
-        self.assertEqual(len(models), 7)
+        self.assertEqual(len(models), 9)
         for model in models:
             self.assertEqual(self.matrix.backend_of(model), "anthropic")
             self.assertIn(model["slug"], prices)

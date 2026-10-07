@@ -82,14 +82,14 @@ python scripts/run_matrix.py
 ## فقط Claude، مستقیم با API انتروپیک (Batch، نصف قیمت)
 
 ماتریس [`configs/anthropic_models.json`](configs/anthropic_models.json)
-مدل Opus 5.5 را در سطح‌های فکر low، medium و max و Sonnet 5.5 را بدون فکر و
-در همین سه سطح اجرا می‌کند. هر اجرا یک Message Batch است که نصف قیمت حساب
+مدل Opus 5.5 را در سطح‌های فکر low، medium، high و max و Sonnet 5.5 را بدون
+فکر و در همین چهار سطح اجرا می‌کند. هر اجرا یک Message Batch است که نصف قیمت حساب
 می‌شود:
 
 ```bash
 export ANTHROPIC_API_KEY=...
 python scripts/run_matrix.py --config configs/anthropic_models.json --estimate
-# اول یک اجرای آزمایشی ارزان (۲۰ سوال چالشی برای هر ردیف، حدود ۶ دلار)
+# اول یک اجرای آزمایشی ارزان (۲۰ سوال چالشی برای هر ردیف، حدود ۷ دلار)
 python scripts/run_matrix.py --config configs/anthropic_models.json \
   --splits challenge --max-items 20 --results-dir results/pilot
 python scripts/run_matrix.py --config configs/anthropic_models.json
