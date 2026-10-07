@@ -63,7 +63,7 @@ or on macOS, double-click [`RUN_ME.command`](RUN_ME.command).
 | `hf` | Any Hugging Face causal LM, optionally 4/8-bit quantised | install with `.[hf]` |
 | `openai-compatible` | GPT-4.x, GPT-5 family, and any OpenAI-compatible Chat Completions endpoint | `OPENAI_API_KEY`, optional `OPENAI_BASE_URL` |
 | `openai-responses` | GPT-5 family Responses API with `--reasoning-effort` | `OPENAI_API_KEY` |
-| `anthropic` | Claude 3.x, 4.x, and 4.7 (with adaptive thinking via `--reasoning-effort`) | `ANTHROPIC_API_KEY`, optional `ANTHROPIC_BASE_URL` |
+| `anthropic` | Claude 3.x and 4.x, and the Claude 5.x family (Opus 5.5, Sonnet 5.5, Fable 5.1) with adaptive thinking via `--reasoning-effort`; `--batch` uses the Message Batches API at half price | `ANTHROPIC_API_KEY`, optional `ANTHROPIC_BASE_URL` |
 | `openrouter` | Any model on OpenRouter (Claude, GPT, Gemini, Grok, DeepSeek, Qwen, …) through one key, with unified reasoning control, provider pinning, and per-call cost tracking | `OPENROUTER_API_KEY`, optional `OPENROUTER_BASE_URL` |
 
 ```bash
@@ -79,6 +79,12 @@ persian-eval run --model claude-opus-4-7 --backend anthropic \
   --data data/persian_eval_v1.hard.jsonl \
   --output results/claude-opus-4-7-thinking.hard.json
 
+# Anthropic — Claude Opus 5.5 at max effort as one Message Batch (half price)
+persian-eval run --model claude-opus-5-5 --backend anthropic \
+  --reasoning-effort max --max-new-tokens 4096 --batch \
+  --data data/persian_eval_v1.challenge.jsonl \
+  --output results/claude-opus-5.5-max.challenge.json
+
 # OpenAI — GPT-5 with medium reasoning (Responses API)
 export OPENAI_API_KEY=...
 persian-eval run --model gpt-5 --backend openai-responses \
@@ -93,10 +99,15 @@ persian-eval run --model PartAI/Dorna2-Llama3.1-8B-Instruct --backend hf \
   --output results/dorna2.json
 ```
 
-`--reasoning-effort` accepts `minimal`, `low`, `medium`, `high`, `xhigh`. The
-Anthropic backend maps these to the Claude 4.7 adaptive thinking API
-(`low`/`medium`/`high`) and sets a max-tokens headroom; the OpenAI Responses
-backend forwards the effort to the API directly.
+`--reasoning-effort` accepts `none`, `minimal`, `low`, `medium`, `high`,
+`xhigh`, `max`. On Claude 5.x models the Anthropic backend sends adaptive
+thinking with `output_config.effort` (`low` to `max`), never a temperature, and
+adds an effort-scaled `max_tokens` headroom (4K/8K/16K, 64K for `xhigh` and
+`max`); requests above about 21K tokens are streamed. `none` turns thinking off
+only where the model allows it (Sonnet 5.5, sent as `between_tools`); Opus 5.5
+and Fable 5.1 always think. Claude 4.7 keeps its earlier mapping to
+`low`/`medium`/`high`. The OpenAI Responses backend forwards the effort to the
+API directly.
 
 ### OpenRouter
 
@@ -117,9 +128,9 @@ persian-eval run --model openai/gpt-6-sol --backend openrouter \
   --data data/persian_eval_v1.hard.jsonl --output results/gpt-6-sol-thinking-medium.hard.json
 
 # The full matrix in configs/openrouter_models.json over every split.
-python scripts/run_openrouter_matrix.py --estimate  # cost estimate, no key needed
-python scripts/run_openrouter_matrix.py --dry-run   # plan + live slug/price check
-python scripts/run_openrouter_matrix.py
+python scripts/run_matrix.py --estimate  # cost estimate, no key needed
+python scripts/run_matrix.py --dry-run   # plan + live slug/price check
+python scripts/run_matrix.py
 ```
 
 `--estimate` prices the planned runs from the real prompt sizes, measured
@@ -147,6 +158,41 @@ per token, and half that through the Batch API; see
 - Runs are checkpointed to `<output>.partial.jsonl`; if a run dies, rerun the
   same command with `--resume` to skip the items already paid for.
 
+### Claude 5.x on Anthropic's API, as Message Batches
+
+[`configs/anthropic_models.json`](configs/anthropic_models.json) runs Claude
+Opus 5.5 at `low`, `medium`, and `max` effort and Claude Sonnet 5.5 without
+thinking and at `low`, `medium`, and `max` (Fable 5.1 rows are there but
+disabled). Every run is one Message Batch: half price, most batches finish
+within an hour, none takes more than 24. The script submits all batches first
+and then collects them.
+
+```bash
+export ANTHROPIC_API_KEY=...
+python scripts/run_matrix.py --config configs/anthropic_models.json --estimate
+# Pilot first: 20 challenge items per row, kept out of the leaderboard.
+python scripts/run_matrix.py --config configs/anthropic_models.json \
+  --splits challenge --max-items 20 --results-dir results/pilot
+python scripts/run_matrix.py --config configs/anthropic_models.json
+```
+
+The estimate for all seven rows over the four splits is about **$153** at
+batch prices ($79–$300 depending on thinking length); the two `max` rows are
+about $132 of it. The pilot costs about $6 and its summary table shows the
+real output tokens per item, which replace the assumed thinking lengths.
+
+- The batch id is saved in the run's checkpoint right after submission, so an
+  interrupted run (or one started with `--no-wait`) collects the same batch on
+  `--resume` instead of paying for a second one; starting over without
+  `--resume` is refused while a batch is outstanding.
+- Items a batch fails on are retried by the next `--resume`, which submits
+  only those; `--max-item-errors N` lets up to N of them score 0 instead.
+- A refusal (`stop_reason: refusal`) scores as an empty answer and is counted
+  in `usage.refusals`. No fallback model is configured, because its answer
+  would be scored as this model's.
+- `usage.cost_usd` is computed from Anthropic's list prices and the reported
+  tokens (thinking is billed as output), halved for batches.
+
 ## CLI
 
 ```bash
@@ -162,7 +208,9 @@ persian-eval leaderboard build <result.json ...> --output <out.json> [--csv <out
   with `--split public_eval`. Reasoning models often need
   `--max-new-tokens 512` or `768`. `--concurrency N` runs N API requests in
   parallel (results keep dataset order), and `--resume` continues an
-  interrupted run from its checkpoint.
+  interrupted run from its checkpoint. With the Anthropic backend, `--batch`
+  sends the items as one Message Batch (`--no-wait` submits and exits).
+  `--max-items N` runs N items spread evenly over the data, for a pilot.
 - **`rescore`** re-applies the current scoring rules to a previously written
   result file's saved sample predictions. Use this whenever you tighten an
   accepted-answer list or fix an item — no model re-run is needed:
@@ -321,7 +369,7 @@ Notes:
 ```
 
 `usage` and per-sample `meta` appear only for backends that report them
-(currently `openrouter`).
+(`openrouter` and `anthropic`).
 
 Sample-level predictions are included by default and are what makes
 `persian-eval rescore` possible. Use `--no-samples` only when running the
@@ -358,9 +406,10 @@ Running the full Claude + GPT matrix used in this report came in under $25.
   validator, and `build_leaderboard.sh`.
 - [`tests/`](tests) — unittest-style tests run through pytest.
 - [`configs/baselines.yml`](configs/baselines.yml) — suggested baseline matrix.
-- [`configs/openrouter_models.json`](configs/openrouter_models.json) — the
-  OpenRouter model matrix run by
-  [`scripts/run_openrouter_matrix.py`](scripts/run_openrouter_matrix.py).
+- [`configs/openrouter_models.json`](configs/openrouter_models.json) and
+  [`configs/anthropic_models.json`](configs/anthropic_models.json) — the
+  OpenRouter and Claude-only model matrices run by
+  [`scripts/run_matrix.py`](scripts/run_matrix.py).
 - [`spaces/leaderboard/`](spaces/leaderboard) — Gradio HF Space template.
 
 ## Hidden official split

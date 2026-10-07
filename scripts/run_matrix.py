@@ -1,21 +1,31 @@
 #!/usr/bin/env python3
-"""Run the OpenRouter model matrix (configs/openrouter_models.json) over the benchmark splits.
+"""Run a model matrix (configs/*_models.json) over the benchmark splits.
 
-One OPENROUTER_API_KEY covers every model. For each enabled model and split the
-script calls `persian-eval run --backend openrouter` and writes
-results/<label>.<split>.json. Existing result files are skipped (use --force to
-redo them), and an interrupted run resumes from its .partial.jsonl checkpoint.
+Each enabled config row is one model setting, and each run writes
+results/<label>.<split>.json. The config's "backend" picks the route:
+configs/openrouter_models.json sends every model through OpenRouter with one
+OPENROUTER_API_KEY; configs/anthropic_models.json sends Claude models through
+Anthropic's own API with ANTHROPIC_API_KEY. Existing result files are skipped
+(use --force to redo them), and an interrupted run resumes from its
+.partial.jsonl checkpoint.
 
-Before spending anything it checks every slug against OpenRouter's public model
-catalogue, prints per-million-token prices, skips unknown slugs, and estimates
-the cost of the planned runs (--estimate prints only the estimate).
+OpenRouter slugs are checked against OpenRouter's public model catalogue
+before anything is spent: unknown slugs are skipped and live prices shown.
+Every run prints a cost estimate first (--estimate prints only that).
+
+Rows with "batch": true (Anthropic only) go out as Message Batches at half
+price. The script submits every batch first and then collects them, so the
+whole matrix takes about as long as its slowest batch.
 
 Usage:
-    python scripts/run_openrouter_matrix.py --estimate           # cost estimate, no key needed
+    python scripts/run_matrix.py --estimate            # OpenRouter matrix cost, no key needed
+    python scripts/run_matrix.py --config configs/anthropic_models.json --estimate
     export OPENROUTER_API_KEY=sk-or-...
-    python scripts/run_openrouter_matrix.py --dry-run            # plan + estimate
-    python scripts/run_openrouter_matrix.py                      # run everything
-    python scripts/run_openrouter_matrix.py --only opus,gpt-6 --splits practical
+    python scripts/run_matrix.py --dry-run             # plan + estimate
+    python scripts/run_matrix.py                       # run everything
+    python scripts/run_matrix.py --only opus,gpt-6 --splits practical
+    python scripts/run_matrix.py --config configs/anthropic_models.json \\
+        --splits challenge --max-items 20 --results-dir results/pilot   # cheap pilot
 """
 
 from __future__ import annotations
@@ -37,13 +47,15 @@ from persian_eval.cli import main as persian_eval  # noqa: E402
 from persian_eval.dataset import load_records  # noqa: E402
 
 DEFAULT_CONFIG = ROOT / "configs" / "openrouter_models.json"
+API_KEYS = {"openrouter": "OPENROUTER_API_KEY", "anthropic": "ANTHROPIC_API_KEY"}
+BATCH_DISCOUNT = 0.5  # Message Batches API price relative to standard
 
 # Persian characters per token, measured on this repo's prompts (Sep 2026) with
 # the o200k tokenizer (GPT-4o/5 family) and the public legacy Claude tokenizer.
 # The current Claude tokenizer is not public, so the Claude figure is an
 # assumption; thinking tokens dominate, so a 30% error here moves a Claude row
 # by under 8%. Other providers get a middle assumption.
-CHARS_PER_TOKEN = {"openai/": 2.9, "anthropic/": 1.0}
+CHARS_PER_TOKEN = {"openai/": 2.9, "anthropic/": 1.0, "claude-": 1.0}
 DEFAULT_CHARS_PER_TOKEN = 2.0
 # Assumed thinking tokens per item for these short tasks, by reasoning effort.
 REASONING_TOKENS = {
@@ -72,6 +84,13 @@ def load_config(path: Path) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     return defaults, models
 
 
+def backend_of(model: dict[str, Any]) -> str:
+    backend = str(model.get("backend", "openrouter"))
+    if backend not in API_KEYS:
+        raise ValueError(f"{model['label']}: backend must be one of {', '.join(API_KEYS)}")
+    return backend
+
+
 def fetch_catalogue() -> dict[str, dict[str, Any]] | None:
     base_url = os.getenv("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1").rstrip("/")
     try:
@@ -83,14 +102,7 @@ def fetch_catalogue() -> dict[str, dict[str, Any]] | None:
     return {item["id"]: item for item in data.get("data", []) if isinstance(item, dict)}
 
 
-def per_million(price: Any) -> str:
-    try:
-        return f"${float(price) * 1_000_000:.2f}"
-    except (TypeError, ValueError):
-        return "?"
-
-
-def split_profile(split: str) -> dict[str, float]:
+def split_profile(split: str, max_items: int | None = None) -> dict[str, float]:
     """Item count plus prompt and expected-answer characters for one split."""
 
     records = load_records([ROOT / "data" / f"persian_eval_v1.{split}.jsonl"])
@@ -100,10 +112,11 @@ def split_profile(split: str) -> dict[str, float]:
         or ANSWER_CHARS.get(str(record.metadata.get("scoring")), 80)
         for record in records
     )
+    share = min(1.0, max_items / len(records)) if max_items else 1.0
     return {
-        "items": len(records),
-        "prompt_chars": prompt_chars,
-        "answer_chars": answer_chars * VERBOSITY,
+        "items": len(records) * share,
+        "prompt_chars": prompt_chars * share,
+        "answer_chars": answer_chars * VERBOSITY * share,
     }
 
 
@@ -139,7 +152,8 @@ def estimate_cost(
     output_tokens = profile["answer_chars"] / per_token
     output_tokens += reasoning_tokens(model) * reasoning_scale * profile["items"]
     price_in, price_out = prices
-    return (input_tokens * price_in + output_tokens * price_out) / 1_000_000
+    cost = (input_tokens * price_in + output_tokens * price_out) / 1_000_000
+    return cost * BATCH_DISCOUNT if model.get("batch") else cost
 
 
 def model_prices(
@@ -165,9 +179,10 @@ def print_estimate(
     splits: list[str],
     catalogue: dict[str, dict[str, Any]] | None,
     listed: dict[str, list[float]],
+    max_items: int | None = None,
 ) -> float:
-    profiles = {split: split_profile(split) for split in splits}
-    header = " | ".join(f"{split} ({int(profiles[split]['items'])})" for split in splits)
+    profiles = {split: split_profile(split, max_items) for split in splits}
+    header = " | ".join(f"{split} ({round(profiles[split]['items'])})" for split in splits)
     print(f"\n| label | chars/token | thinking tokens/item | $/M in / out | {header} | total |")
     print("|---|:---:|:---:|:---:|" + "---:|" * (len(splits) + 1))
     grand = low = high = 0.0
@@ -187,6 +202,8 @@ def print_estimate(
             f"| {model['label']} | {chars_per_token(model):.1f} | {reasoning_tokens(model):.0f} | "
             f"${prices[0]:g} / ${prices[1]:g} | {cells} | ${total:.2f} |"
         )
+    if any(model.get("batch") for model in models):
+        print("\nRows with batch=true are priced at the Message Batches discount (50% off).")
     print(
         f"\nEstimated total: ${grand:.2f} (${low:.2f}-${high:.2f} if thinking runs 0.5x-2x the "
         "assumed length). Actual cost is recorded per run in usage.cost_usd."
@@ -194,13 +211,15 @@ def print_estimate(
     return grand
 
 
-def build_command(model: dict[str, Any], split: str, output: Path) -> list[str]:
+def build_command(
+    model: dict[str, Any], split: str, output: Path, max_items: int | None = None
+) -> list[str]:
     command = [
         "run",
         "--model",
         model["slug"],
         "--backend",
-        "openrouter",
+        backend_of(model),
         "--model-type",
         model.get("model_type", "api"),
         "--data",
@@ -225,6 +244,10 @@ def build_command(model: dict[str, Any], split: str, output: Path) -> list[str]:
         command += ["--provider", model["provider"]]
     if model.get("data_collection"):
         command += ["--data-collection", model["data_collection"]]
+    if model.get("batch"):
+        command.append("--batch")
+    if max_items:
+        command += ["--max-items", str(max_items)]
     return command
 
 
@@ -235,11 +258,14 @@ def summarize(paths: list[Path]) -> None:
             continue
         result = json.loads(path.read_text(encoding="utf-8"))
         usage = result.get("usage", {})
+        calls = usage.get("calls") or 0
+        tokens_out = usage.get("completion_tokens")
         rows.append(
             (
                 path.stem,
                 result["overall_score"],
                 usage.get("cost_usd"),
+                round(tokens_out / calls) if calls and tokens_out else None,
                 usage.get("empty_predictions", 0),
                 usage.get("truncated", 0),
                 usage.get("item_errors", 0),
@@ -247,39 +273,60 @@ def summarize(paths: list[Path]) -> None:
         )
     if not rows:
         return
-    print("\n| run | overall | cost (USD) | empty | truncated | errors |")
-    print("|---|:---:|:---:|:---:|:---:|:---:|")
-    for name, overall, cost, empty, truncated, errors in sorted(rows, key=lambda row: -row[1]):
+    print("\n| run | overall | cost (USD) | output tokens/item | empty | truncated | errors |")
+    print("|---|:---:|:---:|:---:|:---:|:---:|:---:|")
+    for name, overall, cost, per_item, empty, truncated, errors in sorted(
+        rows, key=lambda row: -row[1]
+    ):
         cost_text = f"{cost:.3f}" if isinstance(cost, (int, float)) else "-"
-        print(f"| {name} | {overall:.4f} | {cost_text} | {empty} | {truncated} | {errors} |")
+        per_item_text = str(per_item) if per_item is not None else "-"
+        print(
+            f"| {name} | {overall:.4f} | {cost_text} | {per_item_text} | {empty} | "
+            f"{truncated} | {errors} |"
+        )
 
 
 def preflight(
-    models: list[dict[str, Any]], catalogue: dict[str, dict[str, Any]] | None
+    models: list[dict[str, Any]],
+    catalogue: dict[str, dict[str, Any]] | None,
+    listed: dict[str, list[float]],
 ) -> list[dict[str, Any]]:
-    """Print live prices per model; drop slugs missing from a reachable catalogue."""
+    """Print each row's prices; drop OpenRouter slugs missing from a reachable catalogue."""
 
     runnable = []
-    print("| label | slug | effort | $/M in | $/M out |")
+    print("| label | model | effort | $/M in | $/M out |")
     print("|---|---|---|---:|---:|")
     for model in models:
-        entry = catalogue.get(model["slug"]) if catalogue else None
-        pricing = (entry or {}).get("pricing", {})
         effort = model.get("reasoning_effort") or "default"
-        prices = f"{per_million(pricing.get('prompt'))} | {per_million(pricing.get('completion'))}"
-        if catalogue is not None and entry is None:
-            print(f"| {model['label']} | {model['slug']} | {effort} | not in catalogue | skipped |")
+        row = f"| {model['label']} | {model['slug']} | {effort} |"
+        on_openrouter = backend_of(model) == "openrouter"
+        if on_openrouter and catalogue is not None and model["slug"] not in catalogue:
+            print(f"{row} not in catalogue | skipped |")
             continue
-        print(f"| {model['label']} | {model['slug']} | {effort} | {prices} |")
+        prices = model_prices(model, catalogue, listed)
+        print(f"{row} " + (f"${prices[0]:g} | ${prices[1]:g} |" if prices else "? | ? |"))
         runnable.append(model)
     return runnable
 
 
-def run_all(todo: list[tuple[dict[str, Any], str, Path]]) -> list[str]:
+def run_all(
+    todo: list[tuple[dict[str, Any], str, Path]], max_items: int | None = None
+) -> list[str]:
     failures = []
+    collect = []
+    # Submit every batch first so they all process at once, then collect them.
     for model, split, path in todo:
+        if not model.get("batch"):
+            continue
+        print(f"\n=== {model['label']} / {split}: submit batch ===", flush=True)
+        if persian_eval([*build_command(model, split, path, max_items), "--no-wait"]) != 0:
+            failures.append(f"{model['label']}/{split}")
+        elif Path(f"{path}.partial.jsonl").exists():
+            collect.append((model, split, path))  # Still running; else already collected.
+    direct = [item for item in todo if not item[0].get("batch")]
+    for model, split, path in direct + collect:
         print(f"\n=== {model['label']} / {split} ===", flush=True)
-        code = persian_eval(build_command(model, split, path))
+        code = persian_eval(build_command(model, split, path, max_items))
         if code != 0:
             failures.append(f"{model['label']}/{split}")
             print(f"failed: {model['label']}/{split} (rerun to resume)", file=sys.stderr)
@@ -299,6 +346,12 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument(
         "--skip-preflight", action="store_true", help="do not check slugs against the catalogue"
+    )
+    parser.add_argument(
+        "--max-items",
+        type=int,
+        default=None,
+        help="pilot: run N items per split, spread over its tracks (use another --results-dir)",
     )
     args = parser.parse_args(argv)
     config_path = args.config.resolve()
@@ -321,9 +374,10 @@ def main(argv: list[str] | None = None) -> int:
         print("no models selected", file=sys.stderr)
         return 1
 
-    catalogue = None if args.skip_preflight else fetch_catalogue()
-    runnable = preflight(models, catalogue)
-    print_estimate(runnable, splits, catalogue, listed_prices)
+    on_openrouter = any(backend_of(model) == "openrouter" for model in models)
+    catalogue = fetch_catalogue() if on_openrouter and not args.skip_preflight else None
+    runnable = preflight(models, catalogue, listed_prices)
+    print_estimate(runnable, splits, catalogue, listed_prices, args.max_items)
     if args.estimate:
         return 0
 
@@ -336,13 +390,15 @@ def main(argv: list[str] | None = None) -> int:
     print(f"\n{len(todo)} run(s) to do, {len(plan) - len(todo)} already done")
     if args.dry_run:
         for model, split, path in todo:
-            print("persian-eval " + " ".join(build_command(model, split, path)))
+            print("persian-eval " + " ".join(build_command(model, split, path, args.max_items)))
         return 0
-    if todo and not os.getenv("OPENROUTER_API_KEY"):
-        print("OPENROUTER_API_KEY is not set; export it and rerun.", file=sys.stderr)
+    needed = {API_KEYS[backend_of(model)] for model, _, _ in todo}
+    missing = sorted(key for key in needed if not os.getenv(key))
+    if missing:
+        print(f"{', '.join(missing)} is not set; export it and rerun.", file=sys.stderr)
         return 1
 
-    failures = run_all(todo)
+    failures = run_all(todo, args.max_items)
     summarize([path for _, _, path in plan])
     if failures:
         print(f"\n{len(failures)} failed: {', '.join(failures)}", file=sys.stderr)

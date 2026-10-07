@@ -264,7 +264,7 @@ class OpenRouterEndToEndTests(unittest.TestCase):
 
     def test_matrix_script_preflight_skips_unknown_slugs(self):
         sys.path.insert(0, str(ROOT / "scripts"))
-        import run_openrouter_matrix  # noqa: PLC0415 - script module, not a package
+        import run_matrix  # noqa: PLC0415 - script module, not a package
 
         config = {
             "defaults": {"splits": ["dev"], "max_new_tokens": 64, "concurrency": 2},
@@ -279,9 +279,7 @@ class OpenRouterEndToEndTests(unittest.TestCase):
             config_path = Path(tmp) / "models.json"
             config_path.write_text(json.dumps(config), encoding="utf-8")
             try:
-                code = run_openrouter_matrix.main(
-                    ["--config", str(config_path), "--results-dir", tmp]
-                )
+                code = run_matrix.main(["--config", str(config_path), "--results-dir", tmp])
             finally:
                 os.chdir(cwd)
             self.assertEqual(code, 0)
@@ -295,9 +293,9 @@ class OpenRouterEndToEndTests(unittest.TestCase):
 class CostEstimateTests(unittest.TestCase):
     def setUp(self):
         sys.path.insert(0, str(ROOT / "scripts"))
-        import run_openrouter_matrix  # noqa: PLC0415 - script module, not a package
+        import run_matrix  # noqa: PLC0415 - script module, not a package
 
-        self.matrix = run_openrouter_matrix
+        self.matrix = run_matrix
 
     def test_estimate_cost_counts_prompt_answer_and_thinking_tokens(self):
         profile = {"items": 10, "prompt_chars": 2900.0, "answer_chars": 290.0}

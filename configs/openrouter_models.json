@@ -1,6 +1,6 @@
 {
   "_notes": [
-    "Model matrix for scripts/run_openrouter_matrix.py. Every run goes through OpenRouter with one OPENROUTER_API_KEY.",
+    "Model matrix for scripts/run_matrix.py. Every run goes through OpenRouter with one OPENROUTER_API_KEY.",
     "label becomes the results file name: results/<label>.<split>.json. slug is the OpenRouter model id.",
     "Slugs were taken from openrouter.ai listings in September 2026; the script checks each one against the live catalogue before spending anything and skips unknown slugs.",
     "reasoning_effort: omit for the provider default, 'none' to disable thinking where the model allows it, or minimal/low/medium/high/xhigh/max. GPT-6 Astra does not accept 'none'.",

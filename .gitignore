@@ -17,6 +17,7 @@ dist/
 *.egg-info/
 *.zip
 results/*.json
+results/pilot/
 leaderboard/*.json
 leaderboard/*.csv
 !results/.gitkeep

@@ -24,7 +24,7 @@ by hand, then rerun it (CI runs `--check` on both):
   frontier models; `scripts/build_challenge_items.py`.
 
 All their items are `pending_review`. The improvement plan, the OpenRouter
-model matrix, and the cost estimate are in
+and Claude-only model matrices, and the cost estimates are in
 [`docs/ROADMAP_FA.md`](docs/ROADMAP_FA.md) (Persian).
 
 ## Layout
@@ -42,11 +42,13 @@ model matrix, and the cost estimate are in
 - `scripts/` — model launch shells, `build_leaderboard.sh`,
   `validate_dataset.py`, `build_v1_1_items.py` (the v1.1 generator),
   `build_practical_items.py` and `build_challenge_items.py` (generators for
-  the two new splits), `run_openrouter_matrix.py` (runs the OpenRouter
-  model matrix; `--estimate` prints a cost estimate without a key).
+  the two new splits), `run_matrix.py` (runs a model matrix config through
+  OpenRouter or Anthropic's API; `--estimate` prints a cost estimate without
+  a key, `--max-items N` makes a pilot).
 - `configs/baselines.yml` — suggested baseline matrix;
   `configs/openrouter_models.json` — OpenRouter model matrix (slug, label,
-  reasoning effort per row).
+  reasoning effort per row); `configs/anthropic_models.json` — Claude-only
+  matrix (Opus 5.5 and Sonnet 5.5 at several efforts) run as Message Batches.
 - `docs/` — `BENCHMARK_REPORT.md`, `CODEX_BENCHMARK_PROMPT.md`,
   `ROADMAP_FA.md`.
 - `results/` — per-model result JSONs. Top level holds current v1.1 runs;
@@ -78,8 +80,13 @@ persian-eval run --model claude-sonnet-4-6 --backend anthropic \
 persian-eval run --model anthropic/claude-opus-5.5 --backend openrouter \
   --data data/persian_eval_v1.practical.jsonl --max-new-tokens 4096 \
   --concurrency 6 --output results/claude-opus-5.5.practical.json
-python scripts/run_openrouter_matrix.py --estimate  # cost estimate, no key
-python scripts/run_openrouter_matrix.py --dry-run   # whole matrix
+python scripts/run_matrix.py --estimate  # cost estimate, no key
+python scripts/run_matrix.py --dry-run   # whole matrix
+
+# Claude 5.x on Anthropic's API as Message Batches (half price)
+python scripts/run_matrix.py --config configs/anthropic_models.json --estimate
+python scripts/run_matrix.py --config configs/anthropic_models.json \
+  --splits challenge --max-items 20 --results-dir results/pilot  # pilot
 
 # Regenerate a generated split after editing its builder
 python scripts/build_practical_items.py
@@ -115,6 +122,19 @@ bash scripts/build_leaderboard.sh
 - For 4.7+ models, `temperature` is not sent and an effort-scaled
   `max_tokens` headroom (4K/8K/16K/32K) is added on top of the user's
   `--max-new-tokens` so the model has room for thinking *and* final answer.
+- Claude 5.x models (`CLAUDE5_FAMILIES` in `backends.py`) always get adaptive
+  thinking: `--reasoning-effort` `low`…`max` → `output_config.effort`, with
+  4K/8K/16K/64K/64K headroom; no temperature, no `budget_tokens`. `none` is
+  only accepted where the model can stop thinking (Sonnet 5.5 →
+  `thinking: between_tools`); Opus 5.5 and Fable 5.1 reject it. Requests over
+  `STREAM_ABOVE_MAX_TOKENS` are streamed. Refusals score as empty answers;
+  never add a fallback model, since its answer would be scored as this one's.
+  `cost_usd` comes from `CLAUDE_PRICES_USD_PER_MILLION` (update it when list
+  prices change), halved for batches.
+- `--batch` (anthropic only) sends the pending items as one Message Batch and
+  writes the batch id into the checkpoint right after submission; `--resume`
+  collects that batch instead of submitting another, and a fresh run is
+  refused while a batch is outstanding. `--no-wait` exits while it runs.
 - The OpenAI Chat Completions endpoint for the GPT-5 family uses
   `max_completion_tokens` instead of `max_tokens`. The Codex prompt
   documents a small client-side workaround if you hit this.

@@ -1,0 +1,36 @@
+{
+  "_notes": [
+    "Claude-only matrix for scripts/run_matrix.py through Anthropic's own API with one ANTHROPIC_API_KEY. label becomes the results file name: results/<label>.<split>.json. slug is the Anthropic model id.",
+    "batch: true sends each run as one Message Batch at half price. The script submits every batch first and then collects them; most batches finish within an hour and none takes longer than 24 hours.",
+    "reasoning_effort: low, medium, high, xhigh, or max. 'none' turns thinking off on Claude Sonnet 5.5 (sent as thinking type between_tools). Claude Opus 5.5 and Claude Fable 5.1 cannot turn thinking off. Without reasoning_effort the API default applies: Opus 5.5 medium, Sonnet 5.5 high, Fable 5.1 high.",
+    "max_new_tokens caps the visible answer; the backend adds an effort-scaled thinking headroom on top (4K low, 8K medium, 16K high, 64K xhigh and max). Requests above about 21K tokens are streamed when not batched.",
+    "No fallback model is configured: a refusal scores as an empty answer instead of being answered by another model.",
+    "prices_usd_per_million are Anthropic's list prices (October 2026) for the estimate. Each result's usage.cost_usd is computed from the same prices and the tokens the API reports, halved for batches.",
+    "Fable 5.1 rows are kept disabled for later; set enabled to true (or remove it) to run one."
+  ],
+  "defaults": {
+    "backend": "anthropic",
+    "batch": true,
+    "splits": ["practical", "challenge", "hard", "public_eval"],
+    "max_new_tokens": 4096,
+    "concurrency": 4,
+    "max_item_errors": 3
+  },
+  "prices_usd_per_million": {
+    "claude-opus-5-5": [4, 20],
+    "claude-sonnet-5-5": [2, 10],
+    "claude-fable-5-1": [10, 50]
+  },
+  "models": [
+    {"label": "claude-opus-5.5-low", "slug": "claude-opus-5-5", "reasoning_effort": "low"},
+    {"label": "claude-opus-5.5-medium", "slug": "claude-opus-5-5", "reasoning_effort": "medium", "note": "Opus 5.5's default effort."},
+    {"label": "claude-opus-5.5-max", "slug": "claude-opus-5-5", "reasoning_effort": "max"},
+    {"label": "claude-sonnet-5.5-no-thinking", "slug": "claude-sonnet-5-5", "reasoning_effort": "none"},
+    {"label": "claude-sonnet-5.5-low", "slug": "claude-sonnet-5-5", "reasoning_effort": "low"},
+    {"label": "claude-sonnet-5.5-medium", "slug": "claude-sonnet-5-5", "reasoning_effort": "medium"},
+    {"label": "claude-sonnet-5.5-max", "slug": "claude-sonnet-5-5", "reasoning_effort": "max"},
+    {"label": "claude-fable-5.1-low", "slug": "claude-fable-5-1", "reasoning_effort": "low", "enabled": false},
+    {"label": "claude-fable-5.1-medium", "slug": "claude-fable-5-1", "reasoning_effort": "medium", "enabled": false},
+    {"label": "claude-fable-5.1-max", "slug": "claude-fable-5-1", "reasoning_effort": "max", "enabled": false}
+  ]
+}

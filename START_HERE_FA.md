@@ -70,14 +70,32 @@ persian-eval run --model anthropic/claude-opus-5.5 --backend openrouter \
   --concurrency 6 --output results/claude-opus-5.5.practical.json
 
 # کل ماتریس مدل‌ها (configs/openrouter_models.json)
-python scripts/run_openrouter_matrix.py --estimate  # تخمین هزینه، بدون کلید
-python scripts/run_openrouter_matrix.py --dry-run   # برنامه و قیمت‌های زنده
-python scripts/run_openrouter_matrix.py
+python scripts/run_matrix.py --estimate  # تخمین هزینه، بدون کلید
+python scripts/run_matrix.py --dry-run   # برنامه و قیمت‌های زنده
+python scripts/run_matrix.py
 ```
 
 اگر اجرا وسط کار قطع شد، همان دستور را دوباره بزن؛ سوال‌هایی که جواب
 گرفته‌اند دوباره پرسیده نمی‌شوند. هزینه‌ی واقعی هر اجرا (به دلار) در
 فایل نتیجه ثبت می‌شود.
+
+## فقط Claude، مستقیم با API انتروپیک (Batch، نصف قیمت)
+
+ماتریس [`configs/anthropic_models.json`](configs/anthropic_models.json)
+مدل Opus 5.5 را در سطح‌های فکر low، medium و max و Sonnet 5.5 را بدون فکر و
+در همین سه سطح اجرا می‌کند. هر اجرا یک Message Batch است که نصف قیمت حساب
+می‌شود:
+
+```bash
+export ANTHROPIC_API_KEY=...
+python scripts/run_matrix.py --config configs/anthropic_models.json --estimate
+# اول یک اجرای آزمایشی ارزان (۲۰ سوال چالشی برای هر ردیف، حدود ۶ دلار)
+python scripts/run_matrix.py --config configs/anthropic_models.json \
+  --splits challenge --max-items 20 --results-dir results/pilot
+python scripts/run_matrix.py --config configs/anthropic_models.json
+```
+
+تخمین هزینه و جزئیات در بخش ۴ [`docs/ROADMAP_FA.md`](docs/ROADMAP_FA.md).
 
 ## اجرای مستقیم با API یا GPU خودت
 
