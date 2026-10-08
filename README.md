@@ -177,8 +177,11 @@ python scripts/run_matrix.py --config configs/anthropic_models.json
 ```
 
 The estimate for the seven phase-1 rows over the four splits is about **$55**
-at batch prices ($30–$104 depending on thinking length); the two `max` rows
-would add about $132. The pilot costs about $2 and its summary table shows the
+at batch prices ($30–$104 depending on thinking length); the run itself cost
+**$4.83**, because the models think far less on these short items than the
+estimate assumes (results in
+[`docs/BENCHMARK_REPORT.md`](docs/BENCHMARK_REPORT.md)). The two `max` rows
+are estimated at about $132 on the same assumptions. The pilot costs about $2 and its summary table shows the
 real output tokens per item, which replace the assumed thinking lengths.
 
 - The batch id is saved in the run's checkpoint right after submission, so an

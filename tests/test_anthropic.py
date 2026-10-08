@@ -123,6 +123,13 @@ class AnthropicResponseTests(unittest.TestCase):
         _, batch_meta = _backend().parse_message(_message("claude-opus-5-5"), batch=True)
         self.assertAlmostEqual(batch_meta["cost_usd"], meta["cost_usd"] / 2)
 
+    def test_empty_answer_records_the_content_block_types(self):
+        data = _message("claude-opus-5-5")
+        data["content"] = [{"type": "thinking", "thinking": ""}]
+        prediction, meta = _backend().parse_message(data)
+        self.assertEqual(prediction, "")
+        self.assertEqual(meta["content_types"], ["thinking"])
+
     def test_refusal_scores_as_an_empty_answer(self):
         data = _message(
             "claude-opus-5-5",

@@ -379,6 +379,10 @@ class AnthropicBackend(BaseBackend):
             prediction = ""
         else:
             prediction = extract_anthropic_text(data)
+            if not prediction:
+                # Kept to diagnose answers that came back without a text block.
+                blocks = [block for block in data.get("content", []) if isinstance(block, dict)]
+                meta["content_types"] = [block.get("type") for block in blocks]
         return prediction, {key: value for key, value in meta.items() if value is not None}
 
     def _is_47plus(self) -> bool:
