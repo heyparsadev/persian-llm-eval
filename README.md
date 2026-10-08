@@ -1,5 +1,8 @@
 # Persian LLM Eval (v1.1)
 
+**[فارسی: README_FA.md](README_FA.md)** — the Persian description of the
+project, with the latest results.
+
 A practical benchmark runner and leaderboard scaffold for evaluating large
 language models on **Iranian Persian**. The repo ships a CLI, a JSONL dataset
 (544 scored items across four splits and twenty-one tracks, plus a dev set),
@@ -8,28 +11,56 @@ backends for the major API families, OpenRouter, and local Hugging Face models.
 
 > **Status:** v1.1 dataset plus two new splits pending native-speaker review:
 > **`practical`** (150 everyday-use and creative items) and **`challenge`**
-> (100 items built to stay hard for frontier models); 23 reference result
-> files from frontier models (Claude Opus/Sonnet/Haiku, GPT‑5 / 5.5 with and
-> without reasoning). See [`docs/BENCHMARK_REPORT.md`](docs/BENCHMARK_REPORT.md)
-> for the methodology write-up and per-track tables, and
-> [`docs/ROADMAP_FA.md`](docs/ROADMAP_FA.md) (Persian) for the improvement plan
-> and the OpenRouter model matrix (Claude Fable 5.1 / Opus 5.5, GPT-6
-> Astra / Sol / Luna, and more).
+> (100 items built to stay hard for frontier models). Results: 23 v1.1 runs
+> (Claude Opus/Sonnet/Haiku 4.x, GPT‑5 / 5.5) and, new in October 2026, 28
+> phase-1 runs of Claude Opus 5.5 and Sonnet 5.5 at several thinking efforts
+> over all four splits. See [`docs/BENCHMARK_REPORT.md`](docs/BENCHMARK_REPORT.md)
+> for the methodology and findings, and [`docs/ROADMAP_FA.md`](docs/ROADMAP_FA.md)
+> (Persian) for the plan and cost estimates.
 
 ## Headline results
 
-| Rank | Model | Mode | public_eval | hard | combined |
-|:---:|---|---|:---:|:---:|:---:|
-| 1 | gpt-5.5 | + thinking (high) | 0.9460 | 0.8654 | **0.9057** |
-| 2 | gpt-5.5 | standard | 0.9429 | 0.8641 | 0.9035 |
-| 3 | gpt-5.5 | + thinking (medium) | 0.9436 | 0.8554 | 0.8995 |
-| 4 | gpt-5 | standard | 0.9459 | 0.8376 | 0.8918 |
-| 5 | gpt-5-mini | standard | 0.9354 | 0.8422 | 0.8888 |
-| 6 | claude-sonnet-4-6 | standard | 0.9063 | **0.8692** | 0.8878 |
-| 7 | claude-opus-4-7 | standard | 0.9160 | 0.8464 | 0.8812 |
+### Claude Opus 5.5 and Sonnet 5.5 on all four splits (October 2026)
 
-Bootstrap 95% CIs overlap heavily across the top eight rows — no two adjacent
-rows are statistically distinguishable on n=30 per track.
+| Setting | practical | challenge | hard | public_eval | mean | cost (USD) |
+|---|:---:|:---:|:---:|:---:|:---:|---:|
+| Opus 5.5 · low | **0.957** | 0.880 | **0.897** | **0.927** | **0.915** | 0.91 |
+| Opus 5.5 · medium | 0.950 | **0.890** | 0.873 | 0.925 | 0.910 | 1.10 |
+| Opus 5.5 · high | 0.944 | 0.870 | 0.888 | 0.924 | 0.906 | 1.17 |
+| Sonnet 5.5 · no thinking | 0.879 | 0.750 | 0.856 | 0.896 | 0.845 | 0.31 |
+| Sonnet 5.5 · low | 0.899 | 0.790 | 0.868 | 0.871 | 0.857 | 0.37 |
+| Sonnet 5.5 · medium | 0.904 | 0.780 | 0.881 | 0.868 | 0.858 | 0.38 |
+| Sonnet 5.5 · high | 0.944 | 0.830 | 0.862 | 0.916 | 0.888 | 0.59 |
+
+Batch prices for all 544 items; the whole phase cost $4.83. `max` effort is
+planned for phase 2.
+
+### All models on public_eval and hard
+
+| Rank | Run | public_eval | hard | combined |
+|:---:|---|:---:|:---:|:---:|
+| 1 | gpt-5.5 + thinking (high) | **0.9702** | **0.9197** | **0.9450** |
+| 2 | gpt-5.5 | 0.9622 | 0.9183 | 0.9403 |
+| 3 | gpt-5.5 + thinking (medium) | 0.9651 | 0.9147 | 0.9399 |
+| 4 | gpt-5 | 0.9659 | 0.8903 | 0.9281 |
+| 5 | gpt-5-mini | 0.9558 | 0.8979 | 0.9269 |
+| 6 | claude-sonnet-4-6 | 0.9318 | 0.9090 | 0.9204 |
+| 7 | gpt-5 + thinking (medium) | 0.9479 | 0.8774 | 0.9127 |
+| 8 | claude-opus-5.5 · low | 0.9269 | 0.8969 | 0.9119 |
+| 9 | claude-opus-5.5 · high | 0.9239 | 0.8881 | 0.9060 |
+| 10 | claude-opus-4-7 | 0.9296 | 0.8766 | 0.9031 |
+| 11 | claude-opus-5.5 · medium | 0.9246 | 0.8730 | 0.8988 |
+| 12 | gpt-5-nano | 0.9397 | 0.8502 | 0.8950 |
+| 13 | claude-sonnet-5.5 · high | 0.9164 | 0.8617 | 0.8890 |
+| 14 | claude-sonnet-5.5 · no thinking | 0.8961 | 0.8562 | 0.8762 |
+| 15 | claude-sonnet-5.5 · medium | 0.8680 | 0.8806 | 0.8743 |
+| 16 | claude-sonnet-5.5 · low | 0.8708 | 0.8680 | 0.8694 |
+| 17 | claude-haiku-4-5 | 0.8434 | 0.8219 | 0.8326 |
+
+Bootstrap 95% CIs are about ±3 pp per split, so neighbouring rows are not
+statistically distinguishable. The v1.1 instruction checks count a ZWNJ
+compound as two words, which costs Claude 5.5 (which writes ZWNJ
+consistently) up to 6–7 pp on public_eval; see the report's Phase 1 section.
 
 ## Quickstart
 

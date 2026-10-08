@@ -41,11 +41,21 @@ class LeaderboardTests(unittest.TestCase):
             self.assertEqual(len(leaderboard["main"]), 1)
             self.assertEqual(len(leaderboard["reference"]), 1)
             self.assertEqual(leaderboard["reference"][0]["model_id"], "api-model")
+            self.assertEqual(leaderboard["reference"][0]["run"], "api")
+            self.assertIsNone(leaderboard["reference"][0]["split"])
             for row in leaderboard["main"] + leaderboard["reference"]:
                 self.assertIn("overall_score_ci_low", row)
                 self.assertIn("overall_score_ci_high", row)
                 self.assertLessEqual(row["overall_score_ci_low"], row["overall_score"])
                 self.assertGreaterEqual(row["overall_score_ci_high"], row["overall_score"])
+
+    def test_split_comes_from_the_single_dataset_path(self):
+        from persian_eval.leaderboard import result_split  # noqa: PLC0415
+
+        config = {"data": ["data/persian_eval_v1.challenge.jsonl"]}
+        self.assertEqual(result_split({"run_config": config}), "challenge")
+        two = {"data": ["data/persian_eval_v1.hard.jsonl", "data/persian_eval_v1.dev.jsonl"]}
+        self.assertIsNone(result_split({"run_config": two}))
 
     def test_bootstrap_ci_uses_samples_when_present(self):
         result = {

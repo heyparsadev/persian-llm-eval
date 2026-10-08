@@ -6,6 +6,7 @@ import csv
 import json
 import math
 import random
+import re
 from collections import defaultdict
 from pathlib import Path
 from typing import Any
@@ -30,6 +31,8 @@ def build_leaderboard(
     for path in result_paths:
         result = load_result(path)
         row = {
+            "run": Path(path).stem,
+            "split": result_split(result),
             "model_id": result["model_id"],
             "model_type": result["model_type"],
             "backend": result["backend"],
@@ -66,6 +69,16 @@ def build_leaderboard(
         row for row in rows if row["model_type"] == "api" or row["backend"] == "openai-compatible"
     ]
     return {"generated_at": utc_now(), "main": main, "reference": reference}
+
+
+def result_split(result: dict[str, Any]) -> str | None:
+    """The split a result was run on, read from its single dataset path, if any."""
+
+    data = result.get("run_config", {}).get("data")
+    if not isinstance(data, list) or len(data) != 1:
+        return None
+    match = re.fullmatch(r"persian_eval_v1\.(\w+)\.jsonl", Path(str(data[0])).name)
+    return match.group(1) if match else None
 
 
 def compute_bootstrap_ci(

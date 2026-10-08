@@ -20,9 +20,10 @@ RUN_ME.command
 
 ## نتایج فعلی
 
-نسخه‌ی فعلی دیتاست **v1.1** است (۱۵۰ سوال در split عمومی + ۱۵۰ سوال در
-split سخت). تا الان ۲۳ ران از مدل‌های فرانتیر منتشر شده‌اند. خلاصه و
-جدول کامل اینجا:
+۲۳ اجرا از مدل‌های Claude 4.x و GPT-5/5.5 روی splitهای عمومی و سخت، و از
+مهر ۱۴۰۵، ۲۸ اجرای Claude Opus 5.5 و Sonnet 5.5 روی هر چهار split منتشر
+شده‌اند. خلاصه‌ی فارسی نتایج در [`README_FA.md`](README_FA.md) است و جدول کامل
+اینجا:
 
 - [`docs/BENCHMARK_REPORT.md`](docs/BENCHMARK_REPORT.md) — گزارش کامل
   با per-track و bootstrap CI.
