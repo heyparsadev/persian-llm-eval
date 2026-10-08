@@ -323,6 +323,12 @@ def run_all(
             failures.append(f"{model['label']}/{split}")
         elif Path(f"{path}.partial.jsonl").exists():
             collect.append((model, split, path))  # Still running; else already collected.
+    if collect:
+        print(
+            f"\n{len(collect)} batch(es) submitted. Collecting them now; nothing to rerun "
+            "unless this script is stopped (then rerun the same command).",
+            flush=True,
+        )
     direct = [item for item in todo if not item[0].get("batch")]
     for model, split, path in direct + collect:
         print(f"\n=== {model['label']} / {split} ===", flush=True)
