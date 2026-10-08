@@ -6,7 +6,7 @@
     "max_new_tokens caps the visible answer; the backend adds an effort-scaled thinking headroom on top (4K low, 8K medium, 16K high, 64K xhigh and max). Requests above about 21K tokens are streamed when not batched.",
     "No fallback model is configured: a refusal scores as an empty answer instead of being answered by another model.",
     "prices_usd_per_million are Anthropic's list prices (October 2026) for the estimate. Each result's usage.cost_usd is computed from the same prices and the tokens the API reports, halved for batches.",
-    "Fable 5.1 rows are kept disabled for later; set enabled to true (or remove it) to run one."
+    "Phase 1 runs the seven rows without max effort. The two max rows (about $132 at batch prices) and the Fable 5.1 rows are disabled for a later phase; set enabled to true (or remove it) to run one."
   ],
   "defaults": {
     "backend": "anthropic",
@@ -25,12 +25,12 @@
     {"label": "claude-opus-5.5-low", "slug": "claude-opus-5-5", "reasoning_effort": "low"},
     {"label": "claude-opus-5.5-medium", "slug": "claude-opus-5-5", "reasoning_effort": "medium", "note": "Opus 5.5's default effort."},
     {"label": "claude-opus-5.5-high", "slug": "claude-opus-5-5", "reasoning_effort": "high"},
-    {"label": "claude-opus-5.5-max", "slug": "claude-opus-5-5", "reasoning_effort": "max"},
+    {"label": "claude-opus-5.5-max", "slug": "claude-opus-5-5", "reasoning_effort": "max", "enabled": false, "note": "Phase 2."},
     {"label": "claude-sonnet-5.5-no-thinking", "slug": "claude-sonnet-5-5", "reasoning_effort": "none"},
     {"label": "claude-sonnet-5.5-low", "slug": "claude-sonnet-5-5", "reasoning_effort": "low"},
     {"label": "claude-sonnet-5.5-medium", "slug": "claude-sonnet-5-5", "reasoning_effort": "medium"},
     {"label": "claude-sonnet-5.5-high", "slug": "claude-sonnet-5-5", "reasoning_effort": "high", "note": "Sonnet 5.5's default effort."},
-    {"label": "claude-sonnet-5.5-max", "slug": "claude-sonnet-5-5", "reasoning_effort": "max"},
+    {"label": "claude-sonnet-5.5-max", "slug": "claude-sonnet-5-5", "reasoning_effort": "max", "enabled": false, "note": "Phase 2."},
     {"label": "claude-fable-5.1-low", "slug": "claude-fable-5-1", "reasoning_effort": "low", "enabled": false},
     {"label": "claude-fable-5.1-medium", "slug": "claude-fable-5-1", "reasoning_effort": "medium", "enabled": false},
     {"label": "claude-fable-5.1-high", "slug": "claude-fable-5-1", "reasoning_effort": "high", "enabled": false, "note": "Fable 5.1's default effort."},

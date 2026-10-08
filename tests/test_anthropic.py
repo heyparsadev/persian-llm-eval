@@ -492,10 +492,13 @@ class AnthropicMatrixConfigTests(unittest.TestCase):
 
     def test_every_row_is_a_valid_backend_setting_with_a_price(self):
         path = ROOT / "configs" / "anthropic_models.json"
-        prices = json.loads(path.read_text(encoding="utf-8"))["prices_usd_per_million"]
-        _, models = self.matrix.load_config(path)
-        self.assertEqual(len(models), 9)
-        for model in models:
+        config = json.loads(path.read_text(encoding="utf-8"))
+        prices = config["prices_usd_per_million"]
+        _, enabled = self.matrix.load_config(path)
+        self.assertEqual(len(enabled), 7)  # Phase 1: no max rows, no Fable.
+        self.assertFalse(any(model["reasoning_effort"] == "max" for model in enabled))
+        for row in config["models"]:  # Disabled rows too, so phase 2 starts clean.
+            model = {**config["defaults"], **row}
             self.assertEqual(self.matrix.backend_of(model), "anthropic")
             self.assertIn(model["slug"], prices)
             effort = model["reasoning_effort"]

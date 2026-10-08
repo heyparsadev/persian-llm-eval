@@ -162,8 +162,8 @@ per token, and half that through the Batch API; see
 
 [`configs/anthropic_models.json`](configs/anthropic_models.json) runs Claude
 Opus 5.5 at `low`, `medium`, `high`, and `max` effort and Claude Sonnet 5.5
-without thinking and at the same four levels (Fable 5.1 rows are there but
-disabled). Every run is one Message Batch: half price, most batches finish
+without thinking and at the same four levels. Phase 1 leaves out `max`: the
+two `max` rows and the Fable 5.1 rows are disabled until a later phase. Every run is one Message Batch: half price, most batches finish
 within an hour, none takes more than 24. The script submits all batches first
 and then collects them.
 
@@ -176,9 +176,9 @@ python scripts/run_matrix.py --config configs/anthropic_models.json \
 python scripts/run_matrix.py --config configs/anthropic_models.json
 ```
 
-The estimate for all nine rows over the four splits is about **$187** at
-batch prices ($96–$367 depending on thinking length); the two `max` rows are
-about $132 of it. The pilot costs about $7 and its summary table shows the
+The estimate for the seven phase-1 rows over the four splits is about **$55**
+at batch prices ($30–$104 depending on thinking length); the two `max` rows
+would add about $132. The pilot costs about $2 and its summary table shows the
 real output tokens per item, which replace the assumed thinking lengths.
 
 - The batch id is saved in the run's checkpoint right after submission, so an

@@ -48,7 +48,8 @@ and Claude-only model matrices, and the cost estimates are in
 - `configs/baselines.yml` — suggested baseline matrix;
   `configs/openrouter_models.json` — OpenRouter model matrix (slug, label,
   reasoning effort per row); `configs/anthropic_models.json` — Claude-only
-  matrix (Opus 5.5 and Sonnet 5.5 at several efforts) run as Message Batches.
+  matrix (Opus 5.5 and Sonnet 5.5 at several efforts) run as Message Batches;
+  its `max` and Fable rows are disabled until a later phase.
 - `docs/` — `BENCHMARK_REPORT.md`, `CODEX_BENCHMARK_PROMPT.md`,
   `ROADMAP_FA.md`.
 - `results/` — per-model result JSONs. Top level holds current v1.1 runs;
