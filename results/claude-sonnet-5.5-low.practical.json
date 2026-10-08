@@ -1,0 +1,3260 @@
+{
+  "model_id": "claude-sonnet-5-5",
+  "model_type": "api",
+  "revision": null,
+  "backend": "anthropic",
+  "task_scores": {
+    "practical_creative": {
+      "score": 0.84,
+      "n": 25
+    },
+    "practical_editing": {
+      "score": 0.96,
+      "n": 25
+    },
+    "practical_extraction": {
+      "score": 0.992,
+      "n": 25
+    },
+    "practical_numbers": {
+      "score": 1.0,
+      "n": 25
+    },
+    "practical_pragmatics": {
+      "score": 1.0,
+      "n": 25
+    },
+    "practical_writing": {
+      "score": 0.6,
+      "n": 25
+    }
+  },
+  "overall_score": 0.8986666666666666,
+  "run_config": {
+    "data": [
+      "data/persian_eval_v1.practical.jsonl"
+    ],
+    "tasks": "all",
+    "split": null,
+    "max_new_tokens": 4096,
+    "temperature": 0.0,
+    "dtype": "bfloat16",
+    "quantization": null,
+    "reasoning_effort": "low",
+    "thinking": null,
+    "thinking_budget_tokens": null,
+    "batch": true
+  },
+  "timestamp": "2026-10-08T15:02:04+00:00",
+  "usage": {
+    "calls": 150,
+    "prompt_tokens": 33191,
+    "completion_tokens": 16594,
+    "cost_usd": 0.116161,
+    "empty_predictions": 0,
+    "truncated": 0,
+    "item_errors": 0,
+    "served_models": {
+      "claude-sonnet-5-5": 150
+    }
+  },
+  "samples": [
+    {
+      "id": "peval-practical-writing-001",
+      "track": "practical_writing",
+      "prediction": "با سلام و احترام\n\nجناب آقای/سرکار خانم مدیر محترم،\n\nاحتراماً، اینجانب به دلیل وجود یک کار شخصی ضروری، نیازمند یک روز مرخصی در تاریخ ۱۵ مهر هستم. خواهشمند است با درخواست اینجانب موافقت فرمایید. در صورت لزوم، پیش از آن تاریخ کارهای محول‌شده را تکمیل و به همکاران تحویل خواهم داد.\n\nبا سپاس",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "max_words": true,
+          "starts_with": true,
+          "ends_with": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 200,
+        "completion_tokens": 185,
+        "cost_usd": 0.001125
+      }
+    },
+    {
+      "id": "peval-practical-writing-002",
+      "track": "practical_writing",
+      "prediction": "سلام و وقت بخیر. لطفاً نوبت من را از سه‌شنبه به پنج‌شنبه ساعت ۱۷ منتقل کنید. بابت زحمت و ایجاد مزاحمت پوزش می‌خواهم. ممنون از لطف و همکاری شما.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "max_words": true,
+          "required_any": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 202,
+        "completion_tokens": 109,
+        "cost_usd": 0.000747
+      }
+    },
+    {
+      "id": "peval-practical-writing-003",
+      "track": "practical_writing",
+      "prediction": "با سلام و احترام،\nفردا به دلیل بیماری قادر به حضور در محل کار نخواهم بود. خواهشمند است در صورت امکان، یک روز مرخصی برای اینجانب در نظر بگیرید.\n\nبا تشکر",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "forbidden": true,
+          "max_words": true,
+          "required_any": false
+        },
+        "constraint_score": 0.6666666666666666
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 166,
+        "completion_tokens": 91,
+        "cost_usd": 0.000621
+      }
+    },
+    {
+      "id": "peval-practical-writing-004",
+      "track": "practical_writing",
+      "prediction": "«فردا عصر میای خونه‌مون؟»\n\nیا کمی صمیمی‌تر:\n«فردا عصر وقت داری بیای خونه‌مون؟»",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "forbidden": true,
+          "max_words": true,
+          "required_any": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 146,
+        "completion_tokens": 63,
+        "cost_usd": 0.000461
+      }
+    },
+    {
+      "id": "peval-practical-writing-005",
+      "track": "practical_writing",
+      "prediction": "مشتری گرامی، بابت تأخیر در رسیدن سفارشتان صمیمانه عذرخواهی می‌کنیم و نگرانی شما را کاملاً درک می‌کنیم. سفارش شما در اولویت قرار گرفته و حداکثر تا ۴۸ ساعت آینده ارسال خواهد شد. کد رهگیری را نیز به‌محض ارسال برایتان می‌فرستیم. از شکیبایی‌تان سپاسگزاریم.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "forbidden": true,
+          "max_words": true,
+          "required_any": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 231,
+        "completion_tokens": 179,
+        "cost_usd": 0.001126
+      }
+    },
+    {
+      "id": "peval-practical-writing-006",
+      "track": "practical_writing",
+      "prediction": "آب محله‌ی نارمک به دلیل تعمیر خط اصلی انتقال، روز ۲۰ آبان از ساعت ۹ صبح تا ۳ بعدازظهر قطع می‌شود؛ لطفاً آب مورد نیاز را ذخیره کنید.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "max_words": true,
+          "required_any": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 312,
+        "completion_tokens": 106,
+        "cost_usd": 0.000842
+      }
+    },
+    {
+      "id": "peval-practical-writing-007",
+      "track": "practical_writing",
+      "prediction": "ظرفیت ۱٫۷ لیتری با بدنه استیل ضدزنگ، مناسب برای خانواده‌ها و پذیرایی‌های مهمانی  \nجوشاندن سریع آب با قدرت ۲۲۰۰ وات و خاموشی خودکار هنگام جوش آمدن یا خالی بودن کتری  \n۱۸ ماه گارانتی معتبر و خدمات پس از فروش، برای خریدی مطمئن و بدون نگرانی",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "max_words": true,
+          "line_count": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 160,
+        "completion_tokens": 178,
+        "cost_usd": 0.00105
+      }
+    },
+    {
+      "id": "peval-practical-writing-008",
+      "track": "practical_writing",
+      "prediction": "**موضوع: درخواست همکاری به‌عنوان دستیار پژوهشی**\n\nاستاد گرامی، جناب آقای دکتر رضایی\n\nبا سلام و احترام،\n\nاینجانب [نام و نام خانوادگی]، دانشجوی [مقطع و رشته] در دانشگاه [نام دانشگاه]، به فعالیت‌های پژوهشی آزمایشگاه شما بسیار علاقه‌مندم. مایلم به‌عنوان دستیار پژوهشی با شما همکاری کنم. رزومه‌ام به این ایمیل پیوست است.\n\nدر صورت صلاحدید، خوشحال می‌شوم فرصت گفت‌وگو داشته باشم.\n\nبا سپاس و احترام\n[نام شما]\n[اطلاعات تماس]",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "max_words": true,
+          "starts_with": false
+        },
+        "constraint_score": 0.6666666666666666
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 217,
+        "completion_tokens": 284,
+        "cost_usd": 0.001637
+      }
+    },
+    {
+      "id": "peval-practical-writing-009",
+      "track": "practical_writing",
+      "prediction": "بوی قهوه، نور گرم و آرامشی به‌اندازه‌ی یک عصر دلنشین زیر آسمان نقش‌جهان؛ جایی برای دم‌کردن لحظه‌های خوب ☕✨\n#اصفهان #کافه",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "max_words": false
+        },
+        "constraint_score": 0.5
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 146,
+        "completion_tokens": 98,
+        "cost_usd": 0.000636
+      }
+    },
+    {
+      "id": "peval-practical-writing-010",
+      "track": "practical_writing",
+      "prediction": "همکار گرامی،\nدرگذشت پدر بزرگوارتان را به شما و خانواده محترمتان تسلیت عرض می‌کنم. برای ایشان آمرزش و رحمت الهی، و برای شما و بازماندگان صبر و آرامش آرزومندم.\n\nبا احترام",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "max_words": true,
+          "required_any": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 163,
+        "completion_tokens": 108,
+        "cost_usd": 0.000703
+      }
+    },
+    {
+      "id": "peval-practical-writing-011",
+      "track": "practical_writing",
+      "prediction": "عزیزم، تبریک! خیلی خوشحالم برای تو. آرزو می‌کنم همیشه عاشق و خندان باشید و با هم، «به پای هم پیر شوید». دوستت دارم!",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "max_words": true,
+          "required_any": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 139,
+        "completion_tokens": 79,
+        "cost_usd": 0.000534
+      }
+    },
+    {
+      "id": "peval-practical-writing-012",
+      "track": "practical_writing",
+      "prediction": "**موضوع:** عذرخواهی بابت غیبت در جلسه\n\nسلام،\n\nبا عرض پوزش بابت غیبتم در جلسه‌ی امروز. به دلیل قطعی اینترنت نتوانستم حضور پیدا کنم. در صورت صلاح‌دید، جلسه‌ی جبرانی را شنبه ساعت ۱۰ برگزار کنیم.\n\nبا تشکر\n[نام شما]",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "max_words": true,
+          "required_any": true,
+          "starts_with": false
+        },
+        "constraint_score": 0.75
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 206,
+        "completion_tokens": 157,
+        "cost_usd": 0.000991
+      }
+    },
+    {
+      "id": "peval-practical-writing-013",
+      "track": "practical_writing",
+      "prediction": "خانم احمدی گرامی، نوبت شما در کلینیک ۲۶ آبان ساعت ۱۶:۳۰ است. لطفاً چند دقیقه زودتر مراجعه کنید. برای لغو نوبت، عدد ۱ را ارسال کنید.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "max_words": true,
+          "required_any": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 195,
+        "completion_tokens": 103,
+        "cost_usd": 0.00071
+      }
+    },
+    {
+      "id": "peval-practical-writing-014",
+      "track": "practical_writing",
+      "prediction": "آپارتمان ۷۵ متری دوخوابه در شیراز برای اجاره. نورگیر، آرام و نزدیک به مراکز خرید و حمل‌ونقل عمومی. مناسب خانواده یا زوج. برای بازدید و اطلاعات بیشتر تماس بگیرید.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "forbidden": true,
+          "max_words": true,
+          "required_any": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 194,
+        "completion_tokens": 113,
+        "cost_usd": 0.000759
+      }
+    },
+    {
+      "id": "peval-practical-writing-015",
+      "track": "practical_writing",
+      "prediction": "با سلام\n\nاحتراماً، به استحضار می‌رساند چراغ‌های روشنایی «خیابان بهار» از یک هفته پیش خاموش است. این وضعیت موجب کاهش ایمنی عبور و مرور شهروندان، به‌ویژه در ساعات شب، شده است. خواهشمند است دستور فرمایید بررسی و تعمیر لازم در اسرع وقت انجام شود.\n\nبا تشکر\nنام و نام خانوادگی\nشماره تماس",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "max_words": true,
+          "starts_with": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 187,
+        "completion_tokens": 177,
+        "cost_usd": 0.001072
+      }
+    },
+    {
+      "id": "peval-practical-writing-016",
+      "track": "practical_writing",
+      "prediction": "من با ۵ سال سابقه در حوزه‌ی حسابداری، به تهیه‌ی دقیق گزارش‌های مالی و بهینه‌سازی فرایندهای مالی سازمان علاقه‌مندم و همواره به دنبال ارتقای دقت و شفافیت هستم.",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "max_words": false,
+          "required_any": true
+        },
+        "constraint_score": 0.6666666666666666
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 185,
+        "completion_tokens": 111,
+        "cost_usd": 0.00074
+      }
+    },
+    {
+      "id": "peval-practical-writing-017",
+      "track": "practical_writing",
+      "prediction": "**فروش دوچرخه کوهستان سایز ۲۶ سالم**\n\n(۶ کلمه: فروش، دوچرخه، کوهستان، سایز، ۲۶، سالم)",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "max_words": false
+        },
+        "constraint_score": 0.5
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 156,
+        "completion_tokens": 71,
+        "cost_usd": 0.000511
+      }
+    },
+    {
+      "id": "peval-practical-writing-018",
+      "track": "practical_writing",
+      "prediction": "«لطفاً فاکتور مربوط به ماه سپتامبر را در پیوست ملاحظه فرمایید.»\n\nنسخه‌ی جایگزین: «فاکتور ماه سپتامبر به‌پیوست ارسال می‌گردد.»",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "max_words": false,
+          "required_any": true
+        },
+        "constraint_score": 0.5
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 107,
+        "completion_tokens": 95,
+        "cost_usd": 0.000582
+      }
+    },
+    {
+      "id": "peval-practical-writing-019",
+      "track": "practical_writing",
+      "prediction": "سلام عزیزم،\nواقعاً دلم می‌خواست کمکت کنم، ولی الان توانش را ندارم و نمی‌خواهم قولی بدهم که نتوانم عمل کنم. امیدوارم مشکلت زودتر حل شود. اگر کار دیگری از دستم برمی‌آید، حتماً بگو. 🌷",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "max_words": true,
+          "required_any": false
+        },
+        "constraint_score": 0.5
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 172,
+        "completion_tokens": 130,
+        "cost_usd": 0.000822
+      }
+    },
+    {
+      "id": "peval-practical-writing-020",
+      "track": "practical_writing",
+      "prediction": "۱. آب را در کتری بجوشانید و کمی از آب جوش را داخل قوری بریزید تا قوری گرم شود.\n۲. آب گرم را خالی کنید و چای خشک را (حدود یک قاشق چای‌خوری برای هر نفر) داخل قوری بریزید.\n۳. آب جوش را روی چای بریزید و قوری را روی کتری یا روی حرارت ملایم بگذارید.\n۴. بعد از ۱۵ تا ۲۰ دقیقه دم بکشد، سپس چای را در استکان بریزید و با آب جوش رقیق کنید.",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "max_words": false,
+          "required_any": true,
+          "line_count": true
+        },
+        "constraint_score": 0.75
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 131,
+        "completion_tokens": 218,
+        "cost_usd": 0.001221
+      }
+    },
+    {
+      "id": "peval-practical-writing-021",
+      "track": "practical_writing",
+      "prediction": "**موضوع:** پاسخ خودکار – در مرخصی\n\nسلام و احترام،\n\nاز پیام شما سپاسگزارم. من از ۲۰ تا ۳۰ آبان در مرخصی هستم و به ایمیل‌ها پاسخ نمی‌دهم. لطفاً برای موارد ضروری با آقای کریمی تماس بگیرید.\n\nبا احترام",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "max_words": true,
+          "required_any": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 165,
+        "completion_tokens": 139,
+        "cost_usd": 0.00086
+      }
+    },
+    {
+      "id": "peval-practical-writing-022",
+      "track": "practical_writing",
+      "prediction": "سلام، وقت‌تان بخیر. ببخشید مزاحم می‌شوم. خواهش می‌کنم شب‌ها صدای موسیقی را کمی کمتر کنید، چون صدا در ساعات آخر شب به واحد ما می‌رسد و استراحت را سخت می‌کند. ممنون از توجه و همکاری‌تان.",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "forbidden": true,
+          "max_words": false,
+          "required_any": true
+        },
+        "constraint_score": 0.6666666666666666
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 165,
+        "completion_tokens": 131,
+        "cost_usd": 0.00082
+      }
+    },
+    {
+      "id": "peval-practical-writing-023",
+      "track": "practical_writing",
+      "prediction": "یعنی هر ۸ ساعت (مثلاً صبح، عصر و شب) بعد از غذا خوردن، یک کپسول بخورید. نه قبل از غذا و نه با شکم خالی.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "forbidden": true,
+          "max_words": true,
+          "required_any": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 144,
+        "completion_tokens": 76,
+        "cost_usd": 0.000524
+      }
+    },
+    {
+      "id": "peval-practical-writing-024",
+      "track": "practical_writing",
+      "prediction": "ممنونم که با صبر و مهربانی، راه یادگرفتن را به من نشان دادید.\nروز معلم بر شما مبارک؛ هر موفقیتم را مدیون زحمات یک معلم دلسوز مثل شماست.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "max_words": true,
+          "line_count": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 128,
+        "completion_tokens": 89,
+        "cost_usd": 0.000573
+      }
+    },
+    {
+      "id": "peval-practical-writing-025",
+      "track": "practical_writing",
+      "prediction": "همکار گرامی،\n\nبا سلام و احترام،\nاز شما دعوت می‌شود در جشن شب یلدای شرکت، روز ۳۰ آذر، ساعت ۱۸ در سالن اجتماعات حضور یابید. شبی دلنشین با هم‌نشینی، شعر، موسیقی و پذیرایی سنتی خواهیم داشت. منتظر حضور گرمتان هستیم",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "max_words": true,
+          "required_any": true,
+          "ends_with": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 195,
+        "completion_tokens": 150,
+        "cost_usd": 0.000945
+      }
+    },
+    {
+      "id": "peval-practical-editing-001",
+      "track": "practical_editing",
+      "prediction": "Standard Persian keyboard mapping: s=س, g=ل, h=ا, l=م → \"سلام\". Space. o=ج? Let's check: o=ج, \",\"=و, f=ب, d=ی.\n\n\"o,fd\" → ج و ب ی → \"جوبی\"? Hmm, let me recheck the mapping: in the Persian layout, q=ض, w=ص, e=ث, r=ق, t=ف, y=غ, u=ع, i=ه, o=خ, p=ح, a=ش, s=س, d=ی, f=ب, g=ل, h=ا, j=ت, k=ن, l=م.\n\nSo o=خ, \",\"=و, f=ب, d=ی → \"خوبی\".\n\nسلام خوبی",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "سلام خوبی"
+        ],
+        "normalized_prediction": "سلام خوبی",
+        "scored_candidate": "سلام خوبی",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 235,
+        "completion_tokens": 247,
+        "cost_usd": 0.00147
+      }
+    },
+    {
+      "id": "peval-practical-editing-002",
+      "track": "practical_editing",
+      "prediction": "Standard Persian keyboard mapping: l = م, k = ن, space, t = ف, v = ر, n = د, h = ا.\n\n\"lk\" = من\n\"tvnh\" = فردا\n\"ldhl\" = l=م, d=ی, h=ا, l=م → مایم\n\nHmm, \"ldhl\": م ی ا م → \"میام\".\n\nSo: من فردا میام\n\nمن فردا میام",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "من فردا میام"
+        ],
+        "normalized_prediction": "من فردا میام",
+        "scored_candidate": "من فردا میام",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 238,
+        "completion_tokens": 132,
+        "cost_usd": 0.000898
+      }
+    },
+    {
+      "id": "peval-practical-editing-003",
+      "track": "practical_editing",
+      "prediction": "جلسه ساعت ده شروع میشه",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "جلسه ساعت ده شروع میشه"
+        ],
+        "normalized_prediction": "جلسه ساعت ده شروع میشه",
+        "scored_candidate": "جلسه ساعت ده شروع میشه",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 243,
+        "completion_tokens": 331,
+        "cost_usd": 0.001898
+      }
+    },
+    {
+      "id": "peval-practical-editing-004",
+      "track": "practical_editing",
+      "prediction": "لطفا فایل را برای من بفرست",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "لطفا فایل را برای من بفرست"
+        ],
+        "normalized_prediction": "لطفا فایل را برای من بفرست",
+        "scored_candidate": "لطفا فایل را برای من بفرست",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 247,
+        "completion_tokens": 325,
+        "cost_usd": 0.001872
+      }
+    },
+    {
+      "id": "peval-practical-editing-005",
+      "track": "practical_editing",
+      "prediction": "کد تخفیف برای خرید بعدی شما ارسال شد",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "کد تخفیف برای خرید بعدی شما ارسال شد"
+        ],
+        "normalized_prediction": "کد تخفیف برای خرید بعدی شما ارسال شد",
+        "scored_candidate": "کد تخفیف برای خرید بعدی شما ارسال شد",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 251,
+        "completion_tokens": 422,
+        "cost_usd": 0.002361
+      }
+    },
+    {
+      "id": "peval-practical-editing-006",
+      "track": "practical_editing",
+      "prediction": "امروز هوا خیلی سرد است",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "امروز هوا خیلی سرد است"
+        ],
+        "normalized_prediction": "امروز هوا خیلی سرد است",
+        "scored_candidate": "امروز هوا خیلی سرد است",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 244,
+        "completion_tokens": 344,
+        "cost_usd": 0.001964
+      }
+    },
+    {
+      "id": "peval-practical-editing-007",
+      "track": "practical_editing",
+      "prediction": "Google",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "google",
+          "گوگل"
+        ],
+        "normalized_prediction": "google",
+        "scored_candidate": "Google",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 233,
+        "completion_tokens": 209,
+        "cost_usd": 0.001278
+      }
+    },
+    {
+      "id": "peval-practical-editing-008",
+      "track": "practical_editing",
+      "prediction": "password",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "password",
+          "پسورد"
+        ],
+        "normalized_prediction": "password",
+        "scored_candidate": "password",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 235,
+        "completion_tokens": 241,
+        "cost_usd": 0.00144
+      }
+    },
+    {
+      "id": "peval-practical-editing-009",
+      "track": "practical_editing",
+      "prediction": "سلام، امروز هوا خیلی گرمه",
+      "score": 1.0,
+      "details": {
+        "best_answer": "سلام، امروز هوا خیلی گرمه",
+        "scored_candidate": "سلام، امروز هوا خیلی گرمه"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 185,
+        "completion_tokens": 20,
+        "cost_usd": 0.000285
+      }
+    },
+    {
+      "id": "peval-practical-editing-010",
+      "track": "practical_editing",
+      "prediction": "می‌خوام یه قهوه بگیرم، تو چی می‌خوای؟",
+      "score": 1.0,
+      "details": {
+        "best_answer": "می‌خوام یه قهوه بگیرم، تو چی می‌خوای؟",
+        "scored_candidate": "می‌خوام یه قهوه بگیرم، تو چی می‌خوای؟"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 192,
+        "completion_tokens": 32,
+        "cost_usd": 0.000352
+      }
+    },
+    {
+      "id": "peval-practical-editing-011",
+      "track": "practical_editing",
+      "prediction": "فردا ساعت ۸ جلوی دانشگاه منتظرتم",
+      "score": 1.0,
+      "details": {
+        "best_answer": "فردا ساعت ۸ جلوی دانشگاه منتظرتم",
+        "scored_candidate": "فردا ساعت ۸ جلوی دانشگاه منتظرتم"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 194,
+        "completion_tokens": 29,
+        "cost_usd": 0.000339
+      }
+    },
+    {
+      "id": "peval-practical-editing-012",
+      "track": "practical_editing",
+      "prediction": "قربونت برم، دستت درد نکنه",
+      "score": 1.0,
+      "details": {
+        "best_answer": "قربونت برم، دستت درد نکنه",
+        "scored_candidate": "قربونت برم، دستت درد نکنه"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 188,
+        "completion_tokens": 18,
+        "cost_usd": 0.000278
+      }
+    },
+    {
+      "id": "peval-practical-editing-013",
+      "track": "practical_editing",
+      "prediction": "کتابو یادت نره بیاری",
+      "score": 1.0,
+      "details": {
+        "best_answer": "کتابو یادت نره بیاری",
+        "scored_candidate": "کتابو یادت نره بیاری"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 183,
+        "completion_tokens": 15,
+        "cost_usd": 0.000258
+      }
+    },
+    {
+      "id": "peval-practical-editing-014",
+      "track": "practical_editing",
+      "prediction": "«بچه‌ها در حیاط مدرسه فوتبال بازی می‌کردند.»",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "max_words": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 143,
+        "completion_tokens": 36,
+        "cost_usd": 0.000323
+      }
+    },
+    {
+      "id": "peval-practical-editing-015",
+      "track": "practical_editing",
+      "prediction": "«او برای خواستگاری به منزل آن‌ها رفت.»",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "max_words": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 132,
+        "completion_tokens": 27,
+        "cost_usd": 0.000267
+      }
+    },
+    {
+      "id": "peval-practical-editing-016",
+      "track": "practical_editing",
+      "prediction": "«گزارش جلسه را روی میز مدیر گذاشتم.»",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "max_words": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 136,
+        "completion_tokens": 28,
+        "cost_usd": 0.000276
+      }
+    },
+    {
+      "id": "peval-practical-editing-017",
+      "track": "practical_editing",
+      "prediction": "این اتفاق برای همه‌ی ما درس عبرتی بود.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "max_words": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 138,
+        "completion_tokens": 28,
+        "cost_usd": 0.000278
+      }
+    },
+    {
+      "id": "peval-practical-editing-018",
+      "track": "practical_editing",
+      "prediction": "«بعد از سخنرانی، همه از جایشان برخاستند.»",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "max_words": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 136,
+        "completion_tokens": 28,
+        "cost_usd": 0.000276
+      }
+    },
+    {
+      "id": "peval-practical-editing-019",
+      "track": "practical_editing",
+      "prediction": "«این دستگاه نقص فنی دارد و استفاده از آن نقض قانون است.»",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "max_words": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 143,
+        "completion_tokens": 35,
+        "cost_usd": 0.000318
+      }
+    },
+    {
+      "id": "peval-practical-editing-020",
+      "track": "practical_editing",
+      "prediction": "ما می‌خواهیم کتاب‌ها را به کتابخانه ببریم.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "max_words": true,
+          "required_exact": true,
+          "forbidden_exact": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 184,
+        "completion_tokens": 33,
+        "cost_usd": 0.000349
+      }
+    },
+    {
+      "id": "peval-practical-editing-021",
+      "track": "practical_editing",
+      "prediction": "«دانش‌آموزان در کلاس‌ها نشسته‌اند.»",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "max_words": true,
+          "required_exact": true,
+          "forbidden_exact": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 178,
+        "completion_tokens": 31,
+        "cost_usd": 0.000333
+      }
+    },
+    {
+      "id": "peval-practical-editing-022",
+      "track": "practical_editing",
+      "prediction": "این بزرگ‌ترین مشکل ما در سال‌های اخیر است.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "max_words": true,
+          "required_exact": true,
+          "forbidden_exact": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 182,
+        "completion_tokens": 31,
+        "cost_usd": 0.000337
+      }
+    },
+    {
+      "id": "peval-practical-editing-023",
+      "track": "practical_editing",
+      "prediction": "«آن‌ها نمی‌توانند فردا بیایند.»",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "max_words": true,
+          "required_exact": true,
+          "forbidden_exact": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 175,
+        "completion_tokens": 26,
+        "cost_usd": 0.000305
+      }
+    },
+    {
+      "id": "peval-practical-editing-024",
+      "track": "practical_editing",
+      "prediction": "«خوش‌حال شدم که شما را دیدم.»",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "max_words": true,
+          "required_exact": false,
+          "forbidden_exact": false
+        },
+        "constraint_score": 0.3333333333333333
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 174,
+        "completion_tokens": 23,
+        "cost_usd": 0.000289
+      }
+    },
+    {
+      "id": "peval-practical-editing-025",
+      "track": "practical_editing",
+      "prediction": "«پیام‌ها را خوانده‌ام و به‌زودی پاسخ می‌دهم.»",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "max_words": true,
+          "required_exact": true,
+          "forbidden_exact": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 184,
+        "completion_tokens": 39,
+        "cost_usd": 0.000379
+      }
+    },
+    {
+      "id": "peval-practical-numbers-001",
+      "track": "practical_numbers",
+      "prediction": "۱ مهر ۱۴۰۵ برابر است با ۲۳ سپتامبر ۲۰۲۶ (نوروز ۱۴۰۵ = ۲۱ مارس ۲۰۲۶ است، چون ۱۴۰۵ کبیسه نیست و ۱۴۰۴ کبیسه است؟ بررسی: نوروز ۱۴۰۵ در ۲۱ مارس ۲۰۲۶ می‌افتد؛ ۱ مهر = ۲۳ سپتامبر).\n\n۱ مهر = ۲۳ سپتامبر، پس ۱۵ مهر = ۲۳ + ۱۴ = ۳۷ سپتامبر = ۷ اکتبر.\n\n۷ اکتبر ۲۰۲۶",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "7 اکتبر 2026",
+          "7 October 2026",
+          "October 7, 2026",
+          "2026-10-07",
+          "2026/10/07"
+        ],
+        "normalized_prediction": "7 اکتبر 2026",
+        "scored_candidate": "۷ اکتبر ۲۰۲۶",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 234,
+        "completion_tokens": 279,
+        "cost_usd": 0.001629
+      }
+    },
+    {
+      "id": "peval-practical-numbers-002",
+      "track": "practical_numbers",
+      "prediction": "۱۱ فوریه ۲۰۲۶",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "11 فوریه 2026",
+          "11 February 2026",
+          "February 11, 2026",
+          "2026-02-11",
+          "2026/02/11"
+        ],
+        "normalized_prediction": "11 فوریه 2026",
+        "scored_candidate": "۱۱ فوریه ۲۰۲۶",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 235,
+        "completion_tokens": 20,
+        "cost_usd": 0.000335
+      }
+    },
+    {
+      "id": "peval-practical-numbers-003",
+      "track": "practical_numbers",
+      "prediction": "۱۴۰۳ کبیسه است؟ بررسی: ۱ فروردین ۱۴۰۳ برابر ۲۰ مارس ۲۰۲۴ است. ۱ فروردین ۱۴۰۴ برابر ۲۱ مارس ۲۰۲۵ است. بنابراین سال ۱۴۰۳ برابر ۳۶۵ روز است (از ۲۰ مارس ۲۰۲۴ تا ۲۱ مارس ۲۰۲۵ می‌شود ۳۶۵ روز، چون ۲۰۲۴ فوریه ۲۹ روزه قبل از مارس است و در بازه نیست). پس ۳۰ اسفند ۱۴۰۳ وجود ندارد؟ طبق تقویم رسمی ایران ۱۴۰۳ کبیسه نیست و اسفند ۲۹ روز دارد؛ اما ۱۴۰۳ در الگوی ۳۳ساله کبیسه است. بررسی دقیق: ۱ فروردین ۱۴۰۳ = ۲۰ مارس ۲۰۲۴ و ۱ فروردین ۱۴۰۴ = ۲۰ مارس ۲۰۲۵ (نوروز ۱۴۰۴ در ۲۰ مارس ۲۰۲۵ ساعت ۱۲:۳۱ ایران بود). پس فاصله ۳۶۵ روز است؟ از ۲۰ مارس ۲۰۲۴ تا ۲۰ مارس ۲۰۲۵ دقیقاً ۳۶۵ روز است. بنابراین ۱۴۰۳ دارای ۳۶۵ روز، یعنی کبیسه است (۳۶۶ نیست)... سال عادی ۳۶۵ روز است؛ کبیسه ۳۶۶. پس ۱۴۰۳ عادی است و اسفند ۲۹ روز دارد، و ۳۰ اسفند ۱۴۰۳ وجود ندارد.\n\nولی ۱۴۰۳ کبیسه نیست و ۱۴۰۳ اسفند ۲۹ روز دارد؛ ۳۰ اسفند در ۱۴۰۳ وجود ندارد.\n\n۳۰ اسفند ۱۴۰۳ وجود ندارد (اسفند ۱۴۰۳ فقط ۲۹ روز دارد؛ ۲۹ اسفند ۱۴۰۳ برابر ۱۹ مارس ۲۰۲۵ است).",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "20 مارس 2025",
+          "20 March 2025",
+          "March 20, 2025",
+          "2025-03-20",
+          "2025/03/20"
+        ],
+        "normalized_prediction": "1403 کبیسه است بررسی 1 فروردین 1403 برابر 20 مارس 2024 است 1 فروردین 1404 برابر 21 مارس 2025 است بنابراین سال 1403 برابر 365 روز است از 20 مارس 2024 تا 21 مارس 2025 می شود 365 روز چون 2024 فوریه 29 روزه قبل از مارس است و در بازه نیست پس 30 اسفند 1403 وجود ندارد طبق تقویم رسمی ایران 1403 کبیسه نیست و اسفند 29 روز دارد اما 1403 در الگوی 33ساله کبیسه است بررسی دقیق 1 فروردین 1403 20 مارس 2024 و 1 فروردین 1404 20 مارس 2025 نوروز 1404 در 20 مارس 2025 ساعت 1231 ایران بود پس فاصله 365 روز است از 20 مارس 2024 تا 20 مارس 2025 دقیقا 365 روز است بنابراین 1403 دارای 365 روز یعنی کبیسه است 366 نیست سال عادی 365 روز است کبیسه 366 پس 1403 عادی است و اسفند 29 روز دارد و 30 اسفند 1403 وجود ندارد",
+        "scored_candidate": "۱۴۰۳ کبیسه است؟ بررسی: ۱ فروردین ۱۴۰۳ برابر ۲۰ مارس ۲۰۲۴ است. ۱ فروردین ۱۴۰۴ برابر ۲۱ مارس ۲۰۲۵ است. بنابراین سال ۱۴۰۳ برابر ۳۶۵ روز است (از ۲۰ مارس ۲۰۲۴ تا ۲۱ مارس ۲۰۲۵ می‌شود ۳۶۵ روز، چون ۲۰۲۴ فوریه ۲۹ روزه قبل از مارس است و در بازه نیست). پس ۳۰ اسفند ۱۴۰۳ وجود ندارد؟ طبق تقویم رسمی ایران ۱۴۰۳ کبیسه نیست و اسفند ۲۹ روز دارد؛ اما ۱۴۰۳ در الگوی ۳۳ساله کبیسه است. بررسی دقیق: ۱ فروردین ۱۴۰۳ = ۲۰ مارس ۲۰۲۴ و ۱ فروردین ۱۴۰۴ = ۲۰ مارس ۲۰۲۵ (نوروز ۱۴۰۴ در ۲۰ مارس ۲۰۲۵ ساعت ۱۲:۳۱ ایران بود). پس فاصله ۳۶۵ روز است؟ از ۲۰ مارس ۲۰۲۴ تا ۲۰ مارس ۲۰۲۵ دقیقاً ۳۶۵ روز است. بنابراین ۱۴۰۳ دارای ۳۶۵ روز، یعنی کبیسه است (۳۶۶ نیست)... سال عادی ۳۶۵ روز است؛ کبیسه ۳۶۶. پس ۱۴۰۳ عادی است و اسفند ۲۹ روز دارد، و ۳۰ اسفند ۱۴۰۳ وجود ندارد.",
+        "match_kind": "subsequence"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 235,
+        "completion_tokens": 905,
+        "cost_usd": 0.00476
+      }
+    },
+    {
+      "id": "peval-practical-numbers-004",
+      "track": "practical_numbers",
+      "prediction": "1 دی 1405: نوروز 1405 برابر 20 مارس 2026 است (اعتدال بهاری 2026 در 20 مارس ساعت 14:46 به وقت UTC، یعنی 18:16 به وقت تهران؛ بعد از ظهر تهران است پس نوروز 1405 روز بعد یعنی 21 مارس است؟).\n\nبررسی: اعتدال 20 مارس 2026 ساعت 14:46 UTC = 18:16 تهران، بعد از ظهر است، پس سال نو از فردای آن، یعنی 21 مارس 2026 آغاز می‌شود. پس 1 فروردین 1405 = 21 مارس 2026.\n\nاز 1 فروردین تا 1 دی: ماه‌های 1 تا 6 هر کدام 31 روز (186)، ماه‌های 7 تا 9 هر کدام 30 روز (90). مجموع تا 1 دی = 276 روز بعد از 1 فروردین.\n\n21 مارس + 276 روز: مارس باقی‌مانده تا 31 مارس = 10 روز → 31 مارس (10). آوریل 30 → 40، مه 31 → 71، ژوئن 30 → 101، ژوئیه 31 → 132، اوت 31 → 163، سپتامبر 30 → 193، اکتبر 31 → 224، نوامبر 30 → 254، تا 31 دسامبر باید 276 باشد: 254 + 22 = 276 → 22 دسامبر.\n\n۲۲ دسامبر ۲۰۲۶",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "22 دسامبر 2026",
+          "22 December 2026",
+          "December 22, 2026",
+          "2026-12-22",
+          "2026/12/22"
+        ],
+        "normalized_prediction": "22 دسامبر 2026",
+        "scored_candidate": "۲۲ دسامبر ۲۰۲۶",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 231,
+        "completion_tokens": 545,
+        "cost_usd": 0.002956
+      }
+    },
+    {
+      "id": "peval-practical-numbers-005",
+      "track": "practical_numbers",
+      "prediction": "۴ دی ۱۴۰۵",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "4 دی 1405",
+          "1405/10/04",
+          "1405/10/4"
+        ],
+        "normalized_prediction": "4 دی 1405",
+        "scored_candidate": "۴ دی ۱۴۰۵",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 238,
+        "completion_tokens": 16,
+        "cost_usd": 0.000318
+      }
+    },
+    {
+      "id": "peval-practical-numbers-006",
+      "track": "practical_numbers",
+      "prediction": "۱۱ دی ۱۴۰۵",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "11 دی 1405",
+          "1405/10/11"
+        ],
+        "normalized_prediction": "11 دی 1405",
+        "scored_candidate": "۱۱ دی ۱۴۰۵",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 236,
+        "completion_tokens": 18,
+        "cost_usd": 0.000326
+      }
+    },
+    {
+      "id": "peval-practical-numbers-007",
+      "track": "practical_numbers",
+      "prediction": "Need to know whether 1404 is a leap year in the Persian calendar. Esfand has 29 days normally, 30 in leap years.\n\nLeap years in the 33-year cycle: 1399 was leap (Esfand 30 days), then 1403 is leap. So 1403 was leap (Esfand 1403 had 30 days), and 1404 is not leap. So Esfand 1404 has 29 days.\n\n28 Esfand + 5 days: 29 Esfand (1), 1 Farvardin (2), 2 (3), 3 (4), 4 (5). Result: 4 Farvardin 1405.\n\n۴ فروردین ۱۴۰۵",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "4 فروردین 1405",
+          "1405/01/04",
+          "1405/1/4"
+        ],
+        "normalized_prediction": "4 فروردین 1405",
+        "scored_candidate": "۴ فروردین ۱۴۰۵",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 223,
+        "completion_tokens": 219,
+        "cost_usd": 0.001318
+      }
+    },
+    {
+      "id": "peval-practical-numbers-008",
+      "track": "practical_numbers",
+      "prediction": "اسفند ۱۴۰۳: سال ۱۴۰۳ کبیسه است؟ باید بررسی کنیم. سال‌های کبیسه اخیر: ۱۳۹۹ کبیسه بود، بعدی ۱۴۰۳ است. بنابراین اسفند ۱۴۰۳ دارای ۳۰ روز است.\n\n۲۵ اسفند + ۱۰ روز: ۵ روز تا ۳۰ اسفند، ۵ روز باقی می‌ماند → ۵ فروردین ۱۴۰۴.\n\n۵ فروردین ۱۴۰۴",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "5 فروردین 1404",
+          "1404/01/05",
+          "1404/1/5"
+        ],
+        "normalized_prediction": "5 فروردین 1404",
+        "scored_candidate": "۵ فروردین ۱۴۰۴",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 225,
+        "completion_tokens": 219,
+        "cost_usd": 0.00132
+      }
+    },
+    {
+      "id": "peval-practical-numbers-009",
+      "track": "practical_numbers",
+      "prediction": "۲۰ شهریور + ۱۰ روز = ۳۰ شهریور (شهریور ۳۱ روزه است، پس ۱۱ روز تا ۳۱ شهریور).\n\nدقیق‌تر: شهریور ۳۱ روز دارد. از ۲۰ شهریور تا ۳۱ شهریور ۱۱ روز است. باقی‌مانده: ۴۵ − ۱۱ = ۳۴ روز.\nمهر ۳۰ روز دارد: ۳۴ − ۳۰ = ۴ روز، یعنی ۳۰ مهر پس از ۴۱ روز، و سپس ۴ روز دیگر می‌شود ۴ آبان.\n\nبررسی: ۱۱ روز → ۳۱ شهریور، ۳۰ روز دیگر → ۳۰ مهر (مجموع ۴۱)، ۴ روز دیگر → ۴ آبان.\n\n۴ آبان ۱۴۰۵",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "4 آبان 1405",
+          "1405/08/04",
+          "1405/8/4"
+        ],
+        "normalized_prediction": "4 آبان 1405",
+        "scored_candidate": "۴ آبان ۱۴۰۵",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 225,
+        "completion_tokens": 345,
+        "cost_usd": 0.00195
+      }
+    },
+    {
+      "id": "peval-practical-numbers-010",
+      "track": "practical_numbers",
+      "prediction": "چهارشنبه",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "چهارشنبه",
+          "چهار‌شنبه"
+        ],
+        "normalized_prediction": "چهارشنبه",
+        "scored_candidate": "چهارشنبه",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 171,
+        "completion_tokens": 479,
+        "cost_usd": 0.002566
+      }
+    },
+    {
+      "id": "peval-practical-numbers-011",
+      "track": "practical_numbers",
+      "prediction": "یکشنبه",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "یکشنبه",
+          "یک‌شنبه"
+        ],
+        "normalized_prediction": "یکشنبه",
+        "scored_candidate": "یکشنبه",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 170,
+        "completion_tokens": 303,
+        "cost_usd": 0.001685
+      }
+    },
+    {
+      "id": "peval-practical-numbers-012",
+      "track": "practical_numbers",
+      "prediction": "تولد: 15 آبان 1378. در 5 مهر 1405 هنوز به 15 آبان نرسیده، پس سن تمام = 1405 - 1378 - 1 = 26.\n\n۲۶",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "26"
+        ],
+        "normalized_prediction": "26",
+        "scored_candidate": "۲۶",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 207,
+        "completion_tokens": 74,
+        "cost_usd": 0.000577
+      }
+    },
+    {
+      "id": "peval-practical-numbers-013",
+      "track": "practical_numbers",
+      "prediction": "یک میلیون و دویست و پنجاه هزار",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "یک میلیون و دویست و پنجاه هزار"
+        ],
+        "normalized_prediction": "یک میلیون و دویست و پنجاه هزار",
+        "scored_candidate": "یک میلیون و دویست و پنجاه هزار",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 194,
+        "completion_tokens": 21,
+        "cost_usd": 0.000299
+      }
+    },
+    {
+      "id": "peval-practical-numbers-014",
+      "track": "practical_numbers",
+      "prediction": "سیصد و هفت هزار و پانصد",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "سیصد و هفت هزار و پانصد"
+        ],
+        "normalized_prediction": "سیصد و هفت هزار و پانصد",
+        "scored_candidate": "سیصد و هفت هزار و پانصد",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 190,
+        "completion_tokens": 18,
+        "cost_usd": 0.00028
+      }
+    },
+    {
+      "id": "peval-practical-numbers-015",
+      "track": "practical_numbers",
+      "prediction": "دو میلیارد و چهل و هشت میلیون",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "دو میلیارد و چهل و هشت میلیون"
+        ],
+        "normalized_prediction": "دو میلیارد و چهل و هشت میلیون",
+        "scored_candidate": "دو میلیارد و چهل و هشت میلیون",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 202,
+        "completion_tokens": 21,
+        "cost_usd": 0.000307
+      }
+    },
+    {
+      "id": "peval-practical-numbers-016",
+      "track": "practical_numbers",
+      "prediction": "هجده هزار و هجده تومان",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "هجده هزار و هجده",
+          "هیجده هزار و هیجده"
+        ],
+        "normalized_prediction": "هجده هزار و هجده تومان",
+        "scored_candidate": "هجده هزار و هجده تومان",
+        "match_kind": "subsequence"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 188,
+        "completion_tokens": 15,
+        "cost_usd": 0.000263
+      }
+    },
+    {
+      "id": "peval-practical-numbers-017",
+      "track": "practical_numbers",
+      "prediction": "۶۷۵٬۴۰۲",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "675402"
+        ],
+        "normalized_prediction": "675402",
+        "scored_candidate": "۶۷۵٬۴۰۲",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 168,
+        "completion_tokens": 16,
+        "cost_usd": 0.000248
+      }
+    },
+    {
+      "id": "peval-practical-numbers-018",
+      "track": "practical_numbers",
+      "prediction": "3040009",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "3040009"
+        ],
+        "normalized_prediction": "3040009",
+        "scored_candidate": "3040009",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 158,
+        "completion_tokens": 5,
+        "cost_usd": 0.000183
+      }
+    },
+    {
+      "id": "peval-practical-numbers-019",
+      "track": "practical_numbers",
+      "prediction": "۴۸٬۵۰۰",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "48500"
+        ],
+        "normalized_prediction": "48500",
+        "scored_candidate": "۴۸٬۵۰۰",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 184,
+        "completion_tokens": 14,
+        "cost_usd": 0.000254
+      }
+    },
+    {
+      "id": "peval-practical-numbers-020",
+      "track": "practical_numbers",
+      "prediction": "۲٬۵۰۰٬۰۰۰",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "2500000"
+        ],
+        "normalized_prediction": "2500000",
+        "scored_candidate": "۲٬۵۰۰٬۰۰۰",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 161,
+        "completion_tokens": 20,
+        "cost_usd": 0.000261
+      }
+    },
+    {
+      "id": "peval-practical-numbers-021",
+      "track": "practical_numbers",
+      "prediction": "۲٬۰۴۰٬۰۰۰",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "2040000"
+        ],
+        "normalized_prediction": "2040000",
+        "scored_candidate": "۲٬۰۴۰٬۰۰۰",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 211,
+        "completion_tokens": 20,
+        "cost_usd": 0.000311
+      }
+    },
+    {
+      "id": "peval-practical-numbers-022",
+      "track": "practical_numbers",
+      "prediction": "۹۳۵٬۰۰۰",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "935000"
+        ],
+        "normalized_prediction": "935000",
+        "scored_candidate": "۹۳۵٬۰۰۰",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 234,
+        "completion_tokens": 16,
+        "cost_usd": 0.000314
+      }
+    },
+    {
+      "id": "peval-practical-numbers-023",
+      "track": "practical_numbers",
+      "prediction": "۵ کیلویی: ۷۵۰,۰۰۰ ÷ ۵ = ۱۵۰,۰۰۰\n۱۰ کیلویی: ۱,۴۰۰,۰۰۰ ÷ ۱۰ = ۱۴۰,۰۰۰\n\n۱۴۰۰۰۰",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "140000"
+        ],
+        "normalized_prediction": "140000",
+        "scored_candidate": "۱۴۰۰۰۰",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 260,
+        "completion_tokens": 117,
+        "cost_usd": 0.000845
+      }
+    },
+    {
+      "id": "peval-practical-numbers-024",
+      "track": "practical_numbers",
+      "prediction": "۴٬۰۰۰٬۰۰۰",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "4000000"
+        ],
+        "normalized_prediction": "4000000",
+        "scored_candidate": "۴٬۰۰۰٬۰۰۰",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 239,
+        "completion_tokens": 20,
+        "cost_usd": 0.000339
+      }
+    },
+    {
+      "id": "peval-practical-numbers-025",
+      "track": "practical_numbers",
+      "prediction": "تقویم ایرانی: ماه‌های فروردین تا شهریور هرکدام ۳۱ روز دارند، یعنی ۶ ماه × ۳۱ = ۱۸۶ روز.\n\nاز ۱ فروردین تا ۱ مهر دقیقاً ۶ ماه کامل است، پس فاصله ۱۸۶ روز است (روز شروع حساب نمی‌شود و روز پایان شمرده می‌شود، که همان تفاوت تاریخ‌هاست).\n\n۱۸۶",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "186"
+        ],
+        "normalized_prediction": "186",
+        "scored_candidate": "۱۸۶",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 204,
+        "completion_tokens": 187,
+        "cost_usd": 0.001139
+      }
+    },
+    {
+      "id": "peval-practical-extraction-001",
+      "track": "practical_extraction",
+      "prediction": "{\"city\":\"تهران\",\"neighbourhood\":\"سعادت‌آباد\",\"area_m2\":85,\"bedrooms\":2,\"floor\":3,\"elevator\":true,\"parking\":null,\"price_toman\":8500000000}",
+      "score": 1.0,
+      "details": {
+        "parsed": true,
+        "fields": {
+          "city": true,
+          "neighbourhood": true,
+          "area_m2": true,
+          "bedrooms": true,
+          "floor": true,
+          "elevator": true,
+          "parking": true,
+          "price_toman": true
+        },
+        "field_accuracy": 1.0,
+        "extra_keys": []
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 386,
+        "completion_tokens": 75,
+        "cost_usd": 0.000761
+      }
+    },
+    {
+      "id": "peval-practical-extraction-002",
+      "track": "practical_extraction",
+      "prediction": "{\"city\":\"اصفهان\",\"area_m2\":60,\"bedrooms\":1,\"deposit_toman\":300000000,\"monthly_rent_toman\":12000000,\"parking\":false,\"elevator\":null}",
+      "score": 1.0,
+      "details": {
+        "parsed": true,
+        "fields": {
+          "city": true,
+          "area_m2": true,
+          "bedrooms": true,
+          "deposit_toman": true,
+          "monthly_rent_toman": true,
+          "parking": true,
+          "elevator": true
+        },
+        "field_accuracy": 1.0,
+        "extra_keys": []
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 388,
+        "completion_tokens": 69,
+        "cost_usd": 0.000733
+      }
+    },
+    {
+      "id": "peval-practical-extraction-003",
+      "track": "practical_extraction",
+      "prediction": "{\"brand\":\"پژو\",\"model\":\"۲۰۶ تیپ ۵\",\"model_year\":1399,\"color\":\"سفید\",\"mileage_km\":85000,\"price_toman\":620000000}",
+      "score": 1.0,
+      "details": {
+        "parsed": true,
+        "fields": {
+          "brand": true,
+          "model": true,
+          "model_year": true,
+          "color": true,
+          "mileage_km": true,
+          "price_toman": true
+        },
+        "field_accuracy": 1.0,
+        "extra_keys": []
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 362,
+        "completion_tokens": 64,
+        "cost_usd": 0.000682
+      }
+    },
+    {
+      "id": "peval-practical-extraction-004",
+      "track": "practical_extraction",
+      "prediction": "{\"type\":\"برداشت\",\"amount_rial\":1250000,\"balance_rial\":34800000,\"date\":\"1405/07/03\",\"time\":\"18:24\"}",
+      "score": 1.0,
+      "details": {
+        "parsed": true,
+        "fields": {
+          "type": true,
+          "amount_rial": true,
+          "balance_rial": true,
+          "date": true,
+          "time": true
+        },
+        "field_accuracy": 1.0,
+        "extra_keys": []
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 385,
+        "completion_tokens": 52,
+        "cost_usd": 0.000645
+      }
+    },
+    {
+      "id": "peval-practical-extraction-005",
+      "track": "practical_extraction",
+      "prediction": "{\"type\":\"واریز\",\"amount_toman\":4500000,\"balance_toman\":5230000,\"date\":\"1405/06/31\"}",
+      "score": 1.0,
+      "details": {
+        "parsed": true,
+        "fields": {
+          "type": true,
+          "amount_toman": true,
+          "balance_toman": true,
+          "date": true
+        },
+        "field_accuracy": 1.0,
+        "extra_keys": []
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 382,
+        "completion_tokens": 44,
+        "cost_usd": 0.000602
+      }
+    },
+    {
+      "id": "peval-practical-extraction-006",
+      "track": "practical_extraction",
+      "prediction": "{\"title\":\"برنامه‌نویس پایتون (سطح میانی)\",\"city\":\"شیراز\",\"min_experience_years\":3,\"salary_min_toman\":40000000,\"salary_max_toman\":55000000,\"remote\":false,\"insurance\":null}",
+      "score": 1.0,
+      "details": {
+        "parsed": true,
+        "fields": {
+          "title": true,
+          "city": true,
+          "min_experience_years": true,
+          "salary_min_toman": true,
+          "salary_max_toman": true,
+          "remote": true,
+          "insurance": true
+        },
+        "field_accuracy": 1.0,
+        "extra_keys": []
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 375,
+        "completion_tokens": 85,
+        "cost_usd": 0.0008
+      }
+    },
+    {
+      "id": "peval-practical-extraction-007",
+      "track": "practical_extraction",
+      "prediction": "{\"origin\":\"مشهد\",\"destination\":\"کیش\",\"date\":\"1405/07/21\",\"departure_time\":\"06:45\",\"flight_number\":\"5621\",\"seat\":\"14C\"}",
+      "score": 1.0,
+      "details": {
+        "parsed": true,
+        "fields": {
+          "origin": true,
+          "destination": true,
+          "date": true,
+          "departure_time": true,
+          "flight_number": true,
+          "seat": true
+        },
+        "field_accuracy": 1.0,
+        "extra_keys": []
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 371,
+        "completion_tokens": 58,
+        "cost_usd": 0.000661
+      }
+    },
+    {
+      "id": "peval-practical-extraction-008",
+      "track": "practical_extraction",
+      "prediction": "{\"origin\":\"تهران\",\"destination\":\"مشهد\",\"wagon\":4,\"seat\":12,\"price_toman\":890000,\"departure_time\":\"21:30\"}",
+      "score": 1.0,
+      "details": {
+        "parsed": true,
+        "fields": {
+          "origin": true,
+          "destination": true,
+          "wagon": true,
+          "seat": true,
+          "price_toman": true,
+          "departure_time": true
+        },
+        "field_accuracy": 1.0,
+        "extra_keys": []
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 360,
+        "completion_tokens": 54,
+        "cost_usd": 0.00063
+      }
+    },
+    {
+      "id": "peval-practical-extraction-009",
+      "track": "practical_extraction",
+      "prediction": "{\"item_count\": 6, \"subtotal_toman\": 1155000, \"service_percent\": 10, \"total_toman\": 1270500}",
+      "score": 1.0,
+      "details": {
+        "parsed": true,
+        "fields": {
+          "item_count": true,
+          "subtotal_toman": true,
+          "service_percent": true,
+          "total_toman": true
+        },
+        "field_accuracy": 1.0,
+        "extra_keys": []
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 465,
+        "completion_tokens": 45,
+        "cost_usd": 0.00069
+      }
+    },
+    {
+      "id": "peval-practical-extraction-010",
+      "track": "practical_extraction",
+      "prediction": "{\"quantity\":3,\"subtotal_toman\":8400000,\"vat_toman\":840000,\"total_toman\":9240000}",
+      "score": 1.0,
+      "details": {
+        "parsed": true,
+        "fields": {
+          "quantity": true,
+          "subtotal_toman": true,
+          "vat_toman": true,
+          "total_toman": true
+        },
+        "field_accuracy": 1.0,
+        "extra_keys": []
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 381,
+        "completion_tokens": 43,
+        "cost_usd": 0.000596
+      }
+    },
+    {
+      "id": "peval-practical-extraction-011",
+      "track": "practical_extraction",
+      "prediction": "{\"doctor_name\": \"سپیده کاظمی\", \"specialty\": \"پوست\", \"date\": \"1405/07/23\", \"time\": \"17:00\", \"arrive_minutes_early\": 15, \"fee_toman\": null}",
+      "score": 1.0,
+      "details": {
+        "parsed": true,
+        "fields": {
+          "doctor_name": true,
+          "specialty": true,
+          "date": true,
+          "time": true,
+          "arrive_minutes_early": true,
+          "fee_toman": true
+        },
+        "field_accuracy": 1.0,
+        "extra_keys": []
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 409,
+        "completion_tokens": 73,
+        "cost_usd": 0.000774
+      }
+    },
+    {
+      "id": "peval-practical-extraction-012",
+      "track": "practical_extraction",
+      "prediction": "{\"event\":\"جشن فارغ‌التحصیلی دانشکده‌ی مهندسی\",\"date\":\"1405/08/08\",\"time\":\"16:00\",\"venue\":\"تالار مولوی\",\"guests_allowed\":true}",
+      "score": 0.8,
+      "details": {
+        "parsed": true,
+        "fields": {
+          "event": false,
+          "date": true,
+          "time": true,
+          "venue": true,
+          "guests_allowed": true
+        },
+        "field_accuracy": 0.8,
+        "extra_keys": []
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 367,
+        "completion_tokens": 75,
+        "cost_usd": 0.000742
+      }
+    },
+    {
+      "id": "peval-practical-extraction-013",
+      "track": "practical_extraction",
+      "prediction": "{\"brand\":\"سامسونگ\",\"model\":\"گلکسی A56\",\"storage_gb\":256,\"ram_gb\":8,\"color\":\"مشکی\",\"warranty_months\":18}",
+      "score": 1.0,
+      "details": {
+        "parsed": true,
+        "fields": {
+          "brand": true,
+          "model": true,
+          "storage_gb": true,
+          "ram_gb": true,
+          "color": true,
+          "warranty_months": true
+        },
+        "field_accuracy": 1.0,
+        "extra_keys": []
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 347,
+        "completion_tokens": 60,
+        "cost_usd": 0.000647
+      }
+    },
+    {
+      "id": "peval-practical-extraction-014",
+      "track": "practical_extraction",
+      "prediction": "{\"name\": \"آرش نیک‌نام\", \"job_title\": \"مدیر فنی\", \"company\": \"شرکت داده‌پردازان پارس\", \"city\": \"تبریز\", \"email\": null}",
+      "score": 1.0,
+      "details": {
+        "parsed": true,
+        "fields": {
+          "name": true,
+          "job_title": true,
+          "company": true,
+          "city": true,
+          "email": true
+        },
+        "field_accuracy": 1.0,
+        "extra_keys": []
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 322,
+        "completion_tokens": 66,
+        "cost_usd": 0.000652
+      }
+    },
+    {
+      "id": "peval-practical-extraction-015",
+      "track": "practical_extraction",
+      "prediction": "{\"drug\":\"آموکسی‌سیلین\",\"dose_mg\":500,\"doses_per_day\":3,\"days\":7,\"total_capsules\":21}",
+      "score": 1.0,
+      "details": {
+        "parsed": true,
+        "fields": {
+          "drug": true,
+          "dose_mg": true,
+          "doses_per_day": true,
+          "days": true,
+          "total_capsules": true
+        },
+        "field_accuracy": 1.0,
+        "extra_keys": []
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 340,
+        "completion_tokens": 52,
+        "cost_usd": 0.0006
+      }
+    },
+    {
+      "id": "peval-practical-extraction-016",
+      "track": "practical_extraction",
+      "prediction": "{\"city\": \"رشت\", \"condition\": \"بارانی\", \"min_temp_c\": 14, \"max_temp_c\": 21, \"rain_chance_percent\": 80, \"wind_kmh\": null}",
+      "score": 1.0,
+      "details": {
+        "parsed": true,
+        "fields": {
+          "city": true,
+          "condition": true,
+          "min_temp_c": true,
+          "max_temp_c": true,
+          "rain_chance_percent": true,
+          "wind_kmh": true
+        },
+        "field_accuracy": 1.0,
+        "extra_keys": []
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 374,
+        "completion_tokens": 66,
+        "cost_usd": 0.000704
+      }
+    },
+    {
+      "id": "peval-practical-extraction-017",
+      "track": "practical_extraction",
+      "prediction": "{\"tracking_code\": \"7240193381\", \"origin_center\": \"مرکز پردازش تهران\", \"delivery_deadline\": \"1405/07/12\", \"recipient_name\": null}",
+      "score": 1.0,
+      "details": {
+        "parsed": true,
+        "fields": {
+          "tracking_code": true,
+          "origin_center": true,
+          "delivery_deadline": true,
+          "recipient_name": true
+        },
+        "field_accuracy": 1.0,
+        "extra_keys": []
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 370,
+        "completion_tokens": 61,
+        "cost_usd": 0.000675
+      }
+    },
+    {
+      "id": "peval-practical-extraction-018",
+      "track": "practical_extraction",
+      "prediction": "{\"period\":\"شهریور\",\"consumption_kwh\":385,\"amount_toman\":412000,\"due_date\":\"1405/07/10\"}",
+      "score": 1.0,
+      "details": {
+        "parsed": true,
+        "fields": {
+          "period": true,
+          "consumption_kwh": true,
+          "amount_toman": true,
+          "due_date": true
+        },
+        "field_accuracy": 1.0,
+        "extra_keys": []
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 387,
+        "completion_tokens": 46,
+        "cost_usd": 0.000617
+      }
+    },
+    {
+      "id": "peval-practical-extraction-019",
+      "track": "practical_extraction",
+      "prediction": "{\"course\":\"مقدمه‌ای بر یادگیری ماشین\",\"instructor\":\"دکتر نرگس صدری\",\"sessions\":8,\"start_date\":\"1405/07/19\",\"fee_toman\":3200000,\"student_fee_toman\":2560000}",
+      "score": 1.0,
+      "details": {
+        "parsed": true,
+        "fields": {
+          "course": true,
+          "instructor": true,
+          "sessions": true,
+          "start_date": true,
+          "fee_toman": true,
+          "student_fee_toman": true
+        },
+        "field_accuracy": 1.0,
+        "extra_keys": []
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 449,
+        "completion_tokens": 87,
+        "cost_usd": 0.000884
+      }
+    },
+    {
+      "id": "peval-practical-extraction-020",
+      "track": "practical_extraction",
+      "prediction": "{\"hotel\": \"نگین\", \"city\": \"اصفهان\", \"check_in\": \"1405/08/10\", \"nights\": 3, \"check_out\": \"1405/08/13\", \"adults\": 2, \"breakfast_included\": true}",
+      "score": 1.0,
+      "details": {
+        "parsed": true,
+        "fields": {
+          "hotel": true,
+          "city": true,
+          "check_in": true,
+          "nights": true,
+          "check_out": true,
+          "adults": true,
+          "breakfast_included": true
+        },
+        "field_accuracy": 1.0,
+        "extra_keys": []
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 389,
+        "completion_tokens": 73,
+        "cost_usd": 0.000754
+      }
+    },
+    {
+      "id": "peval-practical-extraction-021",
+      "track": "practical_extraction",
+      "prediction": "{\"brand\": \"لنوو\", \"ram_gb\": 16, \"ssd_gb\": 512, \"price_toman\": 48000000, \"negotiable\": false}",
+      "score": 1.0,
+      "details": {
+        "parsed": true,
+        "fields": {
+          "brand": true,
+          "ram_gb": true,
+          "ssd_gb": true,
+          "price_toman": true,
+          "negotiable": true
+        },
+        "field_accuracy": 1.0,
+        "extra_keys": []
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 400,
+        "completion_tokens": 53,
+        "cost_usd": 0.000665
+      }
+    },
+    {
+      "id": "peval-practical-extraction-022",
+      "track": "practical_extraction",
+      "prediction": "{\"city\": \"خوی\", \"province\": \"آذربایجان غربی\", \"magnitude\": 4.6, \"casualties_reported\": false, \"depth_km\": null}",
+      "score": 1.0,
+      "details": {
+        "parsed": true,
+        "fields": {
+          "city": true,
+          "province": true,
+          "magnitude": true,
+          "casualties_reported": true,
+          "depth_km": true
+        },
+        "field_accuracy": 1.0,
+        "extra_keys": []
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 352,
+        "completion_tokens": 54,
+        "cost_usd": 0.000622
+      }
+    },
+    {
+      "id": "peval-practical-extraction-023",
+      "track": "practical_extraction",
+      "prediction": "{\"grade\":8,\"destination\":\"باغ‌وحش ارم\",\"date\":\"1405/08/06\",\"departure_time\":\"07:30\",\"cost_toman\":450000,\"lunch_included\":null}",
+      "score": 1.0,
+      "details": {
+        "parsed": true,
+        "fields": {
+          "grade": true,
+          "destination": true,
+          "date": true,
+          "departure_time": true,
+          "cost_toman": true,
+          "lunch_included": true
+        },
+        "field_accuracy": 1.0,
+        "extra_keys": []
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 412,
+        "completion_tokens": 64,
+        "cost_usd": 0.000732
+      }
+    },
+    {
+      "id": "peval-practical-extraction-024",
+      "track": "practical_extraction",
+      "prediction": "{\"base_salary_toman\":28000000,\"overtime_toman\":4500000,\"deductions_toman\":3700000,\"net_toman\":28800000}",
+      "score": 1.0,
+      "details": {
+        "parsed": true,
+        "fields": {
+          "base_salary_toman": true,
+          "overtime_toman": true,
+          "deductions_toman": true,
+          "net_toman": true
+        },
+        "field_accuracy": 1.0,
+        "extra_keys": []
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 391,
+        "completion_tokens": 50,
+        "cost_usd": 0.000641
+      }
+    },
+    {
+      "id": "peval-practical-extraction-025",
+      "track": "practical_extraction",
+      "prediction": "{\"home_team\": \"استقلال\", \"away_team\": \"سپاهان\", \"home_goals\": 1, \"away_goals\": 2, \"winner\": \"سپاهان\", \"stadium\": \"آزادی\"}",
+      "score": 1.0,
+      "details": {
+        "parsed": true,
+        "fields": {
+          "home_team": true,
+          "away_team": true,
+          "home_goals": true,
+          "away_goals": true,
+          "winner": true,
+          "stadium": true
+        },
+        "field_accuracy": 1.0,
+        "extra_keys": []
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 354,
+        "completion_tokens": 67,
+        "cost_usd": 0.000689
+      }
+    },
+    {
+      "id": "peval-practical-pragmatics-001",
+      "track": "practical_pragmatics",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 225,
+        "completion_tokens": 4,
+        "cost_usd": 0.000245
+      }
+    },
+    {
+      "id": "peval-practical-pragmatics-002",
+      "track": "practical_pragmatics",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 203,
+        "completion_tokens": 4,
+        "cost_usd": 0.000223
+      }
+    },
+    {
+      "id": "peval-practical-pragmatics-003",
+      "track": "practical_pragmatics",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 217,
+        "completion_tokens": 4,
+        "cost_usd": 0.000237
+      }
+    },
+    {
+      "id": "peval-practical-pragmatics-004",
+      "track": "practical_pragmatics",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 206,
+        "completion_tokens": 4,
+        "cost_usd": 0.000226
+      }
+    },
+    {
+      "id": "peval-practical-pragmatics-005",
+      "track": "practical_pragmatics",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 271,
+        "completion_tokens": 4,
+        "cost_usd": 0.000291
+      }
+    },
+    {
+      "id": "peval-practical-pragmatics-006",
+      "track": "practical_pragmatics",
+      "prediction": "در باور عامیانه ایرانی، عطسه هنگام شروع کار را نشانه‌ی مانع و بدشگونی می‌دانند و می‌گویند «صبر آمد» یا «صبر کن». پس پاسخ:\n\nالف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 198,
+        "completion_tokens": 89,
+        "cost_usd": 0.000643
+      }
+    },
+    {
+      "id": "peval-practical-pragmatics-007",
+      "track": "practical_pragmatics",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 206,
+        "completion_tokens": 4,
+        "cost_usd": 0.000226
+      }
+    },
+    {
+      "id": "peval-practical-pragmatics-008",
+      "track": "practical_pragmatics",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 218,
+        "completion_tokens": 4,
+        "cost_usd": 0.000238
+      }
+    },
+    {
+      "id": "peval-practical-pragmatics-009",
+      "track": "practical_pragmatics",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 205,
+        "completion_tokens": 4,
+        "cost_usd": 0.000225
+      }
+    },
+    {
+      "id": "peval-practical-pragmatics-010",
+      "track": "practical_pragmatics",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 199,
+        "completion_tokens": 4,
+        "cost_usd": 0.000219
+      }
+    },
+    {
+      "id": "peval-practical-pragmatics-011",
+      "track": "practical_pragmatics",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 204,
+        "completion_tokens": 4,
+        "cost_usd": 0.000224
+      }
+    },
+    {
+      "id": "peval-practical-pragmatics-012",
+      "track": "practical_pragmatics",
+      "prediction": "**پ**",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "**پ**"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 211,
+        "completion_tokens": 6,
+        "cost_usd": 0.000241
+      }
+    },
+    {
+      "id": "peval-practical-pragmatics-013",
+      "track": "practical_pragmatics",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 210,
+        "completion_tokens": 4,
+        "cost_usd": 0.00023
+      }
+    },
+    {
+      "id": "peval-practical-pragmatics-014",
+      "track": "practical_pragmatics",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 198,
+        "completion_tokens": 4,
+        "cost_usd": 0.000218
+      }
+    },
+    {
+      "id": "peval-practical-pragmatics-015",
+      "track": "practical_pragmatics",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 228,
+        "completion_tokens": 4,
+        "cost_usd": 0.000248
+      }
+    },
+    {
+      "id": "peval-practical-pragmatics-016",
+      "track": "practical_pragmatics",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 196,
+        "completion_tokens": 4,
+        "cost_usd": 0.000216
+      }
+    },
+    {
+      "id": "peval-practical-pragmatics-017",
+      "track": "practical_pragmatics",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 234,
+        "completion_tokens": 4,
+        "cost_usd": 0.000254
+      }
+    },
+    {
+      "id": "peval-practical-pragmatics-018",
+      "track": "practical_pragmatics",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 255,
+        "completion_tokens": 4,
+        "cost_usd": 0.000275
+      }
+    },
+    {
+      "id": "peval-practical-pragmatics-019",
+      "track": "practical_pragmatics",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 233,
+        "completion_tokens": 4,
+        "cost_usd": 0.000253
+      }
+    },
+    {
+      "id": "peval-practical-pragmatics-020",
+      "track": "practical_pragmatics",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 204,
+        "completion_tokens": 4,
+        "cost_usd": 0.000224
+      }
+    },
+    {
+      "id": "peval-practical-pragmatics-021",
+      "track": "practical_pragmatics",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 243,
+        "completion_tokens": 4,
+        "cost_usd": 0.000263
+      }
+    },
+    {
+      "id": "peval-practical-pragmatics-022",
+      "track": "practical_pragmatics",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 214,
+        "completion_tokens": 4,
+        "cost_usd": 0.000234
+      }
+    },
+    {
+      "id": "peval-practical-pragmatics-023",
+      "track": "practical_pragmatics",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 190,
+        "completion_tokens": 4,
+        "cost_usd": 0.00021
+      }
+    },
+    {
+      "id": "peval-practical-pragmatics-024",
+      "track": "practical_pragmatics",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 176,
+        "completion_tokens": 4,
+        "cost_usd": 0.000196
+      }
+    },
+    {
+      "id": "peval-practical-pragmatics-025",
+      "track": "practical_pragmatics",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 173,
+        "completion_tokens": 4,
+        "cost_usd": 0.000193
+      }
+    },
+    {
+      "id": "peval-practical-creative-001",
+      "track": "practical_creative",
+      "prediction": "مادر، پناهِ امن روزهای سخت و آغوشِ آرام من است.\nهر لبخندش دنیایی از امید را به خانه می‌آورد.\nروشنیِ دعاهایش همیشه راه زندگی‌ام را گرم می‌کند.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_any": true,
+          "line_count": true,
+          "line_initials": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 153,
+        "completion_tokens": 349,
+        "cost_usd": 0.001898
+      }
+    },
+    {
+      "id": "peval-practical-creative-002",
+      "track": "practical_creative",
+      "prediction": "افتخار من خاکی است که در آن ریشه دارم.\nیاد کوه‌ها و دشت‌هایش همیشه در دلم زنده است.\nرودهایش از تاریخی کهن و سرگذشتی پرافتخار سخن می‌گویند.\nامید دارم فردایش از امروز روشن‌تر و آبادتر باشد.\nنام ایران برای من یعنی عشق، خانه و آرامش.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "line_count": true,
+          "line_initials": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 154,
+        "completion_tokens": 463,
+        "cost_usd": 0.002469
+      }
+    },
+    {
+      "id": "peval-practical-creative-003",
+      "track": "practical_creative",
+      "prediction": "باد سرد از لابه‌لای شاخه‌های لخت می‌گذرد.\nآسمان خاکستری، آرام بر شانه‌ی شهر می‌نشیند.\nرنگ برگ‌ها میان زردی و سرخی جان می‌گیرد.\nافسوس نمی‌خورم، چون هر پایانی آغازی پنهان دارد.\nنسیم با بوی خاک نم‌خورده، خاطره‌های قدیمی را بیدار می‌کند.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_any": true,
+          "line_count": true,
+          "line_initials": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 154,
+        "completion_tokens": 176,
+        "cost_usd": 0.001034
+      }
+    },
+    {
+      "id": "peval-practical-creative-004",
+      "track": "practical_creative",
+      "prediction": "دوستی یعنی کنار هم ماندن، حتی وقتی دنیا سخت می‌شود.\nوفاداری ریشه‌ی هر رابطه‌ی واقعی و ماندگار است.\nسکوتِ کنار یک دوست گاهی آرام‌بخش‌تر از هزار کلمه است.\nتنهایی در کنار یک دوست خوب معنای دیگری پیدا می‌کند.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "line_count": true,
+          "line_initials": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 155,
+        "completion_tokens": 442,
+        "cost_usd": 0.002365
+      }
+    },
+    {
+      "id": "peval-practical-creative-005",
+      "track": "practical_creative",
+      "prediction": "فصل نو با شکوفه و گل آغاز می‌شود.\nهوا ملایم و دلنشین است و دشت سبز می‌شود.\nکودکان با دیدن گل و سبزه شاد می‌شوند.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "min_words": true,
+          "required_any": true,
+          "forbidden_chars": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 171,
+        "completion_tokens": 507,
+        "cost_usd": 0.002706
+      }
+    },
+    {
+      "id": "peval-practical-creative-006",
+      "track": "practical_creative",
+      "prediction": "سفره‌ی سحرگاهی با چای داغ، کره، گردو، عسل، خامه، تخم‌مرغ و سبزی خوشبو چیده می‌شود.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "min_words": true,
+          "required_any": true,
+          "forbidden_chars": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 168,
+        "completion_tokens": 475,
+        "cost_usd": 0.002543
+      }
+    },
+    {
+      "id": "peval-practical-creative-007",
+      "track": "practical_creative",
+      "prediction": "بحرِ نیلی، پر موج و پر نور، در شب می‌درخشد و می‌رود.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "min_words": true,
+          "required_any": true,
+          "forbidden_chars": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 148,
+        "completion_tokens": 553,
+        "cost_usd": 0.002913
+      }
+    },
+    {
+      "id": "peval-practical-creative-008",
+      "track": "practical_creative",
+      "prediction": "کودکان هر صبح با شوق به مدرسه رفتند و درس آموختند.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "min_words": true,
+          "forbidden_chars": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 125,
+        "completion_tokens": 338,
+        "cost_usd": 0.001815
+      }
+    },
+    {
+      "id": "peval-practical-creative-009",
+      "track": "practical_creative",
+      "prediction": "برگ‌ها زرد و طلایی شد، به هر کوی و کنار،\nباد آرام می‌خواند ترانه‌ی پاییز را از انتظارِ بهار.\n\nببخشید، بگذارید نسخه‌ی روان‌تری بدهم:\n\nپاییز آمد و برگ‌ها ریخت بر دوش کوچه و بازار،\nبوی نم و باران نشست بر شاخه‌های بی‌بار.\n\n(کلمه‌های پایانی: «بازار» و «بی‌بار» که هر دو با «ار» تمام می‌شوند و یکسان نیستند.)",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "line_count": false,
+          "lines_end_with": false,
+          "distinct_line_endings": true
+        },
+        "constraint_score": 0.3333333333333333
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 156,
+        "completion_tokens": 218,
+        "cost_usd": 0.001246
+      }
+    },
+    {
+      "id": "peval-practical-creative-010",
+      "track": "practical_creative",
+      "prediction": "شب آرام و آسمان پر از ستارگان است\nدر سکوتش دل من با ماه مهربان است\n\nبازنویسی با رعایت دقیق شرط (کلمه‌ی پیش از «است» باید به «ان» ختم شود):\n\nآسمان شب پر از نور ستارگان است\nماه در سکوت شب، تنها نگهبان است\n\nدر این دو سطر، «ستارگان» و «نگهبان» هر دو به «ان» ختم می‌شوند و هر سطر با «است» تمام می‌شود.",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "line_count": false,
+          "lines_end_with": false
+        },
+        "constraint_score": 0.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 148,
+        "completion_tokens": 188,
+        "cost_usd": 0.001088
+      }
+    },
+    {
+      "id": "peval-practical-creative-011",
+      "track": "practical_creative",
+      "prediction": "دوستی گوهری است که با صداقت، همیشه در دل ما می‌ماند و نمی‌شود آن را به آسانی از کف داد، چون پیوندی است درست.\n\nاما این کوتاه نیست و باید دقیق‌تر بنویسم:\n\nهر که در سختی کنارم ایستاد، یار من است؛\nدوستی، پیوند دل‌هاست که هرگز نمی‌گسست.\n\nبا پوزش، پاسخ بالا نامرتب شد. نسخه‌ی درست:\n\nدوستی مهری است کز دل بر دل دیگر **پیوست**،\nهر که در سختی کنارم ایستاد، یار من **هست**؛\n\nاز آنجا که «پیوست» و «هست» هر دو با «ست» تمام می‌شوند، اما شرط شما «وست» است، نسخه‌ی نهایی:\n\nدوستی مهری است کز جان تا دل یاران **پیوست**،\nهر که در سختی بماند، همدم و یار و **دوست**.\n\nبرای رعایت دقیق «وست»، این نسخه‌ی نهایی است:\n\nدوستی پیوند جان است و دلی نیکو **پیوست**،\nهر که در سختی بماند، یار راستین و **دوست**.\n\nنکته: «دوست» با «وست» تمام می‌شود، ولی «پیوست» نه. پس پاسخ دقیق:\n\n۱. دوستی یعنی کنار هم ماندن در غم و شادی، چون مهر یک **دوست**\n۲. که در سختی‌ها پناه ماست و در تنهایی، همراه نیکوی **پیوست**\n\nدر نهایت، تنها پاسخ منطبق با شرط:\n\nدوستی یعنی کنار هم ماندن، ای یار، چون مهر یک **دوست**،\nو در سختی‌ها بودن، چون نگاهی گرم از هر **نیکوست**.",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "line_count": false,
+          "lines_end_with": false,
+          "distinct_line_endings": false
+        },
+        "constraint_score": 0.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 137,
+        "completion_tokens": 662,
+        "cost_usd": 0.003447
+      }
+    },
+    {
+      "id": "peval-practical-creative-012",
+      "track": "practical_creative",
+      "prediction": "سحرگاهان سیمین سپیدارها سکوت ساختند.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "min_words": true,
+          "max_words": true,
+          "word_initial": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 122,
+        "completion_tokens": 28,
+        "cost_usd": 0.000262
+      }
+    },
+    {
+      "id": "peval-practical-creative-013",
+      "track": "practical_creative",
+      "prediction": "بهار بی‌بهانه بر بامِ بلند بارید.\n\nبررسی: بهار (۱)، بی‌بهانه (۲)، بر (۳)، بامِ (۴)، بلند (۵)، بارید (۶).",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "min_words": true,
+          "max_words": false,
+          "word_initial": false
+        },
+        "constraint_score": 0.3333333333333333
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 122,
+        "completion_tokens": 84,
+        "cost_usd": 0.000542
+      }
+    },
+    {
+      "id": "peval-practical-creative-014",
+      "track": "practical_creative",
+      "prediction": "«راهب» حروفش: ر، ا، ه، ب. فصل‌ها: بهار (ب، ه، ا، ر) — درست است.\n\nبهار",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "بهار"
+        ],
+        "normalized_prediction": "بهار",
+        "scored_candidate": "بهار",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 173,
+        "completion_tokens": 57,
+        "cost_usd": 0.000458
+      }
+    },
+    {
+      "id": "peval-practical-creative-015",
+      "track": "practical_creative",
+      "prediction": "شیراز",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "شیراز"
+        ],
+        "normalized_prediction": "شیراز",
+        "scored_candidate": "شیراز",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 177,
+        "completion_tokens": 6,
+        "cost_usd": 0.000207
+      }
+    },
+    {
+      "id": "peval-practical-creative-016",
+      "track": "practical_creative",
+      "prediction": "حروف: ن، ا، ر، ا، ی → «ایران» شامل ا، ی، ر، ا، ن است. حروف داده‌شده: ن، ا، ر، ا، ی؛ یعنی دو الف، ن، ر، ی. «ایران» = ا، ی، ر، ا، ن. مطابق است.\n\nایران",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "ایران"
+        ],
+        "normalized_prediction": "ایران",
+        "scored_candidate": "ایران",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 170,
+        "completion_tokens": 121,
+        "cost_usd": 0.000775
+      }
+    },
+    {
+      "id": "peval-practical-creative-017",
+      "track": "practical_creative",
+      "prediction": "«انار» یک میوه است، اما حروف داده‌شده ر، ا، ن، ا هستند؛ یعنی دو الف، ر و ن. «انار» = ا، ن، ا، ر. دقیقاً همین حروف را دارد.\n\nانار",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "انار"
+        ],
+        "normalized_prediction": "انار",
+        "scored_candidate": "انار",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 167,
+        "completion_tokens": 92,
+        "cost_usd": 0.000627
+      }
+    },
+    {
+      "id": "peval-practical-creative-018",
+      "track": "practical_creative",
+      "prediction": "اسفنج",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "اسفنج"
+        ],
+        "normalized_prediction": "اسفنج",
+        "scored_candidate": "اسفنج",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 172,
+        "completion_tokens": 7,
+        "cost_usd": 0.000207
+      }
+    },
+    {
+      "id": "peval-practical-creative-019",
+      "track": "practical_creative",
+      "prediction": "حوله",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "حوله"
+        ],
+        "normalized_prediction": "حوله",
+        "scored_candidate": "حوله",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 173,
+        "completion_tokens": 5,
+        "cost_usd": 0.000198
+      }
+    },
+    {
+      "id": "peval-practical-creative-020",
+      "track": "practical_creative",
+      "prediction": "چاله (گودال)",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "چاله",
+          "گودال",
+          "سوراخ",
+          "حفره"
+        ],
+        "normalized_prediction": "چاله گودال",
+        "scored_candidate": "چاله (گودال)",
+        "match_kind": "subsequence"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 169,
+        "completion_tokens": 10,
+        "cost_usd": 0.000219
+      }
+    },
+    {
+      "id": "peval-practical-creative-021",
+      "track": "practical_creative",
+      "prediction": "عشق: ع=70، ش=300، ق=100 → 470\n\n۴۷۰",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "470"
+        ],
+        "normalized_prediction": "470",
+        "scored_candidate": "۴۷۰",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 184,
+        "completion_tokens": 31,
+        "cost_usd": 0.000339
+      }
+    },
+    {
+      "id": "peval-practical-creative-022",
+      "track": "practical_creative",
+      "prediction": "یلدا: ی=10، ل=30، د=4، ا=1 → 45\n\n۴۵",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "45"
+        ],
+        "normalized_prediction": "45",
+        "scored_candidate": "۴۵",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 185,
+        "completion_tokens": 34,
+        "cost_usd": 0.000355
+      }
+    },
+    {
+      "id": "peval-practical-creative-023",
+      "track": "practical_creative",
+      "prediction": "یعنی کاری بی‌فایده انجام دادن که هر قدر هم تلاش کنی، هیچ نتیجه‌ای نمی‌دهد.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "forbidden": true,
+          "max_words": true,
+          "required_any": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 172,
+        "completion_tokens": 60,
+        "cost_usd": 0.000472
+      }
+    },
+    {
+      "id": "peval-practical-creative-024",
+      "track": "practical_creative",
+      "prediction": "یعنی دیگر برای جبران یا اصلاح اوضاع دیر شده و چاره‌ای باقی نمانده است.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "forbidden": true,
+          "max_words": true,
+          "required_any": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 148,
+        "completion_tokens": 49,
+        "cost_usd": 0.000393
+      }
+    },
+    {
+      "id": "peval-practical-creative-025",
+      "track": "practical_creative",
+      "prediction": "ترافیک تهران دوباره رکورد زد؛ مقصد کجا بود؟",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "max_words": true,
+          "required_suffix": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 145,
+        "completion_tokens": 34,
+        "cost_usd": 0.000315
+      }
+    }
+  ]
+}

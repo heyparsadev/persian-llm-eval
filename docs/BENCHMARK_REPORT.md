@@ -17,6 +17,84 @@
 > updated dataset — no model was re-run. Scores rose ~3 pp across the
 > board because accepted-answer lists are no longer artificially narrow.
 
+## Phase 1 (October 2026): Claude Opus 5.5 and Sonnet 5.5
+
+Seven settings over all four splits (544 items each): Opus 5.5 at `low`,
+`medium`, and `high` effort, and Sonnet 5.5 without thinking and at the same
+three efforts. Every run went through Anthropic's own API as a Message Batch
+(`configs/anthropic_models.json`), `max_new_tokens` 4096 plus the effort
+headroom. `max` effort is left for phase 2.
+
+| Setting | practical | challenge | hard | public_eval | mean | cost (USD) | output tokens / item |
+|---|:---:|:---:|:---:|:---:|:---:|---:|---:|
+| Opus 5.5 · low | **0.957** | 0.880 | **0.897** | **0.927** | **0.915** | 0.91 | 125 |
+| Opus 5.5 · medium | 0.950 | **0.890** | 0.873 | 0.925 | 0.910 | 1.10 | 161 |
+| Opus 5.5 · high | 0.944 | 0.870 | 0.888 | 0.924 | 0.906 | 1.17 | 174 |
+| Sonnet 5.5 · no thinking | 0.879 | 0.750 | 0.856 | 0.896 | 0.845 | 0.31 | 72 |
+| Sonnet 5.5 · low | 0.899 | 0.790 | 0.868 | 0.871 | 0.857 | 0.37 | 94 |
+| Sonnet 5.5 · medium | 0.904 | 0.780 | 0.881 | 0.868 | 0.858 | 0.38 | 99 |
+| Sonnet 5.5 · high | 0.944 | 0.830 | 0.862 | 0.916 | 0.888 | 0.59 | 173 |
+
+Costs are batch prices for all 544 items; output tokens include thinking.
+The 95% bootstrap intervals are about ±3 pp on practical, hard, and
+public_eval and ±6 pp on challenge, so most gaps inside one model are noise.
+
+**1. Opus 5.5 is best at `low` effort, which is also its cheapest setting.**
+`medium` and `high` cost 20–30% more and land within noise of `low` (the
+same pattern as Opus 4.7 in v1.1). For this benchmark, run Opus 5.5 at
+`low`.
+
+**2. Sonnet 5.5 needs `high` effort to close the gap.** `high` adds 4–5 pp on
+practical and challenge over `medium` and is the best Sonnet setting, at
+about 55% more cost. Without thinking, Sonnet scores 0.845 for $0.31,
+the cheapest result by far.
+
+**3. The challenge split does its job.** It is the hardest split for every
+setting (0.75–0.89) and spreads the settings 14 pp apart, against 6 pp on
+public_eval. `challenge_wordplay` separates Sonnet without thinking (0.45)
+from Opus (0.85), and `challenge_ambiguity` is the hardest track (0.50–0.70).
+`challenge_grounding` is at 1.0 for every setting and needs harder items.
+
+**4. Opus 5.5's safety classifier refuses mistyped Persian.** The
+wrong-keyboard-layout items in `practical_editing` (`003`–`005`, Persian typed
+on an English layout) were declined with `stop_reason: refusal`, category
+`cyber`: three refusals across Opus `medium` and `high`, while Opus `low` and
+every Sonnet setting answered them. Refusals score 0, which costs Opus `high`
+8 pp on that track (2 of 25 items). It is a real false positive
+for a common Persian user habit.
+
+**5. Legacy instruction scoring penalises correct Persian spelling.** The
+v1.1 `min_words`/`max_words` checks count a ZWNJ compound such as «لامپ‌های»
+as two words, and `required_suffix` fails on a trailing period. Claude 5.5
+writes ZWNJ consistently, so on public_eval's `instruction` track 4–10 of
+its 5–15 failures per setting would pass under the ZWNJ-aware count and the
+punctuation-tolerant suffix the new splits use (GPT-5.5 had one failure).
+That is up to 0.33 on the track and up to 6–7 pp on public_eval overall.
+The comparison below therefore understates Claude 5.5 on public_eval. The
+fix changes published scoring, so it waits for a decision; `rescore` would
+apply it without calling any model.
+
+**6. Against v1.1 models (mean of public_eval and hard, as scored today):**
+Opus 5.5 · low 0.912, Sonnet 4.6 0.920, Opus 4.7 0.903, GPT-5.5 0.940,
+GPT-5.5 thinking-high 0.945, gpt-5-mini 0.927. The v1.1 runs used other
+token limits and older prompts, and point 5 applies, so read this as a rough
+placement, not a ranking.
+
+**7. The cost estimate was more than ten times too high.** The whole phase cost
+**$4.83** against an estimate of about $55. The models think far less than
+assumed on these short items (72–174 output tokens per item, answer
+included, against 600–4,000 assumed thinking tokens), and Claude 5.5 reads
+about 1.4 Persian characters per token, not 1.0.
+
+**Data fix found by this run.** The prompt of `peval-hard-reading-025` had
+been replaced by a reviewer note during the v1.1 review pass (commit
+`5b390f7`), so phase-1 models saw no passage (Opus declined it twice as
+`reasoning_extraction`). The prompt is restored, with the reviewer's
+suggested constraint added; this item's phase-1 scores are not meaningful.
+Opus 5.5 `high` also returned two MCQ answers with no text block (3 output
+tokens, `end_turn`); the backend now records the content block types of
+empty answers.
+
 ## Headline
 
 Overall scores on the hard split, sorted, with 1000-iteration bootstrap
@@ -234,6 +312,21 @@ model-assisted review pass. The proposals are captured in
   (`peval-public-shortqa-027`, `peval-hard-reasoning-014`,
   `peval-hard-reading-028`, `peval-hard-culture-012`,
   `peval-hard-math-029`, `peval-hard-culture-008`).
+
+### Next run
+
+The next revision adds two splits — `practical` (150 everyday-use and
+creative items) and `challenge` (100 items on false premises, unanswerable
+questions, ambiguity, chained knowledge, and word play) — and runs a new
+model matrix — Claude Fable 5.1 and Opus 5.5, GPT-6 Astra / Sol / Luna,
+Gemini, Grok, DeepSeek — through OpenRouter with per-call cost tracking
+(estimated at about $102 for all four splits). A Claude-only matrix runs on
+Anthropic's own API as Message Batches: Opus 5.5 at low, medium, and high
+effort and Sonnet 5.5 without thinking and at the same three levels; its
+results are in "Phase 1" above (actual cost $4.83). Max effort for both
+follows in phase 2. See [`ROADMAP_FA.md`](ROADMAP_FA.md),
+`configs/openrouter_models.json`, and `configs/anthropic_models.json`. The
+OpenRouter matrix has not been run yet.
 
 ### Limitations
 - 30 items per track (now 29–30 after rejects) keeps bootstrap CIs at

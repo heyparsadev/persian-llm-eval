@@ -1,0 +1,51 @@
+{
+  "_notes": [
+    "Model matrix for scripts/run_matrix.py. Every run goes through OpenRouter with one OPENROUTER_API_KEY.",
+    "label becomes the results file name: results/<label>.<split>.json. slug is the OpenRouter model id.",
+    "Slugs were taken from openrouter.ai listings in September 2026; the script checks each one against the live catalogue before spending anything and skips unknown slugs.",
+    "reasoning_effort: omit for the provider default, 'none' to disable thinking where the model allows it, or minimal/low/medium/high/xhigh/max. GPT-6 Astra does not accept 'none'.",
+    "Claude Fable 5.1 and Claude Opus 5.5 cannot turn thinking off (their default effort is high and medium respectively), so their rows always set reasoning_effort and never use 'none'. Claude Sonnet 5.5 turns thinking off only through Anthropic's between_tools mode, which OpenRouter's unified reasoning parameter does not express, so its row uses low effort.",
+    "max_new_tokens caps the visible answer; when reasoning_effort is set the backend adds thinking headroom on top. Models that think by default (no reasoning_effort) must fit their thinking inside the cap, which is why it is 4096 rather than the CLI default of 96. It is a cap, not a target: short answers cost the same either way.",
+    "max_item_errors lets up to that many items whose call keeps failing (e.g. a provider refusing one prompt) score 0 instead of aborting the run; a systematic error still aborts after the budget. Failed items are retried when the run is resumed.",
+    "prices_usd_per_million are the input/output prices listed on the openrouter.ai model pages in September 2026. They are used only for the cost estimate when the live catalogue is unreachable; the preflight always prefers live prices.",
+    "assumed_reasoning_tokens is an estimate-only guess of thinking tokens per item for rows without reasoning_effort whose model may think by default. It does not change what is sent to the API.",
+    "Set enabled=false to keep an entry in the file without running it."
+  ],
+  "defaults": {
+    "splits": ["practical", "challenge", "hard", "public_eval"],
+    "max_new_tokens": 4096,
+    "temperature": 0.0,
+    "concurrency": 6,
+    "max_item_errors": 3,
+    "data_collection": null,
+    "provider": null
+  },
+  "prices_usd_per_million": {
+    "anthropic/claude-fable-5.1": [10, 50],
+    "anthropic/claude-opus-5.5": [4, 20],
+    "anthropic/claude-sonnet-5.5": [2, 10],
+    "openai/gpt-6-astra": [10, 50],
+    "openai/gpt-6-sol": [2, 10],
+    "openai/gpt-6-luna": [0.1, 0.5],
+    "openai/gpt-5.5": [5, 30],
+    "google/gemini-3.8-flash": [0.75, 3.75],
+    "x-ai/grok-4.7": [2, 6],
+    "deepseek/deepseek-v4.1-flash": [0.035, 0.29]
+  },
+  "models": [
+    {"label": "claude-fable-5.1-effort-low", "slug": "anthropic/claude-fable-5.1", "reasoning_effort": "low"},
+    {"label": "claude-fable-5.1-effort-medium", "slug": "anthropic/claude-fable-5.1", "reasoning_effort": "medium", "enabled": false, "note": "Second thinking point for Fable; roughly twice the cost of the low row."},
+    {"label": "claude-opus-5.5-effort-low", "slug": "anthropic/claude-opus-5.5", "reasoning_effort": "low"},
+    {"label": "claude-opus-5.5-effort-medium", "slug": "anthropic/claude-opus-5.5", "reasoning_effort": "medium", "note": "Opus 5.5's default effort."},
+    {"label": "claude-sonnet-5.5-effort-low", "slug": "anthropic/claude-sonnet-5.5", "reasoning_effort": "low", "note": "Slug follows OpenRouter's naming pattern and was not checked against a listing; the preflight skips it if the live catalogue uses another id."},
+    {"label": "gpt-6-astra-low", "slug": "openai/gpt-6-astra", "reasoning_effort": "low"},
+    {"label": "gpt-6-sol", "slug": "openai/gpt-6-sol", "reasoning_effort": "none"},
+    {"label": "gpt-6-sol-thinking-medium", "slug": "openai/gpt-6-sol", "reasoning_effort": "medium"},
+    {"label": "gpt-6-luna", "slug": "openai/gpt-6-luna", "reasoning_effort": "none"},
+    {"label": "gpt-5.5-openrouter", "slug": "openai/gpt-5.5", "assumed_reasoning_tokens": 1000, "note": "Anchor row: provider-default settings, to compare with the direct-API gpt-5.5 standard runs in docs/BENCHMARK_REPORT.md."},
+    {"label": "gemini-3.8-flash", "slug": "google/gemini-3.8-flash", "assumed_reasoning_tokens": 800},
+    {"label": "grok-4.7", "slug": "x-ai/grok-4.7", "assumed_reasoning_tokens": 1000},
+    {"label": "deepseek-v4.1-flash", "slug": "deepseek/deepseek-v4.1-flash", "assumed_reasoning_tokens": 300},
+    {"label": "gpt-6-sol-pro", "slug": "openai/gpt-6-sol-pro", "reasoning_effort": "medium", "enabled": false, "note": "Optional; check its price in the preflight table before enabling."}
+  ]
+}

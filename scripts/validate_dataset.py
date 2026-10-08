@@ -22,6 +22,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from persian_eval.dataset import DatasetRecord, load_records  # noqa: E402
 from persian_eval.normalize import normalize_persian, strip_punctuation, tokenize  # noqa: E402
+from persian_eval.scoring import score_record  # noqa: E402
 
 PUBLIC_TRACKS = {"knowledge", "short_qa", "reading", "instruction", "culture"}
 HARD_TRACKS = {
@@ -32,11 +33,31 @@ HARD_TRACKS = {
     "hard_culture",
 }
 DEV_TRACKS = PUBLIC_TRACKS  # dev mirrors public tracks at smaller scale.
+PRACTICAL_TRACKS = {
+    "practical_writing",
+    "practical_editing",
+    "practical_numbers",
+    "practical_extraction",
+    "practical_pragmatics",
+    "practical_creative",
+}
+
+CHALLENGE_TRACKS = {
+    "challenge_premise",
+    "challenge_grounding",
+    "challenge_ambiguity",
+    "challenge_multihop",
+    "challenge_wordplay",
+}
+# Splits whose track names are `<split>_<id token>`.
+PREFIXED_SPLITS = {"practical", "challenge"}
 
 PER_SPLIT_TRACKS: dict[str, set[str]] = {
     "dev": DEV_TRACKS,
     "public_eval": PUBLIC_TRACKS,
     "hard": HARD_TRACKS,
+    "practical": PRACTICAL_TRACKS,
+    "challenge": CHALLENGE_TRACKS,
 }
 
 # Minimum number of items per (split, track). dev is intentionally tiny;
@@ -46,6 +67,8 @@ PER_TRACK_MIN: dict[str, int] = {
     "dev": 2,
     "public_eval": 20,
     "hard": 20,
+    "practical": 20,
+    "challenge": 20,
 }
 
 # Minimum prompt length per track (in characters of the normalized prompt).
@@ -60,9 +83,20 @@ PROMPT_MIN_CHARS: dict[str, int] = {
     "hard_reading": 70,
     "hard_instruction": 40,
     "hard_culture": 20,
+    "practical_writing": 60,
+    "practical_editing": 40,
+    "practical_numbers": 25,
+    "practical_extraction": 80,
+    "practical_pragmatics": 30,
+    "practical_creative": 30,
+    "challenge_premise": 25,
+    "challenge_grounding": 80,
+    "challenge_ambiguity": 25,
+    "challenge_multihop": 25,
+    "challenge_wordplay": 25,
 }
 
-ID_PATTERN = re.compile(r"^peval-(dev|public|hard)-([a-z]+)-(\d{3,})$")
+ID_PATTERN = re.compile(r"^peval-(dev|public|hard|practical|challenge)-([a-z]+)-(\d{3,})$")
 # Some legacy IDs spell tracks without an underscore (e.g. `shortqa` for
 # `short_qa`). The mapping below is the source of truth for id-token →
 # canonical track name within a split.
@@ -104,6 +138,8 @@ def main(argv: list[str] | None = None) -> int:
     errors.extend(check_choice_leakage(records))
     errors.extend(check_mcq_structure(records))
     errors.extend(check_instruction_structure(records))
+    errors.extend(check_json_structure(records))
+    errors.extend(check_reference_responses(records))
     errors.extend(check_prompt_lengths(records))
 
     count_messages = check_per_track_counts(records)
@@ -135,7 +171,13 @@ def check_id_format(records: Iterable[DatasetRecord]) -> list[str]:
             errors.append(f"{record.id}: id must match peval-{{split}}-{{track}}-{{NNN}}")
             continue
         split_token, track_token, _ = match.groups()
-        expected_split = {"dev": "dev", "public": "public_eval", "hard": "hard"}[split_token]
+        expected_split = {
+            "dev": "dev",
+            "public": "public_eval",
+            "hard": "hard",
+            "practical": "practical",
+            "challenge": "challenge",
+        }[split_token]
         if record.split != expected_split:
             errors.append(
                 f"{record.id}: id split token {split_token!r} does not match "
@@ -148,6 +190,11 @@ def check_id_format(records: Iterable[DatasetRecord]) -> list[str]:
         canonical_track = _resolve_track_alias(track_token, expected_split)
         if expected_split == "hard" and not record.track.startswith("hard_"):
             errors.append(f"{record.id}: hard split rows require a hard_* track")
+        elif expected_split in PREFIXED_SPLITS and record.track != f"{expected_split}_{track_token}":
+            errors.append(
+                f"{record.id}: id track token {track_token!r} does not match "
+                f"row track {record.track!r}"
+            )
         elif canonical_track and canonical_track != record.track:
             errors.append(
                 f"{record.id}: id track token {track_token!r} resolves to "
@@ -192,7 +239,8 @@ def check_no_answer_leakage(records: Iterable[DatasetRecord]) -> list[str]:
         # text (liar/truth, ordering, etc.).
         if scoring not in {"exact", "f1"}:
             continue
-        if record.track in {"reading", "hard_reading"}:
+        if record.track in {"reading", "hard_reading", "challenge_grounding"}:
+            # Reading answers come from the passage by design.
             continue
         prompt_tokens = tokenize(record.prompt)
         for accepted in _iter_accepted_strings(record.answer):
@@ -280,18 +328,10 @@ def check_instruction_structure(records: Iterable[DatasetRecord]) -> list[str]:
         if not isinstance(record.answer, dict):
             errors.append(f"{record.id}: instruction answer must be an object")
             continue
-        active = [
-            key
-            for key in (
-                "required_keywords",
-                "forbidden",
-                "min_words",
-                "max_words",
-                "required_prefix",
-                "required_suffix",
-            )
-            if key in record.answer
-        ]
+        active = [key for key in INSTRUCTION_KEYS if key in record.answer]
+        unknown = sorted(set(record.answer) - set(INSTRUCTION_KEYS))
+        if unknown:
+            errors.append(f"{record.id}: unknown instruction constraint(s): {unknown}")
         if not active:
             errors.append(f"{record.id}: instruction item has no active constraints")
             continue
@@ -303,6 +343,66 @@ def check_instruction_structure(records: Iterable[DatasetRecord]) -> list[str]:
             and min_words > max_words
         ):
             errors.append(f"{record.id}: min_words > max_words")
+    return errors
+
+
+INSTRUCTION_KEYS = (
+    "required_keywords",
+    "forbidden",
+    "min_words",
+    "max_words",
+    "required_prefix",
+    "required_suffix",
+    "required_any",
+    "forbidden_chars",
+    "required_exact",
+    "forbidden_exact",
+    "starts_with",
+    "ends_with",
+    "line_count",
+    "line_initials",
+    "lines_end_with",
+    "distinct_line_endings",
+    "words_per_line",
+    "word_initial",
+    "word_final",
+    "word_palindrome",
+    "letter_palindrome",
+    "min_letters",
+    "word_length_step",
+)
+
+
+def check_json_structure(records: Iterable[DatasetRecord]) -> list[str]:
+    errors: list[str] = []
+    scalar = (str, int, float, bool, type(None))
+    for record in records:
+        if record.metadata.get("scoring") != "json":
+            continue
+        for key, value in record.answer.items():
+            options = value if isinstance(value, list) else [value]
+            if not options or not all(isinstance(option, scalar) for option in options):
+                errors.append(
+                    f"{record.id}: json field {key!r} must be a scalar or a list of scalars"
+                )
+    return errors
+
+
+def check_reference_responses(records: Iterable[DatasetRecord]) -> list[str]:
+    """Items that ship a reference response must give it a perfect score.
+
+    This proves instruction constraints are jointly satisfiable and that answer
+    keys parse the way the author intended.
+    """
+
+    errors: list[str] = []
+    for record in records:
+        reference = record.metadata.get("reference_response")
+        if reference is None:
+            continue
+        score, details = score_record(record, str(reference))
+        if score != 1.0:
+            errors.append(f"{record.id}: reference_response scores {score:.3f}: {details}")
     return errors
 
 
@@ -325,8 +425,11 @@ def check_per_track_counts(records: list[DatasetRecord]) -> list[str]:
     bucket: dict[tuple[str, str], int] = defaultdict(int)
     for record in records:
         bucket[(record.split, record.track)] += 1
+    present_splits = {record.split for record in records}
     messages: list[str] = []
     for split, tracks in PER_SPLIT_TRACKS.items():
+        if split not in present_splits:
+            continue
         minimum = PER_TRACK_MIN.get(split, 0)
         for track in tracks:
             count = bucket.get((split, track), 0)

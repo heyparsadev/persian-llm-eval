@@ -8,12 +8,56 @@ import os
 import time
 import urllib.error
 import urllib.request
+from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Any
+from typing import Any, TypeVar
 
 from .dataset import DatasetRecord
 
 SYSTEM_PROMPT = "شما یک دستیار دقیق فارسی هستید. پاسخ را کوتاه، مستقیم و به زبان فارسی بدهید."
+
+T = TypeVar("T")
+
+# Claude 5.x models think adaptively: they reject sampling parameters and
+# budget_tokens, and effort goes in output_config. Per family: how thinking is
+# turned off (None: it cannot be) and the API's default effort. Longest prefix wins.
+CLAUDE5_FAMILIES: dict[str, tuple[dict[str, str] | None, str]] = {
+    "claude-fable-5": (None, "high"),
+    "claude-mythos-5": (None, "high"),
+    "claude-opus-5": ({"type": "disabled"}, "high"),
+    "claude-opus-5-5": (None, "medium"),
+    "claude-sonnet-5": ({"type": "disabled"}, "high"),
+    "claude-sonnet-5-5": ({"type": "between_tools"}, "high"),
+    "claude-haiku-5-5": ({"type": "disabled"}, "medium"),
+}
+CLAUDE5_EFFORTS = ("low", "medium", "high", "xhigh", "max")
+# Thinking shares max_tokens with the answer; xhigh and max need at least 64K.
+CLAUDE5_THINKING_HEADROOM = {
+    "low": 4096,
+    "medium": 8192,
+    "high": 16384,
+    "xhigh": 65536,
+    "max": 65536,
+}
+# List prices in USD per million input/output tokens (October 2026). The
+# Messages API returns no cost, so cost_usd is computed from these; the Message
+# Batches API charges half.
+CLAUDE_PRICES_USD_PER_MILLION = {
+    "claude-fable-5": (10.0, 50.0),
+    "claude-opus-5-5": (4.0, 20.0),
+    "claude-sonnet-5-5": (2.0, 10.0),
+}
+# A non-streaming request that may run past ten minutes can lose its idle
+# connection, so larger requests are streamed (the SDKs use the same cut-off).
+STREAM_ABOVE_MAX_TOKENS = 21_333
+
+
+class APIError(RuntimeError):
+    """An API call failed after retries; ``status`` is the HTTP status when there was one."""
+
+    def __init__(self, message: str, *, status: int | None = None):
+        super().__init__(message)
+        self.status = status
 
 
 def format_prompt(record: DatasetRecord) -> str:
@@ -33,6 +77,8 @@ def format_prompt(record: DatasetRecord) -> str:
             "فقط پاسخ نهایی را در یک خط بنویس. "
             "بدون توضیح، بدون فرمول، بدون مارک‌داون، بدون پیشوند «پاسخ:»."
         )
+    if scoring == "json":
+        return f"{record.prompt}\n\nفقط یک شیء JSON معتبر بنویس؛ بدون توضیح و بدون مارک‌داون."
     return record.prompt
 
 
@@ -46,6 +92,9 @@ class GenerationConfig:
     reasoning_effort: str | None = None
     thinking_type: str | None = None
     thinking_budget_tokens: int | None = None
+    provider_order: list[str] | None = None
+    allow_fallbacks: bool = True
+    data_collection: str | None = None
 
 
 class BaseBackend:
@@ -53,6 +102,11 @@ class BaseBackend:
 
     def generate(self, record: DatasetRecord) -> str:
         raise NotImplementedError
+
+    def generate_with_meta(self, record: DatasetRecord) -> tuple[str, dict[str, Any]]:
+        """Return the prediction plus optional call metadata (tokens, cost, provider)."""
+
+        return self.generate(record), {}
 
 
 class MockBackend(BaseBackend):
@@ -200,6 +254,15 @@ class OpenAICompatibleBackend(BaseBackend):
 
 
 class AnthropicBackend(BaseBackend):
+    """Claude through Anthropic's Messages API, or the Message Batches API with ``--batch``.
+
+    Claude 5.x models get adaptive thinking driven by ``--reasoning-effort``
+    (``none`` turns thinking off where the model allows it) and an
+    effort-scaled ``max_tokens`` headroom. Older models keep the payloads their
+    published results were run with. Token usage and a list-price cost are
+    returned as call metadata.
+    """
+
     name = "anthropic"
 
     def __init__(self, model_id: str, *, config: GenerationConfig):
@@ -212,30 +275,52 @@ class AnthropicBackend(BaseBackend):
         if not api_key:
             raise RuntimeError("ANTHROPIC_API_KEY is required for the anthropic backend")
         self.api_key: str = api_key
+        self.claude5 = _by_prefix(model_id, CLAUDE5_FAMILIES)
+        if self.claude5 is not None:
+            self._check_claude5_config(*self.claude5)
 
-    def generate(self, record: DatasetRecord) -> str:
+    def _check_claude5_config(self, off_mode: dict[str, str] | None, default_effort: str) -> None:
         effort = self.config.reasoning_effort
-        use_thinking = bool(effort and effort != "none")
-        is_47plus = self._is_47plus()
-        max_tokens = self.config.max_new_tokens
-        if use_thinking and not is_47plus:
-            # Legacy enabled-thinking API needs explicit budget plus headroom.
-            budget = _resolve_thinking_budget(effort)
-            max_tokens = max(self.config.max_new_tokens + budget, budget + 256)
-        elif use_thinking and is_47plus:
-            # Adaptive thinking on 4.7+ shares max_tokens between thinking and
-            # the final answer; raise the ceiling so high-effort runs have
-            # room for both.
-            headroom = _adaptive_thinking_headroom(effort)
-            max_tokens = max(self.config.max_new_tokens + headroom, headroom)
+        if self.config.thinking_budget_tokens:
+            raise ValueError(
+                f"{self.model_id} takes no thinking token budget; use --reasoning-effort"
+            )
+        if effort == "none" and off_mode is None:
+            raise ValueError(
+                f"{self.model_id} cannot turn thinking off; use --reasoning-effort low or higher"
+            )
+        if effort is not None and effort != "none" and effort not in CLAUDE5_EFFORTS:
+            raise ValueError(
+                f"{self.model_id} takes --reasoning-effort {', '.join(CLAUDE5_EFFORTS)}"
+                + (" or none" if off_mode is not None else "")
+                + f" (default {default_effort})"
+            )
+
+    def build_payload(self, record: DatasetRecord) -> dict[str, Any]:
         payload: dict[str, Any] = {
             "model": self.model_id,
-            "max_tokens": max_tokens,
+            "max_tokens": self.config.max_new_tokens,
             "system": SYSTEM_PROMPT,
             "messages": [
                 {"role": "user", "content": format_prompt(record)},
             ],
         }
+        if self.claude5 is not None:
+            payload.update(self._claude5_fields(*self.claude5))
+            return payload
+        effort = self.config.reasoning_effort
+        use_thinking = bool(effort and effort != "none")
+        is_47plus = self._is_47plus()
+        if use_thinking and not is_47plus:
+            # Legacy enabled-thinking API needs explicit budget plus headroom.
+            budget = _resolve_thinking_budget(effort)
+            payload["max_tokens"] = max(self.config.max_new_tokens + budget, budget + 256)
+        elif use_thinking and is_47plus:
+            # Adaptive thinking on 4.7+ shares max_tokens between thinking and
+            # the final answer; raise the ceiling so high-effort runs have
+            # room for both.
+            headroom = _adaptive_thinking_headroom(effort)
+            payload["max_tokens"] = max(self.config.max_new_tokens + headroom, headroom)
         if use_thinking:
             if is_47plus:
                 payload["thinking"] = {"type": "adaptive"}
@@ -247,28 +332,111 @@ class AnthropicBackend(BaseBackend):
                 }
         elif not is_47plus:
             payload["temperature"] = self.config.temperature
-        data = self._post(payload)
-        return extract_anthropic_text(data)
+        return payload
+
+    def _claude5_fields(
+        self, off_mode: dict[str, str] | None, default_effort: str
+    ) -> dict[str, Any]:
+        effort = self.config.reasoning_effort
+        if effort == "none" and off_mode is not None:
+            # No effort is sent: between_tools only accepts the default (high) or lower.
+            return {"thinking": dict(off_mode)}
+        headroom = CLAUDE5_THINKING_HEADROOM[effort or default_effort]
+        fields: dict[str, Any] = {"max_tokens": self.config.max_new_tokens + headroom}
+        if effort:
+            fields["thinking"] = {"type": "adaptive"}
+            fields["output_config"] = {"effort": effort}
+        return fields
+
+    def generate(self, record: DatasetRecord) -> str:
+        return self.generate_with_meta(record)[0]
+
+    def generate_with_meta(self, record: DatasetRecord) -> tuple[str, dict[str, Any]]:
+        started = time.monotonic()
+        data = self._post(self.build_payload(record))
+        prediction, meta = self.parse_message(data)
+        meta["latency_s"] = round(time.monotonic() - started, 3)
+        return prediction, meta
+
+    def parse_message(
+        self, data: dict[str, Any], *, batch: bool = False
+    ) -> tuple[str, dict[str, Any]]:
+        """Prediction and call metadata from one Messages response or batch result."""
+
+        stop_reason = data.get("stop_reason")
+        usage = _as_dict(data.get("usage"))
+        meta: dict[str, Any] = {
+            "served_model": data.get("model"),
+            "finish_reason": stop_reason,
+            "prompt_tokens": usage.get("input_tokens"),
+            "completion_tokens": usage.get("output_tokens"),
+            "cost_usd": anthropic_cost_usd(self.model_id, usage, batch=batch),
+        }
+        if stop_reason == "refusal":
+            # A safety-classifier decline scores as an empty answer. No fallback
+            # model is configured: its answer would be scored as this model's.
+            meta["refusal_category"] = _as_dict(data.get("stop_details")).get("category")
+            prediction = ""
+        else:
+            prediction = extract_anthropic_text(data)
+            if not prediction:
+                # Kept to diagnose answers that came back without a text block.
+                blocks = [block for block in data.get("content", []) if isinstance(block, dict)]
+                meta["content_types"] = [block.get("type") for block in blocks]
+        return prediction, {key: value for key, value in meta.items() if value is not None}
 
     def _is_47plus(self) -> bool:
         prefixes = ("claude-opus-4-7", "claude-sonnet-4-7", "claude-haiku-4-7")
         return self.model_id.startswith(prefixes)
 
     def _accepts_temperature(self) -> bool:
-        return not self._is_47plus()
+        return self.claude5 is None and not self._is_47plus()
 
-    def _post(self, payload: dict[str, Any]) -> dict[str, Any]:
-        request = urllib.request.Request(
-            self.messages_url,
-            data=json.dumps(payload).encode("utf-8"),
+    def _request(
+        self, method: str, url: str, payload: dict[str, Any] | None = None
+    ) -> urllib.request.Request:
+        return urllib.request.Request(
+            url,
+            data=None if payload is None else json.dumps(payload).encode("utf-8"),
             headers={
                 "x-api-key": self.api_key,
                 "anthropic-version": "2023-06-01",
                 "content-type": "application/json",
             },
-            method="POST",
+            method=method,
         )
-        return post_json(request, timeout=300, provider="Anthropic")
+
+    def _post(self, payload: dict[str, Any]) -> dict[str, Any]:
+        if payload["max_tokens"] > STREAM_ABOVE_MAX_TOKENS:
+            request = self._request("POST", self.messages_url, {**payload, "stream": True})
+            return post_json(
+                request, timeout=300, provider="Anthropic", reader=read_anthropic_stream
+            )
+        request = self._request("POST", self.messages_url, payload)
+        return post_json(request, timeout=600, provider="Anthropic")
+
+    @property
+    def batches_url(self) -> str:
+        return f"{self.messages_url}/batches"
+
+    def submit_batch(self, requests: list[dict[str, Any]]) -> dict[str, Any]:
+        """Create a Message Batch from ``{"custom_id", "params"}`` requests."""
+
+        # Retrying after a dropped connection could create and bill a second
+        # batch, so only error responses (the batch was not created) are retried.
+        request = self._request("POST", self.batches_url, {"requests": requests})
+        return post_json(request, timeout=300, provider="Anthropic", retry_network_errors=False)
+
+    def get_batch(self, batch_id: str) -> dict[str, Any]:
+        request = self._request("GET", f"{self.batches_url}/{batch_id}")
+        return post_json(request, timeout=60, provider="Anthropic")
+
+    def batch_results(self, batch_id: str) -> list[dict[str, Any]]:
+        """One ``{"custom_id", "result"}`` row per request, in no particular order."""
+
+        request = self._request("GET", f"{self.batches_url}/{batch_id}/results")
+        data = post_json(request, timeout=300, provider="Anthropic", reader=_read_jsonl)
+        return list(data["results"])
 
 
 def _adaptive_thinking_headroom(effort: str | None) -> int:
@@ -304,6 +472,65 @@ def _resolve_thinking_budget(effort: str | None) -> int:
         "high": 8192,
         "xhigh": 16384,
     }.get(effort, 0)
+
+
+def _by_prefix(model_id: str, table: dict[str, T]) -> T | None:
+    matches = [prefix for prefix in table if model_id.startswith(prefix)]
+    return table[max(matches, key=len)] if matches else None
+
+
+def anthropic_cost_usd(
+    model_id: str, usage: dict[str, Any], *, batch: bool = False
+) -> float | None:
+    """List-price cost of one call (thinking is billed as output), or None if unknown."""
+
+    prices = _by_prefix(model_id, CLAUDE_PRICES_USD_PER_MILLION)
+    tokens_in = usage.get("input_tokens")
+    tokens_out = usage.get("output_tokens")
+    if prices is None or not isinstance(tokens_in, int) or not isinstance(tokens_out, int):
+        return None
+    cost = (tokens_in * prices[0] + tokens_out * prices[1]) / 1_000_000
+    return round(cost / 2 if batch else cost, 8)
+
+
+def read_anthropic_stream(response: Any) -> dict[str, Any]:
+    """Assemble a streamed Messages response into the non-streaming response shape."""
+
+    message: dict[str, Any] = {"usage": {}}
+    blocks: dict[int, dict[str, Any]] = {}
+    for raw in response:
+        line = raw.decode("utf-8").strip()
+        if not line.startswith("data:"):
+            continue  # "event:" names and blank separators; the type is in the data.
+        event = json.loads(line[len("data:") :])
+        kind = event.get("type")
+        if kind == "message_start":
+            start = _as_dict(event.get("message"))
+            message.update({k: v for k, v in start.items() if k not in {"content", "usage"}})
+            message["usage"].update(_as_dict(start.get("usage")))
+        elif kind == "content_block_start":
+            blocks[int(event.get("index", len(blocks)))] = dict(
+                _as_dict(event.get("content_block"))
+            )
+        elif kind == "content_block_delta":
+            delta = _as_dict(event.get("delta"))
+            block = blocks.setdefault(int(event.get("index", 0)), {"type": "text"})
+            if delta.get("type") == "text_delta":
+                block["text"] = str(block.get("text") or "") + str(delta.get("text") or "")
+        elif kind == "message_delta":
+            message.update(_as_dict(event.get("delta")))
+            message["usage"].update(_as_dict(event.get("usage")))
+        elif kind == "error":
+            error = _as_dict(event.get("error"))
+            status = {"overloaded_error": 529, "api_error": 500}.get(str(error.get("type")))
+            raise APIError(f"Anthropic stream error: {error}", status=status)
+    message["content"] = [blocks[index] for index in sorted(blocks)]
+    return message
+
+
+def _read_jsonl(response: Any) -> dict[str, Any]:
+    lines = response.read().decode("utf-8").splitlines()
+    return {"results": [json.loads(line) for line in lines if line.strip()]}
 
 
 def extract_anthropic_text(data: dict[str, Any]) -> str:
@@ -360,6 +587,164 @@ class OpenAIResponsesBackend(BaseBackend):
         return extract_response_text(data)
 
 
+OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
+OPENROUTER_APP_URL = "https://github.com/heyparsadev/persian-llm-eval"
+OPENROUTER_APP_TITLE = "persian-llm-eval"
+
+
+class OpenRouterUpstreamError(APIError):
+    """OpenRouter answered 200 but the routed provider failed; worth retrying."""
+
+
+class OpenRouterBackend(BaseBackend):
+    """Any model behind OpenRouter's OpenAI-compatible Chat Completions API.
+
+    One ``OPENROUTER_API_KEY`` reaches every provider. Reasoning uses
+    OpenRouter's unified ``reasoning`` parameter: ``--reasoning-effort`` maps
+    to ``effort`` and ``--thinking-budget-tokens`` to an explicit budget.
+    Reasoning tokens share ``max_tokens`` with the answer, so an effort-scaled
+    headroom is added on top of ``--max-new-tokens`` (same idea as the
+    Anthropic backend). Token usage, cost, and the serving provider are
+    returned as call metadata.
+    """
+
+    name = "openrouter"
+
+    def __init__(self, model_id: str, *, config: GenerationConfig):
+        self.model_id = model_id
+        self.config = config
+        self.base_url = (
+            config.base_url or os.getenv("OPENROUTER_BASE_URL") or OPENROUTER_BASE_URL
+        ).rstrip("/")
+        api_key = os.getenv("OPENROUTER_API_KEY")
+        if not api_key:
+            raise RuntimeError("OPENROUTER_API_KEY is required for the openrouter backend")
+        self.api_key: str = api_key
+
+    def build_payload(self, record: DatasetRecord) -> dict[str, Any]:
+        payload: dict[str, Any] = {
+            "model": self.model_id,
+            "messages": [
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": format_prompt(record)},
+            ],
+            "max_tokens": self.config.max_new_tokens + self._reasoning_headroom(),
+        }
+        reasoning = self._reasoning()
+        if reasoning is not None:
+            payload["reasoning"] = reasoning
+        if not self._reasoning_headroom():
+            payload["temperature"] = self.config.temperature
+        provider: dict[str, Any] = {}
+        if self.config.provider_order:
+            provider["order"] = list(self.config.provider_order)
+            provider["allow_fallbacks"] = self.config.allow_fallbacks
+        if self.config.data_collection:
+            provider["data_collection"] = self.config.data_collection
+        if provider:
+            payload["provider"] = provider
+        return payload
+
+    def _reasoning(self) -> dict[str, Any] | None:
+        if self.config.thinking_budget_tokens:
+            return {"max_tokens": self.config.thinking_budget_tokens, "exclude": True}
+        effort = self.config.reasoning_effort
+        if not effort:
+            return None
+        if effort == "none":
+            return {"effort": "none"}
+        return {"effort": effort, "exclude": True}
+
+    def _reasoning_headroom(self) -> int:
+        if self.config.thinking_budget_tokens:
+            return self.config.thinking_budget_tokens
+        effort = self.config.reasoning_effort
+        if not effort or effort == "none":
+            return 0
+        return {
+            "minimal": 2048,
+            "low": 4096,
+            "medium": 8192,
+            "high": 16384,
+            "xhigh": 32768,
+            "max": 65536,
+        }.get(effort, 8192)
+
+    def generate(self, record: DatasetRecord) -> str:
+        return self.generate_with_meta(record)[0]
+
+    def generate_with_meta(self, record: DatasetRecord) -> tuple[str, dict[str, Any]]:
+        body = json.dumps(self.build_payload(record)).encode("utf-8")
+        for attempt in range(3):
+            request = urllib.request.Request(
+                f"{self.base_url}/chat/completions",
+                data=body,
+                headers={
+                    "Authorization": f"Bearer {self.api_key}",
+                    "Content-Type": "application/json",
+                    "HTTP-Referer": OPENROUTER_APP_URL,
+                    "X-Title": OPENROUTER_APP_TITLE,
+                },
+                method="POST",
+            )
+            started = time.monotonic()
+            data = post_json(request, timeout=600, provider="OpenRouter", attempts=6)
+            try:
+                text = extract_openrouter_text(data)
+            except OpenRouterUpstreamError:
+                if attempt == 2:
+                    raise
+                time.sleep(2 ** (attempt + 1))
+                continue
+            meta = openrouter_call_meta(data)
+            meta["latency_s"] = round(time.monotonic() - started, 3)
+            return text, meta
+        raise RuntimeError("unreachable")
+
+
+def extract_openrouter_text(data: dict[str, Any]) -> str:
+    choices = data.get("choices")
+    if not isinstance(choices, list) or not choices or not isinstance(choices[0], dict):
+        raise OpenRouterUpstreamError(f"OpenRouter response had no choices: {data.get('error')}")
+    choice = choices[0]
+    if choice.get("error") or choice.get("finish_reason") == "error":
+        raise OpenRouterUpstreamError(f"OpenRouter upstream error: {choice.get('error')}")
+    message = choice.get("message") or {}
+    content = message.get("content") if isinstance(message, dict) else None
+    if isinstance(content, list):
+        content = "\n".join(
+            part["text"]
+            for part in content
+            if isinstance(part, dict) and isinstance(part.get("text"), str)
+        )
+    if not isinstance(content, str):
+        # Typically the whole budget went to reasoning (finish_reason=length).
+        # Return empty so the item scores 0 instead of aborting the run.
+        return ""
+    return content.strip()
+
+
+def openrouter_call_meta(data: dict[str, Any]) -> dict[str, Any]:
+    usage = _as_dict(data.get("usage"))
+    details = _as_dict(usage.get("completion_tokens_details"))
+    choices = data.get("choices")
+    choice = _as_dict(choices[0]) if isinstance(choices, list) and choices else {}
+    meta = {
+        "provider": data.get("provider"),
+        "served_model": data.get("model"),
+        "finish_reason": choice.get("finish_reason"),
+        "prompt_tokens": usage.get("prompt_tokens"),
+        "completion_tokens": usage.get("completion_tokens"),
+        "reasoning_tokens": details.get("reasoning_tokens"),
+        "cost_usd": usage.get("cost"),
+    }
+    return {key: value for key, value in meta.items() if value is not None}
+
+
+def _as_dict(value: Any) -> dict[str, Any]:
+    return value if isinstance(value, dict) else {}
+
+
 def normalize_anthropic_messages_url(base_url: str) -> str:
     base = base_url.rstrip("/")
     if base.endswith("/v1/messages"):
@@ -370,25 +755,65 @@ def normalize_anthropic_messages_url(base_url: str) -> str:
 
 
 def post_json(
-    request: urllib.request.Request, *, timeout: int, provider: str = "OpenAI"
+    request: urllib.request.Request,
+    *,
+    timeout: int,
+    provider: str = "OpenAI",
+    attempts: int = 4,
+    reader: Callable[[Any], dict[str, Any]] | None = None,
+    retry_network_errors: bool = True,
 ) -> dict[str, Any]:
-    retry_statuses = {408, 409, 429, 500, 502, 503, 504}
+    """Send ``request`` and decode the JSON reply (or let ``reader`` parse the response).
+
+    Rate limits, overload, and server errors are retried with backoff; so are
+    network errors unless ``retry_network_errors`` is False, for requests that
+    must not run twice.
+    """
+
+    retry_statuses = {408, 409, 429, 500, 502, 503, 504, 529}
     last_error: Exception | None = None
-    for attempt in range(4):
+    for attempt in range(attempts):
+        delay = float(2**attempt)
         try:
             with urllib.request.urlopen(request, timeout=timeout) as response:
+                if reader is not None:
+                    return reader(response)
                 return json.loads(response.read().decode("utf-8"))
         except urllib.error.HTTPError as exc:
             last_error = exc
-            if exc.code not in retry_statuses or attempt == 3:
+            if exc.code not in retry_statuses or attempt == attempts - 1:
                 detail = exc.read().decode("utf-8", errors="replace")
-                raise RuntimeError(f"{provider} API error {exc.code}: {detail}") from exc
-        except (urllib.error.URLError, http.client.RemoteDisconnected, TimeoutError) as exc:
+                raise APIError(
+                    f"{provider} API error {exc.code}: {detail}", status=exc.code
+                ) from exc
+            delay = max(delay, _retry_after_seconds(exc))
+        except APIError as exc:
+            # Raised by a reader, e.g. an overloaded error in the middle of a stream.
             last_error = exc
-            if attempt == 3:
-                raise RuntimeError(f"{provider} API request failed: {exc}") from exc
-        time.sleep(2**attempt)
-    raise RuntimeError(f"{provider} API request failed: {last_error}")
+            if exc.status not in retry_statuses or attempt == attempts - 1:
+                raise
+        except (
+            urllib.error.URLError,
+            http.client.RemoteDisconnected,
+            http.client.IncompleteRead,
+            ConnectionError,
+            TimeoutError,
+        ) as exc:
+            last_error = exc
+            if not retry_network_errors or attempt == attempts - 1:
+                raise APIError(f"{provider} API request failed: {exc}") from exc
+        time.sleep(delay)
+    raise APIError(f"{provider} API request failed: {last_error}")
+
+
+def _retry_after_seconds(exc: urllib.error.HTTPError) -> float:
+    """Honour a numeric Retry-After header on 429/503, capped at one minute."""
+
+    value = exc.headers.get("Retry-After") if exc.headers else None
+    try:
+        return min(60.0, max(0.0, float(value))) if value else 0.0
+    except ValueError:
+        return 0.0
 
 
 def extract_response_text(data: dict[str, Any]) -> str:
@@ -428,4 +853,6 @@ def create_backend(
         return OpenAIResponsesBackend(model_id, config=config)
     if backend_name == "anthropic":
         return AnthropicBackend(model_id, config=config)
+    if backend_name == "openrouter":
+        return OpenRouterBackend(model_id, config=config)
     raise ValueError(f"Unsupported backend: {backend_name}")

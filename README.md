@@ -1,30 +1,66 @@
 # Persian LLM Eval (v1.1)
 
+**[فارسی: README_FA.md](README_FA.md)** — the Persian description of the
+project, with the latest results.
+
 A practical benchmark runner and leaderboard scaffold for evaluating large
 language models on **Iranian Persian**. The repo ships a CLI, a JSONL dataset
-(300 items across two splits, ten tracks), deterministic scoring with bootstrap
-confidence intervals, and pluggable backends for the major API families plus
-local Hugging Face models.
+(544 scored items across four splits and twenty-one tracks, plus a dev set),
+deterministic scoring with bootstrap confidence intervals, and pluggable
+backends for the major API families, OpenRouter, and local Hugging Face models.
 
-> **Status:** v1.1 dataset; 23 reference result files from frontier models
-> (Claude Opus/Sonnet/Haiku, GPT‑5 / 5.5 with and without reasoning). See
-> [`docs/BENCHMARK_REPORT.md`](docs/BENCHMARK_REPORT.md) for the full
-> methodology write-up and per-track tables.
+> **Status:** v1.1 dataset plus two new splits pending native-speaker review:
+> **`practical`** (150 everyday-use and creative items) and **`challenge`**
+> (100 items built to stay hard for frontier models). Results: 23 v1.1 runs
+> (Claude Opus/Sonnet/Haiku 4.x, GPT‑5 / 5.5) and, new in October 2026, 28
+> phase-1 runs of Claude Opus 5.5 and Sonnet 5.5 at several thinking efforts
+> over all four splits. See [`docs/BENCHMARK_REPORT.md`](docs/BENCHMARK_REPORT.md)
+> for the methodology and findings, and [`docs/ROADMAP_FA.md`](docs/ROADMAP_FA.md)
+> (Persian) for the plan and cost estimates.
 
 ## Headline results
 
-| Rank | Model | Mode | public_eval | hard | combined |
-|:---:|---|---|:---:|:---:|:---:|
-| 1 | gpt-5.5 | + thinking (high) | 0.9460 | 0.8654 | **0.9057** |
-| 2 | gpt-5.5 | standard | 0.9429 | 0.8641 | 0.9035 |
-| 3 | gpt-5.5 | + thinking (medium) | 0.9436 | 0.8554 | 0.8995 |
-| 4 | gpt-5 | standard | 0.9459 | 0.8376 | 0.8918 |
-| 5 | gpt-5-mini | standard | 0.9354 | 0.8422 | 0.8888 |
-| 6 | claude-sonnet-4-6 | standard | 0.9063 | **0.8692** | 0.8878 |
-| 7 | claude-opus-4-7 | standard | 0.9160 | 0.8464 | 0.8812 |
+### Claude Opus 5.5 and Sonnet 5.5 on all four splits (October 2026)
 
-Bootstrap 95% CIs overlap heavily across the top eight rows — no two adjacent
-rows are statistically distinguishable on n=30 per track.
+| Setting | practical | challenge | hard | public_eval | mean | cost (USD) |
+|---|:---:|:---:|:---:|:---:|:---:|---:|
+| Opus 5.5 · low | **0.957** | 0.880 | **0.897** | **0.927** | **0.915** | 0.91 |
+| Opus 5.5 · medium | 0.950 | **0.890** | 0.873 | 0.925 | 0.910 | 1.10 |
+| Opus 5.5 · high | 0.944 | 0.870 | 0.888 | 0.924 | 0.906 | 1.17 |
+| Sonnet 5.5 · no thinking | 0.879 | 0.750 | 0.856 | 0.896 | 0.845 | 0.31 |
+| Sonnet 5.5 · low | 0.899 | 0.790 | 0.868 | 0.871 | 0.857 | 0.37 |
+| Sonnet 5.5 · medium | 0.904 | 0.780 | 0.881 | 0.868 | 0.858 | 0.38 |
+| Sonnet 5.5 · high | 0.944 | 0.830 | 0.862 | 0.916 | 0.888 | 0.59 |
+
+Batch prices for all 544 items; the whole phase cost $4.83. `max` effort is
+planned for phase 2.
+
+### All models on public_eval and hard
+
+| Rank | Run | public_eval | hard | combined |
+|:---:|---|:---:|:---:|:---:|
+| 1 | gpt-5.5 + thinking (high) | **0.9702** | **0.9197** | **0.9450** |
+| 2 | gpt-5.5 | 0.9622 | 0.9183 | 0.9403 |
+| 3 | gpt-5.5 + thinking (medium) | 0.9651 | 0.9147 | 0.9399 |
+| 4 | gpt-5 | 0.9659 | 0.8903 | 0.9281 |
+| 5 | gpt-5-mini | 0.9558 | 0.8979 | 0.9269 |
+| 6 | claude-sonnet-4-6 | 0.9318 | 0.9090 | 0.9204 |
+| 7 | gpt-5 + thinking (medium) | 0.9479 | 0.8774 | 0.9127 |
+| 8 | claude-opus-5.5 · low | 0.9269 | 0.8969 | 0.9119 |
+| 9 | claude-opus-5.5 · high | 0.9239 | 0.8881 | 0.9060 |
+| 10 | claude-opus-4-7 | 0.9296 | 0.8766 | 0.9031 |
+| 11 | claude-opus-5.5 · medium | 0.9246 | 0.8730 | 0.8988 |
+| 12 | gpt-5-nano | 0.9397 | 0.8502 | 0.8950 |
+| 13 | claude-sonnet-5.5 · high | 0.9164 | 0.8617 | 0.8890 |
+| 14 | claude-sonnet-5.5 · no thinking | 0.8961 | 0.8562 | 0.8762 |
+| 15 | claude-sonnet-5.5 · medium | 0.8680 | 0.8806 | 0.8743 |
+| 16 | claude-sonnet-5.5 · low | 0.8708 | 0.8680 | 0.8694 |
+| 17 | claude-haiku-4-5 | 0.8434 | 0.8219 | 0.8326 |
+
+Bootstrap 95% CIs are about ±3 pp per split, so neighbouring rows are not
+statistically distinguishable. The v1.1 instruction checks count a ZWNJ
+compound as two words, which costs Claude 5.5 (which writes ZWNJ
+consistently) up to 6–7 pp on public_eval; see the report's Phase 1 section.
 
 ## Quickstart
 
@@ -58,7 +94,8 @@ or on macOS, double-click [`RUN_ME.command`](RUN_ME.command).
 | `hf` | Any Hugging Face causal LM, optionally 4/8-bit quantised | install with `.[hf]` |
 | `openai-compatible` | GPT-4.x, GPT-5 family, and any OpenAI-compatible Chat Completions endpoint | `OPENAI_API_KEY`, optional `OPENAI_BASE_URL` |
 | `openai-responses` | GPT-5 family Responses API with `--reasoning-effort` | `OPENAI_API_KEY` |
-| `anthropic` | Claude 3.x, 4.x, and 4.7 (with adaptive thinking via `--reasoning-effort`) | `ANTHROPIC_API_KEY`, optional `ANTHROPIC_BASE_URL` |
+| `anthropic` | Claude 3.x and 4.x, and the Claude 5.x family (Opus 5.5, Sonnet 5.5, Fable 5.1) with adaptive thinking via `--reasoning-effort`; `--batch` uses the Message Batches API at half price | `ANTHROPIC_API_KEY`, optional `ANTHROPIC_BASE_URL` |
+| `openrouter` | Any model on OpenRouter (Claude, GPT, Gemini, Grok, DeepSeek, Qwen, …) through one key, with unified reasoning control, provider pinning, and per-call cost tracking | `OPENROUTER_API_KEY`, optional `OPENROUTER_BASE_URL` |
 
 ```bash
 # Anthropic — Claude Sonnet 4.6
@@ -72,6 +109,12 @@ persian-eval run --model claude-opus-4-7 --backend anthropic \
   --reasoning-effort low \
   --data data/persian_eval_v1.hard.jsonl \
   --output results/claude-opus-4-7-thinking.hard.json
+
+# Anthropic — Claude Opus 5.5 at max effort as one Message Batch (half price)
+persian-eval run --model claude-opus-5-5 --backend anthropic \
+  --reasoning-effort max --max-new-tokens 4096 --batch \
+  --data data/persian_eval_v1.challenge.jsonl \
+  --output results/claude-opus-5.5-max.challenge.json
 
 # OpenAI — GPT-5 with medium reasoning (Responses API)
 export OPENAI_API_KEY=...
@@ -87,10 +130,102 @@ persian-eval run --model PartAI/Dorna2-Llama3.1-8B-Instruct --backend hf \
   --output results/dorna2.json
 ```
 
-`--reasoning-effort` accepts `minimal`, `low`, `medium`, `high`, `xhigh`. The
-Anthropic backend maps these to the Claude 4.7 adaptive thinking API
-(`low`/`medium`/`high`) and sets a max-tokens headroom; the OpenAI Responses
-backend forwards the effort to the API directly.
+`--reasoning-effort` accepts `none`, `minimal`, `low`, `medium`, `high`,
+`xhigh`, `max`. On Claude 5.x models the Anthropic backend sends adaptive
+thinking with `output_config.effort` (`low` to `max`), never a temperature, and
+adds an effort-scaled `max_tokens` headroom (4K/8K/16K, 64K for `xhigh` and
+`max`); requests above about 21K tokens are streamed. `none` turns thinking off
+only where the model allows it (Sonnet 5.5, sent as `between_tools`); Opus 5.5
+and Fable 5.1 always think. Claude 4.7 keeps its earlier mapping to
+`low`/`medium`/`high`. The OpenAI Responses backend forwards the effort to the
+API directly.
+
+### OpenRouter
+
+One key reaches every provider, so the whole model matrix runs the same code
+path:
+
+```bash
+export OPENROUTER_API_KEY=sk-or-...
+
+# One model, one split, 6 requests in flight.
+persian-eval run --model anthropic/claude-opus-5.5 --backend openrouter \
+  --data data/persian_eval_v1.practical.jsonl --max-new-tokens 4096 \
+  --concurrency 6 --output results/claude-opus-5.5.practical.json
+
+# GPT-6 Sol with thinking; OpenRouter's unified `reasoning.effort`.
+persian-eval run --model openai/gpt-6-sol --backend openrouter \
+  --reasoning-effort medium --max-new-tokens 4096 --concurrency 6 \
+  --data data/persian_eval_v1.hard.jsonl --output results/gpt-6-sol-thinking-medium.hard.json
+
+# The full matrix in configs/openrouter_models.json over every split.
+python scripts/run_matrix.py --estimate  # cost estimate, no key needed
+python scripts/run_matrix.py --dry-run   # plan + live slug/price check
+python scripts/run_matrix.py
+```
+
+`--estimate` prices the planned runs from the real prompt sizes, measured
+Persian characters-per-token ratios, and an assumed thinking length per
+reasoning effort. For the default matrix (12 rows x 4 splits, 544 items per
+row) it comes to about **$102** (roughly $58–$190 depending on how long the
+models actually think); the two new splits alone are about $45. Claude
+Fable 5.1 and Opus 5.5 cannot turn thinking off, so their rows always set an
+effort. Running only the Claude models on Anthropic's own API costs the same
+per token, and half that through the Batch API; see
+[`docs/ROADMAP_FA.md`](docs/ROADMAP_FA.md) for the per-row tables.
+
+- `--reasoning-effort` maps to OpenRouter's `reasoning.effort` (`none` turns
+  thinking off where the model allows it; GPT-6 Astra does not). Thinking
+  shares `max_tokens` with the answer, so an effort-scaled headroom
+  (4K–64K) is added on top of `--max-new-tokens`. `--thinking-budget-tokens`
+  sends an explicit `reasoning.max_tokens` instead.
+- `--provider anthropic,google-vertex` pins the provider order,
+  `--no-fallbacks` forbids routing elsewhere, and `--data-collection deny`
+  only uses providers that do not store or train on prompts, which keeps the
+  eval set out of training data.
+- Every call records tokens, reasoning tokens, USD cost, latency, and the
+  serving provider; the result gets a `usage` block and the leaderboard a
+  `cost_usd` column.
+- Runs are checkpointed to `<output>.partial.jsonl`; if a run dies, rerun the
+  same command with `--resume` to skip the items already paid for.
+
+### Claude 5.x on Anthropic's API, as Message Batches
+
+[`configs/anthropic_models.json`](configs/anthropic_models.json) runs Claude
+Opus 5.5 at `low`, `medium`, `high`, and `max` effort and Claude Sonnet 5.5
+without thinking and at the same four levels. Phase 1 leaves out `max`: the
+two `max` rows and the Fable 5.1 rows are disabled until a later phase. Every run is one Message Batch: half price, most batches finish
+within an hour, none takes more than 24. The script submits all batches first
+and then collects them.
+
+```bash
+export ANTHROPIC_API_KEY=...
+python scripts/run_matrix.py --config configs/anthropic_models.json --estimate
+# Pilot first: 20 challenge items per row, kept out of the leaderboard.
+python scripts/run_matrix.py --config configs/anthropic_models.json \
+  --splits challenge --max-items 20 --results-dir results/pilot
+python scripts/run_matrix.py --config configs/anthropic_models.json
+```
+
+The estimate for the seven phase-1 rows over the four splits is about **$55**
+at batch prices ($30–$104 depending on thinking length); the run itself cost
+**$4.83**, because the models think far less on these short items than the
+estimate assumes (results in
+[`docs/BENCHMARK_REPORT.md`](docs/BENCHMARK_REPORT.md)). The two `max` rows
+are estimated at about $132 on the same assumptions. The pilot costs about $2 and its summary table shows the
+real output tokens per item, which replace the assumed thinking lengths.
+
+- The batch id is saved in the run's checkpoint right after submission, so an
+  interrupted run (or one started with `--no-wait`) collects the same batch on
+  `--resume` instead of paying for a second one; starting over without
+  `--resume` is refused while a batch is outstanding.
+- Items a batch fails on are retried by the next `--resume`, which submits
+  only those; `--max-item-errors N` lets up to N of them score 0 instead.
+- A refusal (`stop_reason: refusal`) scores as an empty answer and is counted
+  in `usage.refusals`. No fallback model is configured, because its answer
+  would be scored as this model's.
+- `usage.cost_usd` is computed from Anthropic's list prices and the reported
+  tokens (thinking is billed as output), halved for batches.
 
 ## CLI
 
@@ -105,7 +240,11 @@ persian-eval leaderboard build <result.json ...> --output <out.json> [--csv <out
 - **`run`** generates predictions, scores them in-process, and writes the
   result schema. Filter tracks with `--tasks knowledge,reading` and splits
   with `--split public_eval`. Reasoning models often need
-  `--max-new-tokens 512` or `768`.
+  `--max-new-tokens 512` or `768`. `--concurrency N` runs N API requests in
+  parallel (results keep dataset order), and `--resume` continues an
+  interrupted run from its checkpoint. With the Anthropic backend, `--batch`
+  sends the items as one Message Batch (`--no-wait` submits and exits).
+  `--max-items N` runs N items spread evenly over the data, for a pilot.
 - **`rescore`** re-applies the current scoring rules to a previously written
   result file's saved sample predictions. Use this whenever you tighten an
   accepted-answer list or fix an item — no model re-run is needed:
@@ -122,21 +261,53 @@ persian-eval leaderboard build <result.json ...> --output <out.json> [--csv <out
   rows land in `main`; API-backed rows in `reference`. The Hugging Face
   Space under `spaces/leaderboard/` reads the resulting JSON.
 
-## Dataset (v1.1)
+## Dataset (v1.1 + practical + challenge)
 
-300 items across three JSONL files in [`data/`](data):
+554 items across five JSONL files in [`data/`](data):
 
 | File | Items | Use |
 |---|:---:|---|
 | `persian_eval_v1.dev.jsonl` | 10 | Smoke and debug |
-| `persian_eval_v1.public_eval.jsonl` | 150 | Public leaderboard |
-| `persian_eval_v1.hard.jsonl` | 150 | Harder public split |
+| `persian_eval_v1.public_eval.jsonl` | 149 | Public leaderboard |
+| `persian_eval_v1.hard.jsonl` | 145 | Harder public split |
+| `persian_eval_v1.practical.jsonl` | 150 | Everyday use and creative writing (new, `pending_review`) |
+| `persian_eval_v1.challenge.jsonl` | 100 | Hard knowledge, awareness, and word play (new, `pending_review`) |
 
-Each split carries five tracks at 30 items each. `public_eval` covers
-`knowledge`, `short_qa`, `reading`, `instruction`, `culture`. `hard` covers
-`hard_reasoning`, `hard_math`, `hard_reading`, `hard_instruction`,
+`public_eval` and `hard` carry five tracks at ~30 items each. `public_eval`
+covers `knowledge`, `short_qa`, `reading`, `instruction`, `culture`. `hard`
+covers `hard_reasoning`, `hard_math`, `hard_reading`, `hard_instruction`,
 `hard_culture`. A separate **hidden** split is documented in
 [`data/hidden/README.md`](data/hidden/README.md); never commit it.
+
+The **`practical`** split asks for what people actually bring to an assistant
+in Persian, six tracks x 25 items:
+
+| Track | What it tests | Scoring |
+|---|---|---|
+| `practical_writing` | Leave requests, SMS, formal/colloquial register shifts, support replies, condolence and congratulation messages | `instruction` |
+| `practical_editing` | Text typed on the wrong keyboard layout, Finglish to Persian script, spelling (حیاط/حیات, نقص/نقض), ZWNJ (نیم‌فاصله) | `exact`, `f1`, `instruction` |
+| `practical_numbers` | Jalali↔Gregorian dates, date arithmetic across Esfand and leap years, weekdays, cheque amounts in words, toman/rial, discounts, VAT, installments | `exact` |
+| `practical_extraction` | Real-estate and car ads, bank SMS, tickets, receipts, prescriptions → JSON, including fields that must stay `null` | `json` |
+| `practical_pragmatics` | Taarof and social formulas (خسته نباشید، عافیت باشه، چشمتان روشن), natural EN↔FA translation of idioms | `mcq` |
+| `practical_creative` | Acrostics (توشیح), lipograms, rhyme and radif, alliteration, anagrams, riddles, abjad, idiom paraphrase | `instruction`, `exact` |
+
+The **`challenge`** split is meant to stay hard for frontier models and to
+reward awareness, not recall, five tracks x 20 items:
+
+| Track | What it tests | Scoring |
+|---|---|---|
+| `challenge_premise` | False premises to push back on (گلستان «by Ferdowsi», «۳۰ اسفند ۱۴۰۵», «the province of Kish»), mixed with true-premise controls that must not be "corrected" | `instruction` |
+| `challenge_grounding` | Answer only from a passage; half the questions are not answerable from it and must be declined; the rest need updates, negation, or arithmetic | `exact`, `instruction` |
+| `challenge_ambiguity` | Persian homographs without vowels (شیر، کرم، ملک، مهر), sarcasm and irony, pronoun and attachment ambiguity, disambiguation in context | `instruction`, `mcq` |
+| `challenge_multihop` | Chained facts on Iranian literature, history, and geography; Persian kinship terms (جاری، باجناق، پسرخاله) | `exact`, `instruction` |
+| `challenge_wordplay` | Word and letter palindromes, rhopalic sentences, acrostic + rhyme / lipogram combinations, per-line word counts, letter and dot counting in Persian script | `instruction`, `exact` |
+
+Both new splits are generated by scripts
+([`build_practical_items.py`](scripts/build_practical_items.py),
+[`build_challenge_items.py`](scripts/build_challenge_items.py)): computable
+answers (calendar conversion, number words, keyboard mapping, abjad, letter
+counts) come from code, and every non-MCQ item carries a
+`metadata.reference_response` that CI requires to score 1.0.
 
 ### Schema
 
@@ -169,6 +340,19 @@ Supported `metadata.scoring` values:
 - `instruction` — strict pass/fail on a constraint dict
   (`required_keywords`, `forbidden`, `min_words`, `max_words`,
   `required_prefix`, `required_suffix`). One violated constraint scores 0.
+  The practical split adds `required_any` (groups of alternatives),
+  `forbidden_chars` (lipograms), `required_exact`/`forbidden_exact`
+  (ZWNJ-sensitive), `starts_with`/`ends_with` (punctuation-tolerant),
+  `line_count`, `line_initials` (acrostics), `lines_end_with` and
+  `distinct_line_endings` (rhyme), `word_initial` (alliteration). The
+  challenge split adds `word_final`, `word_palindrome`,
+  `letter_palindrome` with `min_letters`, `word_length_step` (rhopalic
+  sentences), and `words_per_line`; these treat a ZWNJ compound such as
+  «می‌روم» as one word.
+- `json` — the first JSON object in the reply is compared field by field with
+  the gold object; the score is the fraction of fields right. Numbers compare
+  numerically (`"8,500,000"` = `8500000`), a list of gold values means "any
+  of these", and a gold `null` is satisfied by null or a missing key.
 
 Contributing items, the authoring checklist, and the review rubric are in
 [`CONTRIBUTING_DATASET.md`](CONTRIBUTING_DATASET.md). Mechanical checks are
@@ -213,9 +397,13 @@ Notes:
   "overall_score": 0.9063,
   "run_config": {"...": "..."},
   "timestamp": "2026-05-14T...",
-  "samples": [{"id": "...", "track": "...", "prediction": "...", "score": 1.0, "details": {...}}]
+  "usage": {"calls": 150, "prompt_tokens": 41250, "completion_tokens": 9120, "cost_usd": 0.43, "providers": {"Anthropic": 150}},
+  "samples": [{"id": "...", "track": "...", "prediction": "...", "score": 1.0, "details": {...}, "meta": {"cost_usd": 0.0029, "provider": "Anthropic"}}]
 }
 ```
+
+`usage` and per-sample `meta` appear only for backends that report them
+(`openrouter` and `anthropic`).
 
 Sample-level predictions are included by default and are what makes
 `persian-eval rescore` possible. Use `--no-samples` only when running the
@@ -252,6 +440,10 @@ Running the full Claude + GPT matrix used in this report came in under $25.
   validator, and `build_leaderboard.sh`.
 - [`tests/`](tests) — unittest-style tests run through pytest.
 - [`configs/baselines.yml`](configs/baselines.yml) — suggested baseline matrix.
+- [`configs/openrouter_models.json`](configs/openrouter_models.json) and
+  [`configs/anthropic_models.json`](configs/anthropic_models.json) — the
+  OpenRouter and Claude-only model matrices run by
+  [`scripts/run_matrix.py`](scripts/run_matrix.py).
 - [`spaces/leaderboard/`](spaces/leaderboard) — Gradio HF Space template.
 
 ## Hidden official split

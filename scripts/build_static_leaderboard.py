@@ -25,11 +25,11 @@ def render_table(rows: list[dict[str, object]]) -> str:
     track_keys = sorted({
         key for row in rows for key in row if key.endswith("_score") and key != "overall_score"
     })
-    headers = ["Model", "Type", "Overall"] + [key.replace("_score", "") for key in track_keys]
+    headers = ["Run", "Type", "Overall"] + [key.replace("_score", "") for key in track_keys]
     body = []
     for row in rows:
         cells = [
-            html.escape(str(row.get("model_id", ""))),
+            html.escape(str(row.get("run") or row.get("model_id", ""))),
             html.escape(str(row.get("model_type", ""))),
             fmt_score(row.get("overall_score")),
         ]
@@ -38,6 +38,29 @@ def render_table(rows: list[dict[str, object]]) -> str:
 
     header_html = "".join(f"<th>{html.escape(header)}</th>" for header in headers)
     return f"<table><thead><tr>{header_html}</tr></thead><tbody>{''.join(body)}</tbody></table>"
+
+
+SPLIT_TITLES = {
+    "practical": "practical — کارهای روزمره",
+    "challenge": "challenge — سوال‌های چالشی",
+    "hard": "hard — سخت",
+    "public_eval": "public_eval — عمومی",
+}
+
+
+def render_by_split(rows: list[dict[str, object]]) -> str:
+    """One table per split, so each table only has that split's tracks."""
+
+    splits = list(SPLIT_TITLES) + sorted(
+        {str(row.get("split")) for row in rows if row.get("split") not in SPLIT_TITLES}
+    )
+    parts = []
+    for split in splits:
+        subset = [row for row in rows if str(row.get("split")) == split]
+        if subset:
+            title = html.escape(SPLIT_TITLES.get(split, split))
+            parts.append(f"<h3>{title}</h3>{render_table(subset)}")
+    return "".join(parts) or render_table([])
 
 
 def main() -> int:
@@ -117,7 +140,7 @@ def main() -> int:
     <h2>مدل‌های open-weight</h2>
     {render_table(main_rows)}
     <h2>API reference baselines</h2>
-    {render_table(reference_rows)}
+    {render_by_split(reference_rows)}
   </main>
 </body>
 </html>

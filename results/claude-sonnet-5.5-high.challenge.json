@@ -1,0 +1,2163 @@
+{
+  "model_id": "claude-sonnet-5-5",
+  "model_type": "api",
+  "revision": null,
+  "backend": "anthropic",
+  "task_scores": {
+    "challenge_ambiguity": {
+      "score": 0.55,
+      "n": 20
+    },
+    "challenge_grounding": {
+      "score": 1.0,
+      "n": 20
+    },
+    "challenge_multihop": {
+      "score": 0.85,
+      "n": 20
+    },
+    "challenge_premise": {
+      "score": 0.9,
+      "n": 20
+    },
+    "challenge_wordplay": {
+      "score": 0.85,
+      "n": 20
+    }
+  },
+  "overall_score": 0.8299999999999998,
+  "run_config": {
+    "data": [
+      "data/persian_eval_v1.challenge.jsonl"
+    ],
+    "tasks": "all",
+    "split": null,
+    "max_new_tokens": 4096,
+    "temperature": 0.0,
+    "dtype": "bfloat16",
+    "quantization": null,
+    "reasoning_effort": "high",
+    "thinking": null,
+    "thinking_budget_tokens": null,
+    "batch": true
+  },
+  "timestamp": "2026-10-08T15:02:45+00:00",
+  "usage": {
+    "calls": 100,
+    "prompt_tokens": 19607,
+    "completion_tokens": 24880,
+    "cost_usd": 0.144007,
+    "empty_predictions": 0,
+    "truncated": 0,
+    "item_errors": 0,
+    "served_models": {
+      "claude-sonnet-5-5": 100
+    }
+  },
+  "samples": [
+    {
+      "id": "peval-challenge-premise-001",
+      "track": "challenge_premise",
+      "prediction": "گلستان را فردوسی ننوشته است؛ این کتاب اثر سعدی شیرازی است (۶۵۶ ق). فردوسی سراینده‌ی شاهنامه است که یکسره شعر است.\n\nسعدی گلستان را به نثر مسجع آمیخته با شعر نوشت تا پند و حکمت و حکایت‌های اخلاقی هم دلنشین‌تر و ماندگارتر شود و هم از یکنواختی دور بماند.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "max_words": true,
+          "required_any": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 126,
+        "completion_tokens": 253,
+        "cost_usd": 0.001391
+      }
+    },
+    {
+      "id": "peval-challenge-premise-002",
+      "track": "challenge_premise",
+      "prediction": "سعدی بوستان را در قالب **رباعی** نسروده است. این اثر مثنوی است و در بحر متقارب (وزن شاهنامه) سروده شده، چون هر بیت قافیهٔ جداگانه دارد و برای روایت حکایت‌های اخلاقی و تعلیمی مناسب است. سعدی بوستان را در سال ۶۵۵ هجری نوشت. رباعی قالب کوتاه چهار مصراعی است و برای روایت طولانی کارایی ندارد.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "max_words": true,
+          "required_any": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 115,
+        "completion_tokens": 236,
+        "cost_usd": 0.001295
+      }
+    },
+    {
+      "id": "peval-challenge-premise-003",
+      "track": "challenge_premise",
+      "prediction": "شب یلدا (حدود ۲۱ دسامبر) هنگامی است که محور زمین، با شیب حدود ۲۳٫۵ درجه، نیمکره‌ی شمالی را بیشترین فاصله‌ی زاویه‌ای از خورشید قرار می‌دهد. در این زمان، پرتوهای خورشید مایل‌تر می‌تابند و مدت روشنایی روز کمتر می‌شود. به همین دلیل شب طولانی‌تر است و این روز آغاز زمستان (انقلاب زمستانی) به شمار می‌رود.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "forbidden": true,
+          "max_words": true,
+          "required_any": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 125,
+        "completion_tokens": 210,
+        "cost_usd": 0.001175
+      }
+    },
+    {
+      "id": "peval-challenge-premise-004",
+      "track": "challenge_premise",
+      "prediction": "شاهنامه را حافظ نسروده است؛ سراینده‌ی آن **فردوسی** است. فردوسی حدود **۳۰ سال** (تقریباً از ۳۷۰ تا ۴۰۰ هجری قمری) برای سرودن آن وقت گذاشت. حافظ شاعر قرن هشتم و آفرینندهٔ «دیوان غزلیات» است.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "max_words": true,
+          "required_any": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 120,
+        "completion_tokens": 223,
+        "cost_usd": 0.001235
+      }
+    },
+    {
+      "id": "peval-challenge-premise-005",
+      "track": "challenge_premise",
+      "prediction": "سال ۱۴۰۵ کبیسه نیست و اسفند آن ۲۹ روز دارد، پس ۳۰ اسفند ۱۴۰۵ وجود ندارد. آخرین روز آن، یعنی ۲۹ اسفند ۱۴۰۵ (۲۰ مارس ۲۰۲۷)، **شنبه** است.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "max_words": true,
+          "required_any": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 121,
+        "completion_tokens": 635,
+        "cost_usd": 0.003296
+      }
+    },
+    {
+      "id": "peval-challenge-premise-006",
+      "track": "challenge_premise",
+      "prediction": "۳۱ مهر ۱۴۰۵ مصادف است با **جمعه** (۲۳ اکتبر ۲۰۲۶).",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "max_words": true,
+          "required_any": false
+        },
+        "constraint_score": 0.5
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 120,
+        "completion_tokens": 878,
+        "cost_usd": 0.00451
+      }
+    },
+    {
+      "id": "peval-challenge-premise-007",
+      "track": "challenge_premise",
+      "prediction": "زیرا زبان عربی صدای /p/ ندارد. در تحول زبان‌های سامی، این صدا در عربی به /f/ تبدیل شد و حرفی برایش لازم نبود. عرب‌زبانان معمولاً «پ» را «ب» تلفظ می‌کنند، مثل «بيبسي» به‌جای «پپسی». فارسی‌زبانان که این صدا را داشتند، با افزودن نقطه‌های بیشتر به «ب»، حرف «پ» را ساختند، همان‌طور که «چ»، «ژ» و «گ» را هم افزودند.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "forbidden": true,
+          "max_words": true,
+          "required_any": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 117,
+        "completion_tokens": 307,
+        "cost_usd": 0.001652
+      }
+    },
+    {
+      "id": "peval-challenge-premise-008",
+      "track": "challenge_premise",
+      "prediction": "کیش استان نیست؛ جزیره‌ای در خلیج فارس است و جزو استان هرمزگان به شمار می‌رود. مرکز استان هرمزگان شهر **بندرعباس** است. خود جزیره هم شهری به نام «کیش» دارد که مرکز اصلی آن است و منطقه آزاد تجاری ـ صنعتی کیش را اداره می‌کند.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "max_words": true,
+          "required_any": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 109,
+        "completion_tokens": 234,
+        "cost_usd": 0.001279
+      }
+    },
+    {
+      "id": "peval-challenge-premise-009",
+      "track": "challenge_premise",
+      "prediction": "این فرض درست نیست. در ایران هفته از **شنبه** شروع می‌شود و **جمعه** آخرین روز هفته و تعطیل رسمی است. این ترتیب از سنت تقویم ایرانی و اسلامی می‌آید و جمعه به‌دلیل جایگاه دینی‌اش (نماز جمعه) روز استراحت شده است. پنجشنبه هم برای بسیاری از ادارات و مدارس نیمه‌تعطیل یا تعطیل است.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "max_words": true,
+          "required_any": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 112,
+        "completion_tokens": 241,
+        "cost_usd": 0.001317
+      }
+    },
+    {
+      "id": "peval-challenge-premise-010",
+      "track": "challenge_premise",
+      "prediction": "شب یلدا کوتاه‌ترین شب سال نیست؛ **بلندترین شب سال** در نیمکره شمالی است. در این زمان (حدود ۲۱ دسامبر، آخر آذر) محور زمین طوری متمایل است که نیمکره شمالی کمترین نور خورشید را می‌گیرد. به همین دلیل روز کوتاه‌ترین و شب طولانی‌ترین حالت خود را دارد. از فردای آن، روزها بلندتر می‌شوند.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "max_words": true,
+          "required_any": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 116,
+        "completion_tokens": 228,
+        "cost_usd": 0.001256
+      }
+    },
+    {
+      "id": "peval-challenge-premise-011",
+      "track": "challenge_premise",
+      "prediction": "سال شمسی حدود ۳۶۵٫۲۴۲۲ روز است، اما سال تقویمی ۳۶۵ روز دارد. باقی‌مانده‌ی کسری، پس از چند سال تقریباً یک روز می‌شود. برای جبران، این روز اضافه در پایان سال، یعنی به آخرین ماه (اسفند) افزوده می‌شود. به همین دلیل اسفند در سال کبیسه از ۲۹ به ۳۰ روز می‌رسد.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "forbidden": true,
+          "max_words": true,
+          "required_any": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 132,
+        "completion_tokens": 307,
+        "cost_usd": 0.001667
+      }
+    },
+    {
+      "id": "peval-challenge-premise-012",
+      "track": "challenge_premise",
+      "prediction": "محمد مصدق هرگز رئیس‌جمهور ایران نبود؛ ایران در زمان او پادشاهی بود و رئیس‌جمهوری وجود نداشت. او در اردیبهشت ۱۳۳۰ (۱۹۵۱ میلادی) به نخست‌وزیری رسید و در مرداد ۱۳۳۲ (۱۹۵۳) با کودتای ۲۸ مرداد از قدرت برکنار شد.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "max_words": true,
+          "required_any": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 120,
+        "completion_tokens": 168,
+        "cost_usd": 0.00096
+      }
+    },
+    {
+      "id": "peval-challenge-premise-013",
+      "track": "challenge_premise",
+      "prediction": "رود کارون به دریای خزر نمی‌ریزد؛ این فرض نادرست است. کارون از کوهستان زاگرس سرچشمه می‌گیرد و در جنوب غربی ایران جریان دارد. سپس در منطقه خوزستان، از طریق اروندرود و شاخه بهمنشیر، به خلیج فارس می‌ریزد. رودهایی مانند سفیدرود و هراز به دریای خزر می‌ریزند.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "max_words": true,
+          "required_any": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 114,
+        "completion_tokens": 236,
+        "cost_usd": 0.001294
+      }
+    },
+    {
+      "id": "peval-challenge-premise-014",
+      "track": "challenge_premise",
+      "prediction": "دماوند در رشته‌کوه **البرز** قرار دارد، نه زاگرس. بلندترین قله زاگرس «دنا» با حدود ۴۴۰۰ متر است. دماوند با ۵۶۰۹ متر، بلندترین قله ایران و خاورمیانه است، چون یک آتشفشان جوان و خاموش است که در اثر فعالیت‌های آتشفشانی و فشار برخورد صفحات زمین‌ساختی بسیار بالا آمده است.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "max_words": true,
+          "required_any": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 124,
+        "completion_tokens": 286,
+        "cost_usd": 0.001554
+      }
+    },
+    {
+      "id": "peval-challenge-premise-015",
+      "track": "challenge_premise",
+      "prediction": "مولوی را «رومی» می‌نامند چون بیشتر عمرش را در قونیه گذراند؛ شهری در آناتولی که در آن زمان «روم» (سرزمین روم شرقی/بیزانس سابق) خوانده می‌شد و تحت حکومت سلجوقیان روم بود. او زادهٔ بلخ بود، اما خانواده‌اش به آناتولی مهاجرت کردند و او آنجا ماندگار شد.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "forbidden": true,
+          "max_words": true,
+          "required_any": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 113,
+        "completion_tokens": 166,
+        "cost_usd": 0.000943
+      }
+    },
+    {
+      "id": "peval-challenge-premise-016",
+      "track": "challenge_premise",
+      "prediction": "مولوی مثنوی معنوی را در شیراز نسروده است. او آن را در قونیه (در آناتولی، ترکیه امروزی) سرود. به درخواست یارش حسام‌الدین چلبی، از حدود سال ۶۶۲ هجری قمری شروع کرد و حسام‌الدین آن را می‌نوشت. مولوی در بلخ زاده شد و پس از مهاجرت خانواده‌اش، در قونیه ماند. شیراز شهر سعدی و حافظ است.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "max_words": true,
+          "required_any": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 117,
+        "completion_tokens": 242,
+        "cost_usd": 0.001327
+      }
+    },
+    {
+      "id": "peval-challenge-premise-017",
+      "track": "challenge_premise",
+      "prediction": "در فارسی امروز، «ث» و «س» تلفظ متفاوتی ندارند و هر دو /s/ خوانده می‌شوند. «ث» در عربی صدای /θ/ (مانند th در انگلیسی thin) دارد، اما فارسی این صدا را نداشت و در واژه‌های عربی‌تبار آن را به /s/ تبدیل کرد. املای عربی فقط برای حفظ ریشه‌ی واژه‌ها (مثل «ثروت» و «سه») باقی مانده است.",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "max_words": true,
+          "required_any": false
+        },
+        "constraint_score": 0.5
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 128,
+        "completion_tokens": 327,
+        "cost_usd": 0.001763
+      }
+    },
+    {
+      "id": "peval-challenge-premise-018",
+      "track": "challenge_premise",
+      "prediction": "اصفهان در دورهٔ صفوی، به‌ویژه زمان شاه‌عباس اول، پایتخت ایران بود و به‌خاطر معماری باشکوه، میدان نقش جهان، پل‌ها، باغ‌ها، بازار پررونق و تجارت جهانی شهرت یافت. مشهور است که زیبایی و رونق آن چنان بود که گفتند «اصفهان نصف جهان است»، یعنی دیدن آن مثل دیدن نیمی از جهان است.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "forbidden": true,
+          "max_words": true,
+          "required_any": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 115,
+        "completion_tokens": 377,
+        "cost_usd": 0.002
+      }
+    },
+    {
+      "id": "peval-challenge-premise-019",
+      "track": "challenge_premise",
+      "prediction": "زبان تاجیکی امروز عمدتاً با خط لاتین نوشته نمی‌شود. در تاجیکستان از خط سیریلیک استفاده می‌شود. شوروی در دهه ۱۹۲۰ خط عربی-فارسی را کنار گذاشت، از ۱۹۲۸ تا ۱۹۴۰ خط لاتین رایج بود و سپس سیریلیک جای آن را گرفت. در افغانستان و ایران فارسی تاجیکی‌تبار با خط فارسی نوشته می‌شود.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "max_words": true,
+          "required_any": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 120,
+        "completion_tokens": 317,
+        "cost_usd": 0.001705
+      }
+    },
+    {
+      "id": "peval-challenge-premise-020",
+      "track": "challenge_premise",
+      "prediction": "تخت جمشید پایتخت ساسانیان نبود؛ این فرض نادرست است. این شهر پایتخت تشریفاتی هخامنشیان بود. پایتخت اصلی ساسانیان تیسفون (در نزدیکی بغداد امروزی) بود. با این حال، استخر در نزدیکی تخت جمشید زادگاه و مرکز دینی و سیاسی مهم خاندان ساسانی بود، و شاید همین موجب این اشتباه شده باشد.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "max_words": true,
+          "required_any": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 115,
+        "completion_tokens": 282,
+        "cost_usd": 0.001525
+      }
+    },
+    {
+      "id": "peval-challenge-grounding-001",
+      "track": "challenge_grounding",
+      "prediction": "سه‌شنبه ساعت ۱۱",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "max_words": true,
+          "required_any": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 330,
+        "completion_tokens": 19,
+        "cost_usd": 0.000425
+      }
+    },
+    {
+      "id": "peval-challenge-grounding-002",
+      "track": "challenge_grounding",
+      "prediction": "در متن نیامده است",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "در متن نیامده است",
+          "در متن نیامده",
+          "در متن ذکر نشده است",
+          "در متن ذکر نشده"
+        ],
+        "normalized_prediction": "در متن نیامده است",
+        "scored_candidate": "در متن نیامده است",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 392,
+        "completion_tokens": 10,
+        "cost_usd": 0.000442
+      }
+    },
+    {
+      "id": "peval-challenge-grounding-003",
+      "track": "challenge_grounding",
+      "prediction": "در متن نیامده است",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "در متن نیامده است",
+          "در متن نیامده",
+          "در متن ذکر نشده است",
+          "در متن ذکر نشده"
+        ],
+        "normalized_prediction": "در متن نیامده است",
+        "scored_candidate": "در متن نیامده است",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 372,
+        "completion_tokens": 10,
+        "cost_usd": 0.000422
+      }
+    },
+    {
+      "id": "peval-challenge-grounding-004",
+      "track": "challenge_grounding",
+      "prediction": "خیر، کارت‌های هدیه قابل مرجوع کردن نیستند.",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "خیر",
+          "نه",
+          "نمی توان",
+          "نمیتوان",
+          "نمی شود",
+          "نمیشود",
+          "امکان ندارد",
+          "ممکن نیست",
+          "قابل مرجوع کردن نیست",
+          "قابل مرجوع کردن نیستند"
+        ],
+        "normalized_prediction": "خیر کارت های هدیه قابل مرجوع کردن نیستند",
+        "scored_candidate": "خیر، کارت‌های هدیه قابل مرجوع کردن نیستند.",
+        "match_kind": "subsequence"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 366,
+        "completion_tokens": 32,
+        "cost_usd": 0.000526
+      }
+    },
+    {
+      "id": "peval-challenge-grounding-005",
+      "track": "challenge_grounding",
+      "prediction": "خیر، طبق متن مصرف این قرص برای کودکان زیر ۱۲ سال توصیه نمی‌شود.",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "خیر",
+          "نه",
+          "توصیه نمی شود",
+          "توصیه نمیشود",
+          "نباید"
+        ],
+        "normalized_prediction": "خیر طبق متن مصرف این قرص برای کودکان زیر 12 سال توصیه نمی شود",
+        "scored_candidate": "خیر، طبق متن مصرف این قرص برای کودکان زیر ۱۲ سال توصیه نمی‌شود.",
+        "match_kind": "subsequence"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 352,
+        "completion_tokens": 93,
+        "cost_usd": 0.000817
+      }
+    },
+    {
+      "id": "peval-challenge-grounding-006",
+      "track": "challenge_grounding",
+      "prediction": "در متن نیامده است",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "در متن نیامده است",
+          "در متن نیامده",
+          "در متن ذکر نشده است",
+          "در متن ذکر نشده"
+        ],
+        "normalized_prediction": "در متن نیامده است",
+        "scored_candidate": "در متن نیامده است",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 345,
+        "completion_tokens": 10,
+        "cost_usd": 0.000395
+      }
+    },
+    {
+      "id": "peval-challenge-grounding-007",
+      "track": "challenge_grounding",
+      "prediction": "مهسا",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "مهسا"
+        ],
+        "normalized_prediction": "مهسا",
+        "scored_candidate": "مهسا",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 332,
+        "completion_tokens": 48,
+        "cost_usd": 0.000572
+      }
+    },
+    {
+      "id": "peval-challenge-grounding-008",
+      "track": "challenge_grounding",
+      "prediction": "در متن نیامده است",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "در متن نیامده است",
+          "در متن نیامده",
+          "در متن ذکر نشده است",
+          "در متن ذکر نشده"
+        ],
+        "normalized_prediction": "در متن نیامده است",
+        "scored_candidate": "در متن نیامده است",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 327,
+        "completion_tokens": 10,
+        "cost_usd": 0.000377
+      }
+    },
+    {
+      "id": "peval-challenge-grounding-009",
+      "track": "challenge_grounding",
+      "prediction": "در متن نیامده است",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "در متن نیامده است",
+          "در متن نیامده",
+          "در متن ذکر نشده است",
+          "در متن ذکر نشده"
+        ],
+        "normalized_prediction": "در متن نیامده است",
+        "scored_candidate": "در متن نیامده است",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 362,
+        "completion_tokens": 10,
+        "cost_usd": 0.000412
+      }
+    },
+    {
+      "id": "peval-challenge-grounding-010",
+      "track": "challenge_grounding",
+      "prediction": "۹۴۵ هزار تومان (۹۰۰ هزار تومان شارژ + ۵ درصد جریمه)",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "945000",
+          "945 هزار"
+        ],
+        "normalized_prediction": "945 هزار تومان 900 هزار تومان شارژ 5 درصد جریمه",
+        "scored_candidate": "۹۴۵ هزار تومان (۹۰۰ هزار تومان شارژ + ۵ درصد جریمه)",
+        "match_kind": "subsequence"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 389,
+        "completion_tokens": 46,
+        "cost_usd": 0.000619
+      }
+    },
+    {
+      "id": "peval-challenge-grounding-011",
+      "track": "challenge_grounding",
+      "prediction": "۹ ساعت و ۳۰ دقیقه",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "9 ساعت و 30 دقیقه",
+          "نه ساعت و سی دقیقه",
+          "9 ساعت 30 دقیقه",
+          "9 و نیم ساعت",
+          "نه و نیم ساعت",
+          "9 ساعت و نیم",
+          "نه ساعت و نیم",
+          "9:30"
+        ],
+        "normalized_prediction": "9 ساعت و 30 دقیقه",
+        "scored_candidate": "۹ ساعت و ۳۰ دقیقه",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 323,
+        "completion_tokens": 147,
+        "cost_usd": 0.001058
+      }
+    },
+    {
+      "id": "peval-challenge-grounding-012",
+      "track": "challenge_grounding",
+      "prediction": "در متن نیامده است",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "در متن نیامده است",
+          "در متن نیامده",
+          "در متن ذکر نشده است",
+          "در متن ذکر نشده"
+        ],
+        "normalized_prediction": "در متن نیامده است",
+        "scored_candidate": "در متن نیامده است",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 314,
+        "completion_tokens": 10,
+        "cost_usd": 0.000364
+      }
+    },
+    {
+      "id": "peval-challenge-grounding-013",
+      "track": "challenge_grounding",
+      "prediction": "در متن نیامده است",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "در متن نیامده است",
+          "در متن نیامده",
+          "در متن ذکر نشده است",
+          "در متن ذکر نشده"
+        ],
+        "normalized_prediction": "در متن نیامده است",
+        "scored_candidate": "در متن نیامده است",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 343,
+        "completion_tokens": 10,
+        "cost_usd": 0.000393
+      }
+    },
+    {
+      "id": "peval-challenge-grounding-014",
+      "track": "challenge_grounding",
+      "prediction": "افتتاح شعبه‌ی تبریز (به جلسه‌ی بعد موکول شد).",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "افتتاح شعبه تبریز",
+          "شعبه تبریز",
+          "افتتاح شعبه ی تبریز",
+          "شعبه ی تبریز"
+        ],
+        "normalized_prediction": "افتتاح شعبه ی تبریز به جلسه ی بعد موکول شد",
+        "scored_candidate": "افتتاح شعبه‌ی تبریز (به جلسه‌ی بعد موکول شد).",
+        "match_kind": "subsequence"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 345,
+        "completion_tokens": 38,
+        "cost_usd": 0.000535
+      }
+    },
+    {
+      "id": "peval-challenge-grounding-015",
+      "track": "challenge_grounding",
+      "prediction": "خواهر مریم",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "خواهر مریم",
+          "خواهرش",
+          "خواهر"
+        ],
+        "normalized_prediction": "خواهر مریم",
+        "scored_candidate": "خواهر مریم",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 295,
+        "completion_tokens": 9,
+        "cost_usd": 0.00034
+      }
+    },
+    {
+      "id": "peval-challenge-grounding-016",
+      "track": "challenge_grounding",
+      "prediction": "در متن نیامده است",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "در متن نیامده است",
+          "در متن نیامده",
+          "در متن ذکر نشده است",
+          "در متن ذکر نشده"
+        ],
+        "normalized_prediction": "در متن نیامده است",
+        "scored_candidate": "در متن نیامده است",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 297,
+        "completion_tokens": 10,
+        "cost_usd": 0.000347
+      }
+    },
+    {
+      "id": "peval-challenge-grounding-017",
+      "track": "challenge_grounding",
+      "prediction": "در متن نیامده است",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "در متن نیامده است",
+          "در متن نیامده",
+          "در متن ذکر نشده است",
+          "در متن ذکر نشده"
+        ],
+        "normalized_prediction": "در متن نیامده است",
+        "scored_candidate": "در متن نیامده است",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 355,
+        "completion_tokens": 10,
+        "cost_usd": 0.000405
+      }
+    },
+    {
+      "id": "peval-challenge-grounding-018",
+      "track": "challenge_grounding",
+      "prediction": "ساعت ۱۴",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "14",
+          "ساعت 14",
+          "دو بعد از ظهر",
+          "دو بعدازظهر",
+          "2 بعد از ظهر",
+          "2 بعدازظهر"
+        ],
+        "normalized_prediction": "ساعت 14",
+        "scored_candidate": "ساعت ۱۴",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 376,
+        "completion_tokens": 11,
+        "cost_usd": 0.000431
+      }
+    },
+    {
+      "id": "peval-challenge-grounding-019",
+      "track": "challenge_grounding",
+      "prediction": "۱۰ تخم‌مرغ",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "10",
+          "ده"
+        ],
+        "normalized_prediction": "10 تخم مرغ",
+        "scored_candidate": "۱۰ تخم‌مرغ",
+        "match_kind": "subsequence"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 338,
+        "completion_tokens": 16,
+        "cost_usd": 0.000418
+      }
+    },
+    {
+      "id": "peval-challenge-grounding-020",
+      "track": "challenge_grounding",
+      "prediction": "در متن نیامده است",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "در متن نیامده است",
+          "در متن نیامده",
+          "در متن ذکر نشده است",
+          "در متن ذکر نشده"
+        ],
+        "normalized_prediction": "در متن نیامده است",
+        "scored_candidate": "در متن نیامده است",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 336,
+        "completion_tokens": 10,
+        "cost_usd": 0.000386
+      }
+    },
+    {
+      "id": "peval-challenge-ambiguity-001",
+      "track": "challenge_ambiguity",
+      "prediction": "معناهای رایج «شیر» در فارسی:\n\n1. **شیر (حیوان):** گربه‌سان بزرگ و درنده، «شیرِ جنگل».\n2. **شیر (نوشیدنی):** مایع سفیدی که از پستانداران، مثل گاو، به دست می‌آید یا نوزاد می‌نوشد.\n3. **شیر (شیرِ آب):** وسیله‌ای برای باز و بسته کردن جریان آب، گاز و مانند آن، مثل «شیرِ آشپزخانه».\n4. **شیر (نشانه یا لقب شجاعت):** در معنای مجازی برای فرد دلیر، مثل «شیرمرد».\n5. **شیر (صورت فلکی):** برج اسد، یکی از برج‌های دوازده‌گانه.\n6. **شیر (در «شیر یا خط»):** یکی از دو رویِ سکه که روی آن نقش شیر بوده است؛ امروز در معنای عمومی «شیر یا خط» به کار می‌رود.\n\nنکته‌ها:\n- در گویش‌ها و کاربردهای محدودتر، «شیر» ممکن است در ترکیب‌هایی مانند «شیرِ برنج»، «شیرِ سویا» و «شیرینی» هم دیده شود، که معنای مستقل جدیدی نیستند.\n- بدون جمله یا اِعراب، تشخیص قطعی معنا ممکن نیست و باید از بافت استفاده کرد.",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "max_words": false,
+          "required_any": true
+        },
+        "constraint_score": 0.5
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 157,
+        "completion_tokens": 530,
+        "cost_usd": 0.002807
+      }
+    },
+    {
+      "id": "peval-challenge-ambiguity-002",
+      "track": "challenge_ambiguity",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 261,
+        "completion_tokens": 4,
+        "cost_usd": 0.000281
+      }
+    },
+    {
+      "id": "peval-challenge-ambiguity-003",
+      "track": "challenge_ambiguity",
+      "prediction": "معناها و خوانش‌های رایج «کرم» (بدون اعراب):\n\n1. **کِرم (Kerm):** جانور نرم‌تن و بدون استخوان، مثل کرم خاکی یا کرم ابریشم.\n2. **کِرْم (Krem، واژه‌ی فرنگی):** ماده‌ی نرم‌کننده یا مرطوب‌کننده‌ی پوست، مثل کرم دست و صورت و کرم ضدآفتاب.\n3. **کِرم (رنگ):** رنگ سفید مایل به زرد (کرم‌رنگ).\n4. **کِرِم (خوراکی):** خامه یا فرنی شیرین، مثل کرم کارامل و کرم شیرینی در شیرینی‌پزی.\n5. **کَرَم (Karam):** بخشندگی، بزرگواری و جوانمردی؛ مثلاً «اهل کرم».\n6. **کَرَم (نام):** اسم خاص یا نام شخص در برخی فرهنگ‌ها.\n7. **کُرم (Korm):** گاهی به‌صورت گویشی برای کُرم یا کُرمه به کار می‌رود، یعنی گیاه یا درخت تاک در برخی گویش‌ها.\n8. **کِرم (رایانه):** برنامه‌ی مخرب خودتکثیرشونده در شبکه‌ها (worm).\n9. **کرم (در تعبیر عامیانه):** شخص موذی یا اهل شیطنت و آزار، مثل «کرم دارد» یا «کرم‌ریختن» به معنی متلک‌گفتن و شیطنت‌کردن.",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "max_words": false,
+          "required_any": true
+        },
+        "constraint_score": 0.5
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 157,
+        "completion_tokens": 587,
+        "cost_usd": 0.003092
+      }
+    },
+    {
+      "id": "peval-challenge-ambiguity-004",
+      "track": "challenge_ambiguity",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 270,
+        "completion_tokens": 4,
+        "cost_usd": 0.00029
+      }
+    },
+    {
+      "id": "peval-challenge-ambiguity-005",
+      "track": "challenge_ambiguity",
+      "prediction": "معناهای رایج «سیر» بدون اعراب:\n\n1. **سیر (sir)**: گیاهی خوراکی با بوی تند، مثل «سیر داغ».\n2. **سیر (sir)**: غیرگرسنه و satisfied، مثل «سیر شدم».\n3. **سیر (seyr)**: گردش، حرکت و سفر، مثل «سیر و سفر» و «سیر تحول».\n4. **سیر (ser)**: واحد وزن قدیمی، حدود ۷۵ گرم.\n5. **سیر (sir)**: پررنگ و تیره، مثل «سبز سیر».",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "max_words": true,
+          "required_any": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 157,
+        "completion_tokens": 669,
+        "cost_usd": 0.003502
+      }
+    },
+    {
+      "id": "peval-challenge-ambiguity-006",
+      "track": "challenge_ambiguity",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 257,
+        "completion_tokens": 4,
+        "cost_usd": 0.000277
+      }
+    },
+    {
+      "id": "peval-challenge-ambiguity-007",
+      "track": "challenge_ambiguity",
+      "prediction": "«گل» بدون اعراب و بدون جمله می‌تواند این معناها را داشته باشد:\n\n1. **گُل (gol):** شکوفه یا گیاه گلدار، مثل گل سرخ.\n2. **گِل (gel):** مخلوط خاک و آب، یا خاک رس.\n3. **گُل (gol) در ورزش:** ورود توپ به دروازه، مثل «گل زد».\n4. **گُل (gol) در معنای مجازی:** چیز یا کسی که خوب، زیبا یا عالی است، مثل «گل پسر» یا «این کار گل بود».\n5. **گُل (gol) به‌عنوان نام:** نام خاص دخترانه یا بخشی از نام‌های مرکب، مثل گل‌ناز.\n6. **گُل (gol) در ترکیب‌ها:** مثل «گل کردن» (شکفتن یا بالا گرفتن)، «گل چراغ» (سوخته‌ی فتیله) و «گل یا پوچ» (نام یک بازی).\n7. **نقش‌ونگار گل‌مانند:** مثل «گل فرش» یا «گل‌دار».\n\nرایج‌ترین خوانش‌ها «گُل» (flower)، «گِل» (mud) و «گُل» (goal) هستند.",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "max_words": false,
+          "required_any": true
+        },
+        "constraint_score": 0.5
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 156,
+        "completion_tokens": 1014,
+        "cost_usd": 0.005226
+      }
+    },
+    {
+      "id": "peval-challenge-ambiguity-008",
+      "track": "challenge_ambiguity",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 238,
+        "completion_tokens": 4,
+        "cost_usd": 0.000258
+      }
+    },
+    {
+      "id": "peval-challenge-ambiguity-009",
+      "track": "challenge_ambiguity",
+      "prediction": "معناهای رایج «کشتی» (بدون اعراب و بدون بافت):\n\n1. **کَشتی** (به فتح کاف): وسیله‌ی بزرگ آبی برای حمل مسافر و بار؛ مثلاً «کشتی اقیانوس‌پیما».\n2. **کُشتی** (به ضم کاف): ورزش رزمی و تنی؛ مثلاً «کشتی آزاد» و «کشتی فرنگی»، و همچنین «کشتی پهلوانی» یا «کشتی‌گیری».\n3. **کُشتی** (به ضم کاف، صورت فعلی): «تو کشتی»، یعنی «کشتن» در ماضی مفرد مخاطب؛ مثلاً «تو او را کشتی».\n4. **کِشتی** (به کسر کاف، کمتر رایج): منسوب به «کِشت» یعنی زراعت و کشاورزی؛ مثلاً «زمین کشتی» یا «محصول کشتی».\n5. **کِشتی** (صورت فعلی، کمتر رایج): «تو کِشتی» یعنی «کاشتی»، در معنای کاشتن؛ این کاربرد بیشتر ادبی یا کهن است.\n6. **کَشتی** (صورت فعلی در گویش یا کاربرد کهن): در برخی متون کهن یا گفتاری ممکن است به معنای «کشیدی» هم بیاید، اما این معنا کمیاب است.\n\n**جمع‌بندی:** رایج‌ترین خوانش‌ها «کَشتی» (وسیله‌ی آبی)، «کُشتی» (ورزش) و «کُشتی» (تو کشتی) هستند.",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "max_words": false,
+          "required_any": false
+        },
+        "constraint_score": 0.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 158,
+        "completion_tokens": 603,
+        "cost_usd": 0.003173
+      }
+    },
+    {
+      "id": "peval-challenge-ambiguity-010",
+      "track": "challenge_ambiguity",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 208,
+        "completion_tokens": 103,
+        "cost_usd": 0.000723
+      }
+    },
+    {
+      "id": "peval-challenge-ambiguity-011",
+      "track": "challenge_ambiguity",
+      "prediction": "«ملک» بدون اعراب چند خوانش دارد:\n\n1. **مِلک (melk)**: دارایی، مال، زمین، خانه یا هر چیز در مالکیت کسی (مثلاً «ملک شخصی»، «خرید ملک»).\n2. **مُلک (molk)**: پادشاهی، فرمانروایی، قلمرو و کشور (مثلاً «مُلک سلیمان»، «ملک و ملت»).\n3. **مَلِک (malek)**: پادشاه، شاه (بیشتر در متون عربی و ادبی، مثل «ملک عبدالله»).\n4. **مَلَک (malak)**: فرشته (مثلاً «ملک و شیطان»).\n5. **ملک (Malek)**: نام خاص یا نام خانوادگی، مثل «ملک‌زاده» یا «ملک‌محمد». در این کاربرد معمولاً به شکل «مَلِک» تلفظ می‌شود.\n\nرایج‌ترین معنا در فارسی امروز «مِلک» به معنی دارایی و زمین است.",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "max_words": false,
+          "required_any": true
+        },
+        "constraint_score": 0.5
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 157,
+        "completion_tokens": 659,
+        "cost_usd": 0.003452
+      }
+    },
+    {
+      "id": "peval-challenge-ambiguity-012",
+      "track": "challenge_ambiguity",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 202,
+        "completion_tokens": 4,
+        "cost_usd": 0.000222
+      }
+    },
+    {
+      "id": "peval-challenge-ambiguity-013",
+      "track": "challenge_ambiguity",
+      "prediction": "این نوشته معمولاً این معناها را دارد:\n\n1. **کَرد (kard)**: فعل گذشته از «کردن»، یعنی «انجام داد» یا «ساخت».\n2. **کُرد (Kord)**: نام قوم کُرد، مثل «او کُرد است».\n3. **کُرد (Kord)**: زبان یا گویش کُردی، به‌صورت کوتاه‌شده.\n4. **کُرد (Kord)**: نام خاص یا نام خانوادگی، یا بخشی از نام جاها، مثل «کردستان» و «کردکوی».\n5. **کِرد (kerd)**: در فارسی کهن و ترکیب‌های ادبی، به معنی «کار» یا «عمل»، مثل «کردگار» و «کردار». این کاربرد امروز مستقل نیست.\n\nرایج‌ترین خوانش‌ها «کَرد» (فعل) و «کُرد» (قوم) هستند.",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "max_words": false,
+          "required_any": true
+        },
+        "constraint_score": 0.5
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 157,
+        "completion_tokens": 808,
+        "cost_usd": 0.004197
+      }
+    },
+    {
+      "id": "peval-challenge-ambiguity-014",
+      "track": "challenge_ambiguity",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 204,
+        "completion_tokens": 4,
+        "cost_usd": 0.000224
+      }
+    },
+    {
+      "id": "peval-challenge-ambiguity-015",
+      "track": "challenge_ambiguity",
+      "prediction": "معناهای رایج «شانه» (شانه / shāne):\n\n1. **وسیله‌ی مرتب‌کردن مو**: شانه‌ی سر.\n2. **عضو بدن**: محل اتصال بازو به تنه، مثل «شانه‌ی راست».\n3. **قطعه‌ای از گوشت**: مثل شانه‌ی گوسفند یا گوساله.\n4. **شانه‌ی عسل**: ساختار شش‌ضلعی موم در کندوی زنبور.\n5. **شانه‌ی تخم‌مرغ**: بسته یا سینی نگهدارنده‌ی تخم‌مرغ.\n6. **حاشیه‌ی کنار جاده**: «شانه‌ی جاده» یا «شانه‌ی خاکی».\n7. **ابزار یا قطعه‌ای دندانه‌دار**: مثل شانه‌ی دستگاه بافندگی، یا شانه‌ی فنی در برخی ابزارها و ماشین‌ها.\n8. **برآمدگی یا خط‌الرأس در طبیعت**: گاهی مجازاً «شانه‌ی کوه».\n\nاگر در عبارت‌های ثابت بیاید، معنای مجازی هم پیدا می‌کند، مثل «شانه خالی کردن» (فرار از مسئولیت) و «شانه‌به‌شانه» (همراه و هم‌تراز).",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "max_words": false,
+          "required_any": false
+        },
+        "constraint_score": 0.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 157,
+        "completion_tokens": 1172,
+        "cost_usd": 0.006017
+      }
+    },
+    {
+      "id": "peval-challenge-ambiguity-016",
+      "track": "challenge_ambiguity",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 207,
+        "completion_tokens": 4,
+        "cost_usd": 0.000227
+      }
+    },
+    {
+      "id": "peval-challenge-ambiguity-017",
+      "track": "challenge_ambiguity",
+      "prediction": "«گرم» بدون اعراب این خوانش‌ها را دارد:\n\n1. **گَرم (garm)**: صفت، به معنی داغ، دارای حرارت یا نه‌چندان سرد، مثل «هوا گرم است». معنای مجازی هم دارد: صمیمی و پرشور («استقبال گرم»)، پرجنب‌وجوش («بازار گرم») و تند یا سخت («بحث گرم»).\n2. **گِرَم / گِرام (gerām, gram)**: واحد جرم، یک‌هزارم کیلوگرم، مثل «۵۰۰ گرم پنیر».\n3. **گَرَم (garam)**: در شعر و متون کهن، مخفف «اگر + م»، یعنی «اگر مرا» یا «اگر من». این معنا امروز کم‌کاربرد است.\n\nدر گفتار روزمره معمولاً دو معنای اول مطرح‌اند. معنای سوم فقط در متون ادبی دیده می‌شود.",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "max_words": false,
+          "required_any": true
+        },
+        "constraint_score": 0.5
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 157,
+        "completion_tokens": 968,
+        "cost_usd": 0.004997
+      }
+    },
+    {
+      "id": "peval-challenge-ambiguity-018",
+      "track": "challenge_ambiguity",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 199,
+        "completion_tokens": 4,
+        "cost_usd": 0.000219
+      }
+    },
+    {
+      "id": "peval-challenge-ambiguity-019",
+      "track": "challenge_ambiguity",
+      "prediction": "«مهر» بدون اعراب این معناها را می‌تواند داشته باشد:\n\n1. **مِهر** (mehr): محبت، دوستی و عطوفت.\n2. **مِهر** (mehr): خورشید، در ادبیات و شعر.\n3. **مِهر** (mehr): ماه هفتم سال هجری شمسی، یعنی ماه پاییزی.\n4. **مِهر** (mehr): میترا (ایزد پیمان و روشنایی) در ایران باستان.\n5. **مُهر** (mohr): نشانی که برای تأیید یا اعتبار اسناد می‌زنند، یا اثر آن بر کاغذ.\n6. **مُهر** (mohr): سنگ یا قطعه‌ی گلی که شیعیان هنگام نماز برای سجده به کار می‌برند.\n7. **مَهر** (mahr): مالی که در عقد ازدواج مرد به زن می‌دهد یا تعهد می‌کند.\n8. **نام خاص**: نام شخص (مثلاً «مهر») یا نام نهادها، مانند «خبرگزاری مهر».",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "max_words": false,
+          "required_any": true
+        },
+        "constraint_score": 0.5
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 157,
+        "completion_tokens": 746,
+        "cost_usd": 0.003887
+      }
+    },
+    {
+      "id": "peval-challenge-ambiguity-020",
+      "track": "challenge_ambiguity",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 198,
+        "completion_tokens": 4,
+        "cost_usd": 0.000218
+      }
+    },
+    {
+      "id": "peval-challenge-multihop-001",
+      "track": "challenge_multihop",
+      "prediction": "7",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "7"
+        ],
+        "normalized_prediction": "7",
+        "scored_candidate": "7",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 200,
+        "completion_tokens": 95,
+        "cost_usd": 0.000675
+      }
+    },
+    {
+      "id": "peval-challenge-multihop-002",
+      "track": "challenge_multihop",
+      "prediction": "گلستان",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "گلستان"
+        ],
+        "normalized_prediction": "گلستان",
+        "scored_candidate": "گلستان",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 174,
+        "completion_tokens": 70,
+        "cost_usd": 0.000524
+      }
+    },
+    {
+      "id": "peval-challenge-multihop-003",
+      "track": "challenge_multihop",
+      "prediction": "قزوین",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "قزوین"
+        ],
+        "normalized_prediction": "قزوین",
+        "scored_candidate": "قزوین",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 169,
+        "completion_tokens": 6,
+        "cost_usd": 0.000199
+      }
+    },
+    {
+      "id": "peval-challenge-multihop-004",
+      "track": "challenge_multihop",
+      "prediction": "تالاب گاوخونی",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "گاوخونی",
+          "تالاب گاوخونی"
+        ],
+        "normalized_prediction": "تالاب گاوخونی",
+        "scored_candidate": "تالاب گاوخونی",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 180,
+        "completion_tokens": 61,
+        "cost_usd": 0.000485
+      }
+    },
+    {
+      "id": "peval-challenge-multihop-005",
+      "track": "challenge_multihop",
+      "prediction": "نیشابور",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "نیشابور"
+        ],
+        "normalized_prediction": "نیشابور",
+        "scored_candidate": "نیشابور",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 164,
+        "completion_tokens": 7,
+        "cost_usd": 0.000199
+      }
+    },
+    {
+      "id": "peval-challenge-multihop-006",
+      "track": "challenge_multihop",
+      "prediction": "همدان",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "همدان"
+        ],
+        "normalized_prediction": "همدان",
+        "scored_candidate": "همدان",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 174,
+        "completion_tokens": 5,
+        "cost_usd": 0.000199
+      }
+    },
+    {
+      "id": "peval-challenge-multihop-007",
+      "track": "challenge_multihop",
+      "prediction": "کمال‌الملک (محمد غفاری)",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "کمال الملک",
+          "محمد غفاری"
+        ],
+        "normalized_prediction": "کمال الملک محمد غفاری",
+        "scored_candidate": "کمال‌الملک (محمد غفاری)",
+        "match_kind": "subsequence"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 175,
+        "completion_tokens": 142,
+        "cost_usd": 0.000885
+      }
+    },
+    {
+      "id": "peval-challenge-multihop-008",
+      "track": "challenge_multihop",
+      "prediction": "«سووشون» نوشتهٔ **سیمین دانشور** است و داستانش در **شیراز** (در دوران اشغال ایران در جنگ جهانی دوم) می‌گذرد.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "max_words": true,
+          "required_any": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 112,
+        "completion_tokens": 72,
+        "cost_usd": 0.000472
+      }
+    },
+    {
+      "id": "peval-challenge-multihop-009",
+      "track": "challenge_multihop",
+      "prediction": "پاریس",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "پاریس"
+        ],
+        "normalized_prediction": "پاریس",
+        "scored_candidate": "پاریس",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 157,
+        "completion_tokens": 6,
+        "cost_usd": 0.000187
+      }
+    },
+    {
+      "id": "peval-challenge-multihop-010",
+      "track": "challenge_multihop",
+      "prediction": "مازندران (نیما یوشیج، زادهٔ روستای یوش در نور)",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "مازندران"
+        ],
+        "normalized_prediction": "مازندران نیما یوشیج زاده روستای یوش در نور",
+        "scored_candidate": "مازندران (نیما یوشیج، زادهٔ روستای یوش در نور)",
+        "match_kind": "subsequence"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 181,
+        "completion_tokens": 83,
+        "cost_usd": 0.000596
+      }
+    },
+    {
+      "id": "peval-challenge-multihop-011",
+      "track": "challenge_multihop",
+      "prediction": "بلندترین قله‌ی ایران، **دماوند** (با ارتفاع حدود ۵٬۶۱۰ متر)، در **رشته‌کوه البرز** (بخش البرز مرکزی) و در **استان مازندران** (در مرز با استان تهران) قرار دارد؛ این قله در نزدیکی شهر آمل و شهرستان آمل واقع شده است.",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "max_words": false,
+          "required_any": true
+        },
+        "constraint_score": 0.5
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 115,
+        "completion_tokens": 140,
+        "cost_usd": 0.000815
+      }
+    },
+    {
+      "id": "peval-challenge-multihop-012",
+      "track": "challenge_multihop",
+      "prediction": "دریاچه ارومیه، بزرگ‌ترین دریاچه داخلی ایران، میان دو استان **آذربایجان شرقی** و **آذربایجان غربی** قرار دارد.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "max_words": true,
+          "required_any": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 117,
+        "completion_tokens": 73,
+        "cost_usd": 0.000482
+      }
+    },
+    {
+      "id": "peval-challenge-multihop-013",
+      "track": "challenge_multihop",
+      "prediction": "نیشابور، در استان خراسان رضوی",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "خراسان رضوی"
+        ],
+        "normalized_prediction": "نیشابور در استان خراسان رضوی",
+        "scored_candidate": "نیشابور، در استان خراسان رضوی",
+        "match_kind": "subsequence"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 155,
+        "completion_tokens": 19,
+        "cost_usd": 0.00025
+      }
+    },
+    {
+      "id": "peval-challenge-multihop-014",
+      "track": "challenge_multihop",
+      "prediction": "گاه‌شماری جلالی به نام **سلطان جلال‌الدین ملکشاه سلجوقی** (حدود ۴۶۷ هجری قمری / ۱۰۷۹ میلادی) نام‌گذاری شد. **حکیم عمر خیام نیشابوری**، شاعر و ریاضی‌دان نامدار، همراه با گروهی از دانشمندان دیگر در رصدخانهٔ اصفهان در تنظیم آن نقش داشت.",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "max_words": false,
+          "required_any": true
+        },
+        "constraint_score": 0.5
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 167,
+        "completion_tokens": 175,
+        "cost_usd": 0.001042
+      }
+    },
+    {
+      "id": "peval-challenge-multihop-015",
+      "track": "challenge_multihop",
+      "prediction": "گنبد سلطانیه در **استان زنجان** (شهر سلطانیه) قرار دارد و در دوره‌ی **ایلخانان مغول** ساخته شد. ساخت آن به دستور **سلطان محمد خدابنده (اولجایتو)** در اوایل قرن هشتم هجری (حدود ۷۰۴ تا ۷۱۲ هجری قمری) انجام شد.",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "max_words": false,
+          "required_any": true
+        },
+        "constraint_score": 0.5
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 115,
+        "completion_tokens": 147,
+        "cost_usd": 0.00085
+      }
+    },
+    {
+      "id": "peval-challenge-multihop-016",
+      "track": "challenge_multihop",
+      "prediction": "آرامگاه نظامی گنجوی در شهر **گنجه** در **جمهوری آذربایجان** قرار دارد.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "max_words": true,
+          "required_any": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 135,
+        "completion_tokens": 220,
+        "cost_usd": 0.001235
+      }
+    },
+    {
+      "id": "peval-challenge-multihop-017",
+      "track": "challenge_multihop",
+      "prediction": "پسرخاله",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "پسرخاله",
+          "پسر خاله"
+        ],
+        "normalized_prediction": "پسرخاله",
+        "scored_candidate": "پسرخاله",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 176,
+        "completion_tokens": 78,
+        "cost_usd": 0.000566
+      }
+    },
+    {
+      "id": "peval-challenge-multihop-018",
+      "track": "challenge_multihop",
+      "prediction": "جاری (همسرِ برادرِ شوهر را «جاری» می‌نامند)",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "جاری"
+        ],
+        "normalized_prediction": "جاری همسر برادر شوهر را جاری می نامند",
+        "scored_candidate": "جاری (همسرِ برادرِ شوهر را «جاری» می‌نامند)",
+        "match_kind": "subsequence"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 167,
+        "completion_tokens": 96,
+        "cost_usd": 0.000647
+      }
+    },
+    {
+      "id": "peval-challenge-multihop-019",
+      "track": "challenge_multihop",
+      "prediction": "باجناق (هم‌باجناق)",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "باجناق"
+        ],
+        "normalized_prediction": "باجناق هم باجناق",
+        "scored_candidate": "باجناق (هم‌باجناق)",
+        "match_kind": "subsequence"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 176,
+        "completion_tokens": 70,
+        "cost_usd": 0.000526
+      }
+    },
+    {
+      "id": "peval-challenge-multihop-020",
+      "track": "challenge_multihop",
+      "prediction": "دخترعمو",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "دخترعمو",
+          "دختر عمو"
+        ],
+        "normalized_prediction": "دخترعمو",
+        "scored_candidate": "دخترعمو",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 175,
+        "completion_tokens": 8,
+        "cost_usd": 0.000215
+      }
+    },
+    {
+      "id": "peval-challenge-wordplay-001",
+      "track": "challenge_wordplay",
+      "prediction": "**«زندگی زیباست، آری، زیباست زندگی»**\n\nاین جمله پنج کلمه دارد: زندگی – زیباست – آری – زیباست – زندگی. از آخر به اول هم همین ترتیب را دارد.",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "forbidden": true,
+          "min_words": true,
+          "word_palindrome": false
+        },
+        "constraint_score": 0.6666666666666666
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 161,
+        "completion_tokens": 605,
+        "cost_usd": 0.003186
+      }
+    },
+    {
+      "id": "peval-challenge-wordplay-002",
+      "track": "challenge_wordplay",
+      "prediction": "**«ما در رد ما»**\n\nحروف بدون فاصله: م ا د ر ر د ا م (۸ حرف)، که از آخر به اول هم همین‌طور خوانده می‌شود.",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "letter_palindrome": false,
+          "min_letters": true
+        },
+        "constraint_score": 0.5
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 136,
+        "completion_tokens": 672,
+        "cost_usd": 0.003496
+      }
+    },
+    {
+      "id": "peval-challenge-wordplay-003",
+      "track": "challenge_wordplay",
+      "prediction": "**«با همه مردم دوستی می‌کنیم»**\n\nتعداد حروف هر کلمه:\n- با: ۲\n- همه: ۳\n- مردم: ۴\n- دوستی: ۵\n- می‌کنیم: ۶ (م، ی، ک، ن، ی، م)",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "min_words": true,
+          "word_length_step": false
+        },
+        "constraint_score": 0.5
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 206,
+        "completion_tokens": 890,
+        "cost_usd": 0.004656
+      }
+    },
+    {
+      "id": "peval-challenge-wordplay-004",
+      "track": "challenge_wordplay",
+      "prediction": "افق از پشت شیشه‌ی قطار آرام‌آرام باز می‌شود.\nبوی چای و نان تازه، صبحِ غریبه‌ها را آشنا می‌کند.\nپیاده در کوچه‌های قدیمی گم می‌شوم تا خودم را پیدا کنم.\nتصویر هر غروب را در دفترچه‌ام نگه می‌دارم.\nثانیه‌ها در راه، پرمعناتر از روزهای عادی می‌گذرند.\nجاده تمام می‌شود، اما شوق سفر بعدی در دلم می‌ماند.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_any": true,
+          "line_count": true,
+          "line_initials": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 135,
+        "completion_tokens": 587,
+        "cost_usd": 0.00307
+      }
+    },
+    {
+      "id": "peval-challenge-wordplay-005",
+      "track": "challenge_wordplay",
+      "prediction": "مهتاب نقره می‌ریزد بر بام آسمان\nهر ستاره چراغی‌ست در دل شب، بی‌گمان\nتنهایی‌ام را سپردم به سکوتِ شبستان\nآرام می‌وزد نسیم از دامنِ کوهستان\nبر پلک خسته‌ام خواب می‌نشیند، مهربان",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "line_count": true,
+          "line_initials": true,
+          "lines_end_with": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 149,
+        "completion_tokens": 466,
+        "cost_usd": 0.002479
+      }
+    },
+    {
+      "id": "peval-challenge-wordplay-006",
+      "track": "challenge_wordplay",
+      "prediction": "این شب سیاه هم تمام می‌شود،\nماه به دل شب جان می‌دهد،\nیک جوانه هم بالا می‌آید،\nدل به خدا ببند و بایست.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "forbidden_chars": true,
+          "line_count": true,
+          "line_initials": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 132,
+        "completion_tokens": 990,
+        "cost_usd": 0.005082
+      }
+    },
+    {
+      "id": "peval-challenge-wordplay-007",
+      "track": "challenge_wordplay",
+      "prediction": "پایتخت ما شلوغ و وسیع است.\nشمالش با کوه‌های سفید و باشکوه تماشایی است.\nبا موزه‌ها و باغ‌های متعدد، پایتخت ما جذاب و دلچسب می‌شود.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "min_words": true,
+          "required_any": true,
+          "forbidden_chars": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 161,
+        "completion_tokens": 1749,
+        "cost_usd": 0.008906
+      }
+    },
+    {
+      "id": "peval-challenge-wordplay-008",
+      "track": "challenge_wordplay",
+      "prediction": "باران می‌بارد آرام\nبر شیشه‌های خسته‌ی این شهر\nدلم تازه می‌شود",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_any": true,
+          "words_per_line": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 202,
+        "completion_tokens": 298,
+        "cost_usd": 0.001692
+      }
+    },
+    {
+      "id": "peval-challenge-wordplay-009",
+      "track": "challenge_wordplay",
+      "prediction": "تکاب",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "تکاب"
+        ],
+        "normalized_prediction": "تکاب",
+        "scored_candidate": "تکاب",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 180,
+        "completion_tokens": 78,
+        "cost_usd": 0.00057
+      }
+    },
+    {
+      "id": "peval-challenge-wordplay-010",
+      "track": "challenge_wordplay",
+      "prediction": "اراک",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "اراک"
+        ],
+        "normalized_prediction": "اراک",
+        "scored_candidate": "اراک",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 178,
+        "completion_tokens": 71,
+        "cost_usd": 0.000533
+      }
+    },
+    {
+      "id": "peval-challenge-wordplay-011",
+      "track": "challenge_wordplay",
+      "prediction": "یزد",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "یزد"
+        ],
+        "normalized_prediction": "یزد",
+        "scored_candidate": "یزد",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 169,
+        "completion_tokens": 60,
+        "cost_usd": 0.000469
+      }
+    },
+    {
+      "id": "peval-challenge-wordplay-012",
+      "track": "challenge_wordplay",
+      "prediction": "10",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "10"
+        ],
+        "normalized_prediction": "10",
+        "scored_candidate": "10",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 190,
+        "completion_tokens": 134,
+        "cost_usd": 0.00086
+      }
+    },
+    {
+      "id": "peval-challenge-wordplay-013",
+      "track": "challenge_wordplay",
+      "prediction": "۳",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "3"
+        ],
+        "normalized_prediction": "3",
+        "scored_candidate": "۳",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 173,
+        "completion_tokens": 128,
+        "cost_usd": 0.000813
+      }
+    },
+    {
+      "id": "peval-challenge-wordplay-014",
+      "track": "challenge_wordplay",
+      "prediction": "۹",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "9"
+        ],
+        "normalized_prediction": "9",
+        "scored_candidate": "۹",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 172,
+        "completion_tokens": 137,
+        "cost_usd": 0.000857
+      }
+    },
+    {
+      "id": "peval-challenge-wordplay-015",
+      "track": "challenge_wordplay",
+      "prediction": "۱۱",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "11"
+        ],
+        "normalized_prediction": "11",
+        "scored_candidate": "۱۱",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 168,
+        "completion_tokens": 166,
+        "cost_usd": 0.000998
+      }
+    },
+    {
+      "id": "peval-challenge-wordplay-016",
+      "track": "challenge_wordplay",
+      "prediction": "تاریکی",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "تاریکی",
+          "ظلمت",
+          "سیاهی",
+          "مه",
+          "دود"
+        ],
+        "normalized_prediction": "تاریکی",
+        "scored_candidate": "تاریکی",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 163,
+        "completion_tokens": 7,
+        "cost_usd": 0.000198
+      }
+    },
+    {
+      "id": "peval-challenge-wordplay-017",
+      "track": "challenge_wordplay",
+      "prediction": "مردی مهربان مقابل مدرسه ما مدتی ماند.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "min_words": true,
+          "max_words": true,
+          "word_initial": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 152,
+        "completion_tokens": 857,
+        "cost_usd": 0.004437
+      }
+    },
+    {
+      "id": "peval-challenge-wordplay-018",
+      "track": "challenge_wordplay",
+      "prediction": "**باغبان مهربان نگهبان بوستان**",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "min_words": true,
+          "max_words": true,
+          "word_final": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 145,
+        "completion_tokens": 287,
+        "cost_usd": 0.00158
+      }
+    },
+    {
+      "id": "peval-challenge-wordplay-019",
+      "track": "challenge_wordplay",
+      "prediction": "سپیده بر باغ می‌تابد\nبنفشه‌ها آرام لبخند می‌زنند\nزمین دوباره جان می‌گیرد",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "line_initials": true,
+          "words_per_line": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 188,
+        "completion_tokens": 361,
+        "cost_usd": 0.001993
+      }
+    },
+    {
+      "id": "peval-challenge-wordplay-020",
+      "track": "challenge_wordplay",
+      "prediction": "5",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "5"
+        ],
+        "normalized_prediction": "5",
+        "scored_candidate": "5",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 181,
+        "completion_tokens": 157,
+        "cost_usd": 0.000966
+      }
+    }
+  ]
+}

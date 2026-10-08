@@ -1,9 +1,9 @@
 # از اینجا شروع کن
 
-این پروژه یک بنچمارک فارسی ایرانی برای مدل‌های زبانی است: ۳۰۰ سوال، ۱۰ تِرَک
-موضوعی (دانش عمومی، فرهنگ، خوانش متن، پیروی از دستور، استدلال، ریاضی،
-تعارف، اصطلاحات و …)، اسکورینگ خودکار و یک leaderboard فعال با نتایج
-مدل‌های فرانتیر مثل Claude 4.x و GPT-5/5.5.
+این پروژه یک بنچمارک فارسی ایرانی برای مدل‌های زبانی است: ۵۴۴ سوال در
+۲۱ تِرَک (دانش عمومی، فرهنگ، خوانش متن، پیروی از دستور، استدلال، ریاضی،
+تعارف، اصطلاحات، و حالا کارهای روزمره، خلاقانه و چالشی)، اسکورینگ خودکار و
+یک leaderboard فعال با نتایج مدل‌های فرانتیر مثل Claude 4.x و GPT-5/5.5.
 
 ## ساده‌ترین راه اجرا
 
@@ -20,16 +20,85 @@ RUN_ME.command
 
 ## نتایج فعلی
 
-نسخه‌ی فعلی دیتاست **v1.1** است (۱۵۰ سوال در split عمومی + ۱۵۰ سوال در
-split سخت). تا الان ۲۳ ران از مدل‌های فرانتیر منتشر شده‌اند. خلاصه و
-جدول کامل اینجا:
+۲۳ اجرا از مدل‌های Claude 4.x و GPT-5/5.5 روی splitهای عمومی و سخت، و از
+مهر ۱۴۰۵، ۲۸ اجرای Claude Opus 5.5 و Sonnet 5.5 روی هر چهار split منتشر
+شده‌اند. خلاصه‌ی فارسی نتایج در [`README_FA.md`](README_FA.md) است و جدول کامل
+اینجا:
 
 - [`docs/BENCHMARK_REPORT.md`](docs/BENCHMARK_REPORT.md) — گزارش کامل
   با per-track و bootstrap CI.
 - [`leaderboard/leaderboard.csv`](leaderboard/leaderboard.csv) — جدول
   قابل باز کردن در اکسل.
 
-## مدل واقعی روی این بنچمارک اجرا کن
+## split جدید: «کاربردی» (practical)
+
+۱۵۰ سوال تازه در ۶ ترک که به کارهای واقعی کاربر ایرانی نزدیک‌ترند:
+نامه و پیامک و تغییر لحن رسمی/محاوره، متن تایپ‌شده با کیبورد اشتباه،
+فینگلیش، غلط املایی و نیم‌فاصله، تاریخ شمسی و میلادی، مبلغ چک به حروف،
+تومان و ریال، استخراج اطلاعات از آگهی دیوار و پیامک بانک به JSON، تعارف
+و جمله‌های اجتماعی، ترجمه‌ی طبیعی اصطلاح‌ها، و بازی‌های زبانی مثل توشیح،
+حذف یک حرف، قافیه، جابه‌جایی حروف، چیستان و حساب ابجد.
+
+## split جدید: «چالشی» (challenge)
+
+۱۰۰ سوال در ۵ ترک که برای مدل‌های نسل جدید هم سخت بمانند و آگاهی را
+بسنجند، نه فقط حافظه را:
+
+- پرسش با پیش‌فرض غلط: «چرا فردوسی گلستان را نوشت؟»
+- پرسشی که جوابش در متن نیست
+- همه‌ی معناهای «شیر» و «مهر» بدون اِعراب، و تشخیص طعنه
+- دانش زنجیروار درباره‌ی ادبیات و تاریخ و جغرافیای ایران، و نسبت‌هایی مثل
+  جاری و باجناق
+- بازی‌های سخت با کلمه: جمله‌ای که از آخر به اول همان باشد، توشیح همراه با
+  قافیه، و شمردن نقطه‌ها
+
+سوال‌های هر دو split فعلاً در وضعیت `pending_review` هستند و باید یک
+فارسی‌زبان آن‌ها را بازبینی کند. جزئیات، تخمین هزینه و برنامه‌ی بعدی در
+[`docs/ROADMAP_FA.md`](docs/ROADMAP_FA.md).
+
+## اجرای مدل‌ها با OpenRouter (پیشنهادی)
+
+با یک کلید OpenRouter به همه‌ی مدل‌ها دسترسی داری (Claude Fable 5.1 و
+Opus 5.5، GPT-6 Astra و Sol و Luna، Gemini، Grok، DeepSeek و …):
+
+```bash
+pip install -e .
+export OPENROUTER_API_KEY=sk-or-...
+
+# یک مدل روی split کاربردی
+persian-eval run --model anthropic/claude-opus-5.5 --backend openrouter \
+  --data data/persian_eval_v1.practical.jsonl --max-new-tokens 4096 \
+  --concurrency 6 --output results/claude-opus-5.5.practical.json
+
+# کل ماتریس مدل‌ها (configs/openrouter_models.json)
+python scripts/run_matrix.py --estimate  # تخمین هزینه، بدون کلید
+python scripts/run_matrix.py --dry-run   # برنامه و قیمت‌های زنده
+python scripts/run_matrix.py
+```
+
+اگر اجرا وسط کار قطع شد، همان دستور را دوباره بزن؛ سوال‌هایی که جواب
+گرفته‌اند دوباره پرسیده نمی‌شوند. هزینه‌ی واقعی هر اجرا (به دلار) در
+فایل نتیجه ثبت می‌شود.
+
+## فقط Claude، مستقیم با API انتروپیک (Batch، نصف قیمت)
+
+ماتریس [`configs/anthropic_models.json`](configs/anthropic_models.json)
+در مرحله‌ی اول Opus 5.5 را در سطح‌های فکر low، medium و high و Sonnet 5.5 را
+بدون فکر و در همین سه سطح اجرا می‌کند؛ سطح max برای مرحله‌ی بعد مانده است. هر اجرا یک Message Batch است که نصف قیمت حساب
+می‌شود:
+
+```bash
+export ANTHROPIC_API_KEY=...
+python scripts/run_matrix.py --config configs/anthropic_models.json --estimate
+# اول یک اجرای آزمایشی ارزان (۲۰ سوال چالشی برای هر ردیف، حدود ۲ دلار)
+python scripts/run_matrix.py --config configs/anthropic_models.json \
+  --splits challenge --max-items 20 --results-dir results/pilot
+python scripts/run_matrix.py --config configs/anthropic_models.json
+```
+
+تخمین هزینه و جزئیات در بخش ۴ [`docs/ROADMAP_FA.md`](docs/ROADMAP_FA.md).
+
+## اجرای مستقیم با API یا GPU خودت
 
 با کلید Anthropic یا OpenAI:
 
