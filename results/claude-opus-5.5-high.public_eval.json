@@ -1,0 +1,2959 @@
+{
+  "model_id": "claude-opus-5-5",
+  "model_type": "api",
+  "revision": null,
+  "backend": "anthropic",
+  "task_scores": {
+    "culture": {
+      "score": 1.0,
+      "n": 30
+    },
+    "instruction": {
+      "score": 0.8333333333333334,
+      "n": 30
+    },
+    "knowledge": {
+      "score": 0.9333333333333333,
+      "n": 30
+    },
+    "reading": {
+      "score": 0.9218277147688914,
+      "n": 30
+    },
+    "short_qa": {
+      "score": 0.9310344827586207,
+      "n": 29
+    }
+  },
+  "overall_score": 0.9239057728388358,
+  "run_config": {
+    "data": [
+      "data/persian_eval_v1.public_eval.jsonl"
+    ],
+    "tasks": "all",
+    "split": null,
+    "max_new_tokens": 4096,
+    "temperature": 0.0,
+    "dtype": "bfloat16",
+    "quantization": null,
+    "reasoning_effort": "high",
+    "thinking": null,
+    "thinking_budget_tokens": null,
+    "batch": true
+  },
+  "timestamp": "2026-10-08T14:59:40+00:00",
+  "usage": {
+    "calls": 149,
+    "prompt_tokens": 27405,
+    "completion_tokens": 16023,
+    "cost_usd": 0.21504,
+    "empty_predictions": 1,
+    "truncated": 0,
+    "item_errors": 0,
+    "served_models": {
+      "claude-opus-5-5": 149
+    }
+  },
+  "samples": [
+    {
+      "id": "peval-public-knowledge-001",
+      "track": "knowledge",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 135,
+        "completion_tokens": 4,
+        "cost_usd": 0.00031
+      }
+    },
+    {
+      "id": "peval-public-knowledge-002",
+      "track": "knowledge",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 142,
+        "completion_tokens": 44,
+        "cost_usd": 0.000724
+      }
+    },
+    {
+      "id": "peval-public-knowledge-003",
+      "track": "knowledge",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 174,
+        "completion_tokens": 36,
+        "cost_usd": 0.000708
+      }
+    },
+    {
+      "id": "peval-public-knowledge-004",
+      "track": "knowledge",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 153,
+        "completion_tokens": 4,
+        "cost_usd": 0.000346
+      }
+    },
+    {
+      "id": "peval-public-shortqa-001",
+      "track": "short_qa",
+      "prediction": "هجری شمسی (هجری خورشیدی)",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "هجری خورشیدی",
+          "تقویم هجری خورشیدی",
+          "خورشیدی"
+        ],
+        "normalized_prediction": "هجری شمسی هجری خورشیدی",
+        "scored_candidate": "هجری شمسی (هجری خورشیدی)",
+        "match_kind": "subsequence"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 149,
+        "completion_tokens": 206,
+        "cost_usd": 0.002358
+      }
+    },
+    {
+      "id": "peval-public-shortqa-002",
+      "track": "short_qa",
+      "prediction": "پزشکی",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "پزشکی",
+          "طب"
+        ],
+        "normalized_prediction": "پزشکی",
+        "scored_candidate": "پزشکی",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 161,
+        "completion_tokens": 7,
+        "cost_usd": 0.000392
+      }
+    },
+    {
+      "id": "peval-public-shortqa-003",
+      "track": "short_qa",
+      "prediction": "سنتور",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "سنتور"
+        ],
+        "normalized_prediction": "سنتور",
+        "scored_candidate": "سنتور",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 175,
+        "completion_tokens": 6,
+        "cost_usd": 0.00041
+      }
+    },
+    {
+      "id": "peval-public-shortqa-004",
+      "track": "short_qa",
+      "prediction": "خلیج فارس",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "خلیج فارس"
+        ],
+        "normalized_prediction": "خلیج فارس",
+        "scored_candidate": "خلیج فارس",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 145,
+        "completion_tokens": 61,
+        "cost_usd": 0.0009
+      }
+    },
+    {
+      "id": "peval-public-reading-001",
+      "track": "reading",
+      "prediction": "کم کردن مصرف پلاستیک",
+      "score": 1.0,
+      "details": {
+        "best_answer": "کم کردن مصرف پلاستیک",
+        "scored_candidate": "کم کردن مصرف پلاستیک"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 286,
+        "completion_tokens": 17,
+        "cost_usd": 0.000742
+      }
+    },
+    {
+      "id": "peval-public-reading-002",
+      "track": "reading",
+      "prediction": "قزوین",
+      "score": 1.0,
+      "details": {
+        "best_answer": "قزوین",
+        "scored_candidate": "قزوین"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 253,
+        "completion_tokens": 6,
+        "cost_usd": 0.000566
+      }
+    },
+    {
+      "id": "peval-public-reading-003",
+      "track": "reading",
+      "prediction": "رابطه بین عددها را پیدا کرد.",
+      "score": 1.0,
+      "details": {
+        "best_answer": "رابطه بین عددها را پیدا کرد",
+        "scored_candidate": "رابطه بین عددها را پیدا کرد."
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 256,
+        "completion_tokens": 20,
+        "cost_usd": 0.000712
+      }
+    },
+    {
+      "id": "peval-public-reading-004",
+      "track": "reading",
+      "prediction": "زیرا جعبه سفارشی باید سبک می‌بود و چوب کاج سبک‌تر و ارزان‌تر است.",
+      "score": 0.8333333333333334,
+      "details": {
+        "best_answer": "سبک تر و ارزان تر بود",
+        "scored_candidate": "زیرا جعبه سفارشی باید سبک می‌بود و چوب کاج سبک‌تر و ارزان‌تر است."
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 285,
+        "completion_tokens": 50,
+        "cost_usd": 0.00107
+      }
+    },
+    {
+      "id": "peval-public-instruction-001",
+      "track": "instruction",
+      "prediction": "با صرفه‌جویی در مصرف **آب**، از این منبع ارزشمند محافظت می‌کنیم. هر قطره‌ای که امروز نجات می‌دهیم، **آینده‌ای** روشن‌تر برای نسل‌های بعد می‌سازد.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "min_words": true,
+          "max_words": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 117,
+        "completion_tokens": 134,
+        "cost_usd": 0.001574
+      }
+    },
+    {
+      "id": "peval-public-instruction-002",
+      "track": "instruction",
+      "prediction": "اول برای هر روز یک **برنامه** مطالعه مشخص بنویس و زمان استراحت را هم در آن بگنجان.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 112,
+        "completion_tokens": 80,
+        "cost_usd": 0.001024
+      }
+    },
+    {
+      "id": "peval-public-instruction-003",
+      "track": "instruction",
+      "prediction": "بازیافت فرایندی است که در آن مواد مصرف‌شده دوباره به چرخه تولید بازمی‌گردند. با بازیافت کاغذ از قطع درختان کاسته می‌شود. این کار مصرف انرژی و آب را کم می‌کند و حجم زباله‌ها را پایین می‌آورد. بازیافت پلاستیک و شیشه و فلز نیز به حفظ محیط زیست کمک می‌کند.",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": false
+        },
+        "constraint_score": 0.75
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 117,
+        "completion_tokens": 415,
+        "cost_usd": 0.004384
+      }
+    },
+    {
+      "id": "peval-public-instruction-004",
+      "track": "instruction",
+      "prediction": "کتاب دریچه‌ای به سوی جهان‌های ناشناخته و بهترین همدم روزهای تنهایی است",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true,
+          "required_suffix": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 105,
+        "completion_tokens": 249,
+        "cost_usd": 0.0027
+      }
+    },
+    {
+      "id": "peval-public-culture-001",
+      "track": "culture",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 181,
+        "completion_tokens": 4,
+        "cost_usd": 0.000402
+      }
+    },
+    {
+      "id": "peval-public-culture-002",
+      "track": "culture",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 161,
+        "completion_tokens": 29,
+        "cost_usd": 0.000612
+      }
+    },
+    {
+      "id": "peval-public-culture-003",
+      "track": "culture",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 176,
+        "completion_tokens": 4,
+        "cost_usd": 0.000392
+      }
+    },
+    {
+      "id": "peval-public-culture-004",
+      "track": "culture",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 171,
+        "completion_tokens": 4,
+        "cost_usd": 0.000382
+      }
+    },
+    {
+      "id": "peval-public-knowledge-005",
+      "track": "knowledge",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 157,
+        "completion_tokens": 22,
+        "cost_usd": 0.000534
+      }
+    },
+    {
+      "id": "peval-public-knowledge-006",
+      "track": "knowledge",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 156,
+        "completion_tokens": 37,
+        "cost_usd": 0.000682
+      }
+    },
+    {
+      "id": "peval-public-knowledge-007",
+      "track": "knowledge",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 137,
+        "completion_tokens": 33,
+        "cost_usd": 0.000604
+      }
+    },
+    {
+      "id": "peval-public-knowledge-008",
+      "track": "knowledge",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 152,
+        "completion_tokens": 28,
+        "cost_usd": 0.000584
+      }
+    },
+    {
+      "id": "peval-public-knowledge-009",
+      "track": "knowledge",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 152,
+        "completion_tokens": 17,
+        "cost_usd": 0.000474
+      }
+    },
+    {
+      "id": "peval-public-knowledge-010",
+      "track": "knowledge",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 149,
+        "completion_tokens": 4,
+        "cost_usd": 0.000338
+      }
+    },
+    {
+      "id": "peval-public-knowledge-011",
+      "track": "knowledge",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 143,
+        "completion_tokens": 108,
+        "cost_usd": 0.001366
+      }
+    },
+    {
+      "id": "peval-public-knowledge-012",
+      "track": "knowledge",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 151,
+        "completion_tokens": 35,
+        "cost_usd": 0.000652
+      }
+    },
+    {
+      "id": "peval-public-knowledge-013",
+      "track": "knowledge",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 157,
+        "completion_tokens": 49,
+        "cost_usd": 0.000804
+      }
+    },
+    {
+      "id": "peval-public-knowledge-014",
+      "track": "knowledge",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 180,
+        "completion_tokens": 44,
+        "cost_usd": 0.0008
+      }
+    },
+    {
+      "id": "peval-public-knowledge-015",
+      "track": "knowledge",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 158,
+        "completion_tokens": 30,
+        "cost_usd": 0.000616
+      }
+    },
+    {
+      "id": "peval-public-knowledge-016",
+      "track": "knowledge",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 204,
+        "completion_tokens": 4,
+        "cost_usd": 0.000448
+      }
+    },
+    {
+      "id": "peval-public-knowledge-017",
+      "track": "knowledge",
+      "prediction": "**الف**",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "**الف**"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 209,
+        "completion_tokens": 181,
+        "cost_usd": 0.002228
+      }
+    },
+    {
+      "id": "peval-public-knowledge-018",
+      "track": "knowledge",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 157,
+        "completion_tokens": 4,
+        "cost_usd": 0.000354
+      }
+    },
+    {
+      "id": "peval-public-knowledge-019",
+      "track": "knowledge",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 167,
+        "completion_tokens": 29,
+        "cost_usd": 0.000624
+      }
+    },
+    {
+      "id": "peval-public-knowledge-020",
+      "track": "knowledge",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 158,
+        "completion_tokens": 4,
+        "cost_usd": 0.000356
+      }
+    },
+    {
+      "id": "peval-public-knowledge-021",
+      "track": "knowledge",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 158,
+        "completion_tokens": 44,
+        "cost_usd": 0.000756
+      }
+    },
+    {
+      "id": "peval-public-knowledge-022",
+      "track": "knowledge",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 164,
+        "completion_tokens": 4,
+        "cost_usd": 0.000368
+      }
+    },
+    {
+      "id": "peval-public-knowledge-023",
+      "track": "knowledge",
+      "prediction": "**پ**\n\nالبته گزینه‌ها با پرسش جور نیستند. پرسش دربارهٔ یکی از بخش‌های شاهنامه است، ولی گزینه‌ها نام شاعران‌اند. اگر منظور «سرایندهٔ شاهنامه» باشد، پاسخ «پ) فردوسی» است. در پاسخ به خودِ پرسش، معمولاً **پادشاهی کیخسرو** را طولانی‌ترین بخش شاهنامه می‌دانند.",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "البته گزینه‌ها با پرسش جور نیستند. پرسش دربارهٔ یکی از بخش‌های شاهنامه است، ولی گزینه‌ها نام شاعران‌اند. اگر منظور «سرایندهٔ شاهنامه» باشد، پاسخ «پ) فردوسی» است. در پاسخ به خودِ پرسش، معمولاً **پادشاهی کیخسرو** را طولانی‌ترین بخش شاهنامه می‌دانند."
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 180,
+        "completion_tokens": 530,
+        "cost_usd": 0.00566
+      }
+    },
+    {
+      "id": "peval-public-knowledge-024",
+      "track": "knowledge",
+      "prediction": "",
+      "score": 0.0,
+      "details": {
+        "predicted_index": null,
+        "answer_index": 3,
+        "scored_candidate": ""
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 141,
+        "completion_tokens": 3,
+        "cost_usd": 0.000312
+      }
+    },
+    {
+      "id": "peval-public-knowledge-025",
+      "track": "knowledge",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 166,
+        "completion_tokens": 32,
+        "cost_usd": 0.000652
+      }
+    },
+    {
+      "id": "peval-public-knowledge-026",
+      "track": "knowledge",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 144,
+        "completion_tokens": 27,
+        "cost_usd": 0.000558
+      }
+    },
+    {
+      "id": "peval-public-knowledge-027",
+      "track": "knowledge",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 135,
+        "completion_tokens": 4,
+        "cost_usd": 0.00031
+      }
+    },
+    {
+      "id": "peval-public-knowledge-028",
+      "track": "knowledge",
+      "prediction": "**ت**",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "**ت**"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 172,
+        "completion_tokens": 46,
+        "cost_usd": 0.000804
+      }
+    },
+    {
+      "id": "peval-public-knowledge-029",
+      "track": "knowledge",
+      "prediction": "<br>الف",
+      "score": 0.0,
+      "details": {
+        "predicted_index": null,
+        "answer_index": 0,
+        "scored_candidate": ""
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 192,
+        "completion_tokens": 8,
+        "cost_usd": 0.000464
+      }
+    },
+    {
+      "id": "peval-public-knowledge-030",
+      "track": "knowledge",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 194,
+        "completion_tokens": 38,
+        "cost_usd": 0.000768
+      }
+    },
+    {
+      "id": "peval-public-shortqa-005",
+      "track": "short_qa",
+      "prediction": "قله دماوند",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "دماوند",
+          "قله دماوند",
+          "کوه دماوند",
+          "قله‌ی دماوند",
+          "کوه‌دماوند"
+        ],
+        "normalized_prediction": "قله دماوند",
+        "scored_candidate": "قله دماوند",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 154,
+        "completion_tokens": 67,
+        "cost_usd": 0.000978
+      }
+    },
+    {
+      "id": "peval-public-shortqa-006",
+      "track": "short_qa",
+      "prediction": "مشهد",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "مشهد",
+          "مشهد مقدس"
+        ],
+        "normalized_prediction": "مشهد",
+        "scored_candidate": "مشهد",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 151,
+        "completion_tokens": 54,
+        "cost_usd": 0.000842
+      }
+    },
+    {
+      "id": "peval-public-shortqa-007",
+      "track": "short_qa",
+      "prediction": "تنگه هرمز",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "تنگه هرمز"
+        ],
+        "normalized_prediction": "تنگه هرمز",
+        "scored_candidate": "تنگه هرمز",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 163,
+        "completion_tokens": 10,
+        "cost_usd": 0.000426
+      }
+    },
+    {
+      "id": "peval-public-shortqa-008",
+      "track": "short_qa",
+      "prediction": "جزیره قشم",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "قشم",
+          "جزیره قشم",
+          "جزیره‌ی قشم"
+        ],
+        "normalized_prediction": "جزیره قشم",
+        "scored_candidate": "جزیره قشم",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 161,
+        "completion_tokens": 38,
+        "cost_usd": 0.000702
+      }
+    },
+    {
+      "id": "peval-public-shortqa-009",
+      "track": "short_qa",
+      "prediction": "اصفهان",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "اصفهان"
+        ],
+        "normalized_prediction": "اصفهان",
+        "scored_candidate": "اصفهان",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 154,
+        "completion_tokens": 7,
+        "cost_usd": 0.000378
+      }
+    },
+    {
+      "id": "peval-public-shortqa-010",
+      "track": "short_qa",
+      "prediction": "فروردین",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "فروردین",
+          "فروردین‌ماه"
+        ],
+        "normalized_prediction": "فروردین",
+        "scored_candidate": "فروردین",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 154,
+        "completion_tokens": 6,
+        "cost_usd": 0.000368
+      }
+    },
+    {
+      "id": "peval-public-shortqa-011",
+      "track": "short_qa",
+      "prediction": "سیزدهمین روز فروردین",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "سیزدهم",
+          "۱۳",
+          "13"
+        ],
+        "normalized_prediction": "سیزدهمین روز فروردین",
+        "scored_candidate": "سیزدهمین روز فروردین",
+        "match_kind": "none"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 162,
+        "completion_tokens": 81,
+        "cost_usd": 0.001134
+      }
+    },
+    {
+      "id": "peval-public-shortqa-012",
+      "track": "short_qa",
+      "prediction": "تبریز",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "تبریز"
+        ],
+        "normalized_prediction": "تبریز",
+        "scored_candidate": "تبریز",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 150,
+        "completion_tokens": 6,
+        "cost_usd": 0.00036
+      }
+    },
+    {
+      "id": "peval-public-shortqa-013",
+      "track": "short_qa",
+      "prediction": "تابستان",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "تابستان",
+          "تابستون"
+        ],
+        "normalized_prediction": "تابستان",
+        "scored_candidate": "تابستان",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 159,
+        "completion_tokens": 6,
+        "cost_usd": 0.000378
+      }
+    },
+    {
+      "id": "peval-public-shortqa-014",
+      "track": "short_qa",
+      "prediction": "سفید",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "سفید"
+        ],
+        "normalized_prediction": "سفید",
+        "scored_candidate": "سفید",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 161,
+        "completion_tokens": 32,
+        "cost_usd": 0.000642
+      }
+    },
+    {
+      "id": "peval-public-shortqa-015",
+      "track": "short_qa",
+      "prediction": "یک کیلومتر ۱۰۰۰ متر است.",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "هزار",
+          "هزار متر",
+          "۱۰۰۰",
+          "1000",
+          "۱۰۰۰ متر",
+          "یک هزار متر",
+          "۱٬۰۰۰",
+          "1,000"
+        ],
+        "normalized_prediction": "یک کیلومتر 1000 متر است",
+        "scored_candidate": "یک کیلومتر ۱۰۰۰ متر است.",
+        "match_kind": "subsequence"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 142,
+        "completion_tokens": 47,
+        "cost_usd": 0.000754
+      }
+    },
+    {
+      "id": "peval-public-shortqa-016",
+      "track": "short_qa",
+      "prediction": "نیم‌کره جنوبی",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "نیم‌کره جنوبی",
+          "جنوبی",
+          "نیمکره جنوبی",
+          "نیم کره جنوبی"
+        ],
+        "normalized_prediction": "نیم کره جنوبی",
+        "scored_candidate": "نیم‌کره جنوبی",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 156,
+        "completion_tokens": 14,
+        "cost_usd": 0.000452
+      }
+    },
+    {
+      "id": "peval-public-shortqa-017",
+      "track": "short_qa",
+      "prediction": "مشتری",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "مشتری",
+          "سیاره مشتری",
+          "ژوپیتر",
+          "Jupiter",
+          "مشتری (Jupiter)"
+        ],
+        "normalized_prediction": "مشتری",
+        "scored_candidate": "مشتری",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 158,
+        "completion_tokens": 6,
+        "cost_usd": 0.000376
+      }
+    },
+    {
+      "id": "peval-public-shortqa-018",
+      "track": "short_qa",
+      "prediction": "شب",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "شب"
+        ],
+        "normalized_prediction": "شب",
+        "scored_candidate": "شب",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 153,
+        "completion_tokens": 4,
+        "cost_usd": 0.000346
+      }
+    },
+    {
+      "id": "peval-public-shortqa-019",
+      "track": "short_qa",
+      "prediction": "هر عددی",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "هر عدد",
+          "همه اعداد",
+          "هر عددی",
+          "تمام اعداد",
+          "هر عدد دلخواه",
+          "هر عدد حقیقی",
+          "هر عددی را",
+          "همه‌ی اعداد"
+        ],
+        "normalized_prediction": "هر عددی",
+        "scored_candidate": "هر عددی",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 163,
+        "completion_tokens": 7,
+        "cost_usd": 0.000396
+      }
+    },
+    {
+      "id": "peval-public-shortqa-020",
+      "track": "short_qa",
+      "prediction": "رشت",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "رشت"
+        ],
+        "normalized_prediction": "رشت",
+        "scored_candidate": "رشت",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 144,
+        "completion_tokens": 5,
+        "cost_usd": 0.000338
+      }
+    },
+    {
+      "id": "peval-public-shortqa-021",
+      "track": "short_qa",
+      "prediction": "سبز",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "سبز"
+        ],
+        "normalized_prediction": "سبز",
+        "scored_candidate": "سبز",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 182,
+        "completion_tokens": 5,
+        "cost_usd": 0.000414
+      }
+    },
+    {
+      "id": "peval-public-shortqa-022",
+      "track": "short_qa",
+      "prediction": "بطن چپ",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "بطن چپ",
+          "چپ",
+          "بطن چپ قلب"
+        ],
+        "normalized_prediction": "بطن چپ",
+        "scored_candidate": "بطن چپ",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 169,
+        "completion_tokens": 8,
+        "cost_usd": 0.000418
+      }
+    },
+    {
+      "id": "peval-public-shortqa-023",
+      "track": "short_qa",
+      "prediction": "سی‌وسه‌پل",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "سی و سه پل",
+          "سی‌و‌سه پل",
+          "پل سی و سه پل"
+        ],
+        "normalized_prediction": "سی وسه پل",
+        "scored_candidate": "سی‌وسه‌پل",
+        "match_kind": "none"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 205,
+        "completion_tokens": 61,
+        "cost_usd": 0.00102
+      }
+    },
+    {
+      "id": "peval-public-shortqa-024",
+      "track": "short_qa",
+      "prediction": "نوروز",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "نوروز",
+          "عید نوروز",
+          "جشن نوروز"
+        ],
+        "normalized_prediction": "نوروز",
+        "scored_candidate": "نوروز",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 174,
+        "completion_tokens": 6,
+        "cost_usd": 0.000408
+      }
+    },
+    {
+      "id": "peval-public-shortqa-025",
+      "track": "short_qa",
+      "prediction": "اردیبهشت",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "اردیبهشت",
+          "اردیبهشت‌ماه",
+          "ماه اردیبهشت"
+        ],
+        "normalized_prediction": "اردیبهشت",
+        "scored_candidate": "اردیبهشت",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 151,
+        "completion_tokens": 62,
+        "cost_usd": 0.000922
+      }
+    },
+    {
+      "id": "peval-public-shortqa-026",
+      "track": "short_qa",
+      "prediction": "استان هرمزگان",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "هرمزگان"
+        ],
+        "normalized_prediction": "استان هرمزگان",
+        "scored_candidate": "استان هرمزگان",
+        "match_kind": "subsequence"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 151,
+        "completion_tokens": 10,
+        "cost_usd": 0.000402
+      }
+    },
+    {
+      "id": "peval-public-shortqa-028",
+      "track": "short_qa",
+      "prediction": "اقیانوس آرام",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "اقیانوس آرام",
+          "آرام",
+          "اقیانوس کبیر",
+          "پاسیفیک",
+          "اقیانوس پاسیفیک"
+        ],
+        "normalized_prediction": "اقیانوس آرام",
+        "scored_candidate": "اقیانوس آرام",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 153,
+        "completion_tokens": 85,
+        "cost_usd": 0.001156
+      }
+    },
+    {
+      "id": "peval-public-shortqa-029",
+      "track": "short_qa",
+      "prediction": "میروم",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "می‌روم",
+          "میروم"
+        ],
+        "normalized_prediction": "میروم",
+        "scored_candidate": "میروم",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 180,
+        "completion_tokens": 5,
+        "cost_usd": 0.00041
+      }
+    },
+    {
+      "id": "peval-public-shortqa-030",
+      "track": "short_qa",
+      "prediction": "جیوه",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "جیوه",
+          "Hg",
+          "جیوه (Hg)",
+          "mercury"
+        ],
+        "normalized_prediction": "جیوه",
+        "scored_candidate": "جیوه",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 151,
+        "completion_tokens": 56,
+        "cost_usd": 0.000862
+      }
+    },
+    {
+      "id": "peval-public-reading-005",
+      "track": "reading",
+      "prediction": "شهرداری",
+      "score": 1.0,
+      "details": {
+        "best_answer": "شهرداری",
+        "scored_candidate": "شهرداری"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 347,
+        "completion_tokens": 7,
+        "cost_usd": 0.000764
+      }
+    },
+    {
+      "id": "peval-public-reading-006",
+      "track": "reading",
+      "prediction": "صبح‌ها راحت‌تر بیدار می‌شود.",
+      "score": 0.923076923076923,
+      "details": {
+        "best_answer": "صبح راحت‌تر بیدار می‌شود",
+        "scored_candidate": "صبح‌ها راحت‌تر بیدار می‌شود."
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 282,
+        "completion_tokens": 26,
+        "cost_usd": 0.000824
+      }
+    },
+    {
+      "id": "peval-public-reading-007",
+      "track": "reading",
+      "prediction": "نبود آب لوله‌کشی و دسترسی نداشتن به آب سالم",
+      "score": 1.0,
+      "details": {
+        "best_answer": "نبود آب لوله‌کشی",
+        "scored_candidate": "نبود آب لوله‌کشی و دسترسی نداشتن به آب سالم"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 282,
+        "completion_tokens": 32,
+        "cost_usd": 0.000884
+      }
+    },
+    {
+      "id": "peval-public-reading-008",
+      "track": "reading",
+      "prediction": "پختن ظرف‌ها در کوره",
+      "score": 1.0,
+      "details": {
+        "best_answer": "پختن ظرف‌ها در کوره",
+        "scored_candidate": "پختن ظرف‌ها در کوره"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 258,
+        "completion_tokens": 18,
+        "cost_usd": 0.000696
+      }
+    },
+    {
+      "id": "peval-public-reading-009",
+      "track": "reading",
+      "prediction": "کمبود نور آفتاب در آن گوشه از باغ",
+      "score": 1.0,
+      "details": {
+        "best_answer": "کمبود نور آفتاب",
+        "scored_candidate": "کمبود نور آفتاب در آن گوشه از باغ"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 268,
+        "completion_tokens": 53,
+        "cost_usd": 0.001066
+      }
+    },
+    {
+      "id": "peval-public-reading-010",
+      "track": "reading",
+      "prediction": "برگزاری آنلاین جلسه‌ها پس از سه ماه هزینه ایاب و ذهاب را به نصف کاهش داد.",
+      "score": 0.8571428571428571,
+      "details": {
+        "best_answer": "هزینه ایاب و ذهاب به نصف رسید",
+        "scored_candidate": "برگزاری آنلاین جلسه‌ها پس از سه ماه هزینه ایاب و ذهاب را به نصف کاهش داد."
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 276,
+        "completion_tokens": 66,
+        "cost_usd": 0.001212
+      }
+    },
+    {
+      "id": "peval-public-reading-011",
+      "track": "reading",
+      "prediction": "￼￼آماده کردن لباس‌های روز بعد از شب قبل",
+      "score": 0.7777777777777778,
+      "details": {
+        "best_answer": "لباس‌های روز بعد را شب قبل آماده کردن",
+        "scored_candidate": "￼￼آماده کردن لباس‌های روز بعد از شب قبل"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 276,
+        "completion_tokens": 29,
+        "cost_usd": 0.000842
+      }
+    },
+    {
+      "id": "peval-public-reading-012",
+      "track": "reading",
+      "prediction": "در خانه‌هایی که گیاه آپارتمانی دارند، رطوبت هوا کمی بیشتر است.",
+      "score": 0.7272727272727273,
+      "details": {
+        "best_answer": "خانه‌هایی که گیاه آپارتمانی دارند رطوبت هوای کمی بیشتری دارند",
+        "scored_candidate": "در خانه‌هایی که گیاه آپارتمانی دارند، رطوبت هوا کمی بیشتر است."
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 257,
+        "completion_tokens": 108,
+        "cost_usd": 0.001594
+      }
+    },
+    {
+      "id": "peval-public-reading-013",
+      "track": "reading",
+      "prediction": "تعداد گزارش‌های خطا به یک‌سوم کاهش یافت.",
+      "score": 1.0,
+      "details": {
+        "best_answer": "کاهش گزارش‌های خطا به یک‌سوم",
+        "scored_candidate": "تعداد گزارش‌های خطا به یک‌سوم کاهش یافت."
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 272,
+        "completion_tokens": 49,
+        "cost_usd": 0.001034
+      }
+    },
+    {
+      "id": "peval-public-reading-014",
+      "track": "reading",
+      "prediction": "از اهالی روستا هدیه گرفته شدند.",
+      "score": 1.0,
+      "details": {
+        "best_answer": "از اهالی روستا",
+        "scored_candidate": "از اهالی روستا هدیه گرفته شدند."
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 288,
+        "completion_tokens": 22,
+        "cost_usd": 0.000796
+      }
+    },
+    {
+      "id": "peval-public-reading-015",
+      "track": "reading",
+      "prediction": "او صبح‌ها به‌جای فهرست بلند، فقط سه کار مهم را یادداشت می‌کرد.",
+      "score": 0.6666666666666666,
+      "details": {
+        "best_answer": "یادداشت سه کار مهم در صبح",
+        "scored_candidate": "او صبح‌ها به‌جای فهرست بلند، فقط سه کار مهم را یادداشت می‌کرد."
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 265,
+        "completion_tokens": 46,
+        "cost_usd": 0.00099
+      }
+    },
+    {
+      "id": "peval-public-reading-016",
+      "track": "reading",
+      "prediction": "تعویض شیرها با شیرهای جدیدی که هوا را با آب مخلوط می‌کنند و جریان آب را کمتر می‌کنند.",
+      "score": 0.8000000000000002,
+      "details": {
+        "best_answer": "نصب شیرهایی که هوا را با آب مخلوط می‌کنند",
+        "scored_candidate": "تعویض شیرها با شیرهای جدیدی که هوا را با آب مخلوط می‌کنند و جریان آب را کمتر می‌کنند."
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 269,
+        "completion_tokens": 101,
+        "cost_usd": 0.001548
+      }
+    },
+    {
+      "id": "peval-public-reading-017",
+      "track": "reading",
+      "prediction": "هزینه خرید لیوان کاغذی حدود ۷۵ درصد کاهش یافت و به یک‌چهارم مقدار قبلی رسید.",
+      "score": 0.8571428571428571,
+      "details": {
+        "best_answer": "هزینه لیوان کاغذی ۷۵ درصد کاهش یافت",
+        "scored_candidate": "هزینه خرید لیوان کاغذی حدود ۷۵ درصد کاهش یافت و به یک‌چهارم مقدار قبلی رسید."
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 278,
+        "completion_tokens": 59,
+        "cost_usd": 0.001146
+      }
+    },
+    {
+      "id": "peval-public-reading-018",
+      "track": "reading",
+      "prediction": "گیاه مقاوم به شوری",
+      "score": 1.0,
+      "details": {
+        "best_answer": "گیاه مقاوم به شوری",
+        "scored_candidate": "گیاه مقاوم به شوری"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 266,
+        "completion_tokens": 15,
+        "cost_usd": 0.000682
+      }
+    },
+    {
+      "id": "peval-public-reading-019",
+      "track": "reading",
+      "prediction": "بر اساس اینکه متوجه شد بیشتر مشتری‌ها صبح زود می‌آیند.",
+      "score": 0.6666666666666666,
+      "details": {
+        "best_answer": "آمدن مشتری‌ها در صبح زود",
+        "scored_candidate": "بر اساس اینکه متوجه شد بیشتر مشتری‌ها صبح زود می‌آیند."
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 253,
+        "completion_tokens": 61,
+        "cost_usd": 0.001116
+      }
+    },
+    {
+      "id": "peval-public-reading-020",
+      "track": "reading",
+      "prediction": "زباله‌ای که به سطل عمومی می‌رود نصف شده است.",
+      "score": 1.0,
+      "details": {
+        "best_answer": "زباله‌ای که به سطل عمومی می‌رود نصف شده",
+        "scored_candidate": "زباله‌ای که به سطل عمومی می‌رود نصف شده است."
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 276,
+        "completion_tokens": 63,
+        "cost_usd": 0.001182
+      }
+    },
+    {
+      "id": "peval-public-reading-021",
+      "track": "reading",
+      "prediction": "کم‌خوابی و کم‌نوشیدن آب",
+      "score": 1.0,
+      "details": {
+        "best_answer": "کم‌خوابی و کم‌نوشیدن آب",
+        "scored_candidate": "کم‌خوابی و کم‌نوشیدن آب"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 296,
+        "completion_tokens": 51,
+        "cost_usd": 0.001102
+      }
+    },
+    {
+      "id": "peval-public-reading-022",
+      "track": "reading",
+      "prediction": "۸ نفر",
+      "score": 1.0,
+      "details": {
+        "best_answer": "۸ نفر",
+        "scored_candidate": "۸ نفر"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 272,
+        "completion_tokens": 80,
+        "cost_usd": 0.001344
+      }
+    },
+    {
+      "id": "peval-public-reading-023",
+      "track": "reading",
+      "prediction": "از هر دانش‌آموز یک پروژه عملی خواست.",
+      "score": 1.0,
+      "details": {
+        "best_answer": "پروژه عملی",
+        "scored_candidate": "از هر دانش‌آموز یک پروژه عملی خواست."
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 275,
+        "completion_tokens": 53,
+        "cost_usd": 0.00108
+      }
+    },
+    {
+      "id": "peval-public-reading-024",
+      "track": "reading",
+      "prediction": "ofتعداد سفارش‌های روزانه دو برابر شد.",
+      "score": 0.8333333333333334,
+      "details": {
+        "best_answer": "سفارش‌های روزانه دو برابر شدند",
+        "scored_candidate": "ofتعداد سفارش‌های روزانه دو برابر شد."
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 260,
+        "completion_tokens": 27,
+        "cost_usd": 0.00079
+      }
+    },
+    {
+      "id": "peval-public-reading-025",
+      "track": "reading",
+      "prediction": "هزینه برق روشنایی پارک‌ها در سال اول حدود ۳۰ درصد کاهش یافت.",
+      "score": 1.0,
+      "details": {
+        "best_answer": "حدود ۳۰ درصد کاهش",
+        "scored_candidate": "هزینه برق روشنایی پارک‌ها در سال اول حدود ۳۰ درصد کاهش یافت."
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 283,
+        "completion_tokens": 45,
+        "cost_usd": 0.001016
+      }
+    },
+    {
+      "id": "peval-public-reading-026",
+      "track": "reading",
+      "prediction": "به‌طور میانگین یک ساعت",
+      "score": 1.0,
+      "details": {
+        "best_answer": "یک ساعت",
+        "scored_candidate": "به‌طور میانگین یک ساعت"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 259,
+        "completion_tokens": 17,
+        "cost_usd": 0.000688
+      }
+    },
+    {
+      "id": "peval-public-reading-027",
+      "track": "reading",
+      "prediction": "دیدن پیشرفت بچه‌ها",
+      "score": 1.0,
+      "details": {
+        "best_answer": "دیدن پیشرفت بچه‌ها",
+        "scored_candidate": "دیدن پیشرفت بچه‌ها"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 259,
+        "completion_tokens": 43,
+        "cost_usd": 0.000948
+      }
+    },
+    {
+      "id": "peval-public-reading-028",
+      "track": "reading",
+      "prediction": "هر روز سی دقیقه پیاده‌روی کنند.",
+      "score": 1.0,
+      "details": {
+        "best_answer": "هر روز سی دقیقه پیاده‌روی کنند",
+        "scored_candidate": "هر روز سی دقیقه پیاده‌روی کنند."
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 279,
+        "completion_tokens": 25,
+        "cost_usd": 0.000808
+      }
+    },
+    {
+      "id": "peval-public-reading-029",
+      "track": "reading",
+      "prediction": "محدود کردن خرید نسیه مشتری‌های همیشگی به مبلغ مشخص",
+      "score": 0.8235294117647058,
+      "details": {
+        "best_answer": "محدود کردن خرید نسیه به مبلغ مشخص",
+        "scored_candidate": "محدود کردن خرید نسیه مشتری‌های همیشگی به مبلغ مشخص"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 254,
+        "completion_tokens": 37,
+        "cost_usd": 0.000878
+      }
+    },
+    {
+      "id": "peval-public-reading-030",
+      "track": "reading",
+      "prediction": "بچه‌های روستا دیگر برای رفتن به مدرسه مجبور به دور زدن از مسیر طولانی نیستند و راهشان کوتاه‌تر شده است.",
+      "score": 0.8888888888888888,
+      "details": {
+        "best_answer": "دیگر مجبور به دور زدن از مسیر طولانی نیستند",
+        "scored_candidate": "بچه‌های روستا دیگر برای رفتن به مدرسه مجبور به دور زدن از مسیر طولانی نیستند و راهشان کوتاه‌تر شده است."
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 270,
+        "completion_tokens": 137,
+        "cost_usd": 0.00191
+      }
+    },
+    {
+      "id": "peval-public-instruction-005",
+      "track": "instruction",
+      "prediction": "سلام! فردا صبح ساعت هفت بریم پارک پیاده‌روی؟ هوا عالیه، بعدش هم یه صبحانه‌ی خوشمزه مهمون من!",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "min_words": true,
+          "max_words": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 156,
+        "completion_tokens": 306,
+        "cost_usd": 0.003372
+      }
+    },
+    {
+      "id": "peval-public-instruction-006",
+      "track": "instruction",
+      "prediction": "هنگام خروج از اتاق، لامپ را خاموش کنید و به‌جای لامپ معمولی از لامپ کم‌مصرف ال‌ای‌دی استفاده کنید.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 161,
+        "completion_tokens": 403,
+        "cost_usd": 0.004352
+      }
+    },
+    {
+      "id": "peval-public-instruction-007",
+      "track": "instruction",
+      "prediction": "اگر هر روز تمرین کنی، مهارتت به‌تدریج بهتر خواهد شد.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 130,
+        "completion_tokens": 183,
+        "cost_usd": 0.00209
+      }
+    },
+    {
+      "id": "peval-public-instruction-008",
+      "track": "instruction",
+      "prediction": "مطالعه دانش را می‌افزاید و کلید روشنی ذهن چیزی نیست جز کتاب.",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "min_words": true,
+          "max_words": true,
+          "required_suffix": false
+        },
+        "constraint_score": 0.75
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 132,
+        "completion_tokens": 659,
+        "cost_usd": 0.006854
+      }
+    },
+    {
+      "id": "peval-public-instruction-009",
+      "track": "instruction",
+      "prediction": "آب سرمایه‌ای ارزشمند و محدود است. هنگام مسواک زدن یا شستن ظرف‌ها، شیر آب را ببندید، نشتی لوله‌ها را تعمیر کنید و از دوش کوتاه‌تر استفاده کنید تا برای نسل‌های آینده آب کافی بماند.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 159,
+        "completion_tokens": 524,
+        "cost_usd": 0.005558
+      }
+    },
+    {
+      "id": "peval-public-instruction-010",
+      "track": "instruction",
+      "prediction": "سلام همکار گرامی، از همکاری صمیمانه و کمک‌های ارزشمندت در پروژه اخیر سپاسگزارم. حضورت در موفقیت تیم نقش مهمی داشت.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 149,
+        "completion_tokens": 432,
+        "cost_usd": 0.004618
+      }
+    },
+    {
+      "id": "peval-public-instruction-011",
+      "track": "instruction",
+      "prediction": "خورشید آب دریا را گرم می‌کند و آب بخار می‌شود و بالا می‌رود. بخارها در آسمان ابر می‌سازند. وقتی ابر سنگین شود، باران می‌بارد و آب به زمین برمی‌گردد.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "min_words": true,
+          "max_words": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 145,
+        "completion_tokens": 798,
+        "cost_usd": 0.00827
+      }
+    },
+    {
+      "id": "peval-public-instruction-012",
+      "track": "instruction",
+      "prediction": "سلام، من یک دستیار هوش مصنوعی هستم. هدف من کمک به شما در یادگیری بهتر زبان فارسی و پاسخ به پرسش‌هایتان در این کلاس است.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 149,
+        "completion_tokens": 348,
+        "cost_usd": 0.003778
+      }
+    },
+    {
+      "id": "peval-public-instruction-013",
+      "track": "instruction",
+      "prediction": "«هر صفحه‌ای که امروز می‌خوانی، تو را یک قدم به رؤیایت نزدیک‌تر می‌کند؛ ادامه بده!»",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "min_words": true,
+          "max_words": false
+        },
+        "constraint_score": 0.6666666666666666
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 138,
+        "completion_tokens": 264,
+        "cost_usd": 0.002916
+      }
+    },
+    {
+      "id": "peval-public-instruction-014",
+      "track": "instruction",
+      "prediction": "پیاده‌روی روزانه به سلامت قلب کمک می‌کند، استرس را کاهش می‌دهد، خواب را بهتر می‌کند و انرژی بدن را افزایش می‌دهد.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 162,
+        "completion_tokens": 327,
+        "cost_usd": 0.003594
+      }
+    },
+    {
+      "id": "peval-public-instruction-015",
+      "track": "instruction",
+      "prediction": "«شازده کوچولو» اثر آنتوان دو سنت‌اگزوپری یکی از کتاب‌های موردعلاقه من است. این داستان کوتاه درباره دوستی، عشق و نگاه ساده کودکانه به دنیاست. هر بار خواندنش، نکته تازه‌ای به من می‌آموزد.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "min_words": true,
+          "max_words": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 143,
+        "completion_tokens": 499,
+        "cost_usd": 0.005276
+      }
+    },
+    {
+      "id": "peval-public-instruction-016",
+      "track": "instruction",
+      "prediction": "سلام، وقت بخیر. مایلم یک جلسه کاری برای سه‌شنبه ساعت ۱۰ صبح با شما رزرو کنم. لطفاً در صورت امکان تأیید بفرمایید. سپاس‌گزارم.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 196,
+        "completion_tokens": 499,
+        "cost_usd": 0.005382
+      }
+    },
+    {
+      "id": "peval-public-instruction-017",
+      "track": "instruction",
+      "prediction": "ایمیل در محیط کار ابزاری رسمی برای ارتباط سریع، ثبت مکاتبات، هماهنگی جلسات و ارسال اسناد میان همکاران و مشتریان است.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 149,
+        "completion_tokens": 334,
+        "cost_usd": 0.003638
+      }
+    },
+    {
+      "id": "peval-public-instruction-018",
+      "track": "instruction",
+      "prediction": "تبریک می‌گویم دوست عزیزم؛ این موفقیت شیرین حاصل تلاش‌های بی‌وقفه‌ات است",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true,
+          "required_suffix": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 143,
+        "completion_tokens": 664,
+        "cost_usd": 0.006926
+      }
+    },
+    {
+      "id": "peval-public-instruction-019",
+      "track": "instruction",
+      "prediction": "آشپز عزیز، لطفاً ناهار فردا را برای ده نفر آماده کنید: قورمه‌سبزی، برنج و سالاد شیرازی. غذا تا ساعت دوازده و نیم حاضر باشد. ممنون.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "min_words": true,
+          "max_words": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 159,
+        "completion_tokens": 389,
+        "cost_usd": 0.004208
+      }
+    },
+    {
+      "id": "peval-public-instruction-020",
+      "track": "instruction",
+      "prediction": "اگر می‌خواهی صبح‌ها پرانرژی‌تر و سرحال‌تر بیدار شوی، زود خوابیدن برایت بهتر است.",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true,
+          "required_suffix": false
+        },
+        "constraint_score": 0.75
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 127,
+        "completion_tokens": 276,
+        "cost_usd": 0.003014
+      }
+    },
+    {
+      "id": "peval-public-instruction-021",
+      "track": "instruction",
+      "prediction": "تیم‌ورک در محیط اداری یعنی همکاری هماهنگ هر همکار با دیگران، تقسیم مسئولیت‌ها و تبادل ایده‌ها برای رسیدن به هدف مشترک. این رویکرد بهره‌وری، اعتماد و کیفیت کار را افزایش می‌دهد.",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "min_words": true,
+          "max_words": false
+        },
+        "constraint_score": 0.6666666666666666
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 141,
+        "completion_tokens": 514,
+        "cost_usd": 0.005422
+      }
+    },
+    {
+      "id": "peval-public-instruction-022",
+      "track": "instruction",
+      "prediction": "۱. دوشاخه را به برق بزنید.\n۲. نان را داخل شکاف‌ها بگذارید.\n۳. درجه برشته‌شدن را تنظیم کنید.\n۴. اهرم را پایین بزنید.\n۵. پس از بیرون پریدن نان، آن را با احتیاط بردارید.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 167,
+        "completion_tokens": 500,
+        "cost_usd": 0.005334
+      }
+    },
+    {
+      "id": "peval-public-instruction-023",
+      "track": "instruction",
+      "prediction": "سلام علی جان، امروز به‌خاطر ترافیک سنگین بزرگراه دیر رسیدم. ببخشید که منتظر ماندی. جلسه را از ساعت ده شروع کنیم؟",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 162,
+        "completion_tokens": 348,
+        "cost_usd": 0.003804
+      }
+    },
+    {
+      "id": "peval-public-instruction-024",
+      "track": "instruction",
+      "prediction": "خانواده عزیز، جمعه ساعت پنج عصر خانه مادربزرگ دور هم جمع می‌شویم. حضورتان دلگرمی ماست؛ منتظرتان هستیم!",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 140,
+        "completion_tokens": 381,
+        "cost_usd": 0.00409
+      }
+    },
+    {
+      "id": "peval-public-instruction-025",
+      "track": "instruction",
+      "prediction": "یادگیری زبان دوم فرصت آشنایی با فرهنگ‌های تازه و مشاغل بهتر را فراهم می‌کند.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "max_words": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 158,
+        "completion_tokens": 418,
+        "cost_usd": 0.004496
+      }
+    },
+    {
+      "id": "peval-public-instruction-026",
+      "track": "instruction",
+      "prediction": "خیلی ممنون از دعوتت! متأسفانه امروز قرار قبلی دارم و نمی‌تونم بیام. ان‌شاءالله دفعه‌ی بعد.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "min_words": true,
+          "max_words": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 160,
+        "completion_tokens": 304,
+        "cost_usd": 0.00336
+      }
+    },
+    {
+      "id": "peval-public-instruction-027",
+      "track": "instruction",
+      "prediction": "سلام معلم گرامی، پسرم علی فردا بیمار است و نمی‌تواند به مدرسه بیاید. لطفاً تکالیف را اطلاع دهید. با سپاس، مادر علی",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 158,
+        "completion_tokens": 343,
+        "cost_usd": 0.003746
+      }
+    },
+    {
+      "id": "peval-public-instruction-028",
+      "track": "instruction",
+      "prediction": "دکتر عزیز، از صبر، دقت و مهربانی همیشگی‌تان در مراقبت از خانواده‌مان صمیمانه سپاسگزاریم. حضور شما مایه آرامش ماست.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 138,
+        "completion_tokens": 341,
+        "cost_usd": 0.003686
+      }
+    },
+    {
+      "id": "peval-public-instruction-029",
+      "track": "instruction",
+      "prediction": "ورزش صبحگاهی با افزایش جریان خون و ترشح هورمون‌های شادی‌آور، انرژی لازم برای شروع روزی پرنشاط و پربازده را به بدن می‌دهد.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 134,
+        "completion_tokens": 340,
+        "cost_usd": 0.003668
+      }
+    },
+    {
+      "id": "peval-public-instruction-030",
+      "track": "instruction",
+      "prediction": "سلام، لطفاً وارد خیابان بهار شوید، بعد از داروخانه کوچه دوم سمت راست، پلاک ۱۲، درِ سبز. جلوی در منتظرم. ممنون.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "min_words": true,
+          "max_words": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 150,
+        "completion_tokens": 332,
+        "cost_usd": 0.00362
+      }
+    },
+    {
+      "id": "peval-public-culture-005",
+      "track": "culture",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 159,
+        "completion_tokens": 12,
+        "cost_usd": 0.000438
+      }
+    },
+    {
+      "id": "peval-public-culture-006",
+      "track": "culture",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 161,
+        "completion_tokens": 4,
+        "cost_usd": 0.000362
+      }
+    },
+    {
+      "id": "peval-public-culture-007",
+      "track": "culture",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 165,
+        "completion_tokens": 49,
+        "cost_usd": 0.00082
+      }
+    },
+    {
+      "id": "peval-public-culture-008",
+      "track": "culture",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 192,
+        "completion_tokens": 4,
+        "cost_usd": 0.000424
+      }
+    },
+    {
+      "id": "peval-public-culture-009",
+      "track": "culture",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 158,
+        "completion_tokens": 47,
+        "cost_usd": 0.000786
+      }
+    },
+    {
+      "id": "peval-public-culture-010",
+      "track": "culture",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 148,
+        "completion_tokens": 4,
+        "cost_usd": 0.000336
+      }
+    },
+    {
+      "id": "peval-public-culture-011",
+      "track": "culture",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 158,
+        "completion_tokens": 31,
+        "cost_usd": 0.000626
+      }
+    },
+    {
+      "id": "peval-public-culture-012",
+      "track": "culture",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 165,
+        "completion_tokens": 4,
+        "cost_usd": 0.00037
+      }
+    },
+    {
+      "id": "peval-public-culture-013",
+      "track": "culture",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 178,
+        "completion_tokens": 50,
+        "cost_usd": 0.000856
+      }
+    },
+    {
+      "id": "peval-public-culture-014",
+      "track": "culture",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 176,
+        "completion_tokens": 35,
+        "cost_usd": 0.000702
+      }
+    },
+    {
+      "id": "peval-public-culture-015",
+      "track": "culture",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 203,
+        "completion_tokens": 28,
+        "cost_usd": 0.000686
+      }
+    },
+    {
+      "id": "peval-public-culture-016",
+      "track": "culture",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 168,
+        "completion_tokens": 58,
+        "cost_usd": 0.000916
+      }
+    },
+    {
+      "id": "peval-public-culture-017",
+      "track": "culture",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 197,
+        "completion_tokens": 4,
+        "cost_usd": 0.000434
+      }
+    },
+    {
+      "id": "peval-public-culture-018",
+      "track": "culture",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 161,
+        "completion_tokens": 27,
+        "cost_usd": 0.000592
+      }
+    },
+    {
+      "id": "peval-public-culture-019",
+      "track": "culture",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 240,
+        "completion_tokens": 32,
+        "cost_usd": 0.0008
+      }
+    },
+    {
+      "id": "peval-public-culture-020",
+      "track": "culture",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 215,
+        "completion_tokens": 4,
+        "cost_usd": 0.00047
+      }
+    },
+    {
+      "id": "peval-public-culture-021",
+      "track": "culture",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 181,
+        "completion_tokens": 4,
+        "cost_usd": 0.000402
+      }
+    },
+    {
+      "id": "peval-public-culture-022",
+      "track": "culture",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 172,
+        "completion_tokens": 4,
+        "cost_usd": 0.000384
+      }
+    },
+    {
+      "id": "peval-public-culture-023",
+      "track": "culture",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 211,
+        "completion_tokens": 26,
+        "cost_usd": 0.000682
+      }
+    },
+    {
+      "id": "peval-public-culture-024",
+      "track": "culture",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 200,
+        "completion_tokens": 4,
+        "cost_usd": 0.00044
+      }
+    },
+    {
+      "id": "peval-public-culture-025",
+      "track": "culture",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 169,
+        "completion_tokens": 88,
+        "cost_usd": 0.001218
+      }
+    },
+    {
+      "id": "peval-public-culture-026",
+      "track": "culture",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 223,
+        "completion_tokens": 4,
+        "cost_usd": 0.000486
+      }
+    },
+    {
+      "id": "peval-public-culture-027",
+      "track": "culture",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 147,
+        "completion_tokens": 28,
+        "cost_usd": 0.000574
+      }
+    },
+    {
+      "id": "peval-public-culture-028",
+      "track": "culture",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 155,
+        "completion_tokens": 4,
+        "cost_usd": 0.00035
+      }
+    },
+    {
+      "id": "peval-public-culture-029",
+      "track": "culture",
+      "prediction": "**الف**",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "**الف**"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 183,
+        "completion_tokens": 35,
+        "cost_usd": 0.000716
+      }
+    },
+    {
+      "id": "peval-public-culture-030",
+      "track": "culture",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-opus-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 206,
+        "completion_tokens": 4,
+        "cost_usd": 0.000452
+      }
+    }
+  ]
+}

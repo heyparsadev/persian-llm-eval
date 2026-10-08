@@ -1,0 +1,2968 @@
+{
+  "model_id": "claude-sonnet-5-5",
+  "model_type": "api",
+  "revision": null,
+  "backend": "anthropic",
+  "task_scores": {
+    "hard_culture": {
+      "score": 1.0,
+      "n": 28
+    },
+    "hard_instruction": {
+      "score": 0.7666666666666667,
+      "n": 30
+    },
+    "hard_math": {
+      "score": 0.8275862068965517,
+      "n": 29
+    },
+    "hard_reading": {
+      "score": 0.7211001642036126,
+      "n": 29
+    },
+    "hard_reasoning": {
+      "score": 0.9655172413793104,
+      "n": 29
+    }
+  },
+  "overall_score": 0.8561740558292282,
+  "run_config": {
+    "data": [
+      "data/persian_eval_v1.hard.jsonl"
+    ],
+    "tasks": "all",
+    "split": null,
+    "max_new_tokens": 4096,
+    "temperature": 0.0,
+    "dtype": "bfloat16",
+    "quantization": null,
+    "reasoning_effort": "none",
+    "thinking": null,
+    "thinking_budget_tokens": null,
+    "batch": true
+  },
+  "timestamp": "2026-10-08T15:01:56+00:00",
+  "usage": {
+    "calls": 145,
+    "prompt_tokens": 33767,
+    "completion_tokens": 9466,
+    "cost_usd": 0.081097,
+    "empty_predictions": 0,
+    "truncated": 0,
+    "item_errors": 0,
+    "served_models": {
+      "claude-sonnet-5-5": 145
+    }
+  },
+  "samples": [
+    {
+      "id": "peval-hard-reasoning-001",
+      "track": "hard_reasoning",
+      "prediction": "شرط اول: نازنین قبل از کاوه است. شرط دوم: بهرام بلافاصله بعد از کسی است که قبل از کاوه است؛ یعنی بهرام بلافاصله بعد از یکی از افراد قبل از کاوه می‌آید.\n\nالف) نازنین، بهرام، کاوه: نازنین قبل از کاوه است ✓. بهرام بلافاصله بعد از نازنین است و نازنین قبل از کاوه است ✓.\n\nب) بهرام، نازنین، کاوه: بهرام اول است و بلافاصله بعد از کسی نیست ✗.\n\nپ) نازنین، کاوه، بهرام: بهرام بلافاصله بعد از کاوه است و کاوه قبل از خودش نیست ✗.\n\nت) کاوه، نازنین، بهرام: نازنین قبل از کاوه نیست ✗.\n\n**الف**",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "**الف**"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 272,
+        "completion_tokens": 319,
+        "cost_usd": 0.001867
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-002",
+      "track": "hard_reasoning",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 270,
+        "completion_tokens": 4,
+        "cost_usd": 0.00029
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-003",
+      "track": "hard_reasoning",
+      "prediction": "اگر مریم آموزش ندیده، طبق قاعده اول به داده خام دسترسی ندارد؛ و چون دسترسی ندارد، از قاعده دوم نمی‌توان نتیجه گرفت پروژه محرمانه ندارد (دسترسی داشتن مستلزم پروژه محرمانه است، نه برعکس).\n\n**الف**",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "**الف**"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 285,
+        "completion_tokens": 131,
+        "cost_usd": 0.00094
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-004",
+      "track": "hard_reasoning",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 280,
+        "completion_tokens": 4,
+        "cost_usd": 0.0003
+      }
+    },
+    {
+      "id": "peval-hard-math-001",
+      "track": "hard_math",
+      "prediction": "۴ درصد کاهش",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "۴ درصد کاهش",
+          "4 درصد کاهش",
+          "کاهش ۴ درصد",
+          "کاهش 4 درصد"
+        ],
+        "normalized_prediction": "4 درصد کاهش",
+        "scored_candidate": "۴ درصد کاهش",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 243,
+        "completion_tokens": 12,
+        "cost_usd": 0.000303
+      }
+    },
+    {
+      "id": "peval-hard-math-002",
+      "track": "hard_math",
+      "prediction": "۲۰",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "۲۰",
+          "20"
+        ],
+        "normalized_prediction": "20",
+        "scored_candidate": "۲۰",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 214,
+        "completion_tokens": 6,
+        "cost_usd": 0.000244
+      }
+    },
+    {
+      "id": "peval-hard-math-003",
+      "track": "hard_math",
+      "prediction": "۵۰",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "۵۰",
+          "50"
+        ],
+        "normalized_prediction": "50",
+        "scored_candidate": "۵۰",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 257,
+        "completion_tokens": 6,
+        "cost_usd": 0.000287
+      }
+    },
+    {
+      "id": "peval-hard-math-004",
+      "track": "hard_math",
+      "prediction": "احتمال = (3/6) × (2/5) = 6/30 = 1/5\n\n**الف**",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "**الف**"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 217,
+        "completion_tokens": 34,
+        "cost_usd": 0.000387
+      }
+    },
+    {
+      "id": "peval-hard-reading-001",
+      "track": "hard_reading",
+      "prediction": "رزرو نشدن اتوبوس",
+      "score": 1.0,
+      "details": {
+        "best_answer": "رزرو نشدن اتوبوس",
+        "scored_candidate": "رزرو نشدن اتوبوس"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 270,
+        "completion_tokens": 16,
+        "cost_usd": 0.00035
+      }
+    },
+    {
+      "id": "peval-hard-reading-002",
+      "track": "hard_reading",
+      "prediction": "معلوم شد پروژه ب با همان هزینه ریسک کمتری دارد و زیرساخت بلندمدت می‌سازد.",
+      "score": 0.75,
+      "details": {
+        "best_answer": "ریسک کمتری داشت و زیرساخت بلندمدت می ساخت",
+        "scored_candidate": "معلوم شد پروژه ب با همان هزینه ریسک کمتری دارد و زیرساخت بلندمدت می‌سازد."
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 302,
+        "completion_tokens": 52,
+        "cost_usd": 0.000562
+      }
+    },
+    {
+      "id": "peval-hard-reading-003",
+      "track": "hard_reading",
+      "prediction": "طراحی فقط تعداد کلیک‌ها را کم کرده بود، نه زمان کل انجام کار؛ بارگذاری‌های کند بین دو صفحه کاربران را معطل می‌کرد.",
+      "score": 0.75,
+      "details": {
+        "best_answer": "بارگذاری بین دو صفحه",
+        "scored_candidate": "طراحی فقط تعداد کلیک‌ها را کم کرده بود، نه زمان کل انجام کار؛ بارگذاری‌های کند بین دو صفحه کاربران را معطل می‌کرد."
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 257,
+        "completion_tokens": 79,
+        "cost_usd": 0.000652
+      }
+    },
+    {
+      "id": "peval-hard-reading-004",
+      "track": "hard_reading",
+      "prediction": "درآمد و سطح تحصیلات بالاتر (عوامل مخدوش‌کننده): شهرهای مرفه‌تر و تحصیل‌کرده‌تر هم کتابخانه بیشتری دارند و هم مردمشان بیشتر مطالعه می‌کنند.",
+      "score": 1.0,
+      "details": {
+        "best_answer": "درآمد و سطح تحصیلات",
+        "scored_candidate": "درآمد و سطح تحصیلات بالاتر (عوامل مخدوش‌کننده): شهرهای مرفه‌تر و تحصیل‌کرده‌تر هم کتابخانه بیشتری دارند و هم مردمشان بیشتر مطالعه می‌کنند."
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 288,
+        "completion_tokens": 106,
+        "cost_usd": 0.000818
+      }
+    },
+    {
+      "id": "peval-hard-instruction-001",
+      "track": "hard_instruction",
+      "prediction": "نتیجه: مطالعه گروهی با فراهم کردن بازخورد فوری از همتایان، به رفع سریع اشتباه‌ها و درک عمیق‌تر مطالب کمک می‌کند. توضیح دادن مباحث به دیگران یادگیری را تثبیت می‌کند، و برنامه مشخص و تعهد به جمع، تمرکز اعضا را بالا نگه می‌دارد و از تعلل جلوگیری می‌کند.",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": false,
+          "required_prefix": true
+        },
+        "constraint_score": 0.8
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 158,
+        "completion_tokens": 171,
+        "cost_usd": 0.001013
+      }
+    },
+    {
+      "id": "peval-hard-instruction-002",
+      "track": "hard_instruction",
+      "prediction": "درک می‌کنم که این مشکل شما را ناراحت کرده است و همین حالا پیگیری آن را شروع می‌کنم تا نتیجه را در سریع‌ترین زمان ممکن به شما اطلاع دهم.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 155,
+        "completion_tokens": 87,
+        "cost_usd": 0.00059
+      }
+    },
+    {
+      "id": "peval-hard-instruction-003",
+      "track": "hard_instruction",
+      "prediction": "رمز عبور نخستین سد دفاعی حساب‌های کاربری شماست. هرچه رمز عبور طولانی‌تر و غیرقابل‌پیش‌بینی‌تر باشد، شکستن آن برای مهاجمان دشوارتر می‌شود. برای ساخت رمزی امن، از ترکیب حروف بزرگ و کوچک، ارقام و نمادها استفاده کنید و از اطلاعات شخصی مانند نام، تاریخ تولد یا شماره تلفن پرهیز کنید. یک عبارت طولانی و بی‌ربط، که چند واژه تصادفی را کنار هم می‌گذارد، معمولاً هم امن‌تر است و هم راحت‌تر به خاطر سپرده می‌شود.\n\nهرگز یک رمز عبور را برای چند سرویس مختلف تکرار نکنید؛ زیرا اگر یکی از سرویس‌ها هک شود، بقیه حساب‌های شما نیز در خطر می‌افتند. برای مدیریت رمزهای متعدد، از یک مدیر رمز عبور معتبر استفاده کنید تا لازم نباشد همه را حفظ کنید.\n\nاحراز هویت دومرحله‌ای لایه حفاظتی مهمی است. حتی اگر رمز عبور شما لو برود، مهاجم بدون کد یک‌بارمصرف یا تأیید از طریق برنامه احراز هویت یا کلید امنیتی نمی‌تواند وارد حساب شود. بهتر است به‌جای پیامک، از برنامه‌های تولید کد یا کلیدهای سخت‌افزاری استفاده کنید، چون ایمن‌تر هستند.\n\nدر نهایت، مراقب صفحات جعلی و ایمیل‌های فریبنده باشید و رمز خود را هیچ‌گاه از طریق پیام یا تماس در اختیار دیگران قرار ندهید. اگر مشکوک شدید که رمزتان فاش شده است، فوراً آن را تغییر دهید.",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": false
+        },
+        "constraint_score": 0.75
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 129,
+        "completion_tokens": 730,
+        "cost_usd": 0.003779
+      }
+    },
+    {
+      "id": "peval-hard-instruction-004",
+      "track": "hard_instruction",
+      "prediction": "اگر کارهای روزانه‌ات را بر اساس اولویت مرتب کنی، پایان روز با آرامش بیشتری همراه می‌شود.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true,
+          "required_suffix": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 129,
+        "completion_tokens": 59,
+        "cost_usd": 0.000424
+      }
+    },
+    {
+      "id": "peval-hard-culture-001",
+      "track": "hard_culture",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 256,
+        "completion_tokens": 4,
+        "cost_usd": 0.000276
+      }
+    },
+    {
+      "id": "peval-hard-culture-002",
+      "track": "hard_culture",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 272,
+        "completion_tokens": 4,
+        "cost_usd": 0.000292
+      }
+    },
+    {
+      "id": "peval-hard-culture-003",
+      "track": "hard_culture",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 215,
+        "completion_tokens": 4,
+        "cost_usd": 0.000235
+      }
+    },
+    {
+      "id": "peval-hard-culture-004",
+      "track": "hard_culture",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 229,
+        "completion_tokens": 4,
+        "cost_usd": 0.000249
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-005",
+      "track": "hard_reasoning",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 269,
+        "completion_tokens": 4,
+        "cost_usd": 0.000289
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-006",
+      "track": "hard_reasoning",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 211,
+        "completion_tokens": 4,
+        "cost_usd": 0.000231
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-007",
+      "track": "hard_reasoning",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 297,
+        "completion_tokens": 4,
+        "cost_usd": 0.000317
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-008",
+      "track": "hard_reasoning",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 257,
+        "completion_tokens": 4,
+        "cost_usd": 0.000277
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-009",
+      "track": "hard_reasoning",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 230,
+        "completion_tokens": 4,
+        "cost_usd": 0.00025
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-010",
+      "track": "hard_reasoning",
+      "prediction": "اجتماع = ۳ + ۴ − ۲ = ۵، پس ۶ − ۵ = ۱ نفر هیچ‌کدام را بازی نمی‌کند.\n\n**ب**",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "**ب**"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 221,
+        "completion_tokens": 72,
+        "cost_usd": 0.000581
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-011",
+      "track": "hard_reasoning",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 287,
+        "completion_tokens": 4,
+        "cost_usd": 0.000307
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-012",
+      "track": "hard_reasoning",
+      "prediction": "باید شرایط را بررسی کنیم: آبی دقیقاً کنار قرمز، قرمز سمت چپ آبی (یعنی قرمز بلافاصله چپ آبی)، زرد در موقعیت سوم، و سبز بلافاصله سمت چپ آبی نباشد.\n\nالف) زرد در موقعیت ۳ نیست (موقعیت ۳ = زرد؟ ترتیب: سبز، قرمز، زرد، آبی، سفید؛ زرد موقعیت ۳ است ولی قرمز و آبی کنار هم نیستند) ✗\n\nب) سفید، قرمز، آبی، زرد، سبز: زرد موقعیت ۴ است ✗\n\nپ) قرمز، آبی، زرد، سبز، سفید: زرد موقعیت ۳ ✓، قرمز و آبی کنار هم و قرمز سمت چپ ✓، سبز سمت چپ آبی نیست ✓\n\nت) سفید، سبز، زرد، قرمز، آبی: زرد موقعیت ۳ ✓، قرمز چپ آبی ✓، سبز بلافاصله چپ آبی نیست ✓ (قرمز آنجاست)\n\nهر دو پ و ت ظاهراً درست هستند. اگر «سمت چپ» را به معنای «در هر جای چپ» بگیریم، در ت سبز در چپ آبی قرار دارد ✗ و در پ سبز در راست آبی است ✓.\n\n**پ**",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "**پ**"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 308,
+        "completion_tokens": 527,
+        "cost_usd": 0.002943
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-013",
+      "track": "hard_reasoning",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 259,
+        "completion_tokens": 4,
+        "cost_usd": 0.000279
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-015",
+      "track": "hard_reasoning",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 318,
+        "completion_tokens": 4,
+        "cost_usd": 0.000338
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-016",
+      "track": "hard_reasoning",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 240,
+        "completion_tokens": 4,
+        "cost_usd": 0.00026
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-017",
+      "track": "hard_reasoning",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 235,
+        "completion_tokens": 4,
+        "cost_usd": 0.000255
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-018",
+      "track": "hard_reasoning",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 256,
+        "completion_tokens": 4,
+        "cost_usd": 0.000276
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-019",
+      "track": "hard_reasoning",
+      "prediction": "حداقل تعداد افرادی که هر دو زبان را می‌دانند برابر است با: ۴ + ۵ − ۷ = ۲\n\n**پ**",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "**پ**"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 217,
+        "completion_tokens": 58,
+        "cost_usd": 0.000507
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-020",
+      "track": "hard_reasoning",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 273,
+        "completion_tokens": 4,
+        "cost_usd": 0.000293
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-021",
+      "track": "hard_reasoning",
+      "prediction": "بررسی حالت‌ها:\n\nسارا می‌گوید «من دروغ‌گو نیستم»؛ این جمله را هر دو نوع آدم می‌توانند بگویند (راست‌گو راست می‌گوید، دروغ‌گو هم دروغ می‌گوید ولی در واقع دروغ‌گوست و این جمله دروغ می‌شود... ) پس دقیق‌تر: اگر سارا دروغ‌گو باشد، جمله‌اش دروغ است، یعنی او دروغ‌گوست؛ سازگار است. اگر راست‌گو باشد هم سازگار است.\n\nحالت ۱: فقط علی دروغ‌گو. پس بابک و سارا راست‌گو. علی گفته «بابک دروغ‌گوست» که دروغ است؛ درست. بابک می‌گوید سارا راست‌گوست؛ درست. سارا راست‌گو و جمله‌اش درست. سازگار است.\n\nحالت ۲: فقط بابک دروغ‌گو. علی راست‌گو و می‌گوید بابک دروغ‌گوست؛ درست. بابک می‌گوید «سارا راست‌گوست» که باید دروغ باشد، ولی سارا راست‌گوست؛ تناقض.\n\nحالت ۳: فقط سارا دروغ‌گو. علی راست‌گو می‌گوید بابک دروغ‌گوست، اما بابک راست‌گوست؛ تناقض.\n\nفقط حالت ۱ سازگار است.\n\n**ب**",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "**ب**"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 274,
+        "completion_tokens": 542,
+        "cost_usd": 0.002984
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-022",
+      "track": "hard_reasoning",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 295,
+        "completion_tokens": 4,
+        "cost_usd": 0.000315
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-023",
+      "track": "hard_reasoning",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 271,
+        "completion_tokens": 4,
+        "cost_usd": 0.000291
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-024",
+      "track": "hard_reasoning",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 237,
+        "completion_tokens": 4,
+        "cost_usd": 0.000257
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-025",
+      "track": "hard_reasoning",
+      "prediction": "ب",
+      "score": 0.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 0,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 199,
+        "completion_tokens": 4,
+        "cost_usd": 0.000219
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-026",
+      "track": "hard_reasoning",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 242,
+        "completion_tokens": 4,
+        "cost_usd": 0.000262
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-027",
+      "track": "hard_reasoning",
+      "prediction": "ترتیب سن از بزرگ به کوچک: امیر ≥ علی ≥ آرش، یعنی ۲۸ ≥ علی ≥ ۲۴.\n\nعدد ۲۳ از ۲۴ کوچک‌تر است و نمی‌تواند سن علی باشد.\n\n**پ**",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "**پ**"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 228,
+        "completion_tokens": 112,
+        "cost_usd": 0.000788
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-028",
+      "track": "hard_reasoning",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 245,
+        "completion_tokens": 4,
+        "cost_usd": 0.000265
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-029",
+      "track": "hard_reasoning",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 281,
+        "completion_tokens": 4,
+        "cost_usd": 0.000301
+      }
+    },
+    {
+      "id": "peval-hard-reasoning-030",
+      "track": "hard_reasoning",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 261,
+        "completion_tokens": 4,
+        "cost_usd": 0.000281
+      }
+    },
+    {
+      "id": "peval-hard-math-005",
+      "track": "hard_math",
+      "prediction": "۲۲۰٬۰۰۰ تومان",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "۲۲۰۰۰۰",
+          "220000",
+          "۲۲۰ هزار",
+          "220 هزار",
+          "دویست و بیست هزار",
+          "۲۲۰،۰۰۰",
+          "220,000",
+          "دویست و بیست هزار تومان",
+          "۲۲۰ هزار تومان",
+          "220 هزار تومان",
+          "۲۲۰٬۰۰۰"
+        ],
+        "normalized_prediction": "220000 تومان",
+        "scored_candidate": "۲۲۰٬۰۰۰ تومان",
+        "match_kind": "subsequence"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 230,
+        "completion_tokens": 20,
+        "cost_usd": 0.00033
+      }
+    },
+    {
+      "id": "peval-hard-math-006",
+      "track": "hard_math",
+      "prediction": "۳۰",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "۳۰",
+          "30"
+        ],
+        "normalized_prediction": "30",
+        "scored_candidate": "۳۰",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 198,
+        "completion_tokens": 6,
+        "cost_usd": 0.000228
+      }
+    },
+    {
+      "id": "peval-hard-math-007",
+      "track": "hard_math",
+      "prediction": "۱/۶ + ۱/۸ + ۱/۱۲ = (۴ + ۳ + ۲)/۲۴ = ۹/۲۴ = ۳/۸ در ساعت، پس زمان = ۸/۳ ساعت\n\n۸/۳ ساعت (حدود ۲٫۶۷ ساعت)",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "۸/۳",
+          "8/3",
+          "۲ و ۲/۳",
+          "2 و 2/3",
+          "۲ ساعت و ۴۰ دقیقه",
+          "دو و دو سوم",
+          "۲.۶۷",
+          "2.67",
+          "۲ و ۲/۳ ساعت",
+          "2 و ۲/۳"
+        ],
+        "normalized_prediction": "83 ساعت حدود 267 ساعت",
+        "scored_candidate": "۸/۳ ساعت (حدود ۲٫۶۷ ساعت)",
+        "match_kind": "subsequence"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 272,
+        "completion_tokens": 118,
+        "cost_usd": 0.000862
+      }
+    },
+    {
+      "id": "peval-hard-math-008",
+      "track": "hard_math",
+      "prediction": "۵۰ کیلومتر بر ساعت",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۵۷.۱۴",
+          "۵۷.۱",
+          "57.1",
+          "57.14",
+          "حدود ۵۷",
+          "۴۰۰/۷",
+          "400/7",
+          "۵۷.۱۴۳",
+          "57.143",
+          "۵۷.۱۴۲۸"
+        ],
+        "normalized_prediction": "50 کیلومتر بر ساعت",
+        "scored_candidate": "۵۰ کیلومتر بر ساعت",
+        "match_kind": "none"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 248,
+        "completion_tokens": 19,
+        "cost_usd": 0.000343
+      }
+    },
+    {
+      "id": "peval-hard-math-009",
+      "track": "hard_math",
+      "prediction": "۶ سانتی‌متر مربع",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "۶",
+          "6",
+          "شش"
+        ],
+        "normalized_prediction": "6 سانتی متر مربع",
+        "scored_candidate": "۶ سانتی‌متر مربع",
+        "match_kind": "subsequence"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 192,
+        "completion_tokens": 16,
+        "cost_usd": 0.000272
+      }
+    },
+    {
+      "id": "peval-hard-math-010",
+      "track": "hard_math",
+      "prediction": "۲/۱۵",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "۲/۱۵",
+          "2/15"
+        ],
+        "normalized_prediction": "215",
+        "scored_candidate": "۲/۱۵",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 233,
+        "completion_tokens": 9,
+        "cost_usd": 0.000278
+      }
+    },
+    {
+      "id": "peval-hard-math-011",
+      "track": "hard_math",
+      "prediction": "۵",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "۵",
+          "5",
+          "پنج"
+        ],
+        "normalized_prediction": "5",
+        "scored_candidate": "۵",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 156,
+        "completion_tokens": 4,
+        "cost_usd": 0.000176
+      }
+    },
+    {
+      "id": "peval-hard-math-012",
+      "track": "hard_math",
+      "prediction": "۲۰ سانتی‌متر",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "۲۰",
+          "20",
+          "بیست",
+          "بیست سانتی‌متر",
+          "۲۰ سانتی‌متر",
+          "20 سانتی‌متر"
+        ],
+        "normalized_prediction": "20 سانتی متر",
+        "scored_candidate": "۲۰ سانتی‌متر",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 187,
+        "completion_tokens": 15,
+        "cost_usd": 0.000262
+      }
+    },
+    {
+      "id": "peval-hard-math-013",
+      "track": "hard_math",
+      "prediction": "۲۵ سال دیگر",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "۲۵",
+          "25",
+          "بیست و پنج"
+        ],
+        "normalized_prediction": "25 سال دیگر",
+        "scored_candidate": "۲۵ سال دیگر",
+        "match_kind": "subsequence"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 185,
+        "completion_tokens": 13,
+        "cost_usd": 0.00025
+      }
+    },
+    {
+      "id": "peval-hard-math-014",
+      "track": "hard_math",
+      "prediction": "۱۶",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "۱۶",
+          "16",
+          "شانزده"
+        ],
+        "normalized_prediction": "16",
+        "scored_candidate": "۱۶",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 163,
+        "completion_tokens": 6,
+        "cost_usd": 0.000193
+      }
+    },
+    {
+      "id": "peval-hard-math-015",
+      "track": "hard_math",
+      "prediction": "۱۰۰ هزار تومان (۱۰۰٬۰۰۰ تومان)",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "۱۰۰۰۰۰",
+          "100000",
+          "۱۰۰ هزار",
+          "100 هزار",
+          "صد هزار",
+          "۱۰۰،۰۰۰",
+          "100،000",
+          "یک صد هزار"
+        ],
+        "normalized_prediction": "100 هزار تومان 100000 تومان",
+        "scored_candidate": "۱۰۰ هزار تومان (۱۰۰٬۰۰۰ تومان)",
+        "match_kind": "subsequence"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 208,
+        "completion_tokens": 35,
+        "cost_usd": 0.000383
+      }
+    },
+    {
+      "id": "peval-hard-math-016",
+      "track": "hard_math",
+      "prediction": "۱۰۰٬۰۰۰ تومان",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "۱۰۰۰۰۰",
+          "100000",
+          "۱۰۰ هزار",
+          "100 هزار",
+          "صد هزار"
+        ],
+        "normalized_prediction": "100000 تومان",
+        "scored_candidate": "۱۰۰٬۰۰۰ تومان",
+        "match_kind": "subsequence"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 202,
+        "completion_tokens": 20,
+        "cost_usd": 0.000302
+      }
+    },
+    {
+      "id": "peval-hard-math-017",
+      "track": "hard_math",
+      "prediction": "۶۰",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۳۰",
+          "30",
+          "سی"
+        ],
+        "normalized_prediction": "60",
+        "scored_candidate": "۶۰",
+        "match_kind": "none"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 237,
+        "completion_tokens": 6,
+        "cost_usd": 0.000267
+      }
+    },
+    {
+      "id": "peval-hard-math-018",
+      "track": "hard_math",
+      "prediction": "۱۵۴ سانتی‌متر مربع",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "۱۵۴",
+          "154",
+          "صد و پنجاه و چهار",
+          "۱۵۴ سانتی‌متر مربع",
+          "154 سانتی‌متر مربع"
+        ],
+        "normalized_prediction": "154 سانتی متر مربع",
+        "scored_candidate": "۱۵۴ سانتی‌متر مربع",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 198,
+        "completion_tokens": 20,
+        "cost_usd": 0.000298
+      }
+    },
+    {
+      "id": "peval-hard-math-019",
+      "track": "hard_math",
+      "prediction": "۱/۶",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۱/۳",
+          "1/3"
+        ],
+        "normalized_prediction": "16",
+        "scored_candidate": "۱/۶",
+        "match_kind": "none"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 241,
+        "completion_tokens": 7,
+        "cost_usd": 0.000276
+      }
+    },
+    {
+      "id": "peval-hard-math-020",
+      "track": "hard_math",
+      "prediction": "۶",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "۶",
+          "6",
+          "شش",
+          "٦"
+        ],
+        "normalized_prediction": "6",
+        "scored_candidate": "۶",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 163,
+        "completion_tokens": 4,
+        "cost_usd": 0.000183
+      }
+    },
+    {
+      "id": "peval-hard-math-021",
+      "track": "hard_math",
+      "prediction": "۳/۸",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "۳/۸",
+          "3/8",
+          "۰٫۳۷۵",
+          "0.375",
+          "3/۸",
+          "۳/8"
+        ],
+        "normalized_prediction": "38",
+        "scored_candidate": "۳/۸",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 236,
+        "completion_tokens": 7,
+        "cost_usd": 0.000271
+      }
+    },
+    {
+      "id": "peval-hard-math-022",
+      "track": "hard_math",
+      "prediction": "۲۱٫۲۵",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "۲۱.۲۵",
+          "21.25",
+          "بیست و یک و یک‌چهارم",
+          "۲۱ و یک‌چهارم",
+          "بیست‌ویک و یک چهارم"
+        ],
+        "normalized_prediction": "2125",
+        "scored_candidate": "۲۱٫۲۵",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 200,
+        "completion_tokens": 12,
+        "cost_usd": 0.00026
+      }
+    },
+    {
+      "id": "peval-hard-math-023",
+      "track": "hard_math",
+      "prediction": "x برابر ۱۲ است.",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "۱۲",
+          "12",
+          "دوازده"
+        ],
+        "normalized_prediction": "x برابر 12 است",
+        "scored_candidate": "x برابر ۱۲ است.",
+        "match_kind": "subsequence"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 169,
+        "completion_tokens": 14,
+        "cost_usd": 0.000239
+      }
+    },
+    {
+      "id": "peval-hard-math-024",
+      "track": "hard_math",
+      "prediction": "۳٫۶ ساعت (یعنی ۳ ساعت و ۳۶ دقیقه)",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "۱۸/۵",
+          "18/5",
+          "۳ و ۳/۵",
+          "3 و 3/5",
+          "۳.۶",
+          "3.6"
+        ],
+        "normalized_prediction": "36 ساعت یعنی 3 ساعت و 36 دقیقه",
+        "scored_candidate": "۳٫۶ ساعت (یعنی ۳ ساعت و ۳۶ دقیقه)",
+        "match_kind": "subsequence"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 231,
+        "completion_tokens": 39,
+        "cost_usd": 0.000426
+      }
+    },
+    {
+      "id": "peval-hard-math-025",
+      "track": "hard_math",
+      "prediction": "۲۵ متر",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "۵",
+          "5",
+          "پنج"
+        ],
+        "normalized_prediction": "25 متر",
+        "scored_candidate": "۲۵ متر",
+        "match_kind": "none"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 176,
+        "completion_tokens": 9,
+        "cost_usd": 0.000221
+      }
+    },
+    {
+      "id": "peval-hard-math-026",
+      "track": "hard_math",
+      "prediction": "۲۰۰ ÷ ۷ باقی‌مانده ۴ دارد، پس ۲۰۰ روز دیگر پنجشنبه است.",
+      "score": 0.0,
+      "details": {
+        "accepted": [
+          "جمعه"
+        ],
+        "normalized_prediction": "200 ÷ 7 باقی مانده 4 دارد پس 200 روز دیگر پنجشنبه است",
+        "scored_candidate": "۲۰۰ ÷ ۷ باقی‌مانده ۴ دارد، پس ۲۰۰ روز دیگر پنجشنبه است.",
+        "match_kind": "none"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 168,
+        "completion_tokens": 58,
+        "cost_usd": 0.000458
+      }
+    },
+    {
+      "id": "peval-hard-math-027",
+      "track": "hard_math",
+      "prediction": "۳۶",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "۳۶",
+          "36",
+          "سی و شش"
+        ],
+        "normalized_prediction": "36",
+        "scored_candidate": "۳۶",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 230,
+        "completion_tokens": 6,
+        "cost_usd": 0.00026
+      }
+    },
+    {
+      "id": "peval-hard-math-028",
+      "track": "hard_math",
+      "prediction": "۴٫۸ روز",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "۲۴/۵",
+          "24/5",
+          "۴.۸",
+          "4.8"
+        ],
+        "normalized_prediction": "48 روز",
+        "scored_candidate": "۴٫۸ روز",
+        "match_kind": "subsequence"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 222,
+        "completion_tokens": 11,
+        "cost_usd": 0.000277
+      }
+    },
+    {
+      "id": "peval-hard-math-030",
+      "track": "hard_math",
+      "prediction": "۱/۶",
+      "score": 1.0,
+      "details": {
+        "accepted": [
+          "۱/۶",
+          "1/6",
+          "یک ششم"
+        ],
+        "normalized_prediction": "16",
+        "scored_candidate": "۱/۶",
+        "match_kind": "exact"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 198,
+        "completion_tokens": 7,
+        "cost_usd": 0.000233
+      }
+    },
+    {
+      "id": "peval-hard-reading-005",
+      "track": "hard_reading",
+      "prediction": "چون سرعت اولیه‌اش با گم‌شدن کاربران در مرحله بعد خنثی می‌شد، در حالی که صفحه پر هرچند در ابتدا معطل می‌کرد، کاربران را به تکمیل کار می‌رساند.",
+      "score": 0.8333333333333334,
+      "details": {
+        "best_answer": "گم شدن کاربر در مرحله بعد",
+        "scored_candidate": "چون سرعت اولیه‌اش با گم‌شدن کاربران در مرحله بعد خنثی می‌شد، در حالی که صفحه پر هرچند در ابتدا معطل می‌کرد، کاربران را به تکمیل کار می‌رساند."
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 353,
+        "completion_tokens": 97,
+        "cost_usd": 0.000838
+      }
+    },
+    {
+      "id": "peval-hard-reading-006",
+      "track": "hard_reading",
+      "prediction": "عوامل مخدوش‌کننده: زود خوابیدن شبانه (خواب کافی) و حمایت تحصیلی بیشتر خانواده، که هم با خوردن صبحانه و هم با نمرهٔ بهتر همراه‌اند و رابطهٔ علّی صبحانه و نمره را مشکوک می‌کنند.",
+      "score": 0.8000000000000002,
+      "details": {
+        "best_answer": "حمایت خانوادگی و خواب کافی",
+        "scored_candidate": "عوامل مخدوش‌کننده: زود خوابیدن شبانه (خواب کافی) و حمایت تحصیلی بیشتر خانواده، که هم با خوردن صبحانه و هم با نمرهٔ بهتر همراه‌اند و رابطهٔ علّی صبحانه و نمره را مشکوک می‌کنند."
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 335,
+        "completion_tokens": 126,
+        "cost_usd": 0.000965
+      }
+    },
+    {
+      "id": "peval-hard-reading-007",
+      "track": "hard_reading",
+      "prediction": "چون نرخ خرابی خط ب بسیار کمتر است و هزینه‌های تعمیر و پشتیبانی خط الف سود حاصل از سرعت بالاترش را از بین می‌برد.",
+      "score": 0.8333333333333334,
+      "details": {
+        "best_answer": "هزینه‌های تعمیر و پشتیبانی کمتر",
+        "scored_candidate": "چون نرخ خرابی خط ب بسیار کمتر است و هزینه‌های تعمیر و پشتیبانی خط الف سود حاصل از سرعت بالاترش را از بین می‌برد."
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 324,
+        "completion_tokens": 76,
+        "cost_usd": 0.000704
+      }
+    },
+    {
+      "id": "peval-hard-reading-008",
+      "track": "hard_reading",
+      "prediction": "داده‌ها قابل مقایسه نیستند: پیشخدمت اول خودش فرم‌ها را پر می‌کرد و این سوگیری و تعارض منافع ایجاد می‌کند، پس بالاتر بودن رضایت او نشانه عملکرد بهتر نیست.",
+      "score": 0.3333333333333333,
+      "details": {
+        "best_answer": "تعارض منافع در پر کردن فرم",
+        "scored_candidate": "داده‌ها قابل مقایسه نیستند: پیشخدمت اول خودش فرم‌ها را پر می‌کرد و این سوگیری و تعارض منافع ایجاد می‌کند، پس بالاتر بودن رضایت او نشانه عملکرد بهتر نیست."
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 331,
+        "completion_tokens": 107,
+        "cost_usd": 0.000866
+      }
+    },
+    {
+      "id": "peval-hard-reading-009",
+      "track": "hard_reading",
+      "prediction": "دیر باز شدن قفل در ورودی پارک (به اندازه یک ساعت)",
+      "score": 1.0,
+      "details": {
+        "best_answer": "دیر باز شدن قفل در ورودی پارک",
+        "scored_candidate": "دیر باز شدن قفل در ورودی پارک (به اندازه یک ساعت)"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 307,
+        "completion_tokens": 34,
+        "cost_usd": 0.000477
+      }
+    },
+    {
+      "id": "peval-hard-reading-010",
+      "track": "hard_reading",
+      "prediction": "آن سه چهارراه سهم کوچکی از کل تصادفات شهر را داشتند و ممکن است تصادفات به چهارراه‌های بدون دوربین منتقل شده باشد (جابه‌جایی ترافیک و رانندگی پرخطر).",
+      "score": 0.42857142857142855,
+      "details": {
+        "best_answer": "جابه‌جایی تصادف به چهارراه‌های دیگر",
+        "scored_candidate": "آن سه چهارراه سهم کوچکی از کل تصادفات شهر را داشتند و ممکن است تصادفات به چهارراه‌های بدون دوربین منتقل شده باشد (جابه‌جایی ترافیک و رانندگی پرخطر)."
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 310,
+        "completion_tokens": 97,
+        "cost_usd": 0.000795
+      }
+    },
+    {
+      "id": "peval-hard-reading-011",
+      "track": "hard_reading",
+      "prediction": "ایراد این است که ملاک رد باید نسبت به کل اعضا (با لحاظ حدنصاب و آرای واقعی) سنجیده می‌شد، نه ۲۰٪ از کل؛ چون فقط نیمی حاضر بودند، ۲۰٪ کل یعنی حدود ۴۰٪ حاضران بوده و نه رد مسلم است و نه موافقت لازم (۵۰٪+۱) را نشان می‌دهد، پس اگر حدنصاب رعایت نشده یا آرای مخالف شمرده نشده، رد پروژه فاقد اعتبار آیین‌نامه‌ای است.",
+      "score": 0.25,
+      "details": {
+        "best_answer": "حضور نیمی از اعضا و عدم حد نصاب",
+        "scored_candidate": "ایراد این است که ملاک رد باید نسبت به کل اعضا (با لحاظ حدنصاب و آرای واقعی) سنجیده می‌شد، نه ۲۰٪ از کل؛ چون فقط نیمی حاضر بودند، ۲۰٪ کل یعنی حدود ۴۰٪ حاضران بوده و نه رد مسلم است و نه موافقت لازم (۵۰٪+۱) را نشان می‌دهد، پس اگر حدنصاب رعایت نشده یا آرای مخالف شمرده نشده، رد پروژه فاقد اعتبار آیین‌نامه‌ای است."
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 316,
+        "completion_tokens": 232,
+        "cost_usd": 0.001476
+      }
+    },
+    {
+      "id": "peval-hard-reading-012",
+      "track": "hard_reading",
+      "prediction": "نمونه روش ب بسیار کوچک (۲۰ نفر) است و اختلاف ۹۰٪ با ۸۰٪ ممکن است صرفاً ناشی از شانس باشد؛ بدون آزمون آماری و در نظر گرفتن عدم قطعیت، نمی‌توان نتیجه گرفت روش ب بهتر است.",
+      "score": 0.8000000000000002,
+      "details": {
+        "best_answer": "کوچک بودن نمونه روش ب",
+        "scored_candidate": "نمونه روش ب بسیار کوچک (۲۰ نفر) است و اختلاف ۹۰٪ با ۸۰٪ ممکن است صرفاً ناشی از شانس باشد؛ بدون آزمون آماری و در نظر گرفتن عدم قطعیت، نمی‌توان نتیجه گرفت روش ب بهتر است."
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 286,
+        "completion_tokens": 131,
+        "cost_usd": 0.000941
+      }
+    },
+    {
+      "id": "peval-hard-reading-013",
+      "track": "hard_reading",
+      "prediction": "چون کمپین تلویزیونی هم همزمان شروع شده بود و این عامل مخدوش‌کننده می‌تواند خودش باعث افزایش فروش شده باشد، پس اثر تغییر رنگ دکمه قابل تفکیک نیست.",
+      "score": 1.0,
+      "details": {
+        "best_answer": "کمپین تلویزیونی هم همزمان شروع شده بود",
+        "scored_candidate": "چون کمپین تلویزیونی هم همزمان شروع شده بود و این عامل مخدوش‌کننده می‌تواند خودش باعث افزایش فروش شده باشد، پس اثر تغییر رنگ دکمه قابل تفکیک نیست."
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 276,
+        "completion_tokens": 97,
+        "cost_usd": 0.000761
+      }
+    },
+    {
+      "id": "peval-hard-reading-014",
+      "track": "hard_reading",
+      "prediction": "فرض نادرست وابستگی علّی (خطای علت‌انگاری کاذب): کارگزار بدون شواهد، رابطهٔ علّی میان مسیر شمال و تأمین آب مرکز را فرض کرد.",
+      "score": 0.5,
+      "details": {
+        "best_answer": "فرض غلط رابطه علی بین شمال و مرکز",
+        "scored_candidate": "فرض نادرست وابستگی علّی (خطای علت‌انگاری کاذب): کارگزار بدون شواهد، رابطهٔ علّی میان مسیر شمال و تأمین آب مرکز را فرض کرد."
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 355,
+        "completion_tokens": 85,
+        "cost_usd": 0.00078
+      }
+    },
+    {
+      "id": "peval-hard-reading-015",
+      "track": "hard_reading",
+      "prediction": "نبودن قطعه یدکی در بازار.",
+      "score": 0.8000000000000002,
+      "details": {
+        "best_answer": "نبود قطعه یدکی در بازار",
+        "scored_candidate": "نبودن قطعه یدکی در بازار."
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 275,
+        "completion_tokens": 19,
+        "cost_usd": 0.00037
+      }
+    },
+    {
+      "id": "peval-hard-reading-016",
+      "track": "hard_reading",
+      "prediction": "گرمای هوا (دما و فصل تابستان)؛ هوای گرم هم فروش بستنی و هم شنا و در نتیجه غرق‌شدگی را افزایش می‌دهد.",
+      "score": 1.0,
+      "details": {
+        "best_answer": "فصل تابستان",
+        "scored_candidate": "گرمای هوا (دما و فصل تابستان)؛ هوای گرم هم فروش بستنی و هم شنا و در نتیجه غرق‌شدگی را افزایش می‌دهد."
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 292,
+        "completion_tokens": 73,
+        "cost_usd": 0.000657
+      }
+    },
+    {
+      "id": "peval-hard-reading-017",
+      "track": "hard_reading",
+      "prediction": "نبودن دستور جلسهٔ مکتوب از پیش، که باعث بحث‌های فرعی و طولانی شدن جلسه‌ها می‌شد.",
+      "score": 0.8000000000000002,
+      "details": {
+        "best_answer": "نبود دستور جلسه از پیش",
+        "scored_candidate": "نبودن دستور جلسهٔ مکتوب از پیش، که باعث بحث‌های فرعی و طولانی شدن جلسه‌ها می‌شد."
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 302,
+        "completion_tokens": 62,
+        "cost_usd": 0.000612
+      }
+    },
+    {
+      "id": "peval-hard-reading-018",
+      "track": "hard_reading",
+      "prediction": "سوگیری نمونه‌گیری (سوگیری انتخاب)",
+      "score": 1.0,
+      "details": {
+        "best_answer": "سوگیری انتخاب",
+        "scored_candidate": "سوگیری نمونه‌گیری (سوگیری انتخاب)"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 265,
+        "completion_tokens": 28,
+        "cost_usd": 0.000405
+      }
+    },
+    {
+      "id": "peval-hard-reading-019",
+      "track": "hard_reading",
+      "prediction": "اضافه شدن ضوابط جدید برای ارزیابی، با وجود رسیدن نرخ قبولی به ۸۵٪.",
+      "score": 0.8000000000000002,
+      "details": {
+        "best_answer": "اضافه شدن ضوابط جدید ارزیابی",
+        "scored_candidate": "اضافه شدن ضوابط جدید برای ارزیابی، با وجود رسیدن نرخ قبولی به ۸۵٪."
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 307,
+        "completion_tokens": 52,
+        "cost_usd": 0.000567
+      }
+    },
+    {
+      "id": "peval-hard-reading-020",
+      "track": "hard_reading",
+      "prediction": "چون ساعت تدریس کلاس دخترانه دو برابر بوده، این عامل مخدوش‌کننده است و نمی‌توان تفاوت نمره‌ها را به جنسیت نسبت داد.",
+      "score": 0.6,
+      "details": {
+        "best_answer": "کلاس دخترانه ساعت بیشتری داشته",
+        "scored_candidate": "چون ساعت تدریس کلاس دخترانه دو برابر بوده، این عامل مخدوش‌کننده است و نمی‌توان تفاوت نمره‌ها را به جنسیت نسبت داد."
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 279,
+        "completion_tokens": 79,
+        "cost_usd": 0.000674
+      }
+    },
+    {
+      "id": "peval-hard-reading-021",
+      "track": "hard_reading",
+      "prediction": "مغالطه قمارباز (مغالطه مونت‌کارلو)",
+      "score": 0.5,
+      "details": {
+        "best_answer": "خطای قمارباز",
+        "scored_candidate": "مغالطه قمارباز (مغالطه مونت‌کارلو)"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 234,
+        "completion_tokens": 28,
+        "cost_usd": 0.000374
+      }
+    },
+    {
+      "id": "peval-hard-reading-022",
+      "track": "hard_reading",
+      "prediction": "نصف شدن قیمت محصول، که همزمان با بزرگ‌تر شدن دکمه رخ داده و اثر دکمه را نمی‌توان از آن جدا کرد.",
+      "score": 1.0,
+      "details": {
+        "best_answer": "نصف شدن قیمت محصول",
+        "scored_candidate": "نصف شدن قیمت محصول، که همزمان با بزرگ‌تر شدن دکمه رخ داده و اثر دکمه را نمی‌توان از آن جدا کرد."
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 309,
+        "completion_tokens": 69,
+        "cost_usd": 0.000654
+      }
+    },
+    {
+      "id": "peval-hard-reading-023",
+      "track": "hard_reading",
+      "prediction": "مدیر فقط به نظر اقلیت ۱۰ درصدی استناد کرد و نظر ۹۰ درصد بقیه کارمندان را نادیده گرفت، یعنی تصمیم بر پایه شواهد ناقص و نمونه‌ی ناکافی بود.",
+      "score": 0.6,
+      "details": {
+        "best_answer": "تعمیم نظر اقلیت به کل",
+        "scored_candidate": "مدیر فقط به نظر اقلیت ۱۰ درصدی استناد کرد و نظر ۹۰ درصد بقیه کارمندان را نادیده گرفت، یعنی تصمیم بر پایه شواهد ناقص و نمونه‌ی ناکافی بود."
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 263,
+        "completion_tokens": 105,
+        "cost_usd": 0.000788
+      }
+    },
+    {
+      "id": "peval-hard-reading-024",
+      "track": "hard_reading",
+      "prediction": "کاهش شکایت‌ها ممکن است فقط به‌خاطر رفتن ساکنان ناراضی باشد، نه بهتر شدن کیفیت زندگی، یعنی جمعیتِ مقایسه‌شده تغییر کرده است.",
+      "score": 0.4000000000000001,
+      "details": {
+        "best_answer": "ساکنان ناراضی قبلاً رفته بودند",
+        "scored_candidate": "کاهش شکایت‌ها ممکن است فقط به‌خاطر رفتن ساکنان ناراضی باشد، نه بهتر شدن کیفیت زندگی، یعنی جمعیتِ مقایسه‌شده تغییر کرده است."
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 294,
+        "completion_tokens": 95,
+        "cost_usd": 0.000769
+      }
+    },
+    {
+      "id": "peval-hard-reading-025",
+      "track": "hard_reading",
+      "prediction": "بله، افزودن عبارتی مانند «فرض کنید عوامل خارجی تغییری نکرده‌اند» با ثابت نگه داشتن سایر متغیرها، توضیح‌های علّی جایگزین را حذف می‌کند و استنتاج علّی را دقیق‌تر می‌سازد.",
+      "score": 0.0,
+      "details": {
+        "best_answer": "",
+        "scored_candidate": ""
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 193,
+        "completion_tokens": 115,
+        "cost_usd": 0.000768
+      }
+    },
+    {
+      "id": "peval-hard-reading-026",
+      "track": "hard_reading",
+      "prediction": "بهینه‌سازی فقط صفحه پروفایل که مشکل در آن است اقتصادی‌تر است، نه بازنویسی همه صفحات.",
+      "score": 1.0,
+      "details": {
+        "best_answer": "صفحه پروفایل",
+        "scored_candidate": "بهینه‌سازی فقط صفحه پروفایل که مشکل در آن است اقتصادی‌تر است، نه بازنویسی همه صفحات."
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 246,
+        "completion_tokens": 59,
+        "cost_usd": 0.000541
+      }
+    },
+    {
+      "id": "peval-hard-reading-027",
+      "track": "hard_reading",
+      "prediction": "متغیر مزاحم احتمالی، سن (میانگین سن جمعیت) است.",
+      "score": 1.0,
+      "details": {
+        "best_answer": "سن",
+        "scored_candidate": "متغیر مزاحم احتمالی، سن (میانگین سن جمعیت) است."
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 256,
+        "completion_tokens": 34,
+        "cost_usd": 0.000426
+      }
+    },
+    {
+      "id": "peval-hard-reading-029",
+      "track": "hard_reading",
+      "prediction": "چون افزایش درآمد فقط ناشی از دو برابر شدن قیمت بوده و تعداد فروش به نصف رسیده، یعنی تقاضا و سهم بازار کاهش یافته و این نشانه‌ی عملکرد خوب نیست.",
+      "score": 0.3,
+      "details": {
+        "best_answer": "تنها افزایش قیمت باعث رشد درآمد شده، نه بهبود فروش",
+        "scored_candidate": "چون افزایش درآمد فقط ناشی از دو برابر شدن قیمت بوده و تعداد فروش به نصف رسیده، یعنی تقاضا و سهم بازار کاهش یافته و این نشانه‌ی عملکرد خوب نیست."
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 278,
+        "completion_tokens": 97,
+        "cost_usd": 0.000763
+      }
+    },
+    {
+      "id": "peval-hard-reading-030",
+      "track": "hard_reading",
+      "prediction": "ممکن است حریفان بازی‌های خانگی ضعیف‌تر و حریفان بازی‌های خارج از خانه قوی‌تر بوده باشند، یعنی تفاوت نتایج به دشواری برنامهٔ بازی‌ها مربوط باشد، نه خود زمین.",
+      "score": 0.8333333333333334,
+      "details": {
+        "best_answer": "حریفان خارج از خانه قوی‌تر",
+        "scored_candidate": "ممکن است حریفان بازی‌های خانگی ضعیف‌تر و حریفان بازی‌های خارج از خانه قوی‌تر بوده باشند، یعنی تفاوت نتایج به دشواری برنامهٔ بازی‌ها مربوط باشد، نه خود زمین."
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 291,
+        "completion_tokens": 110,
+        "cost_usd": 0.000841
+      }
+    },
+    {
+      "id": "peval-hard-instruction-005",
+      "track": "hard_instruction",
+      "prediction": "درک می‌کنم که قطعی اینترنت برایتان ناخوشایند بوده است. موضوع را فوراً برای پیگیری به تیم فنی ارجاع دادیم و پس از بررسی، راهکار مناسب را از طریق پیامک اطلاع می‌دهیم.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 181,
+        "completion_tokens": 107,
+        "cost_usd": 0.000716
+      }
+    },
+    {
+      "id": "peval-hard-instruction-006",
+      "track": "hard_instruction",
+      "prediction": "همکاری در تیم باعث می‌شود اعضا با داشتن هدف مشترک، تلاش‌های خود را هماهنگ کنند. تبادل ایده‌ها و دریافت بازخورد مستمر، کیفیت کار را بالا می‌برد، خطاها را کاهش می‌دهد و مسئولیت‌ها را عادلانه‌تر تقسیم می‌کند.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 186,
+        "completion_tokens": 145,
+        "cost_usd": 0.000911
+      }
+    },
+    {
+      "id": "peval-hard-instruction-007",
+      "track": "hard_instruction",
+      "prediction": "از نظر امنیتی، رمز عبور قوی نخستین سد دفاعی حساب شماست. ترکیب حروف، نمادها و اعداد، نفوذ مهاجمان را دشوار می‌کند. همراه با احراز هویت دومرحله‌ای، از سرقت اطلاعات شخصی جلوگیری می‌شود. هرگز یک رمز را برای چند حساب تکرار نکنید.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 187,
+        "completion_tokens": 153,
+        "cost_usd": 0.000952
+      }
+    },
+    {
+      "id": "peval-hard-instruction-008",
+      "track": "hard_instruction",
+      "prediction": "اگر دانشجو اولویت کارها را مشخص کند و برنامه‌اش را در تقویم بنویسد، استرس امتحان کم می‌شود، کارها به‌موقع تمام می‌شوند و زمان بیشتری برای استراحت و یادگیری عمیق باقی می‌ماند و نتیجه بهتر می‌شود",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": false,
+          "required_prefix": true,
+          "required_suffix": true
+        },
+        "constraint_score": 0.8333333333333334
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 180,
+        "completion_tokens": 127,
+        "cost_usd": 0.000815
+      }
+    },
+    {
+      "id": "peval-hard-instruction-009",
+      "track": "hard_instruction",
+      "prediction": "با سلام،\n\nاز پیشنهاد ارزشمند شما بسیار سپاسگزارم و از لطف شما قدردانی می‌کنم. متأسفانه در حال حاضر به دلیل تعهدات کاری فعلی، امکان همکاری برایم وجود ندارد. امیدوارم در آینده فرصت‌های دیگری برای آشنایی بیشتر فراهم شود.\n\nبا احترام",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 185,
+        "completion_tokens": 149,
+        "cost_usd": 0.00093
+      }
+    },
+    {
+      "id": "peval-hard-instruction-010",
+      "track": "hard_instruction",
+      "prediction": "درست می‌فرمایید، سفارش شما با تأخیر رسیده و بابت این بی‌نظمی از شما پوزش می‌خواهیم. برای جبران، هزینه ارسال این سفارش را بازمی‌گردانیم و تخفیف ویژه‌ای برای خرید بعدی شما در نظر می‌گیریم.",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": false,
+          "required_prefix": true
+        },
+        "constraint_score": 0.8
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 174,
+        "completion_tokens": 126,
+        "cost_usd": 0.000804
+      }
+    },
+    {
+      "id": "peval-hard-instruction-011",
+      "track": "hard_instruction",
+      "prediction": "دعوت می‌کنیم در کارگاه آنلاین «مهارت‌های ارائه مؤثر» شرکت کنید؛ جمعه ساعت ۱۸ برگزار می‌شود و ظرفیت محدود است. برای ثبت‌نام، از لینک زیر استفاده کنید: [لینک ثبت‌نام]",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 176,
+        "completion_tokens": 126,
+        "cost_usd": 0.000806
+      }
+    },
+    {
+      "id": "peval-hard-instruction-012",
+      "track": "hard_instruction",
+      "prediction": "به‌طور کلی، ورزش روزانه قلب را قوی‌تر می‌کند، فشار خون و استرس را کاهش می‌دهد و کیفیت خواب را بهتر می‌کند. همچنین انرژی، تمرکز و خلق‌وخو را افزایش می‌دهد و به کنترل وزن و سلامت عضلات و استخوان‌ها کمک می‌کند.",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": false,
+          "required_prefix": true
+        },
+        "constraint_score": 0.8
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 161,
+        "completion_tokens": 146,
+        "cost_usd": 0.000891
+      }
+    },
+    {
+      "id": "peval-hard-instruction-013",
+      "track": "hard_instruction",
+      "prediction": "از پیشنهاد شما سپاسگزاریم، اما متأسفانه طبق سیاست شرکت امکان ارائه تخفیف بیشتر وجود ندارد. امیدواریم بتوانیم در سفارش‌های بعدی با خدمات مناسب رضایت شما را جلب کنیم.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 175,
+        "completion_tokens": 114,
+        "cost_usd": 0.000745
+      }
+    },
+    {
+      "id": "peval-hard-instruction-014",
+      "track": "hard_instruction",
+      "prediction": "مهندس نرم‌افزار جوان با تمرکز بر توسعه بک‌اند، علاقه‌مند به طراحی سرویس‌های پایدار و مقیاس‌پذیر. تجربه کار با پایتون، پایگاه‌داده و APIهای RESTful دارم. به یادگیری مستمر و همکاری تیمی باور دارم و دنبال فرصتی برای رشد در محیطی پویا هستم.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 183,
+        "completion_tokens": 158,
+        "cost_usd": 0.000973
+      }
+    },
+    {
+      "id": "peval-hard-instruction-015",
+      "track": "hard_instruction",
+      "prediction": "استاد گرامی،\n\nبا سپاس فراوان از زحمات ارزشمند شما در این نیمسال. راهنمایی‌های دقیق و صبورانه‌تان نقش مهمی در پیشرفت علمی من داشت. از اینکه فرصت بهره‌مندی از دانش و تجربه‌تان را یافتم، بسیار قدردانم و برایتان آرزوی موفقیت دارم.\n\nارادتمند شما",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true,
+          "required_suffix": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 203,
+        "completion_tokens": 159,
+        "cost_usd": 0.000998
+      }
+    },
+    {
+      "id": "peval-hard-instruction-016",
+      "track": "hard_instruction",
+      "prediction": "برای امنیت بیشتر، مرورگر شما قدیمی است و آسیب‌پذیری‌های شناخته‌شده دارد. لطفاً پیش از ادامه، مرورگر خود را به آخرین نسخه ارتقا دهید. این به‌روزرسانی فقط چند دقیقه زمان می‌برد.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 193,
+        "completion_tokens": 122,
+        "cost_usd": 0.000803
+      }
+    },
+    {
+      "id": "peval-hard-instruction-017",
+      "track": "hard_instruction",
+      "prediction": "در حال حاضر به دلیل افزایش حجم درخواست‌ها، پاسخ‌گویی با تأخیر انجام می‌شود. تیم پشتیبانی با نوبت‌بندی و اولویت‌بندی تیکت‌ها، همه درخواست‌ها را به ترتیب بررسی می‌کند. از صبوری شما سپاسگزاریم.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 199,
+        "completion_tokens": 138,
+        "cost_usd": 0.000889
+      }
+    },
+    {
+      "id": "peval-hard-instruction-018",
+      "track": "hard_instruction",
+      "prediction": "مسابقه عکاسی «نگاه تازه» با موضوع زندگی شهری برگزار می‌شود. علاقه‌مندان تا پایان ماه آینده می‌توانند بهترین قاب‌های خود را ارسال کنند. داوری آثار بر عهده هیئتی از عکاسان حرفه‌ای است و به نفر اول جایزه نقدی و لوح تقدیر تعلق می‌گیرد. منتظر دیدن تصاویر شما هستیم.",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": false,
+          "required_prefix": true
+        },
+        "constraint_score": 0.8
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 175,
+        "completion_tokens": 177,
+        "cost_usd": 0.00106
+      }
+    },
+    {
+      "id": "peval-hard-instruction-019",
+      "track": "hard_instruction",
+      "prediction": "به اطلاع همکاران گرامی می‌رساند ساعت کاری جدید شرکت از هفته آینده اجرا می‌شود. ساعت کاری از ۸ صبح تا ۴ بعدازظهر خواهد بود و زمان استراحت ناهار نیم‌ساعت است. لطفاً هماهنگی‌های لازم را انجام دهید. از همکاری شما سپاسگزاریم.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 179,
+        "completion_tokens": 152,
+        "cost_usd": 0.000939
+      }
+    },
+    {
+      "id": "peval-hard-instruction-020",
+      "track": "hard_instruction",
+      "prediction": "مشتری گرامی، از همراهی و اعتماد همیشگی شما سپاسگزاریم. «نظر شما» برای ما ارزشمند است. لطفاً با شرکت در نظرسنجی کوتاه ما، ما را در «بهبود خدمات» یاری کنید. پیشاپیش از وقتی که اختصاص می‌دهید قدردانی می‌کنیم.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 186,
+        "completion_tokens": 142,
+        "cost_usd": 0.000896
+      }
+    },
+    {
+      "id": "peval-hard-instruction-021",
+      "track": "hard_instruction",
+      "prediction": "پشتیبان‌گیری منظم از داده‌ها شما را در برابر از دست رفتن اطلاعات ناشی از خرابی دستگاه، حمله بدافزار یا خطای انسانی محافظت می‌کند. با داشتن نسخه‌های به‌روز، بازیابی فایل‌ها سریع و ساده می‌شود و هزینه و استرس کاهش می‌یابد.",
+      "score": 0.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": false,
+          "required_prefix": true
+        },
+        "constraint_score": 0.8
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 188,
+        "completion_tokens": 147,
+        "cost_usd": 0.000923
+      }
+    },
+    {
+      "id": "peval-hard-instruction-022",
+      "track": "hard_instruction",
+      "prediction": "رشد فروش ما حاصل ورود به یک بازار جدید در منطقه و تقویت خدمات پس از فروش بوده است. مشتریان با اعتماد بیشتری خرید می‌کنند و بازگشت آن‌ها به برند ما نیز به‌طور محسوسی افزایش یافته است.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 187,
+        "completion_tokens": 115,
+        "cost_usd": 0.000762
+      }
+    },
+    {
+      "id": "peval-hard-instruction-023",
+      "track": "hard_instruction",
+      "prediction": "جناب آقای دکتر رضایی، با سلام و احترام. ما در پادکست «افق دانش» مشتاق میزبانی شما هستیم. خوشحال می‌شویم برای یک گفت‌وگوی حدود یک‌ساعته درباره تجربه‌های حرفه‌ای‌تان وقت بگذارید. منتظر پاسخ شما هستیم. با سپاس",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 229,
+        "completion_tokens": 144,
+        "cost_usd": 0.000949
+      }
+    },
+    {
+      "id": "peval-hard-instruction-024",
+      "track": "hard_instruction",
+      "prediction": "از تماس شما سپاسگزاریم و بابت ناهماهنگی پیش‌آمده متأسفیم. بررسی فاکتور شما را آغاز کرده‌ایم تا علت اختلاف مبلغ مشخص شود. لطفاً شماره سفارش را ارسال کنید تا پیگیری سریع‌تر انجام شود.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 201,
+        "completion_tokens": 129,
+        "cost_usd": 0.000846
+      }
+    },
+    {
+      "id": "peval-hard-instruction-025",
+      "track": "hard_instruction",
+      "prediction": "برای جست‌وجو، ابتدا عبارت یا کلمه مورد نظر خود را در کادر بالای صفحه بنویسید. سپس روی دکمه جست‌وجو کلیک کنید تا نتایج مرتبط نمایش داده شود. برای دقت بیشتر، از کلمات کلیدی کوتاه و مشخص استفاده کنید.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 191,
+        "completion_tokens": 135,
+        "cost_usd": 0.000866
+      }
+    },
+    {
+      "id": "peval-hard-instruction-026",
+      "track": "hard_instruction",
+      "prediction": "هشدار: ایمیل معمولی امن نیست و ارسال اطلاعات حساس از این طریق خطرناک است. پیش از ارسال، فایل را با رمزنگاری محافظت کنید و گذرواژه را از مسیری جداگانه به گیرنده بدهید.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 195,
+        "completion_tokens": 104,
+        "cost_usd": 0.000715
+      }
+    },
+    {
+      "id": "peval-hard-instruction-027",
+      "track": "hard_instruction",
+      "prediction": "معرفی می‌کنیم: پلتفرمی نوین برای مدیریت ساده زمان و وظایف روزانه. این راه‌حل هوشمند به هر کاربر کمک می‌کند برنامه‌هایش را منظم‌تر دنبال کند، تمرکز بیشتری داشته باشد و با آرامش به اهدافش برسد.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 181,
+        "completion_tokens": 130,
+        "cost_usd": 0.000831
+      }
+    },
+    {
+      "id": "peval-hard-instruction-028",
+      "track": "hard_instruction",
+      "prediction": "پیرو ایمیل شما، جزئیات تکمیلی گزارش شامل داده‌های فصلی و تحلیل نتایج تهیه شده است. فایل کامل در پیوست ارسال می‌شود. در صورت نیاز به اطلاعات بیشتر، مراتب را اعلام فرمایید.\n\nبا احترام",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 231,
+        "completion_tokens": 121,
+        "cost_usd": 0.000836
+      }
+    },
+    {
+      "id": "peval-hard-instruction-029",
+      "track": "hard_instruction",
+      "prediction": "همکاران گرامی،\n\nبه نشست هم‌فکری درباره فرهنگ سازمانی دعوت می‌شوید. در این جلسه نظرها و تجربه‌های شما را درباره بهبود محیط کار می‌شنویم. حضور و مشارکت شما به غنای گفتگو کمک می‌کند.\n\nزمان: سه‌شنبه، ساعت ۱۰ صبح\nمکان: سالن جلسات\n\nبا سپاس",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 213,
+        "completion_tokens": 163,
+        "cost_usd": 0.001028
+      }
+    },
+    {
+      "id": "peval-hard-instruction-030",
+      "track": "hard_instruction",
+      "prediction": "انتقاد شما برای ما ارزشمند است. با دقت موضوع را بررسی می‌کنیم و فرایندهای مربوطه را بازنگری خواهیم کرد. هدف ما بهبود مستمر کیفیت خدمات است. از اینکه نظرتان را با ما در میان گذاشتید سپاسگزاریم.",
+      "score": 1.0,
+      "details": {
+        "checks": {
+          "required_keywords": true,
+          "forbidden": true,
+          "min_words": true,
+          "max_words": true,
+          "required_prefix": true
+        },
+        "constraint_score": 1.0
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 186,
+        "completion_tokens": 125,
+        "cost_usd": 0.000811
+      }
+    },
+    {
+      "id": "peval-hard-culture-005",
+      "track": "hard_culture",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 213,
+        "completion_tokens": 4,
+        "cost_usd": 0.000233
+      }
+    },
+    {
+      "id": "peval-hard-culture-006",
+      "track": "hard_culture",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 194,
+        "completion_tokens": 4,
+        "cost_usd": 0.000214
+      }
+    },
+    {
+      "id": "peval-hard-culture-007",
+      "track": "hard_culture",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 212,
+        "completion_tokens": 4,
+        "cost_usd": 0.000232
+      }
+    },
+    {
+      "id": "peval-hard-culture-009",
+      "track": "hard_culture",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 198,
+        "completion_tokens": 4,
+        "cost_usd": 0.000218
+      }
+    },
+    {
+      "id": "peval-hard-culture-010",
+      "track": "hard_culture",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 229,
+        "completion_tokens": 4,
+        "cost_usd": 0.000249
+      }
+    },
+    {
+      "id": "peval-hard-culture-011",
+      "track": "hard_culture",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 222,
+        "completion_tokens": 4,
+        "cost_usd": 0.000242
+      }
+    },
+    {
+      "id": "peval-hard-culture-013",
+      "track": "hard_culture",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 218,
+        "completion_tokens": 4,
+        "cost_usd": 0.000238
+      }
+    },
+    {
+      "id": "peval-hard-culture-014",
+      "track": "hard_culture",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 222,
+        "completion_tokens": 4,
+        "cost_usd": 0.000242
+      }
+    },
+    {
+      "id": "peval-hard-culture-015",
+      "track": "hard_culture",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 266,
+        "completion_tokens": 4,
+        "cost_usd": 0.000286
+      }
+    },
+    {
+      "id": "peval-hard-culture-016",
+      "track": "hard_culture",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 250,
+        "completion_tokens": 4,
+        "cost_usd": 0.00027
+      }
+    },
+    {
+      "id": "peval-hard-culture-017",
+      "track": "hard_culture",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 215,
+        "completion_tokens": 4,
+        "cost_usd": 0.000235
+      }
+    },
+    {
+      "id": "peval-hard-culture-018",
+      "track": "hard_culture",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 211,
+        "completion_tokens": 4,
+        "cost_usd": 0.000231
+      }
+    },
+    {
+      "id": "peval-hard-culture-019",
+      "track": "hard_culture",
+      "prediction": "پ) با احترام",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ) با احترام"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 167,
+        "completion_tokens": 9,
+        "cost_usd": 0.000212
+      }
+    },
+    {
+      "id": "peval-hard-culture-020",
+      "track": "hard_culture",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 233,
+        "completion_tokens": 4,
+        "cost_usd": 0.000253
+      }
+    },
+    {
+      "id": "peval-hard-culture-021",
+      "track": "hard_culture",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 248,
+        "completion_tokens": 4,
+        "cost_usd": 0.000268
+      }
+    },
+    {
+      "id": "peval-hard-culture-022",
+      "track": "hard_culture",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 234,
+        "completion_tokens": 4,
+        "cost_usd": 0.000254
+      }
+    },
+    {
+      "id": "peval-hard-culture-023",
+      "track": "hard_culture",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 213,
+        "completion_tokens": 4,
+        "cost_usd": 0.000233
+      }
+    },
+    {
+      "id": "peval-hard-culture-024",
+      "track": "hard_culture",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 211,
+        "completion_tokens": 4,
+        "cost_usd": 0.000231
+      }
+    },
+    {
+      "id": "peval-hard-culture-025",
+      "track": "hard_culture",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 221,
+        "completion_tokens": 4,
+        "cost_usd": 0.000241
+      }
+    },
+    {
+      "id": "peval-hard-culture-026",
+      "track": "hard_culture",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 217,
+        "completion_tokens": 4,
+        "cost_usd": 0.000237
+      }
+    },
+    {
+      "id": "peval-hard-culture-027",
+      "track": "hard_culture",
+      "prediction": "پ",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 2,
+        "answer_index": 2,
+        "scored_candidate": "پ"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 211,
+        "completion_tokens": 4,
+        "cost_usd": 0.000231
+      }
+    },
+    {
+      "id": "peval-hard-culture-028",
+      "track": "hard_culture",
+      "prediction": "ت",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 3,
+        "answer_index": 3,
+        "scored_candidate": "ت"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 231,
+        "completion_tokens": 4,
+        "cost_usd": 0.000251
+      }
+    },
+    {
+      "id": "peval-hard-culture-029",
+      "track": "hard_culture",
+      "prediction": "الف",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 0,
+        "answer_index": 0,
+        "scored_candidate": "الف"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 233,
+        "completion_tokens": 4,
+        "cost_usd": 0.000253
+      }
+    },
+    {
+      "id": "peval-hard-culture-030",
+      "track": "hard_culture",
+      "prediction": "ب",
+      "score": 1.0,
+      "details": {
+        "predicted_index": 1,
+        "answer_index": 1,
+        "scored_candidate": "ب"
+      },
+      "meta": {
+        "served_model": "claude-sonnet-5-5",
+        "finish_reason": "end_turn",
+        "prompt_tokens": 244,
+        "completion_tokens": 4,
+        "cost_usd": 0.000264
+      }
+    }
+  ]
+}
